@@ -1,0 +1,440 @@
+//
+//  RSLoginViewController.m
+//  OAManage
+//
+//  Created by mac on 2018/10/18.
+//  Copyright © 2018年 mac. All rights reserved.
+//
+
+#import "RSLoginViewController.h"
+#import "JJOptionView.h"
+
+#import "RSHomeViewController.h"
+#import "RSMenuViewController.h"
+#import "AppDelegate.h"
+
+
+
+//模型
+#import "RSRoleModel.h"
+
+
+#import "FSAES128.h"
+
+#import "RSAEncryptor.h"
+
+
+@interface RSLoginViewController ()<JJOptionViewDelegate,UITextFieldDelegate>
+
+@property (nonatomic,strong)JJOptionView * roleView;
+
+/**账号*/
+@property (nonatomic,strong)UITextField * userNameField;
+/**密码*/
+@property (nonatomic,strong)UITextField * passwordField;
+
+/**这边是保存公钥的一个*/
+@property (nonatomic,strong)NSString * PublickKeyTemp;
+
+/**设备唯一标识号*/
+@property (nonatomic,strong)NSString * udidTemp;
+
+/**保存角色*/
+@property (nonatomic,assign)NSInteger roleInt;
+
+
+@end
+
+@implementation RSLoginViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    self.emptyView.hidden = YES;
+    
+    //设备的唯一标识号
+    NSString *udid = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+    _udidTemp = udid;
+    
+    NSString * canshu = URL_YIGODATA_PUBLICKKEY(udid);
+    NSString * soapStr = URL_YIGODATA_IOS(URL_LOGINWEBSERVICE, URL_GENPUBLICKEY, canshu);
+    NetworkTool * network = [[NetworkTool alloc]init];
+    [network reloadWebServiceNoDataURL:URL_YIGO_IOS andParameters:soapStr andURLName:URL_GENPUBLICKEY];
+    network.successReload = ^(NSDictionary *dict) {
+        self.PublickKeyTemp = dict[@"data"][@"publicKeyStr"];
+    };
+    //logo
+    self.view.backgroundColor = [UIColor whiteColor];
+    self.tableview.hidden = YES;
+    
+    
+    //这边设置成一个view
+    UIView * loginView = [[UIView alloc]init];
+    loginView.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:loginView];
+
+    //logo
+    UIImageView * LoginImageView = [[UIImageView alloc]init];
+    LoginImageView.image =  [UIImage imageNamed:@"logo"];
+    [loginView addSubview:LoginImageView];
+    
+    JJOptionView * roleView = [[JJOptionView alloc]init];
+    roleView.title = @"请选择";
+    roleView.delegate = self;
+    [loginView addSubview:roleView];
+    _roleView = roleView;
+    
+    UITextField * userNameField = [[UITextField alloc]init];
+    NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
+    style.alignment = NSTextAlignmentCenter;
+     NSAttributedString *attri = [[NSAttributedString alloc] initWithString:@"用户名" attributes:@{NSForegroundColorAttributeName:[UIColor colorWithHexColorStr:@"#E0E0E0"],NSFontAttributeName:[UIFont systemFontOfSize:14], NSParagraphStyleAttributeName:style}];
+    userNameField.attributedPlaceholder = attri;
+   // [userNameField addTarget:self action:@selector(monitoringInputValues:) forControlEvents:UIControlEventEditingChanged];
+    userNameField.backgroundColor = [UIColor colorWithHexColorStr:@"#FFFFFF"];
+    //userNameField.borderStyle = UITextBorderStyleRoundedRect;
+    userNameField.layer.cornerRadius = 20;
+    userNameField.layer.borderColor = [UIColor colorWithHexColorStr:@"#D3D3D3"].CGColor;
+    userNameField.layer.borderWidth = 1;
+    userNameField.delegate = self;
+    userNameField.layer.masksToBounds = YES;
+    [loginView addSubview:userNameField];
+
+    UIView *leftview = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 39)];
+    userNameField.leftViewMode = UITextFieldViewModeAlways;
+    userNameField.leftView = leftview;
+    
+    _userNameField = userNameField;
+    
+    UITextField * passwordField = [[UITextField alloc]init];
+    NSMutableParagraphStyle *passwordstyle = [[NSMutableParagraphStyle alloc] init];
+    passwordstyle.alignment = NSTextAlignmentCenter;
+    NSAttributedString * passwordattri = [[NSAttributedString alloc] initWithString:@"密码" attributes:@{NSForegroundColorAttributeName:[UIColor colorWithHexColorStr:@"#E0E0E0"],NSFontAttributeName:[UIFont systemFontOfSize:14], NSParagraphStyleAttributeName:passwordstyle}];
+    passwordField.attributedPlaceholder = passwordattri;
+    passwordField.backgroundColor = [UIColor colorWithHexColorStr:@"#FFFFFF"];
+    passwordField.layer.cornerRadius = 20;
+    passwordField.layer.borderColor = [UIColor colorWithHexColorStr:@"#D3D3D3"].CGColor;
+    passwordField.layer.borderWidth = 1;
+    
+    passwordField.layer.masksToBounds = YES;
+   // [passwordField becomeFirstResponder];
+    [loginView addSubview:passwordField];
+    _passwordField = passwordField;
+    passwordField.delegate = self;
+    UIView *leftpasswordview = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 39)];
+    passwordField.leftViewMode = UITextFieldViewModeAlways;
+    passwordField.leftView = leftpasswordview;
+
+    
+    
+    UIButton * loginBtn = [[UIButton alloc]init];
+    [loginBtn setTitle:@"确定" forState:UIControlStateNormal];
+    [loginBtn setBackgroundColor:[UIColor colorWithHexColorStr:@"#3FE4B1"]];
+    [loginBtn setTitleColor:[UIColor colorWithHexColorStr:@"#FFFFFF"] forState:UIControlStateNormal];
+    loginBtn.titleLabel.font = [UIFont systemFontOfSize:Textadaptation(16)];
+    [loginView addSubview:loginBtn];
+    [loginBtn addTarget:self action:@selector(LoginAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    if (IS_IPHONE) {
+        loginView.sd_layout
+        .centerYEqualToView(self.view)
+        .centerXEqualToView(self.view)
+        .widthRatioToView(self.view, 0.9)
+        .autoHeightRatio(0);
+        
+        
+        LoginImageView.sd_layout
+        .centerXEqualToView(loginView)
+        .widthIs(108)
+        .heightEqualToWidth()
+        .topSpaceToView(loginView, 10);
+        
+        
+        roleView.sd_layout
+        .centerXEqualToView(loginView)
+        .topSpaceToView(LoginImageView, 46)
+        .widthIs(266)
+        .heightIs(39);
+        
+        
+        userNameField.sd_layout
+        .centerXEqualToView(loginView)
+        .topSpaceToView(roleView, 18)
+        .leftEqualToView(roleView)
+        .rightEqualToView(roleView)
+        .heightIs(39);
+        
+        
+        passwordField.sd_layout
+        .centerXEqualToView(loginView)
+        .topSpaceToView(userNameField, 18)
+        .leftEqualToView(userNameField)
+        .rightEqualToView(userNameField)
+        .heightIs(39);
+        
+        
+        loginBtn.sd_layout
+        .centerXEqualToView(loginView)
+        .topSpaceToView(passwordField, 36)
+        .leftEqualToView(passwordField)
+        .rightEqualToView(passwordField)
+        .heightIs(39);
+        
+    }else{
+        
+        if (DEVICES_IS_PRO_12_9) {
+
+            loginView.sd_layout
+            .centerYEqualToView(self.view)
+            .centerXEqualToView(self.view)
+            .widthRatioToView(self.view, 0.9)
+            .autoHeightRatio(0);
+            
+            LoginImageView.sd_layout
+            .centerXEqualToView(loginView)
+            .widthIs(180 * SCALE_TO_PRO)
+            .heightEqualToWidth()
+            .topSpaceToView(loginView, 10);
+            
+            roleView.sd_layout
+            .centerXEqualToView(loginView)
+            .topSpaceToView(LoginImageView, 46)
+            .leftSpaceToView(loginView, 54)
+            .rightSpaceToView(loginView, 54)
+            .heightIs(60 * SCALE_TO_PRO);
+            
+            userNameField.sd_layout
+            .centerXEqualToView(loginView)
+            .topSpaceToView(roleView, 18)
+            .leftEqualToView(roleView)
+            .rightEqualToView(roleView)
+            .heightIs(60 * SCALE_TO_PRO);
+            
+            passwordField.sd_layout
+            .centerXEqualToView(loginView)
+            .topSpaceToView(userNameField, 18)
+            .leftEqualToView(userNameField)
+            .rightEqualToView(userNameField)
+            .heightIs(60 * SCALE_TO_PRO);
+            
+            loginBtn.sd_layout
+            .centerXEqualToView(loginView)
+            .topSpaceToView(passwordField, 36)
+            .leftEqualToView(passwordField)
+            .rightEqualToView(passwordField)
+            .heightIs(60 * SCALE_TO_PRO);
+            
+            
+        }else{
+            
+            loginView.sd_layout
+            .centerYEqualToView(self.view)
+            .centerXEqualToView(self.view)
+            .widthRatioToView(self.view, 0.9)
+            .autoHeightRatio(0);
+            
+            
+            LoginImageView.sd_layout
+            .centerXEqualToView(loginView)
+            .widthIs((180 / SCW)  * SCW)
+            .heightEqualToWidth()
+            .topSpaceToView(loginView, 10);
+            
+            roleView.sd_layout
+            .centerXEqualToView(loginView)
+            .topSpaceToView(LoginImageView, 46)
+            .leftSpaceToView(loginView, 54)
+            .rightSpaceToView(loginView, 54)
+            .heightIs((60 / SCW)  * SCW);
+            
+            userNameField.sd_layout
+            .centerXEqualToView(loginView)
+            .topSpaceToView(roleView, 18)
+            .leftEqualToView(roleView)
+            .rightEqualToView(roleView)
+            .heightIs((60 / SCW)  * SCW);
+            
+            
+            passwordField.sd_layout
+            .centerXEqualToView(loginView)
+            .topSpaceToView(userNameField, 18)
+            .leftEqualToView(userNameField)
+            .rightEqualToView(userNameField)
+            .heightIs((60 / SCW)  * SCW);
+            
+            
+            loginBtn.sd_layout
+            .centerXEqualToView(loginView)
+            .topSpaceToView(passwordField, 36)
+            .leftEqualToView(passwordField)
+            .rightEqualToView(passwordField)
+            .heightIs((60 / SCW)  * SCW);
+            
+            
+        }
+    }
+    loginBtn.layer.cornerRadius = 20;
+    loginBtn.layer.masksToBounds = YES;
+
+    [loginView layoutSubviews];
+    [loginView setupAutoHeightWithBottomView:loginBtn bottomMargin:0];
+}
+
+
+
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    return YES;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+    NSString *temp = [textField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    temp = [self delSpaceAndNewline:temp];
+    if (textField == _userNameField) {
+        if ([temp length] > 0) {
+            //这边要对输入的值进行判断有什么角色
+            //成功了才可以设置值出来
+            _roleView.title = @"请选择";
+            NetworkTool * network = [[NetworkTool alloc]init];
+            NSString * canshu = URL_YIGODATA_USERCODE(temp);
+            NSString * soapStr = URL_YIGODATA_IOS(URL_LOGINWEBSERVICE, URL_FINDROLE, canshu);
+           [network reloadWebServiceNoDataURL:URL_YIGO_IOS andParameters:soapStr andURLName:URL_FINDROLE];
+            //NSMutableArray * array = [NSMutableArray arrayWithObjects:@"管理员",@"游客",@"货主",@"超级管理人员",@"服务人员", nil];
+            network.successArrayReload = ^(NSMutableArray *array) {
+                self.roleView.dataSource = array;
+            };
+            network.failure = ^(NSDictionary *dict) {
+                NSMutableArray * array = [NSMutableArray array];
+                self.roleView.dataSource = array;
+            };
+             self.userNameField.text = temp;
+        }else{
+            _userNameField.text = @"";
+            [_userNameField resignFirstResponder];
+            _roleView.title = @"请选择";
+            NSMutableArray * array = [NSMutableArray array];
+            _roleView.dataSource = array;
+        }
+    }else{
+        if ([temp length] > 0) {
+            //密码要加md5
+            //加密了
+            //temp = [MyMD5 md5:temp];
+            _passwordField.text = temp;
+        }else{
+            [_passwordField resignFirstResponder];
+            _passwordField.text = @"";
+        }
+    }
+}
+
+
+
+
+- (void)LoginAction:(UIButton *)logBtn{
+    if(![self validatePassword:_passwordField.text])
+    {
+        [SVProgressHUD showErrorWithStatus:@"请输入登录密码"];
+        return;
+    }
+    if (_passwordField.text.length<6)
+    {
+        [SVProgressHUD showErrorWithStatus:@"请设置6-18位密码"];
+        return;
+    }
+    if (_passwordField.text.length>18)
+    {
+        [SVProgressHUD showErrorWithStatus:@"请设置6-18位密码"];
+        return;
+    }
+    NSString *temp = [_userNameField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    if ([temp length] < 0){
+        [SVProgressHUD showErrorWithStatus:@"请输入登录账号"];
+        return;
+    }
+    
+    NSString *passwordtemp = [_passwordField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    if ([passwordtemp length] < 0){
+        [SVProgressHUD showErrorWithStatus:@"请输入登录密码"];
+        return;
+    }
+    if ([_roleView.title isEqualToString:@"请选择"]) {
+        [SVProgressHUD showInfoWithStatus:@"请输入正确的用户名，在进行选择角色"];
+        return;
+    }
+     
+    //账号，密码，角色，AES，唯一标示符，------》公钥加密
+    //密码
+    NSString * password =[MyMD5 md5:self.passwordField.text];
+    //获取当前的时间戳
+    NSInteger timeInt = [self getNowTimestamp];
+    //NSString * aes = [FSAES128 AES128Encrypt:[NSString stringWithFormat:@"%ld",timeInt] key:@"123456"];
+    //保存在本地
+    NSString * aes1 = [NSString stringWithFormat:@"%ld",timeInt];
+    NSUserDefaults * user = [NSUserDefaults standardUserDefaults];
+    //拼凑成一个16位的数
+    int a = arc4random() % 100000;
+    NSString *str = [NSString stringWithFormat:@"%06d", a];
+    NSString * const aes2 = [NSString stringWithFormat:@"%@%@",aes1,str];
+    
+    [user setObject:aes2 forKey:@"AES"];
+    [user synchronize];
+   // NSString *const kInitVector = @"16-Bytes--String";
+    NSString * data = [NSString stringWithFormat:@"{userCode:'%@',password:'%@',roleId:%ld,aesKey:'%@'}",self.userNameField.text,password,_roleInt,aes2];
+    //RSA加密
+    NSString * rsaEncryptor = [RSAEncryptor encryptString:data publicKey:self.PublickKeyTemp];
+    //网络请求
+    NetworkTool * network = [[NetworkTool alloc]init];
+    NSString * canshu = URL_YIGODATA_LOGIN(_udidTemp, rsaEncryptor);
+    NSString * soapStr = URL_YIGODATA_IOS(URL_LOGINWEBSERVICE, URL_LOGIN, canshu);
+    [network reloadWebServiceNoDataURL:URL_YIGO_IOS andParameters:soapStr andURLName:URL_LOGIN];
+    //获取成功之后的操作
+    network.successReload = ^(NSDictionary *dict) {
+//        NSString * data1 = dict[@"data"];
+//        NSString * userData = [FSAES128 decryptAES:data1 key:aes2 andKInItVector:kInitVector];
+//        NSData *jsonData = [userData dataUsingEncoding:NSUTF8StringEncoding];
+//        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:nil];
+        RSUserModel * usermodel = [[RSUserModel alloc]init];
+        usermodel.aesKey = dict[@"aesKey"];
+        usermodel.appLoginToken = dict[@"appLoginToken"];
+        usermodel.deptName = dict[@"deptName"];
+        usermodel.sex = dict[@"sex"];
+        usermodel.userCode = dict[@"userCode"];
+        usermodel.userId = dict[@"userId"];
+        usermodel.userName = dict[@"userName"];
+        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:usermodel];
+        [user setObject:data forKey:@"OAUSERMODEL"];
+         [user synchronize];
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            //登录之后要获取用户信息，然后在跳转到下面的界面
+            //改变根控制器
+                RSMyNavigationViewController *navigationController = [[RSMyNavigationViewController alloc] initWithRootViewController:[[RSHomeViewController alloc] init]];
+                RSMenuViewController *menuController = [[RSMenuViewController alloc] init];
+                REFrostedViewController *frostedViewController = [[REFrostedViewController alloc] initWithContentViewController:navigationController menuViewController:menuController];
+                frostedViewController.direction = REFrostedViewControllerDirectionLeft;
+                frostedViewController.liveBlurBackgroundStyle = REFrostedViewControllerLiveBackgroundStyleLight;
+                AppDelegate * appdelegate =(AppDelegate *)[UIApplication sharedApplication].delegate;
+                appdelegate.frostedViewController = frostedViewController;
+                appdelegate.window.rootViewController = frostedViewController;
+        });
+    };
+}
+
+
+- (void)optionView:(JJOptionView *)optionView selectedIndex:(NSInteger)selectedIndex {
+    RSRoleModel * rolemodel = [optionView.dataSource objectAtIndex:selectedIndex];
+    _roleInt = rolemodel.roleID;
+}
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
+@end
