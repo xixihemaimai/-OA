@@ -69,12 +69,6 @@
     
 }
 
-
-
-
-
-
-
 -(UILabel *)numberLabel
 {
     if (!_numberLabel) {
@@ -101,6 +95,7 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(reLoadCurrentViewData) name:@"reLoadCurrentViewData" object:nil];
     self.frostedViewController.panGestureEnabled = YES;
 }
 
@@ -108,42 +103,23 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     self.title = @"首页";
-        
-    RSWeakself
-        UIButton * menuBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
-        [menuBtn setImage:[UIImage imageNamed:@"默认头像"] forState:UIControlStateNormal];
-        [menuBtn addSubview:self.numberLabel];
-        [menuBtn addTarget:(RSMyNavigationViewController *)self.navigationController action:@selector(showMenu) forControlEvents:UIControlEventTouchUpInside];
+    UIButton * menuBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
+    [menuBtn setImage:[UIImage imageNamed:@"默认头像"] forState:UIControlStateNormal];
+    [menuBtn addSubview:self.numberLabel];
+    [menuBtn addTarget:(RSMyNavigationViewController *)self.navigationController action:@selector(showMenu) forControlEvents:UIControlEventTouchUpInside];
         //menuBtn.contentEdgeInsets = UIEdgeInsetsMake(0, -10, 0, 0);
-        UIBarButtonItem * item = [[UIBarButtonItem alloc]initWithCustomView:menuBtn];
-        self.navigationItem.leftBarButtonItem = item;
-        
-        
-    
-//        if (self.dataArray.count < 1 || self.informationArray.count < 1) {
-//            self.emptyView.hidden = NO;
-//        }else{
-//            self.emptyView.hidden = YES;
-//            [self.tableview reloadData];
-//        }
-        RSMenuViewController * menuVc = (RSMenuViewController *)self.frostedViewController.menuViewController;
+    UIBarButtonItem * item = [[UIBarButtonItem alloc]initWithCustomView:menuBtn];
+    self.navigationItem.leftBarButtonItem = item;
+    RSMenuViewController * menuVc = (RSMenuViewController *)self.frostedViewController.menuViewController;
         menuVc.delegate = self;
-    
-        self.emptyView.reAction = ^{
-            if (weakSelf.dataArray.count > 0 || weakSelf.informationArray.count > 0) {
-                weakSelf.emptyView.hidden = YES;
-            }else{
-                weakSelf.emptyView.hidden = NO;
-            }
-        };
-   
-    
-    [self reloadInformationData];
-    
-    
-    [self reloadAuditedData];
-
+       [self reloadInformationData];
+       [self reloadAuditedData];
 }
+
+- (void)reLoadCurrentViewData{
+    [self reloadAuditedData];
+}
+
 
 
 - (void)reloadInformationData{
@@ -158,6 +134,7 @@
     NSString * sopaStr = URL_YIGODATA_IOS(URL_WORKFLOWWEBSERVICE, URL_NOTICE, canshu);
     [network reloadWebServiceNoDataURL:URL_YIGO_IOS andParameters:sopaStr andURLName:URL_NOTICE];
     network.successArrayReload = ^(NSMutableArray *array) {
+        [self.informationArray removeAllObjects];
         [self.informationArray addObjectsFromArray:array];
         if (self.informationArray.count > 0 || self.dataArray.count > 0) {
             self.emptyView.hidden = YES;
@@ -183,6 +160,7 @@
     NSString * sopaStr = URL_YIGODATA_IOS(URL_WORKFLOWWEBSERVICE, URL_TOBEAUDIT, canshu);
     [network reloadWebServiceNoDataURL:URL_YIGO_IOS andParameters:sopaStr andURLName:URL_TOBEAUDIT];
     network.successArrayReload = ^(NSMutableArray *array) {
+        [self.dataArray removeAllObjects];
         [self.dataArray addObjectsFromArray:array];
         if (self.informationArray.count > 0 || self.dataArray.count > 0) {
             self.emptyView.hidden = YES;
@@ -354,14 +332,12 @@
 - (void)clickAction:(UIButton *)homeFristBtn{
     if (homeFristBtn.tag == 0) {
         //这边是跳转到H5的界面
-        RSWKOAmanagerViewController * wkOaVc = [[RSWKOAmanagerViewController alloc]init];
-        [self.navigationController pushViewController:wkOaVc animated:YES];
+ 
+        
         
     }else if (homeFristBtn.tag == 1){
-
-        
-        
-        
+        RSShenHeViewController * shenHeVc = [[RSShenHeViewController alloc]init];
+        [self.navigationController pushViewController:shenHeVc animated:YES];
     }else if(homeFristBtn.tag == 2){
         //待审核的界面
         RSAuditedViewController * auditedVc = [[RSAuditedViewController alloc]init];
@@ -408,19 +384,27 @@
     if (indexPath.section == 0) {
        //这边也是跳到H5的页面
         
-        RSWKOAmanagerViewController * wkOaVc = [[RSWKOAmanagerViewController alloc]init];
-        [self.navigationController pushViewController:wkOaVc animated:YES];
+        
+       
         
     }else if (indexPath.section == 1){
         RSShenHeViewController * shenHeVc = [[RSShenHeViewController alloc]init];
         [self.navigationController pushViewController:shenHeVc animated:YES];
     }else{
-        RSAuditedViewController * auditedVc = [[RSAuditedViewController alloc]init];
-        [self.navigationController pushViewController:auditedVc animated:YES];
+        RSAuditedModel * auditedmodel = self.dataArray[indexPath.row];
+        RSWKOAmanagerViewController * wkOaVc = [[RSWKOAmanagerViewController alloc]init];
+        wkOaVc.billId = auditedmodel.billId;
+        wkOaVc.workItemId = auditedmodel.workItemId;
+        wkOaVc.billKey = auditedmodel.billKey;
+        wkOaVc.usertime = auditedmodel.createtime;
+        [self.navigationController pushViewController:wkOaVc animated:YES];
     }
 }
 
 
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
+}
 
 
 

@@ -55,6 +55,8 @@ typedef void(^REAction)(void);
 @property (nonatomic, weak) id<ZZQEmptyViewDelegate> delegate;
 
 
+@property (nonatomic,strong)NSString * showtype;
+
 @property (nonatomic,copy)REAction reAction;
 
 

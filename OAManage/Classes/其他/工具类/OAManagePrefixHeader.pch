@@ -168,3 +168,7 @@ xsi:type=\"q0:Array\">" \
 #define URL_YIGODDATA_FLOWLIST(A,B,C,D) [NSString stringWithFormat:@"{pageNum:'%@',pageSize:'%@',workFlowType:'%@', billKey:'%@'}",A,B,C,D]
 //{appLoginToken:'e8e58926517e45f1aeafcca6d8c2963f',data: '{billId:29736563}'}第八种
 #define URL_YIGODATA_AUDITFLOW(A) [NSString stringWithFormat:@"{billId:%@}",A]
+
+
+//第九种{workFlowType:1}
+#define URL_YIGODATA_WORKFLOWTYPE(A) [NSString stringWithFormat:@"{workFlowType:%@}",A]

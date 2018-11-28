@@ -49,6 +49,8 @@
         _emptyView.label.text = @"没有数据展示";
         [_emptyView.button setTitle:@"点击重新加载" forState:UIControlStateNormal];
         _emptyView.hidden = NO;
+        _emptyView.button.hidden = YES;
+        _emptyView.showtype = @"0";
         [_emptyView.button setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
     }
     return _emptyView;

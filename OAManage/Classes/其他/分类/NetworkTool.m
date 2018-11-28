@@ -159,13 +159,13 @@
                 }
             }else if ([_tempStr isEqualToString:URL_TOBEAUDIT]){
                 NSDictionary * dic = [self decryptMethodWithDictionary:dict];
-                NSLog(@"==================%@",dic);
                 NSMutableArray * array = [RSAuditedModel mj_objectArrayWithKeyValuesArray:dic[@"list"]];
                 if (self.successArrayReload) {
                     self.successArrayReload(array);
                 }
             }else if ([_tempStr isEqualToString:URL_FLOWLIST]){
                 NSDictionary * dic = [self decryptMethodWithDictionary:dict];
+                NSLog(@"=============%@",dic);
                 NSMutableArray * array = [RSShenHeModel mj_objectArrayWithKeyValuesArray:dic[@"list"]];
                 if (self.successArrayReload) {
                     self.successArrayReload(array);

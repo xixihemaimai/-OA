@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) UIImageView * shenHeImageView;
 
+@property (nonatomic,strong)UILabel * countLabel;
+
 @end
 
 NS_ASSUME_NONNULL_END

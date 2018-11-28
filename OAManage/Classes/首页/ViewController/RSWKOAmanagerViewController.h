@@ -12,6 +12,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface RSWKOAmanagerViewController : RSBaseViewController
 
+@property (nonatomic,assign)NSInteger billId;
+
+@property (nonatomic,strong)NSString * billKey;
+
+@property (nonatomic,assign)NSInteger workItemId;
+
+@property (nonatomic,strong)NSString * usertime;
+
+
+
+
 @end
 
 NS_ASSUME_NONNULL_END

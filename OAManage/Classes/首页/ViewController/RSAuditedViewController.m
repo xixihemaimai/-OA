@@ -9,6 +9,7 @@
 #import "RSAuditedViewController.h"
 #import "RSApprovalCell.h"
 #import "RSShenHeViewController.h"
+#import "RSWKOAmanagerViewController.h"
 
 @interface RSAuditedViewController ()
 
@@ -48,10 +49,6 @@
     
     
     RSWeakself
-    self.emptyView.reAction = ^{
-        weakSelf.pageNum = 1;
-         [weakSelf reloadAuditedNewData];
-    };
     [self reloadAuditedNewData];
     self.tableview.mj_header = [MJChiBaoZiHeader headerWithRefreshingBlock:^{
         weakSelf.pageNum = 1;
@@ -149,8 +146,15 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [self.tableview deselectRowAtIndexPath:indexPath animated:YES];
-//    RSAuditedViewController * auditedVc = [[RSAuditedViewController alloc]init];
-//    [self.navigationController pushViewController:auditedVc animated:YES];
+    RSAuditedModel * auditemodel = self.auditedArray[indexPath.row];
+    RSWKOAmanagerViewController * wkOaVc = [[RSWKOAmanagerViewController alloc]init];
+    wkOaVc.billId = auditemodel.billId;
+    wkOaVc.workItemId = auditemodel.workItemId;
+    wkOaVc.billKey = auditemodel.billKey;
+    wkOaVc.usertime = auditemodel.createtime;
+    
+    [self.navigationController pushViewController:wkOaVc animated:YES];
+    
 }
 
 

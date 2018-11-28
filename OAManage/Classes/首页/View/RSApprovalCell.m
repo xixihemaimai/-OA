@@ -22,6 +22,9 @@
 @property (nonatomic,strong) UILabel * approvalStatusLabel;
 
 @property (nonatomic,strong)UILabel * approvalTimeLabel;
+
+
+@property (nonatomic,strong)UIImageView * approvalImageView;
 @end
 
 
@@ -36,7 +39,7 @@
         approvalImageView.contentMode =  UIViewContentModeScaleAspectFill;
         approvalImageView.image = [UIImage imageNamed:@"logo"];
         [self.contentView addSubview:approvalImageView];
-        
+        _approvalImageView = approvalImageView;
         //名字
         UILabel * approvalNameLabel = [[UILabel alloc]init];
         approvalNameLabel.textColor = [UIColor colorWithHexColorStr:@"#666666"];
@@ -50,7 +53,7 @@
         UILabel * approvalDepartmentLabel = [[UILabel alloc]init];
         approvalDepartmentLabel.textColor = [UIColor colorWithHexColorStr:@"#999999"];
         approvalDepartmentLabel.text = @"信息部";
-        approvalDepartmentLabel.textAlignment = NSTextAlignmentRight;
+        approvalDepartmentLabel.textAlignment = NSTextAlignmentLeft;
         approvalDepartmentLabel.font = [UIFont systemFontOfSize:Textadaptation(10)];
         [self.contentView addSubview:approvalDepartmentLabel];
         _approvalDepartmentLabel = approvalDepartmentLabel;
@@ -131,9 +134,7 @@
             .heightIs(20);
         }else{
             
-            
             if (DEVICES_IS_PRO_12_9) {
-                
                 
                 approvalContentLabel.sd_layout
                 .leftEqualToView(approvalNameLabel)
@@ -141,36 +142,27 @@
                 .topSpaceToView(approvalNameLabel, 10)
                 .heightRatioToView(self.contentView, 0.3);
                 
-                
                 approvalStatusLabel.sd_layout
                 .leftEqualToView(approvalContentLabel)
                 .rightEqualToView(approvalContentLabel)
                 .topSpaceToView(approvalContentLabel, 10)
                 .heightIs(20);
-                
-                
-                
+
             }else{
-                
+
                 approvalContentLabel.sd_layout
                 .leftEqualToView(approvalNameLabel)
                 .rightSpaceToView(self.contentView, 12)
                 .topSpaceToView(approvalNameLabel, 5)
                 .heightRatioToView(self.contentView, 0.3);
                 
-                
                 approvalStatusLabel.sd_layout
                 .leftEqualToView(approvalContentLabel)
                 .rightEqualToView(approvalContentLabel)
                 .topSpaceToView(approvalContentLabel, 5)
                 .heightIs(20);
-                
             }
-            
-            
-            
         }
-        
         approvalBottomView.sd_layout
         .leftSpaceToView(self.contentView, 0)
         .rightSpaceToView(self.contentView, 0)
@@ -192,12 +184,40 @@
           _approvalContentLabel.text = [NSString stringWithFormat:@"%@",auditemodel.billName];
          
      }
+    //
     _approvalNameLabel.text = [NSString stringWithFormat:@"%@",auditemodel.creatorName];
-    _approvalDepartmentLabel.text = [NSString stringWithFormat:@"%@",auditemodel.deptName];
-    _approvalStatusLabel.text = [NSString stringWithFormat:@"%@",auditemodel.workFlowType];
-    _approvalTimeLabel.text = [NSString stringWithFormat:@"%@",auditemodel.createtime];
+    CGSize size = [_approvalNameLabel.text sizeWithAttributes:@{NSFontAttributeName:_approvalNameLabel.font}];
+
+    _approvalNameLabel.sd_layout
+    .topEqualToView(_approvalImageView)
+    .leftSpaceToView(_approvalImageView, 10)
+    .widthIs(size.width)
+    .heightIs(20);
     
-    //"workFlowType":"待我审批","
+    
+    //部门
+    _approvalDepartmentLabel.text = [NSString stringWithFormat:@"%@",auditemodel.deptName];
+    
+    
+    CGSize approvalDepartmentsize = [_approvalDepartmentLabel.text sizeWithAttributes:@{NSFontAttributeName:_approvalDepartmentLabel.font}];
+    _approvalDepartmentLabel.sd_layout
+    .leftSpaceToView(_approvalNameLabel, 5)
+    .bottomEqualToView(_approvalNameLabel)
+    .widthIs(approvalDepartmentsize.width)
+    .heightIs(14);
+    
+    
+    _approvalStatusLabel.text = [NSString stringWithFormat:@"%@",auditemodel.workFlowType];
+    
+    _approvalTimeLabel.text = [NSString stringWithFormat:@"%@",auditemodel.createtime];
+    CGSize approvalTimeLabelSize = [_approvalTimeLabel.text sizeWithAttributes:@{NSFontAttributeName:_approvalTimeLabel.font}];
+    _approvalTimeLabel.sd_layout
+    .topEqualToView(_approvalDepartmentLabel)
+    .rightSpaceToView(self.contentView, 12)
+    .widthIs(approvalTimeLabelSize.width)
+    .bottomEqualToView(_approvalDepartmentLabel);
+    
+    
     
 }
 

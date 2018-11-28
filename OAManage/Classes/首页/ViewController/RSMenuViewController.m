@@ -38,7 +38,6 @@ static NSString * MENUHEADER = @"MENUHEADER";
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    RSWeakself
     for (int i = 0; i < 3; i++) {
         NSString * str = [NSString stringWithFormat:@"%d",i];
         [self.menuArray addObject:str];
@@ -50,14 +49,7 @@ static NSString * MENUHEADER = @"MENUHEADER";
         [self.tableview reloadData];
     }
     
-    self.emptyView.reAction = ^{
-        if (weakSelf.menuArray.count > 0) {
-            weakSelf.emptyView.hidden = YES;
-        }else{
-            weakSelf.emptyView.hidden = NO;
-        }
-    };
-    
+  
     
     
    //tableview的头部

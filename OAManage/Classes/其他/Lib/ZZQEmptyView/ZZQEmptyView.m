@@ -191,30 +191,78 @@ static NSString *const kDefaultNoNetImageName = @"noNet";
     CGSize imageSize = _imgView.image.size;
     
     if ([self hasImageView]) {
-        [_imgView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerX.equalTo(self);
-            make.centerY.equalTo(self.mas_centerY).offset(-imageSize.height/3);
-            make.size.mas_equalTo(imageSize);
-        }];
+        
+        if ([self.showtype isEqualToString:@"0"]) {
+            
+            [_imgView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.centerX.equalTo(self).offset(-10);
+                make.centerY.equalTo(self.mas_centerY).offset(-imageSize.height/3);
+                make.size.mas_equalTo(imageSize);
+            }];
+            
+        }else{
+            
+            
+            [_imgView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.centerX.equalTo(self).offset(-30);
+                make.centerY.equalTo(self.mas_centerY).offset(-imageSize.height/3);
+                make.size.mas_equalTo(imageSize);
+            }];
+            
+        }
+        
+       
     }
     
-    [_label mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self);
-        if ([self hasImageView]) {
-            make.top.equalTo(_imgView.mas_bottom).offset(30);
-        } else {
-            make.centerY.equalTo(self);
-        }
-        make.left.equalTo(self.mas_left).offset(40);
-        make.right.equalTo(self.mas_right).offset(-40);
-    }];
+    if ([self.showtype isEqualToString:@"0"]) {
+        [_label mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(self);
+            if ([self hasImageView]) {
+                make.top.equalTo(_imgView.mas_bottom).offset(30);
+            } else {
+                make.centerY.equalTo(self);
+            }
+            make.left.equalTo(self.mas_left).offset(40);
+            make.right.equalTo(self.mas_right).offset(-40);
+        }];
+        
+        
+        [_detailsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(self);
+            make.left.equalTo(self.mas_left).offset(40);
+            make.right.equalTo(self.mas_right).offset(-40);
+            make.top.equalTo(_label.mas_bottom).offset(20);
+        }];
+        
+    }else{
+        
+        [_label mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(self);
+            if ([self hasImageView]) {
+                make.top.equalTo(_imgView.mas_bottom).offset(30);
+            } else {
+                make.centerY.equalTo(self);
+            }
+            make.left.equalTo(self.mas_left).offset(-5);
+            make.right.equalTo(self.mas_right).offset(-40);
+        }];
+        
+        
+        [_detailsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(self);
+            make.left.equalTo(self.mas_left).offset(-5);
+            make.right.equalTo(self.mas_right).offset(-40);
+            make.top.equalTo(_label.mas_bottom).offset(20);
+        }];
+        
+        
+        
+        
+    }
     
-    [_detailsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self);
-        make.left.equalTo(self.mas_left).offset(40);
-        make.right.equalTo(self.mas_right).offset(-40);
-        make.top.equalTo(_label.mas_bottom).offset(20);
-    }];
+  
+    
+   
     
     if ([self hasButton]) {
         [_button mas_makeConstraints:^(MASConstraintMaker *make) {

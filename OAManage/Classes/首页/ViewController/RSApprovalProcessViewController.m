@@ -50,10 +50,6 @@
    
    RSWeakself
     [self reloadApprovalprocessNewData];
-   self.emptyView.reAction = ^{
-       [weakSelf reloadApprovalprocessNewData];
-    };
-    
     self.tableview.mj_header = [MJChiBaoZiHeader headerWithRefreshingBlock:^{
         [weakSelf reloadApprovalprocessNewData];
         [weakSelf.tableview.mj_header endRefreshing];

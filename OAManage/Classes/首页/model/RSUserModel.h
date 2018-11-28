@@ -21,7 +21,7 @@ appLoginToken 登录标识(相当于之前的LoginKey)
 deptName 部门名称
 sex 性别
 */
-@property (nonatomic,strong)NSString * userId;
+@property (nonatomic,assign)NSInteger userId;
 
 @property (nonatomic,strong)NSString * userName;
 

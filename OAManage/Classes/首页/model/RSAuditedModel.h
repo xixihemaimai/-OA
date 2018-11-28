@@ -35,7 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong)NSString * workFlowType;
 
 
-@property (nonatomic,strong)NSString * workItemId;
+@property (nonatomic,assign)NSInteger workItemId;
 
 @property (nonatomic,strong)NSString * workitemname;
 @end

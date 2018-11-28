@@ -15,7 +15,8 @@
 
 
 #import "RSApprovalProcessViewController.h"
-
+#import "RSWKOAmanagerViewController.h"
+#import "ZZQEmptyView.h"
 
 @interface SCMenuItem : NSObject <SCNavigationMenuItemProtocol,UIScrollViewDelegate>
 
@@ -63,6 +64,7 @@
 @property (nonatomic,assign)NSInteger selectIndex;
 
 
+@property (nonatomic,strong) ZZQEmptyView * currentemptyView;
 @end
 
 @implementation RSShenHeViewController
@@ -81,11 +83,24 @@
     return _rightArray;
 }
 
+- (ZZQEmptyView *)currentemptyView{
+    if (!_currentemptyView) {
+        _currentemptyView = [[ZZQEmptyView alloc] initWithView:self.view];
+        _currentemptyView.emptyMode = ZZQEmptyViewModeNoData;
+        _currentemptyView.label.text = @"没有数据展示";
+        [_currentemptyView.button setTitle:@"点击重新加载" forState:UIControlStateNormal];
+        _currentemptyView.button.hidden = YES;
+        _currentemptyView.showtype = @"1";
+        [_currentemptyView.button setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+    }
+    return _currentemptyView;
+}
+
 
 
 - (UITableView *)leftTableview{
     if (!_leftTableview) {
-        _leftTableview = [[UITableView alloc]initWithFrame:CGRectMake(0, 64, 79, SCH - 64) style:UITableViewStylePlain];
+        _leftTableview = [[UITableView alloc]initWithFrame:CGRectMake(0, 64, 88, SCH - 64) style:UITableViewStylePlain];
         _leftTableview.delegate = self;
         _leftTableview.dataSource = self;
         _leftTableview.showsVerticalScrollIndicator = NO;
@@ -160,18 +175,18 @@
     [self.view addSubview:self.rightTableview];
     self.leftTableview.hidden = YES;
     self.rightTableview.hidden = YES;
+    [self.rightTableview addSubview:self.currentemptyView];
     
     NSIndexPath * indexpath = [NSIndexPath indexPathForRow:0 inSection:0];
     RSShenHeFristCell * cell = [self.leftTableview cellForRowAtIndexPath:indexpath];
     cell.shenHeLabel.backgroundColor = [UIColor colorWithHexColorStr:@"#ffffff"];
     [self reloadShenHeNewData];
-    
-    
     RSWeakself
-    self.emptyView.reAction = ^{
-        weakSelf.pageNum = 1;
-        [weakSelf reloadRightShenHeNewData];
-    };
+    
+    
+    self.emptyView.hidden = YES;
+    
+    
     
     self.rightTableview.mj_header = [MJChiBaoZiHeader headerWithRefreshingBlock:^{
         weakSelf.pageNum = 1;
@@ -187,12 +202,17 @@
 
 
 - (void)reloadShenHeNewData{
-    NSString * kongStr = @"";
-    NSString * canshu = URL_YIGODATA_NOTICE(self.usermodel.appLoginToken, kongStr);
+    NSUserDefaults * user = [NSUserDefaults standardUserDefaults];
+    NSString * aes = [user objectForKey:@"AES"];
+    NSString * const kInitVector = @"16-Bytes--String";
+    NSString * kongStr = URL_YIGODATA_WORKFLOWTYPE(self.selectType);
+    NSString * aes2 = [FSAES128 encryptAES:kongStr key:aes andKInItVector:kInitVector];
+    NSString * canshu = URL_YIGODATA_NOTICE(self.usermodel.appLoginToken, aes2);
     NSString * sopaStr = URL_YIGODATA_IOS(URL_WORKFLOWWEBSERVICE, URL_FLOWLIST, canshu);
     NetworkTool * network = [[NetworkTool alloc]init];
     [network reloadWebServiceNoDataURL:URL_YIGO_IOS andParameters:sopaStr andURLName:URL_FLOWLIST];
     network.successArrayReload = ^(NSMutableArray *array) {
+        [self.leftArray removeAllObjects];
         self.leftArray = array;
         self.leftTableview.hidden = NO;
         self.rightTableview.hidden = NO;
@@ -201,9 +221,22 @@
         }else{
             self.emptyView.hidden = NO;
         }
-        //默认选中第一个位置
-        NSIndexPath * indexpath = [NSIndexPath indexPathForRow:0 inSection:0];
-        self.selectIndex = indexpath.row;
+        BOOL isFind = false;
+        //默认选中位置
+        for (int i = 0; i < self.leftArray.count; i++) {
+             RSShenHeModel * shenhemodel = self.leftArray[i];
+            if ([shenhemodel.billKey isEqualToString:self.billKey]) {
+                self.selectIndex = i;
+                self.billKey = shenhemodel.billKey;
+                isFind = true;
+                break;
+            }
+        }
+        if (!isFind) {
+            self.selectIndex = 0;
+            self.billKey = @"";
+        }
+        NSIndexPath * indexpath = [NSIndexPath indexPathForRow:self.selectIndex inSection:0];
         [self.leftTableview selectRowAtIndexPath:indexpath animated:YES scrollPosition:UITableViewScrollPositionNone];
         [self.leftTableview reloadData];
         [self.rightTableview.mj_header beginRefreshing];
@@ -227,8 +260,14 @@
             self.leftTableview.hidden = NO;
             [self.rightArray removeAllObjects];
              self.rightArray = array;
+            if (self.rightArray.count > 0) {
+                self.currentemptyView.hidden = YES;
+            }else{
+                self.currentemptyView.hidden = NO;
+            }
              self.pageNum = 2;
         }else{
+            self.currentemptyView.hidden = YES;
             NSArray * array1 = array;
             [self.rightArray addObjectsFromArray:array1];
             self.pageNum++;
@@ -268,7 +307,9 @@
     }
     
     self.pageNum = 1;
-    [self.rightTableview.mj_header beginRefreshing];
+    //[self.rightTableview.mj_header beginRefreshing];
+    [self reloadShenHeNewData];
+    
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
@@ -312,19 +353,19 @@
         }
         RSShenHeModel * shenhemodel = self.leftArray[indexPath.row];
         cell.shenHeLabel.text = [NSString stringWithFormat:@"%@",shenhemodel.billName];
-        if (indexPath.row > 0) {
-            cell.shenHeImageView.hidden = YES;
-            
+        cell.countLabel.text = [NSString stringWithFormat:@"%ld",(long)shenhemodel.flowCount];
+        if (shenhemodel.flowCount == 0) {
+            cell.countLabel.hidden = YES;
         }else{
-            cell.shenHeImageView.hidden = NO;
-    
+             cell.countLabel.hidden = NO;
         }
-        
-            if (indexPath.row == self.selectIndex) {
-                    cell.shenHeLabel.backgroundColor = [UIColor colorWithHexColorStr:@"#ffffff"];
-                }else{
-                    cell.shenHeLabel.backgroundColor = [UIColor clearColor];
-            }
+        if (indexPath.row == self.selectIndex) {
+            cell.contentView.backgroundColor = [UIColor colorWithHexColorStr:@"#ffffff"];
+             cell.shenHeImageView.hidden = NO;
+        }else{
+            cell.shenHeImageView.hidden = YES;
+            cell.contentView.backgroundColor = [UIColor colorWithHexColorStr:@"#F8F8F8"];
+        }
         return cell;
     }else{
         static NSString * CELLID = @"SHE3ID";
@@ -335,6 +376,7 @@
         cell.contentView.backgroundColor = [UIColor colorWithHexColorStr:@"#ffffff"];
         cell.auditemodel = self.rightArray[indexPath.row];
        // cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.selectedBackgroundView.backgroundColor = [UIColor colorWithHexColorStr:@"#F7F7F9"];
         return cell;
     }
 }
@@ -345,7 +387,6 @@
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-
     if (tableView == self.leftTableview) {
         //[self.leftTableview deselectRowAtIndexPath:indexPath animated:YES];
         RSShenHeFristCell * cell = [tableView cellForRowAtIndexPath:indexPath];
@@ -355,22 +396,24 @@
         self.billKey = shenhemodel.billKey;
         self.selectIndex = indexPath.row;
         if (indexPath.row == self.selectIndex) {
-            cell.shenHeLabel.backgroundColor = [UIColor colorWithHexColorStr:@"#ffffff"];
+            cell.contentView.backgroundColor = [UIColor colorWithHexColorStr:@"#ffffff"];
+             cell.shenHeImageView.hidden = NO;
         }else{
-            cell.shenHeLabel.backgroundColor = [UIColor clearColor];
+            cell.contentView.backgroundColor = [UIColor colorWithHexColorStr:@"#F8F8F8"];
+             cell.shenHeImageView.hidden = YES;
         }
         [self.leftTableview reloadData];
-       
         [self.rightTableview.mj_header beginRefreshing];
-        
-        
     }else{
-     
-        RSAuditedModel * auditemodel = self.rightArray[indexPath.row];
-        RSApprovalProcessViewController * approvalProgressVc = [[RSApprovalProcessViewController alloc]init];
-        approvalProgressVc.billId = auditemodel.billId;
-        [self.navigationController pushViewController:approvalProgressVc animated:YES];
-
+        [self.rightTableview deselectRowAtIndexPath:indexPath animated:YES];
+        RSAuditedModel * auditedmodel = self.rightArray[indexPath.row];
+        RSWKOAmanagerViewController * wkOaVc = [[RSWKOAmanagerViewController alloc]init];
+        wkOaVc.billId = auditedmodel.billId;
+        wkOaVc.workItemId = auditedmodel.workItemId;
+        wkOaVc.billKey = auditedmodel.billKey;
+        wkOaVc.usertime = auditedmodel.createtime;
+        
+        [self.navigationController pushViewController:wkOaVc animated:YES];
     }
 }
 

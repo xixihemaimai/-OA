@@ -11,6 +11,9 @@
 #import "RSViewProgressLine.h"
 #import <WebKit/WebKit.h>
 
+#import "RSApprovalProcessViewController.h"
+
+
 @interface RSWKOAmanagerViewController ()<WKNavigationDelegate,UINavigationControllerDelegate,WKScriptMessageHandler>
 
 @property (nonatomic,strong)RSViewProgressLine * progressLineview;
@@ -44,7 +47,8 @@
     WKWebViewConfiguration * config = [[WKWebViewConfiguration alloc]init];
     WKUserContentController * userContent = [[WKUserContentController alloc]init];
     
-    
+     [userContent addScriptMessageHandler:self name:@"jump"];
+     [userContent addScriptMessageHandler:self name:@"reload"];
     
     config.userContentController = userContent;
     WKWebView * webview = [[WKWebView alloc]initWithFrame:CGRectMake(0, 1, self.htmlView.bounds.size.width, self.htmlView.bounds.size.height) configuration:config];
@@ -52,7 +56,11 @@
     _webView.navigationDelegate = self;
     _webView.userInteractionEnabled = YES;
     
-    NSString * stoneUrlStr = @"http://192.168.1.48:8089/Yigo1.6/Approval.html";
+    NSUserDefaults * user = [NSUserDefaults standardUserDefaults];
+    NSString * aes = [user objectForKey:@"AES"];
+    NSString * stoneUrlStr =[NSString stringWithFormat:@"%@?billId=%ld&billKey=%@&aesKey=%@&appLoginToken=%@&workItemId=%ld&username=%@&userdepartment=%@&usertime=%@&type=0",@"http://192.168.1.48:8089/Yigo1.6/Approval.html",(long)self.billId,self.billKey,aes,self.usermodel.appLoginToken,(long)self.workItemId,self.usermodel.userName,self.usermodel.deptName,self.usertime];
+    
+    NSLog(@"================%@",stoneUrlStr);
     
     if([[[UIDevice currentDevice] systemVersion] floatValue] >= 9.0){
         
@@ -77,7 +85,7 @@
     .leftSpaceToView(self.htmlView, 0)
     .rightSpaceToView(self.htmlView, 0)
     .topSpaceToView(self.htmlView, 0)
-    .heightIs(1);
+    .heightIs(2);
     self.webView.sd_layout
     .leftSpaceToView(self.htmlView, 0)
     .rightSpaceToView(self.htmlView, 0)
@@ -88,6 +96,38 @@
     
     
 }
+
+- (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message{
+    if ([message.name isEqualToString:@"jump"]) {
+       NSString * shareStr = message.body;
+        [self jumpPageIndex:[shareStr integerValue]
+         ];
+    }else if ([message.name isEqualToString:@"reload"]){
+        [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"%@",message.body]];
+        [[NSNotificationCenter defaultCenter]postNotificationName:@"reLoadCurrentViewData" object:nil];
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
+
+
+- (void)jumpPageIndex:(NSInteger)billId{
+    RSApprovalProcessViewController * approvalProcessVc = [[RSApprovalProcessViewController alloc]init];
+    approvalProcessVc.billId = billId;
+    [self.navigationController pushViewController:approvalProcessVc animated:YES];
+    
+}
+
+
+
+
+
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [_webView.configuration.userContentController removeScriptMessageHandlerForName:@"tixing"];
+}
+
+
 
 
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
