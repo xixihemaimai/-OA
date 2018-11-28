@@ -28,7 +28,7 @@
     
     self.frostedViewController.panGestureEnabled = NO;
     self.title = @"个人信息";
-    
+    self.emptyView.hidden = YES;
     self.fristArray = @[@"昵称",@"性别"];
     self.secondArray = @[@"所在部门",@"所在职位"];
 }

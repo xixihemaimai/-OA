@@ -29,7 +29,7 @@
     self.frostedViewController.panGestureEnabled = NO;
     self.view.backgroundColor = [UIColor whiteColor];
    // self.tableview.hidden = YES;
-    
+    self.emptyView.hidden = YES;
     
     //这边设置成一个view
     UIView * rePasswordView = [[UIView alloc]init];
