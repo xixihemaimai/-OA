@@ -42,12 +42,7 @@
         }
     }
     self.title = @"待审核";
-    
-    
     self.pageNum = 1;
-    
-    
-    
     RSWeakself
     [self reloadAuditedNewData];
     self.tableview.mj_header = [MJChiBaoZiHeader headerWithRefreshingBlock:^{

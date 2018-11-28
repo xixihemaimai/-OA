@@ -209,12 +209,22 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (section == 0) {
-        return self.informationArray.count;
+        if (self.informationArray.count > 3) {
+            return 3;
+        }else{
+             return self.informationArray.count;
+        }
+       
     }else if (section == 1){
         return 1;
     }
     else{
-        return self.dataArray.count;
+        if (self.dataArray.count > 3) {
+            return 3;
+        }else{
+            return self.dataArray.count;
+        }
+       
     }
 }
 

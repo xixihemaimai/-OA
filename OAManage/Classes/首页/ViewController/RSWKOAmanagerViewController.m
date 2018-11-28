@@ -125,6 +125,7 @@
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [_webView.configuration.userContentController removeScriptMessageHandlerForName:@"tixing"];
+    [_webView.configuration.userContentController removeScriptMessageHandlerForName:@"reload"];
 }
 
 
