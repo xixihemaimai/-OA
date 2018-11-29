@@ -39,9 +39,6 @@
     self.emptyView.hidden = YES;
     self.title = @"审批";
     
-
-    //self.navigationController.navigationItem.leftBarButtonItem.enabled = NO;
-    
     self.view.backgroundColor = [UIColor colorWithHexColorStr:@"#f9f9f9"];
     self.htmlView = [[UIView alloc]init];
     self.htmlView.backgroundColor = [UIColor whiteColor];
@@ -151,7 +148,7 @@
         //刷新界面,如果不刷新的话，不重新走一遍代理方法，返回的url还是上一次的url
         [previewController refreshCurrentPreviewItem];
     }else {
-        //[SVProgressHUD showWithStatus:@"下载中"];
+        [SVProgressHUD showWithStatus:@"下载中"];
         NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request progress:^(NSProgress *downloadProgress){
         } destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
             NSURL *documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];

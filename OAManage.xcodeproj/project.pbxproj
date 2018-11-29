@@ -44,7 +44,6 @@
 		04C0474321787B5E0006B8D4 /* UIScrollView+DRRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C0474121787B5E0006B8D4 /* UIScrollView+DRRefresh.m */; };
 		04C0474621787DA00006B8D4 /* RSShenHeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C0474521787DA00006B8D4 /* RSShenHeViewController.m */; };
 		04C0474C217885FF0006B8D4 /* RSLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C0474B217885FF0006B8D4 /* RSLoginViewController.m */; };
-		04C975A821AFECEC0080097D /* RSEnclosureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C975A721AFECEC0080097D /* RSEnclosureViewController.m */; };
 		04CA3FBD219AC85C009C2D33 /* RSUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CA3FBC219AC85C009C2D33 /* RSUserModel.m */; };
 		04D6CECB2190254E00B35A51 /* UIColor+HexColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D6CEC82190254E00B35A51 /* UIColor+HexColor.m */; };
 		04D6CECC2190254E00B35A51 /* Nonetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D6CECA2190254E00B35A51 /* Nonetwork.m */; };
@@ -139,8 +138,6 @@
 		04C0474521787DA00006B8D4 /* RSShenHeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSShenHeViewController.m; sourceTree = "<group>"; };
 		04C0474A217885FF0006B8D4 /* RSLoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSLoginViewController.h; sourceTree = "<group>"; };
 		04C0474B217885FF0006B8D4 /* RSLoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSLoginViewController.m; sourceTree = "<group>"; };
-		04C975A621AFECEC0080097D /* RSEnclosureViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSEnclosureViewController.h; sourceTree = "<group>"; };
-		04C975A721AFECEC0080097D /* RSEnclosureViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSEnclosureViewController.m; sourceTree = "<group>"; };
 		04CA3FBB219AC85C009C2D33 /* RSUserModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSUserModel.h; sourceTree = "<group>"; };
 		04CA3FBC219AC85C009C2D33 /* RSUserModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSUserModel.m; sourceTree = "<group>"; };
 		04D6CEC72190254E00B35A51 /* UIColor+HexColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+HexColor.h"; sourceTree = "<group>"; };
@@ -403,8 +400,6 @@
 				04A6F15B219538F100D15F58 /* RSApprovalProcessViewController.m */,
 				0429906E21AD175C004503A7 /* RSWKOAmanagerViewController.h */,
 				0429906F21AD175C004503A7 /* RSWKOAmanagerViewController.m */,
-				04C975A621AFECEC0080097D /* RSEnclosureViewController.h */,
-				04C975A721AFECEC0080097D /* RSEnclosureViewController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -684,7 +679,6 @@
 				04A6F187219980B900D15F58 /* RSViewProgressLine.m in Sources */,
 				04D6CED22190329100B35A51 /* RSBaseViewController.m in Sources */,
 				0436F6BA2178282600B0D6C8 /* RSMyNavigationViewController.m in Sources */,
-				04C975A821AFECEC0080097D /* RSEnclosureViewController.m in Sources */,
 				0429906D21ACEA14004503A7 /* RSApprovalProcessModel.m in Sources */,
 				0436F6BD2178298800B0D6C8 /* UIBarButtonItem+Item.m in Sources */,
 				04FF49CB21A3B38E00C4A2C2 /* FSAES128.m in Sources */,
