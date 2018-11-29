@@ -209,7 +209,10 @@
     
     _approvalStatusLabel.text = [NSString stringWithFormat:@"%@",auditemodel.workFlowType];
     
-    _approvalTimeLabel.text = [NSString stringWithFormat:@"%@",auditemodel.createtime];
+    NSString * current = _auditemodel.createtime;
+    current = [current substringToIndex:16];
+    
+    _approvalTimeLabel.text = [NSString stringWithFormat:@"%@",current];
     CGSize approvalTimeLabelSize = [_approvalTimeLabel.text sizeWithAttributes:@{NSFontAttributeName:_approvalTimeLabel.font}];
     _approvalTimeLabel.sd_layout
     .topEqualToView(_approvalDepartmentLabel)

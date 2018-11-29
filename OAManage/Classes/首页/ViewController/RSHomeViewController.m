@@ -117,7 +117,6 @@
     
     RSWeakself
     self.tableview.mj_header = [MJChiBaoZiHeader headerWithRefreshingBlock:^{
-        NSLog(@"===============");
         [weakSelf reloadInformationData];
         [weakSelf reloadAuditedData];
     }];

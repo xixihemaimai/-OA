@@ -177,7 +177,7 @@
             
             headImageview.sd_layout
             .leftEqualToView(departmentLabel)
-            .bottomSpaceToView(transverseImageView, 5)
+            .topSpaceToView(statusLabel, 10)
             .widthIs((32 / SCW) * SCW)
             .heightEqualToWidth();
             
@@ -227,13 +227,13 @@
             .leftSpaceToView(transverseImageView, 17)
             .topSpaceToView(transverseImageView, 11)
             .widthRatioToView(transverseImageView, 0.4)
-            .heightRatioToView(self.contentView, 0.2);
+            .heightRatioToView(self.contentView, 0.15);
             
             statusLabel.sd_layout
             .leftEqualToView(departmentLabel)
             .rightEqualToView(departmentLabel)
             .topSpaceToView(departmentLabel, 1)
-            .heightRatioToView(self.contentView, 0.2);
+            .heightRatioToView(self.contentView, 0.15);
             
         }else{
             //SCALE_TO_PRO
@@ -402,14 +402,20 @@
     _approvalProcessmodel = approvalProcessmodel;
     _statusLabel.text = [NSString stringWithFormat:@"%@",_approvalProcessmodel.resultInfo];
     _nameLabel.text = [NSString stringWithFormat:@"%@",_approvalProcessmodel.userName];
-    _timeLabel.text = [NSString stringWithFormat:@"%@",_approvalProcessmodel.createTime];
+    
     _departmentLabel.text = [NSString stringWithFormat:@"%@",_approvalProcessmodel.workItemName];
     _contentLabel.text = [NSString stringWithFormat:@"%@",_approvalProcessmodel.userInfo];
     
     if ([_approvalProcessmodel.resultInfo isEqualToString:@"通过"]) {
-        
         _verticalImageView.image = [UIImage imageNamed:@"审批完图片"];
+        NSString * current = _approvalProcessmodel.finishTime;
+        current = [current substringToIndex:16];
+        _timeLabel.text = [NSString stringWithFormat:@"%@",current];
+        
     }else{
+        NSString * current = _approvalProcessmodel.createTime;
+        current = [current substringToIndex:16];
+        _timeLabel.text = [NSString stringWithFormat:@"%@",current];
         _verticalImageView.image = [UIImage imageNamed:@"进行中图标"];
     }
     

@@ -142,7 +142,10 @@
           _homeThirdContentLabel.text = [NSString stringWithFormat:@"%@",_auditedmodel.billName];
     }
     _homeThirdNameLabel.text = [NSString stringWithFormat:@"%@",_auditedmodel.creatorName];
-    _homeThirdTimeLabel.text = [NSString stringWithFormat:@"%@",_auditedmodel.createtime];
+    
+    NSString * current = _auditedmodel.createtime;
+    current = [current substringToIndex:16];
+    _homeThirdTimeLabel.text = [NSString stringWithFormat:@"%@",current];
 }
 
 

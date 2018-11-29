@@ -26,7 +26,7 @@
 @property (nonatomic, copy)NSURL *fileURL; //文件路径
 
 
-@property (nonatomic,strong)QLPreviewController *previewController;
+@property (nonatomic,strong) WKUserContentController * userContent;
 
 @end
 
@@ -42,13 +42,6 @@
 
     //self.navigationController.navigationItem.leftBarButtonItem.enabled = NO;
     
-    QLPreviewController *previewController =[[QLPreviewController alloc]init];
-    previewController.delegate=self;
-    previewController.dataSource=self;
-    self.previewController = previewController;
-    
-    
-    
     self.view.backgroundColor = [UIColor colorWithHexColorStr:@"#f9f9f9"];
     self.htmlView = [[UIView alloc]init];
     self.htmlView.backgroundColor = [UIColor whiteColor];
@@ -58,7 +51,7 @@
     [self.htmlView addSubview:self.progressLineview];
     WKWebViewConfiguration * config = [[WKWebViewConfiguration alloc]init];
     WKUserContentController * userContent = [[WKUserContentController alloc]init];
-    
+    self.userContent = userContent;
      [userContent addScriptMessageHandler:self name:@"jump"];
      [userContent addScriptMessageHandler:self name:@"reload"];
      [userContent addScriptMessageHandler:self name:@"Submission"];
@@ -73,11 +66,8 @@
     NSUserDefaults * user = [NSUserDefaults standardUserDefaults];
     NSString * aes = [user objectForKey:@"AES"];
     NSString * stoneUrlStr =[NSString stringWithFormat:@"%@?billId=%ld&billKey=%@&aesKey=%@&appLoginToken=%@&workItemId=%ld&username=%@&userdepartment=%@&usertime=%@&type=0",@"http://192.168.1.48:8089/Yigo1.6/Approval.html",(long)self.billId,self.billKey,aes,self.usermodel.appLoginToken,(long)self.workItemId,self.usermodel.userName,self.usermodel.deptName,self.usertime];
-    
     NSLog(@"================%@",stoneUrlStr);
-    
     if([[[UIDevice currentDevice] systemVersion] floatValue] >= 9.0){
-        
         stoneUrlStr = [stoneUrlStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
         [NSCharacterSet URLQueryAllowedCharacterSet];
     }else{
@@ -105,7 +95,6 @@
 }
 
 - (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message{
-    NSLog(@"========6666666==========%@",message.name);
     if ([message.name isEqualToString:@"jump"]) {
        NSString * shareStr = message.body;
         [self jumpPageIndex:[shareStr integerValue]
@@ -117,45 +106,7 @@
     }else if ([message.name isEqualToString:@"Submission"]){
         self.navigationItem.leftBarButtonItem.enabled = NO;
     }else if ([message.name isEqualToString:@"Enclosure"]){
-        NSLog(@"+++++++++++++++++++++32=32=3=2=3=2===========%@",message.body);
-     
-        NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-        
-        AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
-        NSString *urlStr = message.body;
-        if([[[UIDevice currentDevice] systemVersion] floatValue] >= 9.0){
-            urlStr = [urlStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-            [NSCharacterSet URLQueryAllowedCharacterSet];
-        }else{
-            urlStr = [urlStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        }
-        NSString *fileName = [urlStr lastPathComponent]; //获取文件名称
-        NSURL * URL = [NSURL URLWithString:urlStr];
-        NSURLRequest *request = [NSURLRequest requestWithURL:URL];
-//        判断是否存在
-        if([self isFileExist:fileName]) {
-            NSURL *documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
-            NSURL *url = [documentsDirectoryURL URLByAppendingPathComponent:fileName];
-            self.fileURL = url;
-            [self presentViewController:self.previewController animated:YES completion:nil];
-            //刷新界面,如果不刷新的话，不重新走一遍代理方法，返回的url还是上一次的url
-            [self.previewController refreshCurrentPreviewItem];
-        }else {
-            [SVProgressHUD showWithStatus:@"下载中"];
-            NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request progress:^(NSProgress *downloadProgress){
-            } destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
-                NSURL *documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
-                NSURL *url = [documentsDirectoryURL URLByAppendingPathComponent:fileName];
-                return url;
-            } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
-                [SVProgressHUD dismiss];
-                self.fileURL = filePath;
-                [self presentViewController:self.previewController animated:YES completion:nil];
-                //刷新界面,如果不刷新的话，不重新走一遍代理方法，返回的url还是上一次的url
-                [self.previewController refreshCurrentPreviewItem];
-            }];
-            [downloadTask resume];
-        }
+        [self jumpEnclosureTempStr:message.body];
     }
 }
 
@@ -175,6 +126,52 @@
 
 
 
+- (void)jumpEnclosureTempStr:(NSString *)tempStr{
+    QLPreviewController *previewController =[[QLPreviewController alloc]init];
+    previewController.delegate=self;
+    previewController.dataSource=self;
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+    NSString *urlStr = tempStr;
+    if([[[UIDevice currentDevice] systemVersion] floatValue] >= 9.0){
+        urlStr = [urlStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+        [NSCharacterSet URLQueryAllowedCharacterSet];
+    }else{
+        urlStr = [urlStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    }
+    NSString *fileName = [urlStr lastPathComponent]; //获取文件名称
+    NSURL * URL = [NSURL URLWithString:urlStr];
+    NSURLRequest *request = [NSURLRequest requestWithURL:URL];
+    //        判断是否存在
+    if([self isFileExist:fileName]) {
+        NSURL *documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
+        NSURL *url = [documentsDirectoryURL URLByAppendingPathComponent:fileName];
+        self.fileURL = url;
+        [self presentViewController:previewController animated:YES completion:nil];
+        //刷新界面,如果不刷新的话，不重新走一遍代理方法，返回的url还是上一次的url
+        [previewController refreshCurrentPreviewItem];
+    }else {
+        //[SVProgressHUD showWithStatus:@"下载中"];
+        NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request progress:^(NSProgress *downloadProgress){
+        } destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
+            NSURL *documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
+            NSURL *url = [documentsDirectoryURL URLByAppendingPathComponent:fileName];
+            return url;
+        } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
+            [SVProgressHUD dismiss];
+            self.fileURL = filePath;
+            [self presentViewController:previewController animated:YES completion:nil];
+            //                //刷新界面,如果不刷新的话，不重新走一遍代理方法，返回的url还是上一次的url
+            [previewController refreshCurrentPreviewItem];
+        }];
+        [downloadTask resume];
+    }
+}
+
+
+
+
+
 -(NSInteger)numberOfPreviewItemsInPreviewController:(QLPreviewController *)controller{
     return 1;
 }
@@ -183,6 +180,17 @@
 -(id<QLPreviewItem>)previewController:(QLPreviewController *)controller previewItemAtIndex:(NSInteger)index{
     return self.fileURL;
 }
+
+
+- (void)previewControllerWillDismiss:(QLPreviewController *)controller{
+    [self.userContent addScriptMessageHandler:self name:@"Enclosure"];
+}
+
+
+- (void)previewControllerDidDismiss:(QLPreviewController *)controller{
+    NSLog(@"=================");
+}
+
 
 - (void)jumpPageIndex:(NSInteger)billId{
     RSApprovalProcessViewController * approvalProcessVc = [[RSApprovalProcessViewController alloc]init];

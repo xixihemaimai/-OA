@@ -55,7 +55,7 @@
         
         countLabel.sd_layout
         .leftSpaceToView(shenHeLabel, 0)
-        .centerYEqualToView(self.contentView)
+        .topSpaceToView(self.contentView, 10)
         .widthIs(12)
         .heightEqualToWidth();
         

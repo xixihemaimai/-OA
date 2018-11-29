@@ -383,11 +383,22 @@
         }else{
              cell.countLabel.hidden = NO;
         }
+        
+        if (indexPath.row == 0) {
+            cell.shenHeImageView.hidden = NO;
+            cell.shenHeLabel.textAlignment = NSTextAlignmentCenter;
+            cell.shenHeImageView.sd_layout
+            .leftSpaceToView(cell.contentView, 10)
+            .centerYEqualToView(cell.contentView)
+            .widthIs(13)
+            .heightEqualToWidth();
+        }else{
+            cell.shenHeLabel.textAlignment = NSTextAlignmentLeft;
+            cell.shenHeImageView.hidden = YES;
+        }
         if (indexPath.row == self.selectIndex) {
             cell.contentView.backgroundColor = [UIColor colorWithHexColorStr:@"#ffffff"];
-             cell.shenHeImageView.hidden = NO;
         }else{
-            cell.shenHeImageView.hidden = YES;
             cell.contentView.backgroundColor = [UIColor colorWithHexColorStr:@"#F8F8F8"];
         }
         return cell;
@@ -399,7 +410,6 @@
         }
         cell.contentView.backgroundColor = [UIColor colorWithHexColorStr:@"#ffffff"];
         cell.auditemodel = self.rightArray[indexPath.row];
-       // cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.selectedBackgroundView.backgroundColor = [UIColor colorWithHexColorStr:@"#F7F7F9"];
         return cell;
     }
@@ -421,10 +431,8 @@
         self.selectIndex = indexPath.row;
         if (indexPath.row == self.selectIndex) {
             cell.contentView.backgroundColor = [UIColor colorWithHexColorStr:@"#ffffff"];
-             cell.shenHeImageView.hidden = NO;
         }else{
             cell.contentView.backgroundColor = [UIColor colorWithHexColorStr:@"#F8F8F8"];
-             cell.shenHeImageView.hidden = YES;
         }
         [self.leftTableview reloadData];
         [self.rightTableview.mj_header beginRefreshing];
