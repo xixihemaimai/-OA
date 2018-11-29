@@ -302,10 +302,12 @@
             //NSMutableArray * array = [NSMutableArray arrayWithObjects:@"管理员",@"游客",@"货主",@"超级管理人员",@"服务人员", nil];
             network.successArrayReload = ^(NSMutableArray *array) {
                 self.roleView.dataSource = array;
+                self.roleView.title = [self.roleView.dataSource objectAtIndex:0];
             };
             network.failure = ^(NSDictionary *dict) {
                 NSMutableArray * array = [NSMutableArray array];
                 self.roleView.dataSource = array;
+                self.roleView.title = @"请选择";
             };
              self.userNameField.text = temp;
         }else{
