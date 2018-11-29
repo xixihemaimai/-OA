@@ -180,25 +180,44 @@
     NSIndexPath * indexpath = [NSIndexPath indexPathForRow:0 inSection:0];
     RSShenHeFristCell * cell = [self.leftTableview cellForRowAtIndexPath:indexpath];
     cell.shenHeLabel.backgroundColor = [UIColor colorWithHexColorStr:@"#ffffff"];
-    [self reloadShenHeNewData];
-    RSWeakself
+   
     
-    
+     [self reloadShenHeNewData];
     self.emptyView.hidden = YES;
     
     
     
-    self.rightTableview.mj_header = [MJChiBaoZiHeader headerWithRefreshingBlock:^{
-        weakSelf.pageNum = 1;
-        [weakSelf reloadRightShenHeNewData];
-        [weakSelf.rightTableview.mj_header endRefreshing];
-    }];
     
-    self.rightTableview.mj_footer = [MJRefreshFooter footerWithRefreshingBlock:^{
-        [weakSelf reloadRightShenHeNewData];
-        [weakSelf.rightTableview.mj_footer endRefreshing];
-    }];
+    self.rightTableview.mj_header = [MJChiBaoZiHeader headerWithRefreshingTarget:self refreshingAction:@selector(reloadShenHeRightNewData)];
+    
+    self.rightTableview.mj_footer = [MJChiBaoZiFooter footerWithRefreshingTarget:self refreshingAction:@selector(reloadShenHeRightMoreData)];
+    
+    
+//    self.rightTableview.mj_header = [MJChiBaoZiHeader headerWithRefreshingBlock:^{
+//        weakSelf.pageNum = 1;
+//        [weakSelf reloadRightShenHeNewData];
+//        [weakSelf.rightTableview.mj_header endRefreshing];
+//    }];
+//
+//    self.rightTableview.mj_footer = [MJRefreshFooter footerWithRefreshingBlock:^{
+//        [weakSelf reloadRightShenHeNewData];
+//        [weakSelf.rightTableview.mj_footer endRefreshing];
+//    }];
 }
+
+
+- (void)reloadShenHeRightNewData{
+     self.pageNum = 1;
+    [self reloadRightShenHeData];
+}
+
+- (void)reloadShenHeRightMoreData{
+    [self reloadRightShenHeData];
+}
+
+
+
+
 
 
 - (void)reloadShenHeNewData{
@@ -243,7 +262,7 @@
     };
 }
 
-- (void)reloadRightShenHeNewData{
+- (void)reloadRightShenHeData{
     NSUserDefaults * user = [NSUserDefaults standardUserDefaults];
     NSString * aes = [user objectForKey:@"AES"];
     NSString *const kInitVector = @"16-Bytes--String";
@@ -265,11 +284,16 @@
             }else{
                 self.currentemptyView.hidden = NO;
             }
+            NSLog(@"=============------00000===");
+            [self.rightTableview.mj_header endRefreshing];
+            
              self.pageNum = 2;
         }else{
             self.currentemptyView.hidden = YES;
             NSArray * array1 = array;
             [self.rightArray addObjectsFromArray:array1];
+            [self.rightTableview.mj_footer endRefreshing];
+            NSLog(@"++_++++++++++++++++++++++++");
             self.pageNum++;
         }
         [self.rightTableview reloadData];

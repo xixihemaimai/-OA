@@ -165,7 +165,6 @@
                 }
             }else if ([_tempStr isEqualToString:URL_FLOWLIST]){
                 NSDictionary * dic = [self decryptMethodWithDictionary:dict];
-                NSLog(@"=============%@",dic);
                 NSMutableArray * array = [RSShenHeModel mj_objectArrayWithKeyValuesArray:dic[@"list"]];
                 if (self.successArrayReload) {
                     self.successArrayReload(array);

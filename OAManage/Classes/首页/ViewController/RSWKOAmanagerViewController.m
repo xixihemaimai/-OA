@@ -13,14 +13,20 @@
 
 #import "RSApprovalProcessViewController.h"
 
+#import <QuickLook/QuickLook.h>
 
-@interface RSWKOAmanagerViewController ()<WKNavigationDelegate,UINavigationControllerDelegate,WKScriptMessageHandler>
+@interface RSWKOAmanagerViewController ()<WKNavigationDelegate,UINavigationControllerDelegate,WKScriptMessageHandler,QLPreviewControllerDelegate,QLPreviewControllerDataSource>
 
 @property (nonatomic,strong)RSViewProgressLine * progressLineview;
 
 @property (nonatomic,strong)UIView * htmlView;
 
 @property (nonatomic,strong)WKWebView * webView;
+
+@property (nonatomic, copy)NSURL *fileURL; //文件路径
+
+
+@property (nonatomic,strong)QLPreviewController *previewController;
 
 @end
 
@@ -33,14 +39,20 @@
     self.emptyView.hidden = YES;
     self.title = @"审批";
     
+
+    //self.navigationController.navigationItem.leftBarButtonItem.enabled = NO;
+    
+    QLPreviewController *previewController =[[QLPreviewController alloc]init];
+    previewController.delegate=self;
+    previewController.dataSource=self;
+    self.previewController = previewController;
+    
+    
+    
     self.view.backgroundColor = [UIColor colorWithHexColorStr:@"#f9f9f9"];
-    //CGFloat navHeight = self.navigationController.navigationBar.frame.size.height;
-    //CGFloat navY = self.navigationController.navigationBar.frame.origin.y;
     self.htmlView = [[UIView alloc]init];
-    //WithFrame:CGRectMake(0, navY + navHeight, [UIScreen mainScreen].bounds.size.width,SCH - (navY + navHeight))
     self.htmlView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.htmlView];
-    //WithFrame:CGRectMake(0, 0, SCW, 1)
     self.progressLineview = [[RSViewProgressLine alloc] init];
     self.progressLineview.lineColor = [UIColor colorWithRed:65/255.0 green:105/255.0 blue:225/255.0 alpha:1.0];
     [self.htmlView addSubview:self.progressLineview];
@@ -49,6 +61,8 @@
     
      [userContent addScriptMessageHandler:self name:@"jump"];
      [userContent addScriptMessageHandler:self name:@"reload"];
+     [userContent addScriptMessageHandler:self name:@"Submission"];
+     [userContent addScriptMessageHandler:self name:@"Enclosure"];
     
     config.userContentController = userContent;
     WKWebView * webview = [[WKWebView alloc]initWithFrame:CGRectMake(0, 1, self.htmlView.bounds.size.width, self.htmlView.bounds.size.height) configuration:config];
@@ -70,10 +84,7 @@
         stoneUrlStr= [stoneUrlStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     }
     NSURL * urlStr = [[NSURL alloc]initWithString:stoneUrlStr];
-    //    NSString * body = [NSString stringWithFormat:@"pageType=%ld appType = %ld userId = %@ mtlCode = %@ totalSheetSun = %ld totalVol = %ld selectedkeyArr = %@ mtlName = %@ blockno = %@ turnsno = %ld datefrom = %@ dateto = %@ whsname = %@ storeareaname = %@ locationname = %@ ",self.pageType,self.appType,self.usermodel.userID,self.mtlCode,self.totalSheetSun,self.totalVol,self.selectedkeyArr,self.mtlName,self.blockno,self.turnsno,self.datefrom,self.dateto,self.whsname,self.storeareaname,self.locationname];
     NSMutableURLRequest *requst = [[NSMutableURLRequest alloc]initWithURL:urlStr];
-    // [requst setHTTPMethod:@"POST"];
-    // [requst setHTTPBody:[body dataUsingEncoding:NSUTF8StringEncoding]];
     [_webView loadRequest:requst];
     [self.htmlView addSubview:webview];
     self.htmlView.sd_layout
@@ -91,13 +102,10 @@
     .rightSpaceToView(self.htmlView, 0)
     .topSpaceToView(self.progressLineview, 0)
     .bottomSpaceToView(self.htmlView, 0);
-    
-    
-    
-    
 }
 
 - (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message{
+    NSLog(@"========6666666==========%@",message.name);
     if ([message.name isEqualToString:@"jump"]) {
        NSString * shareStr = message.body;
         [self jumpPageIndex:[shareStr integerValue]
@@ -106,59 +114,93 @@
         [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"%@",message.body]];
         [[NSNotificationCenter defaultCenter]postNotificationName:@"reLoadCurrentViewData" object:nil];
         [self.navigationController popViewControllerAnimated:YES];
+    }else if ([message.name isEqualToString:@"Submission"]){
+        self.navigationItem.leftBarButtonItem.enabled = NO;
+    }else if ([message.name isEqualToString:@"Enclosure"]){
+        NSLog(@"+++++++++++++++++++++32=32=3=2=3=2===========%@",message.body);
+     
+        NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+        
+        AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+        NSString *urlStr = message.body;
+        if([[[UIDevice currentDevice] systemVersion] floatValue] >= 9.0){
+            urlStr = [urlStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+            [NSCharacterSet URLQueryAllowedCharacterSet];
+        }else{
+            urlStr = [urlStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        }
+        NSString *fileName = [urlStr lastPathComponent]; //获取文件名称
+        NSURL * URL = [NSURL URLWithString:urlStr];
+        NSURLRequest *request = [NSURLRequest requestWithURL:URL];
+//        判断是否存在
+        if([self isFileExist:fileName]) {
+            NSURL *documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
+            NSURL *url = [documentsDirectoryURL URLByAppendingPathComponent:fileName];
+            self.fileURL = url;
+            [self presentViewController:self.previewController animated:YES completion:nil];
+            //刷新界面,如果不刷新的话，不重新走一遍代理方法，返回的url还是上一次的url
+            [self.previewController refreshCurrentPreviewItem];
+        }else {
+            [SVProgressHUD showWithStatus:@"下载中"];
+            NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request progress:^(NSProgress *downloadProgress){
+            } destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
+                NSURL *documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
+                NSURL *url = [documentsDirectoryURL URLByAppendingPathComponent:fileName];
+                return url;
+            } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
+                [SVProgressHUD dismiss];
+                self.fileURL = filePath;
+                [self presentViewController:self.previewController animated:YES completion:nil];
+                //刷新界面,如果不刷新的话，不重新走一遍代理方法，返回的url还是上一次的url
+                [self.previewController refreshCurrentPreviewItem];
+            }];
+            [downloadTask resume];
+        }
     }
 }
 
+
+
+//判断文件是否已经在沙盒中存在
+-(BOOL) isFileExist:(NSString *)fileName
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *path = [paths objectAtIndex:0];
+    NSString *filePath = [path stringByAppendingPathComponent:fileName];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    BOOL result = [fileManager fileExistsAtPath:filePath];
+    return result;
+}
+
+
+
+
+-(NSInteger)numberOfPreviewItemsInPreviewController:(QLPreviewController *)controller{
+    return 1;
+}
+
+//QuickLook代理
+-(id<QLPreviewItem>)previewController:(QLPreviewController *)controller previewItemAtIndex:(NSInteger)index{
+    return self.fileURL;
+}
 
 - (void)jumpPageIndex:(NSInteger)billId{
     RSApprovalProcessViewController * approvalProcessVc = [[RSApprovalProcessViewController alloc]init];
     approvalProcessVc.billId = billId;
     [self.navigationController pushViewController:approvalProcessVc animated:YES];
-    
 }
-
-
-
-
-
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [_webView.configuration.userContentController removeScriptMessageHandlerForName:@"tixing"];
     [_webView.configuration.userContentController removeScriptMessageHandlerForName:@"reload"];
+    [_webView.configuration.userContentController removeScriptMessageHandlerForName:@"Submission"];
+    [_webView.configuration.userContentController removeScriptMessageHandlerForName:@"Enclosure"];
 }
-
-
-
-
-- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
-    NSLog(@"是否允许这个导航");
-    decisionHandler(WKNavigationActionPolicyAllow);
-}
-
-
-- (void)webView:(WKWebView *)webView decidePolicyForNavigationResponse:(WKNavigationResponse *)navigationResponse decisionHandler:(void (^)(WKNavigationResponsePolicy))decisionHandler {
-    //    Decides whether to allow or cancel a navigation after its response is known.
-    
-    NSLog(@"知道返回内容之后，是否允许加载，允许加载");
-    decisionHandler(WKNavigationResponsePolicyAllow);
-}
-
-
-
 
 //开始加载
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation{
     [self.progressLineview startLoadingAnimation];
-}
-
-
-- (void)webView:(WKWebView *)webView didReceiveServerRedirectForProvisionalNavigation:(null_unspecified WKNavigation *)navigation {
-    NSLog(@"跳转到其他的服务器");
-    
-}
-- (void)webView:(WKWebView *)webView didCommitNavigation:(null_unspecified WKNavigation *)navigation {
-    NSLog(@"网页开始接收网页内容");
 }
 
 
@@ -172,15 +214,6 @@
     [self.progressLineview endLoadingAnimation];
 }
 
-- (void)webView:(WKWebView *)webView didFailNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error {
-    NSLog(@"加载失败,失败原因:%@",[error description]);
-    
-}
-
-
-- (void)webViewWebContentProcessDidTerminate:(WKWebView *)webView {
-    NSLog(@"网页加载内容进程终止");
-}
 
 
 

@@ -114,10 +114,19 @@
         menuVc.delegate = self;
        [self reloadInformationData];
        [self reloadAuditedData];
+    
+    RSWeakself
+    self.tableview.mj_header = [MJChiBaoZiHeader headerWithRefreshingBlock:^{
+        NSLog(@"===============");
+        [weakSelf reloadInformationData];
+        [weakSelf reloadAuditedData];
+    }];
+    
+    
 }
 
 - (void)reLoadCurrentViewData{
-    [self reloadAuditedData];
+    [self.tableview.mj_header beginRefreshing];
 }
 
 
@@ -144,6 +153,7 @@
             self.emptyView.hidden = NO;
         }
     
+        [self.tableview.mj_header endRefreshing];
     };
 }
 
@@ -169,6 +179,7 @@
         }else{
             self.emptyView.hidden = NO;
         }
+         [self.tableview.mj_header endRefreshing];
     };
 }
 
@@ -214,7 +225,7 @@
         }else{
              return self.informationArray.count;
         }
-       
+    
     }else if (section == 1){
         return 1;
     }

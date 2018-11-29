@@ -26,6 +26,11 @@
     return _auditedArray;
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(reLoadCurrentViewAudditedData) name:@"reLoadCurrentViewData" object:nil];
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -43,30 +48,42 @@
     }
     self.title = @"待审核";
     self.pageNum = 1;
-    RSWeakself
-    [self reloadAuditedNewData];
-    self.tableview.mj_header = [MJChiBaoZiHeader headerWithRefreshingBlock:^{
-        weakSelf.pageNum = 1;
-        [weakSelf reloadAuditedNewData];
-        [weakSelf.tableview.mj_header endRefreshing];
-    }];
     
-    self.tableview.mj_footer = [MJRefreshFooter footerWithRefreshingBlock:^{
-        [weakSelf reloadAuditedNewData];
-        [weakSelf.tableview.mj_footer endRefreshing];
-    }];
     
+    self.tableview.mj_header = [MJChiBaoZiHeader headerWithRefreshingTarget:self refreshingAction:@selector(reloadAuditedNewData)];
+    
+    
+    self.tableview.mj_footer = [MJChiBaoZiFooter footerWithRefreshingTarget:self refreshingAction:@selector(reloadAuditedMoreNewData)];
+    
+    [self.tableview.mj_header beginRefreshing];
     
 }
 
+- (void)reLoadCurrentViewAudditedData{
+    self.pageNum = 1;
+    
+}
 
+//下拉
 - (void)reloadAuditedNewData{
+    self.pageNum = 1;
+    [self reloadAuditedData];
+}
+
+//上拉
+- (void)reloadAuditedMoreNewData{
+    [self reloadAuditedData];
+}
+
+
+
+- (void)reloadAuditedData{
     NSUserDefaults * user = [NSUserDefaults standardUserDefaults];
     NSString * aes = [user objectForKey:@"AES"];
     NSString *const kInitVector = @"16-Bytes--String";
     NetworkTool * network = [[NetworkTool alloc]init];
     NSNumber * number = [NSNumber numberWithInteger:self.pageNum];
-    NSString * notice = URL_YIGODATA_DATA(number,@(5));
+    NSString * notice = URL_YIGODATA_DATA(number,@(10));
     NSString * aes2 = [FSAES128 encryptAES:notice key:aes andKInItVector:kInitVector];
     NSString * canshu = URL_YIGODATA_NOTICE(self.usermodel.appLoginToken, aes2);
     NSString * sopaStr = URL_YIGODATA_IOS(URL_WORKFLOWWEBSERVICE, URL_TOBEAUDIT, canshu);
@@ -76,9 +93,11 @@
             [self.auditedArray removeAllObjects];
             self.auditedArray = array;
             self.pageNum = 2;
+            [self.tableview.mj_header endRefreshing];
         }else{
             NSArray * array1 = array;
             [self.auditedArray addObjectsFromArray:array1];
+            [self.tableview.mj_footer endRefreshing];
             self.pageNum++;
         }
         if (self.auditedArray.count > 0 ) {
@@ -116,26 +135,15 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    
     if (IS_IPHONE) {
-        
         return (93 / SCW) * SCW;
     }else{
-        
         if (DEVICES_IS_PRO_12_9) {
-            
             return  120 * SCALE_TO_PRO;
-            
         }else{
             return (120 / SCW) * SCW;
-            
         }
-        
-        
     }
-    
-    
 }
 
 
@@ -153,7 +161,9 @@
 }
 
 
-
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
+}
 
 
 @end
