@@ -51,6 +51,7 @@
     [super viewDidLoad];
     
     self.emptyView.hidden = YES;
+    self.roleInt = 0;
     
     //设备的唯一标识号
     NSString *udid = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
@@ -123,8 +124,6 @@
     UIView *leftpasswordview = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 39)];
     passwordField.leftViewMode = UITextFieldViewModeAlways;
     passwordField.leftView = leftpasswordview;
-
-    
     
     UIButton * loginBtn = [[UIButton alloc]init];
     [loginBtn setTitle:@"确定" forState:UIControlStateNormal];
@@ -134,7 +133,6 @@
     [loginView addSubview:loginBtn];
     [loginBtn addTarget:self action:@selector(LoginAction:) forControlEvents:UIControlEventTouchUpInside];
     
-    
     if (IS_IPHONE) {
         loginView.sd_layout
         .centerYEqualToView(self.view)
@@ -142,20 +140,17 @@
         .widthRatioToView(self.view, 0.9)
         .autoHeightRatio(0);
         
-        
         LoginImageView.sd_layout
         .centerXEqualToView(loginView)
         .widthIs(108)
         .heightEqualToWidth()
         .topSpaceToView(loginView, 10);
         
-        
         roleView.sd_layout
         .centerXEqualToView(loginView)
         .topSpaceToView(LoginImageView, 46)
         .widthIs(266)
         .heightIs(39);
-        
         
         userNameField.sd_layout
         .centerXEqualToView(loginView)
@@ -164,14 +159,12 @@
         .rightEqualToView(roleView)
         .heightIs(39);
         
-        
         passwordField.sd_layout
         .centerXEqualToView(loginView)
         .topSpaceToView(userNameField, 18)
         .leftEqualToView(userNameField)
         .rightEqualToView(userNameField)
         .heightIs(39);
-        
         
         loginBtn.sd_layout
         .centerXEqualToView(loginView)
@@ -224,7 +217,6 @@
             .rightEqualToView(passwordField)
             .heightIs(60 * SCALE_TO_PRO);
             
-            
         }else{
             
             loginView.sd_layout
@@ -232,7 +224,6 @@
             .centerXEqualToView(self.view)
             .widthRatioToView(self.view, 0.9)
             .autoHeightRatio(0);
-            
             
             LoginImageView.sd_layout
             .centerXEqualToView(loginView)
@@ -254,7 +245,6 @@
             .rightEqualToView(roleView)
             .heightIs((60 / SCW)  * SCW);
             
-            
             passwordField.sd_layout
             .centerXEqualToView(loginView)
             .topSpaceToView(userNameField, 18)
@@ -262,15 +252,12 @@
             .rightEqualToView(userNameField)
             .heightIs((60 / SCW)  * SCW);
             
-            
             loginBtn.sd_layout
             .centerXEqualToView(loginView)
             .topSpaceToView(passwordField, 36)
             .leftEqualToView(passwordField)
             .rightEqualToView(passwordField)
             .heightIs((60 / SCW)  * SCW);
-            
-            
         }
     }
     loginBtn.layer.cornerRadius = 20;
@@ -279,8 +266,6 @@
     [loginView layoutSubviews];
     [loginView setupAutoHeightWithBottomView:loginBtn bottomMargin:0];
 }
-
-
 
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
@@ -302,7 +287,14 @@
             //NSMutableArray * array = [NSMutableArray arrayWithObjects:@"管理员",@"游客",@"货主",@"超级管理人员",@"服务人员", nil];
             network.successArrayReload = ^(NSMutableArray *array) {
                 self.roleView.dataSource = array;
-                self.roleView.title = [self.roleView.dataSource objectAtIndex:0];
+                if (self.roleView.dataSource.count > 0) {
+                    RSRoleModel * rolemodel = [self.roleView.dataSource objectAtIndex:0];
+                    self.roleView.title = rolemodel.name;
+                    self.roleInt = rolemodel.roleID;
+                }else{
+                    self.roleView.title = @"请选择";
+                    self.roleInt = 0;
+                }
             };
             network.failure = ^(NSDictionary *dict) {
                 NSMutableArray * array = [NSMutableArray array];
@@ -402,7 +394,7 @@
         usermodel.deptName = dict[@"deptName"];
         usermodel.sex = dict[@"sex"];
         usermodel.userCode = dict[@"userCode"];
-        usermodel.userId = dict[@"userId"];
+        usermodel.userId = [dict[@"userId"]integerValue];
         usermodel.userName = dict[@"userName"];
         NSData *data = [NSKeyedArchiver archivedDataWithRootObject:usermodel];
         [user setObject:data forKey:@"OAUSERMODEL"];

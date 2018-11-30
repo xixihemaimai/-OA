@@ -21,6 +21,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong)NSString * usertime;
 
 
+@property (nonatomic,strong)NSString * creatorName;
+
+@property (nonatomic,strong)NSString * deptName;
 
 
 @end

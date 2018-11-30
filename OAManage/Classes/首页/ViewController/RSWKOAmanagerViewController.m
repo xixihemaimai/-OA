@@ -62,7 +62,7 @@
     
     NSUserDefaults * user = [NSUserDefaults standardUserDefaults];
     NSString * aes = [user objectForKey:@"AES"];
-    NSString * stoneUrlStr =[NSString stringWithFormat:@"%@?billId=%ld&billKey=%@&aesKey=%@&appLoginToken=%@&workItemId=%ld&username=%@&userdepartment=%@&usertime=%@&type=0",@"http://192.168.1.48:8089/Yigo1.6/Approval.html",(long)self.billId,self.billKey,aes,self.usermodel.appLoginToken,(long)self.workItemId,self.usermodel.userName,self.usermodel.deptName,self.usertime];
+    NSString * stoneUrlStr =[NSString stringWithFormat:@"%@?billId=%ld&billKey=%@&aesKey=%@&appLoginToken=%@&workItemId=%ld&username=%@&userdepartment=%@&usertime=%@&type=0",@"http://192.168.1.48:8089/Yigo1.6/Approval.html",(long)self.billId,self.billKey,aes,self.usermodel.appLoginToken,(long)self.workItemId,self.creatorName,self.deptName,self.usertime];
     NSLog(@"================%@",stoneUrlStr);
     if([[[UIDevice currentDevice] systemVersion] floatValue] >= 9.0){
         stoneUrlStr = [stoneUrlStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];

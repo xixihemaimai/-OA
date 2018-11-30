@@ -417,6 +417,8 @@
         wkOaVc.workItemId = auditedmodel.workItemId;
         wkOaVc.billKey = auditedmodel.billKey;
         wkOaVc.usertime = auditedmodel.createtime;
+        wkOaVc.creatorName = auditedmodel.creatorName;
+        wkOaVc.deptName = auditedmodel.deptName;
         [self.navigationController pushViewController:wkOaVc animated:YES];
     }
 }
