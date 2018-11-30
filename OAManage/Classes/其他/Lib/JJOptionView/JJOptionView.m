@@ -232,11 +232,11 @@ static CGFloat const rowheight = 42;
 - (UITableView *)tableView {
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-        //_tableView.tableFooterView = [UIView new];
+       // _tableView.tableFooterView = [UIView new];
         _tableView.rowHeight = rowheight;
         _tableView.delegate = self;
         _tableView.dataSource = self;
-        _tableView.backgroundColor = [UIColor whiteColor];
+        _tableView.backgroundColor = [UIColor colorWithHexColorStr:@"#00D19C"];
         //_tableView.layer.shadowOffset = CGSizeMake(4, 4);
        // _tableView.layer.shadowColor = [UIColor lightGrayColor].CGColor;
        // _tableView.layer.shadowOpacity = 0.8;
@@ -245,9 +245,9 @@ static CGFloat const rowheight = 42;
        // _tableView.layer.borderWidth = 0.5;
         _tableView.layer.cornerRadius = 5;
         _tableView.layer.masksToBounds = YES;
-       //_tableView.setSeparatorColor:[UIColor clearColor]];
-        _tableView.separatorColor = [UIColor colorWithHexColorStr:@"#D8D8D8"];
-        //_tableView.separatorInset = UIEdgeInsetsMake(0, 10, 0, 10);
+      // [_tableView.setSeparatorColor:[UIColor clearColor]];
+        //_tableView.separatorColor = [UIColor colorWithHexColorStr:@"#D8D8D8"];
+        _tableView.separatorColor = [UIColor clearColor];
         [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:NSStringFromClass([UITableViewCell class])];
         if (@available(iOS 11.0, *)) {
             _tableView.contentInsetAdjustmentBehavior = UIApplicationBackgroundFetchIntervalNever;

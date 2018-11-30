@@ -52,23 +52,11 @@
     
     self.emptyView.hidden = YES;
     self.roleInt = 0;
-    
-    //设备的唯一标识号
-    NSString *udid = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
-    _udidTemp = udid;
-    
-    NSString * canshu = URL_YIGODATA_PUBLICKKEY(udid);
-    NSString * soapStr = URL_YIGODATA_IOS(URL_LOGINWEBSERVICE, URL_GENPUBLICKEY, canshu);
-    NetworkTool * network = [[NetworkTool alloc]init];
-    [network reloadWebServiceNoDataURL:URL_YIGO_IOS andParameters:soapStr andURLName:URL_GENPUBLICKEY];
-    network.successReload = ^(NSDictionary *dict) {
-        self.PublickKeyTemp = dict[@"data"][@"publicKeyStr"];
-    };
+    self.PublickKeyTemp = @"";
     //logo
     self.view.backgroundColor = [UIColor whiteColor];
     self.tableview.hidden = YES;
-    
-    
+    [self getPublicKey];
     //这边设置成一个view
     UIView * loginView = [[UIView alloc]init];
     loginView.backgroundColor = [UIColor clearColor];
@@ -146,18 +134,13 @@
         .heightEqualToWidth()
         .topSpaceToView(loginView, 10);
         
-        roleView.sd_layout
+        
+        userNameField.sd_layout
         .centerXEqualToView(loginView)
         .topSpaceToView(LoginImageView, 46)
         .widthIs(266)
         .heightIs(39);
         
-        userNameField.sd_layout
-        .centerXEqualToView(loginView)
-        .topSpaceToView(roleView, 18)
-        .leftEqualToView(roleView)
-        .rightEqualToView(roleView)
-        .heightIs(39);
         
         passwordField.sd_layout
         .centerXEqualToView(loginView)
@@ -166,11 +149,40 @@
         .rightEqualToView(userNameField)
         .heightIs(39);
         
-        loginBtn.sd_layout
+        
+        roleView.sd_layout
         .centerXEqualToView(loginView)
-        .topSpaceToView(passwordField, 36)
+        .topSpaceToView(passwordField, 18)
         .leftEqualToView(passwordField)
         .rightEqualToView(passwordField)
+        .heightIs(39);
+        
+        
+//        roleView.sd_layout
+//        .centerXEqualToView(loginView)
+//        .topSpaceToView(LoginImageView, 46)
+//        .widthIs(266)
+//        .heightIs(39);
+        
+//        userNameField.sd_layout
+//        .centerXEqualToView(loginView)
+//        .topSpaceToView(roleView, 18)
+//        .leftEqualToView(roleView)
+//        .rightEqualToView(roleView)
+//        .heightIs(39);
+//
+//        passwordField.sd_layout
+//        .centerXEqualToView(loginView)
+//        .topSpaceToView(userNameField, 18)
+//        .leftEqualToView(userNameField)
+//        .rightEqualToView(userNameField)
+//        .heightIs(39);
+//
+        loginBtn.sd_layout
+        .centerXEqualToView(loginView)
+        .topSpaceToView(roleView, 36)
+        .leftEqualToView(roleView)
+        .rightEqualToView(roleView)
         .heightIs(39);
         
     }else{
@@ -189,19 +201,15 @@
             .heightEqualToWidth()
             .topSpaceToView(loginView, 10);
             
-            roleView.sd_layout
+            
+            
+            userNameField.sd_layout
             .centerXEqualToView(loginView)
             .topSpaceToView(LoginImageView, 46)
             .leftSpaceToView(loginView, 54)
             .rightSpaceToView(loginView, 54)
             .heightIs(60 * SCALE_TO_PRO);
             
-            userNameField.sd_layout
-            .centerXEqualToView(loginView)
-            .topSpaceToView(roleView, 18)
-            .leftEqualToView(roleView)
-            .rightEqualToView(roleView)
-            .heightIs(60 * SCALE_TO_PRO);
             
             passwordField.sd_layout
             .centerXEqualToView(loginView)
@@ -210,11 +218,43 @@
             .rightEqualToView(userNameField)
             .heightIs(60 * SCALE_TO_PRO);
             
-            loginBtn.sd_layout
+            
+            
+            roleView.sd_layout
             .centerXEqualToView(loginView)
-            .topSpaceToView(passwordField, 36)
+            .topSpaceToView(passwordField, 18)
             .leftEqualToView(passwordField)
             .rightEqualToView(passwordField)
+            .heightIs(60 * SCALE_TO_PRO);
+            
+            
+//
+//            roleView.sd_layout
+//            .centerXEqualToView(loginView)
+//            .topSpaceToView(LoginImageView, 46)
+//            .leftSpaceToView(loginView, 54)
+//            .rightSpaceToView(loginView, 54)
+//            .heightIs(60 * SCALE_TO_PRO);
+//
+//            userNameField.sd_layout
+//            .centerXEqualToView(loginView)
+//            .topSpaceToView(roleView, 18)
+//            .leftEqualToView(roleView)
+//            .rightEqualToView(roleView)
+//            .heightIs(60 * SCALE_TO_PRO);
+//
+//            passwordField.sd_layout
+//            .centerXEqualToView(loginView)
+//            .topSpaceToView(userNameField, 18)
+//            .leftEqualToView(userNameField)
+//            .rightEqualToView(userNameField)
+//            .heightIs(60 * SCALE_TO_PRO);
+            
+            loginBtn.sd_layout
+            .centerXEqualToView(loginView)
+            .topSpaceToView(roleView, 36)
+            .leftEqualToView(roleView)
+            .rightEqualToView(roleView)
             .heightIs(60 * SCALE_TO_PRO);
             
         }else{
@@ -231,19 +271,16 @@
             .heightEqualToWidth()
             .topSpaceToView(loginView, 10);
             
-            roleView.sd_layout
+            
+            
+            userNameField.sd_layout
             .centerXEqualToView(loginView)
             .topSpaceToView(LoginImageView, 46)
             .leftSpaceToView(loginView, 54)
             .rightSpaceToView(loginView, 54)
             .heightIs((60 / SCW)  * SCW);
             
-            userNameField.sd_layout
-            .centerXEqualToView(loginView)
-            .topSpaceToView(roleView, 18)
-            .leftEqualToView(roleView)
-            .rightEqualToView(roleView)
-            .heightIs((60 / SCW)  * SCW);
+            
             
             passwordField.sd_layout
             .centerXEqualToView(loginView)
@@ -252,11 +289,44 @@
             .rightEqualToView(userNameField)
             .heightIs((60 / SCW)  * SCW);
             
-            loginBtn.sd_layout
+            
+            
+            
+            
+            roleView.sd_layout
             .centerXEqualToView(loginView)
-            .topSpaceToView(passwordField, 36)
+            .topSpaceToView(passwordField, 18)
             .leftEqualToView(passwordField)
             .rightEqualToView(passwordField)
+            .heightIs((60 / SCW)  * SCW);
+            
+            
+//            roleView.sd_layout
+//            .centerXEqualToView(loginView)
+//            .topSpaceToView(LoginImageView, 46)
+//            .leftSpaceToView(loginView, 54)
+//            .rightSpaceToView(loginView, 54)
+//            .heightIs((60 / SCW)  * SCW);
+//
+//            userNameField.sd_layout
+//            .centerXEqualToView(loginView)
+//            .topSpaceToView(roleView, 18)
+//            .leftEqualToView(roleView)
+//            .rightEqualToView(roleView)
+//            .heightIs((60 / SCW)  * SCW);
+//
+//            passwordField.sd_layout
+//            .centerXEqualToView(loginView)
+//            .topSpaceToView(userNameField, 18)
+//            .leftEqualToView(userNameField)
+//            .rightEqualToView(userNameField)
+//            .heightIs((60 / SCW)  * SCW);
+            
+            loginBtn.sd_layout
+            .centerXEqualToView(loginView)
+            .topSpaceToView(roleView, 36)
+            .leftEqualToView(roleView)
+            .rightEqualToView(roleView)
             .heightIs((60 / SCW)  * SCW);
         }
     }
@@ -323,6 +393,38 @@
 }
 
 
+- (BOOL)getPublicKey{
+    //设备的唯一标识号
+    __block BOOL isValue;
+    NSString *udid = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+    _udidTemp = udid;
+    NSString * canshu = URL_YIGODATA_PUBLICKKEY(udid);
+    NSString * soapStr = URL_YIGODATA_IOS(URL_LOGINWEBSERVICE, URL_GENPUBLICKEY, canshu);
+    NetworkTool * network = [[NetworkTool alloc]init];
+    [network reloadWebServiceNoDataURL:URL_YIGO_IOS andParameters:soapStr andURLName:URL_GENPUBLICKEY];
+    network.successReload = ^(NSDictionary *dict) {
+        self.PublickKeyTemp = dict[@"data"][@"publicKeyStr"];
+        NSLog(@"6666666666666666");
+        if ([self.PublickKeyTemp length] > 1) {
+            NSLog(@"88888888888888888");
+            isValue = true;
+        }else{
+            NSLog(@"77777777777777777");
+            isValue = false;
+        }
+    };
+    return isValue;
+}
+
+
+
+
+
+
+
+
+
+
 
 
 - (void)LoginAction:(UIButton *)logBtn{
@@ -356,7 +458,35 @@
         [SVProgressHUD showInfoWithStatus:@"请输入正确的用户名，在进行选择角色"];
         return;
     }
-     
+    
+    
+    
+    if ([self.PublickKeyTemp length] < 1) {
+        BOOL isValue = [self getPublicKey];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            if (isValue) {
+                NSLog(@"444444444444444444444");
+                //重新获取值的情况下
+                [self loginUserSopaStr];
+            }else{
+                NSLog(@"55555555555555555555");
+                //重新获取没有值的情况
+                [SVProgressHUD showInfoWithStatus:@"手机网络有问题"];
+            }
+        });
+    }else{
+        //原来就有值的情况
+        NSLog(@"33333333333333333333");
+        [self loginUserSopaStr];
+    }
+}
+
+
+
+
+- (void)loginUserSopaStr{
+ 
+    
     //账号，密码，角色，AES，唯一标示符，------》公钥加密
     //密码
     NSString * password =[MyMD5 md5:self.passwordField.text];
@@ -364,7 +494,7 @@
     NSInteger timeInt = [self getNowTimestamp];
     //NSString * aes = [FSAES128 AES128Encrypt:[NSString stringWithFormat:@"%ld",timeInt] key:@"123456"];
     //保存在本地
-    NSString * aes1 = [NSString stringWithFormat:@"%ld",timeInt];
+    NSString * aes1 = [NSString stringWithFormat:@"%ld",(long)timeInt];
     NSUserDefaults * user = [NSUserDefaults standardUserDefaults];
     //拼凑成一个16位的数
     int a = arc4random() % 100000;
@@ -373,7 +503,7 @@
     
     [user setObject:aes2 forKey:@"AES"];
     [user synchronize];
-   // NSString *const kInitVector = @"16-Bytes--String";
+    // NSString *const kInitVector = @"16-Bytes--String";
     NSString * data = [NSString stringWithFormat:@"{userCode:'%@',password:'%@',roleId:%ld,aesKey:'%@'}",self.userNameField.text,password,_roleInt,aes2];
     //RSA加密
     NSString * rsaEncryptor = [RSAEncryptor encryptString:data publicKey:self.PublickKeyTemp];
@@ -384,10 +514,10 @@
     [network reloadWebServiceNoDataURL:URL_YIGO_IOS andParameters:soapStr andURLName:URL_LOGIN];
     //获取成功之后的操作
     network.successReload = ^(NSDictionary *dict) {
-//        NSString * data1 = dict[@"data"];
-//        NSString * userData = [FSAES128 decryptAES:data1 key:aes2 andKInItVector:kInitVector];
-//        NSData *jsonData = [userData dataUsingEncoding:NSUTF8StringEncoding];
-//        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:nil];
+        //        NSString * data1 = dict[@"data"];
+        //        NSString * userData = [FSAES128 decryptAES:data1 key:aes2 andKInItVector:kInitVector];
+        //        NSData *jsonData = [userData dataUsingEncoding:NSUTF8StringEncoding];
+        //        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:nil];
         RSUserModel * usermodel = [[RSUserModel alloc]init];
         usermodel.aesKey = dict[@"aesKey"];
         usermodel.appLoginToken = dict[@"appLoginToken"];
@@ -398,21 +528,25 @@
         usermodel.userName = dict[@"userName"];
         NSData *data = [NSKeyedArchiver archivedDataWithRootObject:usermodel];
         [user setObject:data forKey:@"OAUSERMODEL"];
-         [user synchronize];
+        [user synchronize];
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             //登录之后要获取用户信息，然后在跳转到下面的界面
             //改变根控制器
-                RSMyNavigationViewController *navigationController = [[RSMyNavigationViewController alloc] initWithRootViewController:[[RSHomeViewController alloc] init]];
-                RSMenuViewController *menuController = [[RSMenuViewController alloc] init];
-                REFrostedViewController *frostedViewController = [[REFrostedViewController alloc] initWithContentViewController:navigationController menuViewController:menuController];
-                frostedViewController.direction = REFrostedViewControllerDirectionLeft;
-                frostedViewController.liveBlurBackgroundStyle = REFrostedViewControllerLiveBackgroundStyleLight;
-                AppDelegate * appdelegate =(AppDelegate *)[UIApplication sharedApplication].delegate;
-                appdelegate.frostedViewController = frostedViewController;
-                appdelegate.window.rootViewController = frostedViewController;
+            RSMyNavigationViewController *navigationController = [[RSMyNavigationViewController alloc] initWithRootViewController:[[RSHomeViewController alloc] init]];
+            RSMenuViewController *menuController = [[RSMenuViewController alloc] init];
+            REFrostedViewController *frostedViewController = [[REFrostedViewController alloc] initWithContentViewController:navigationController menuViewController:menuController];
+            frostedViewController.direction = REFrostedViewControllerDirectionLeft;
+            frostedViewController.liveBlurBackgroundStyle = REFrostedViewControllerLiveBackgroundStyleLight;
+            AppDelegate * appdelegate =(AppDelegate *)[UIApplication sharedApplication].delegate;
+            appdelegate.frostedViewController = frostedViewController;
+            appdelegate.window.rootViewController = frostedViewController;
         });
     };
+    
+    
+    
+    
 }
 
 

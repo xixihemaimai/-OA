@@ -65,9 +65,12 @@
     NSString * stoneUrlStr =[NSString stringWithFormat:@"%@?billId=%ld&billKey=%@&aesKey=%@&appLoginToken=%@&workItemId=%ld&username=%@&userdepartment=%@&usertime=%@&type=0",@"http://192.168.1.48:8089/Yigo1.6/Approval.html",(long)self.billId,self.billKey,aes,self.usermodel.appLoginToken,(long)self.workItemId,self.creatorName,self.deptName,self.usertime];
     NSLog(@"================%@",stoneUrlStr);
     if([[[UIDevice currentDevice] systemVersion] floatValue] >= 9.0){
+        
+       
         stoneUrlStr = [stoneUrlStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
         [NSCharacterSet URLQueryAllowedCharacterSet];
     }else{
+        
         stoneUrlStr= [stoneUrlStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     }
     NSURL * urlStr = [[NSURL alloc]initWithString:stoneUrlStr];
@@ -114,6 +117,7 @@
 {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *path = [paths objectAtIndex:0];
+    NSLog(@"===============%@",path);
     NSString *filePath = [path stringByAppendingPathComponent:fileName];
     NSFileManager *fileManager = [NSFileManager defaultManager];
     BOOL result = [fileManager fileExistsAtPath:filePath];
@@ -141,7 +145,7 @@
     NSURLRequest *request = [NSURLRequest requestWithURL:URL];
     //        判断是否存在
     if([self isFileExist:fileName]) {
-        NSURL *documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
+        NSURL * documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
         NSURL *url = [documentsDirectoryURL URLByAppendingPathComponent:fileName];
         self.fileURL = url;
         [self presentViewController:previewController animated:YES completion:nil];
@@ -153,12 +157,13 @@
         } destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
             NSURL *documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
             NSURL *url = [documentsDirectoryURL URLByAppendingPathComponent:fileName];
+            NSLog(@"0000-------323----------%@",URL);
             return url;
         } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
             [SVProgressHUD dismiss];
             self.fileURL = filePath;
             [self presentViewController:previewController animated:YES completion:nil];
-            //                //刷新界面,如果不刷新的话，不重新走一遍代理方法，返回的url还是上一次的url
+            //刷新界面,如果不刷新的话，不重新走一遍代理方法，返回的url还是上一次的url
             [previewController refreshCurrentPreviewItem];
         }];
         [downloadTask resume];

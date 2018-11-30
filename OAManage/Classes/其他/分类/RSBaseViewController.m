@@ -487,6 +487,34 @@
 }
 
 
+//获取文件的大小
+-(float)sizeOfDirectory:(NSString *)dir{
+    NSDirectoryEnumerator *direnum = [[NSFileManager defaultManager] enumeratorAtPath:dir];
+    NSString *pname;
+    int64_t s=0;
+    while (pname = [direnum nextObject]){
+        //NSLog(@"pname   %@",pname);
+        NSDictionary *currentdict=[direnum fileAttributes];
+        NSString *filesize=[NSString stringWithFormat:@"%@",[currentdict objectForKey:NSFileSize]];
+        NSString *filetype=[currentdict objectForKey:NSFileType];
+        
+        if([filetype isEqualToString:NSFileTypeDirectory]) continue;
+        s=s+[filesize longLongValue];
+    }
+    return s*1.0;
+}
+
+
+//根据路径删除文件
+-(BOOL)deleteFileByPath:(NSString *)path{
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    
+    BOOL res=[fileManager removeItemAtPath:path error:nil];
+    return res;
+    NSLog(@"文件是否存在: %@",[fileManager isExecutableFileAtPath:path]?@"YES":@"NO");
+}
+
+
 
 
 - (void)viewWillDisappear:(BOOL)animated {

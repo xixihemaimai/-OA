@@ -195,16 +195,24 @@
         [self.navigationController pushViewController:passwordModificationVc animated:YES];
     }else{
      //清除缓存
-        NSUInteger bytesCache = [[SDImageCache sharedImageCache] getSize];
+       // NSUInteger bytesCache = [[SDImageCache sharedImageCache] getSize];
+        
+        
+        
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *path = [paths objectAtIndex:0];
+        
+        float MBCache = [self sizeOfDirectory:path];
         //换算成 MB (注意iOS中的字节之间的换算是1000不是1024)
-        float MBCache = bytesCache/1000/1000;
-        NSString * text = [NSString stringWithFormat:@"已清理:%0.2lfM",MBCache];
+         MBCache = MBCache/1000/1000;
+        NSString * text = [NSString stringWithFormat:@"已清理:%0.3lfM",MBCache];
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:text message:nil preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction * actionConfirm = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             //这边是清理缓存
             //异步清除图片缓存 （磁盘中的）
             dispatch_async(dispatch_get_global_queue(0, 0), ^{
-                [[SDImageCache sharedImageCache] clearMemory];
+                //[[SDImageCache sharedImageCache] clearMemory];
+                [self deleteFileByPath:path];
             });
         }];
         [alert addAction:actionConfirm];

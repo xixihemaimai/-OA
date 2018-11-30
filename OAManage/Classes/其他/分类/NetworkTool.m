@@ -250,7 +250,7 @@
     }else if (status == -4){
         [SVProgressHUD showErrorWithStatus:[NSString stringWithFormat:@"%@",dict[@"message"]]];
     }else if (status == -5){
-        [SVProgressHUD showErrorWithStatus:@"未登录"];
+       // [SVProgressHUD showErrorWithStatus:@"未登录"];
         NSUserDefaults * user = [NSUserDefaults standardUserDefaults];
         [user removeObjectForKey:@"OAUSERMODEL"];
         [user removeObjectForKey:@"AES"];
@@ -267,12 +267,26 @@
 - (NSDictionary *)decryptMethodWithDictionary:(NSDictionary *)dict{
     NSUserDefaults * user = [NSUserDefaults standardUserDefaults];
     NSString * aes = [user objectForKey:@"AES"];
-    NSString *const kInitVector = @"16-Bytes--String";
-    NSString * data1 = dict[@"data"];
+    NSString * const kInitVector = @"16-Bytes--String";
+    NSString * data1 = [NSString stringWithFormat:@"%@",dict[@"data"]];
     NSString * userData = [FSAES128 decryptAES:data1 key:aes andKInItVector:kInitVector];
-    NSData *jsonData = [userData dataUsingEncoding:NSUTF8StringEncoding];
-    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:nil];
-    return dic;
+    if ([userData length] < 1) {
+        [SVProgressHUD showErrorWithStatus:@"登录失效"];
+        NSUserDefaults * user = [NSUserDefaults standardUserDefaults];
+        [user removeObjectForKey:@"OAUSERMODEL"];
+        [user removeObjectForKey:@"AES"];
+        [user synchronize];
+        AppDelegate * appdelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+        RSLoginViewController * loginVc = [[RSLoginViewController alloc]init];
+        appdelegate.window.rootViewController = loginVc;
+        return nil;
+
+    }else{
+        NSData *jsonData = [userData dataUsingEncoding:NSUTF8StringEncoding];
+        NSDictionary * dic = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:nil];
+         return dic;
+    }
+   
 }
 
 

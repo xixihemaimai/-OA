@@ -92,7 +92,12 @@
 
 -(NSInteger)timeSwitchTimestamp:(NSString *)formatTime andFormatter:(NSString *)format;
 
+//获取文件的大小
+-(float)sizeOfDirectory:(NSString *)dir;
 
+
+//根据路径删除文件
+-(BOOL)deleteFileByPath:(NSString *)path;
 
 @end
 
