@@ -100,14 +100,17 @@
 
 - (UITableView *)leftTableview{
     if (!_leftTableview) {
-        _leftTableview = [[UITableView alloc]initWithFrame:CGRectMake(0, 64, 88, SCH - 64) style:UITableViewStylePlain];
+        if (IS_IPHONE) {
+             _leftTableview = [[UITableView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.navigationController.navigationBar.frame), 88, SCH - CGRectGetMaxY(self.navigationController.navigationBar.frame)) style:UITableViewStylePlain];
+        }else{
+             _leftTableview = [[UITableView alloc]initWithFrame:CGRectMake(0, 64, 160, SCH - 64) style:UITableViewStylePlain];
+        }
         _leftTableview.delegate = self;
         _leftTableview.dataSource = self;
         _leftTableview.showsVerticalScrollIndicator = NO;
         _leftTableview.showsHorizontalScrollIndicator = NO;
         _leftTableview.separatorStyle = UITableViewCellSeparatorStyleNone;
         _leftTableview.backgroundColor = [UIColor colorWithHexColorStr:@"#ffffff"];
-        
     }
     return _leftTableview;
 }
@@ -351,7 +354,15 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (tableView == self.leftTableview) {
-        return 48;
+        if (IS_IPHONE) {
+             return 48;
+        }else{
+            if (DEVICES_IS_PRO_12_9) {
+                return  80 * SCALE_TO_PRO;
+            }else{
+                return (80 / SCW) * SCW;
+            }
+        }
     }else{
         if (IS_IPHONE) {
             return (93 / SCW) * SCW;
@@ -377,7 +388,14 @@
         }
         RSShenHeModel * shenhemodel = self.leftArray[indexPath.row];
         cell.shenHeLabel.text = [NSString stringWithFormat:@"%@",shenhemodel.billName];
-        cell.countLabel.text = [NSString stringWithFormat:@"%ld",(long)shenhemodel.flowCount];
+        
+        if (shenhemodel.flowCount >= 99) {
+            cell.countLabel.text = [NSString stringWithFormat:@"99"];
+        }else{
+            cell.countLabel.text = [NSString stringWithFormat:@"%ld",(long)shenhemodel.flowCount];
+        }
+        
+        
         if (shenhemodel.flowCount == 0) {
             cell.countLabel.hidden = YES;
         }else{

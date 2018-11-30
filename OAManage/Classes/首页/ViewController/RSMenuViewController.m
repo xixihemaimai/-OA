@@ -121,9 +121,7 @@ static NSString * MENUHEADER = @"MENUHEADER";
      
         
     }else{
-        
-        if (DEVICES_IS_PRO_12_9) {
-            
+            if (DEVICES_IS_PRO_12_9) {
             menuHeaderview.sd_layout
             .leftSpaceToView(self.tableview, 0)
             .topSpaceToView(self.tableview, 0)
@@ -141,13 +139,13 @@ static NSString * MENUHEADER = @"MENUHEADER";
             .topSpaceToView(headerImageview, 2)
             .leftSpaceToView(menuHeaderview, 12)
             .rightSpaceToView(menuHeaderview, 12)
-            .heightIs(25 * SCALE_TO_PRO);
+            .heightRatioToView(menuHeaderview, 0.15);
             
             departmentLabel.sd_layout
             .leftSpaceToView(menuHeaderview, 12)
             .rightSpaceToView(menuHeaderview, 12)
             .topSpaceToView(nameLabel, 5)
-            .heightIs(20 * SCALE_TO_PRO);
+            .bottomSpaceToView(menuHeaderview, 5);
         }else{
             
             menuHeaderview.sd_layout
@@ -166,15 +164,13 @@ static NSString * MENUHEADER = @"MENUHEADER";
             .topSpaceToView(headerImageview, 2)
             .leftSpaceToView(menuHeaderview, 12)
             .rightSpaceToView(menuHeaderview, 12)
-            .heightIs((25 / SCW) * SCW);
+            .heightRatioToView(menuHeaderview, 0.15);
             
             departmentLabel.sd_layout
             .leftSpaceToView(menuHeaderview, 12)
             .rightSpaceToView(menuHeaderview, 12)
             .topSpaceToView(nameLabel, 5)
-            .heightIs((20 / SCW) * SCW);
-            
-           
+            .bottomSpaceToView(menuHeaderview, 5);
         }
     }
 

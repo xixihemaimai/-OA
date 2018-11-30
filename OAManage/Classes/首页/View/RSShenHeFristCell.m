@@ -47,19 +47,81 @@
         .heightEqualToWidth();
         
         
-        shenHeLabel.sd_layout
-        .leftSpaceToView(self.contentView, 12)
-        .topSpaceToView(self.contentView, 0)
-        .bottomSpaceToView(self.contentView, 0)
-        .rightSpaceToView(self.contentView, 20);
-        
-        countLabel.sd_layout
-        .leftSpaceToView(shenHeLabel, 0)
-        .topSpaceToView(self.contentView, 10)
-        .widthIs(12)
-        .heightEqualToWidth();
-        
-        
+        if (IS_IPHONE) {
+            
+            if (iPhone4 || iPhone5) {
+                
+                
+                shenHeLabel.sd_layout
+                .leftSpaceToView(self.contentView, 12)
+                .topSpaceToView(self.contentView, 0)
+                .bottomSpaceToView(self.contentView, 0)
+                .rightSpaceToView(self.contentView, 25);
+                
+                countLabel.sd_layout
+                .leftSpaceToView(shenHeLabel, 0)
+                .topSpaceToView(self.contentView, 12)
+                .widthIs(12)
+                .heightEqualToWidth();
+            }else if (iPhone6p || iPhoneXR || iPhoneXSMax){
+                
+                shenHeLabel.sd_layout
+                .leftSpaceToView(self.contentView, 12)
+                .topSpaceToView(self.contentView, 0)
+                .bottomSpaceToView(self.contentView, 0)
+                .rightSpaceToView(self.contentView, 15);
+                
+                countLabel.sd_layout
+                .leftSpaceToView(shenHeLabel, 0)
+                .topSpaceToView(self.contentView, 10)
+                .widthIs(12)
+                .heightEqualToWidth();
+                
+                
+            }
+            else{
+                shenHeLabel.sd_layout
+                .leftSpaceToView(self.contentView, 12)
+                .topSpaceToView(self.contentView, 0)
+                .bottomSpaceToView(self.contentView, 0)
+                .rightSpaceToView(self.contentView, 20);
+                
+                countLabel.sd_layout
+                .leftSpaceToView(shenHeLabel, 0)
+                .topSpaceToView(self.contentView, 10)
+                .widthIs(12)
+                .heightEqualToWidth();
+            }
+        }else{
+            if (DEVICES_IS_PRO_12_9) {
+                //return  120 * SCALE_TO_PRO;
+                shenHeLabel.sd_layout
+                .leftSpaceToView(self.contentView, 12)
+                .topSpaceToView(self.contentView, 0)
+                .bottomSpaceToView(self.contentView, 0)
+                .rightSpaceToView(self.contentView, 25);
+                
+                countLabel.sd_layout
+                .leftSpaceToView(shenHeLabel, 0)
+                .topSpaceToView(self.contentView, 12)
+                .widthIs(23 * SCALE_TO_PRO)
+                .heightEqualToWidth();
+            
+            }else{
+                //return (120 / SCW) * SCW;
+                shenHeLabel.sd_layout
+                .leftSpaceToView(self.contentView, 12)
+                .topSpaceToView(self.contentView, 0)
+                .bottomSpaceToView(self.contentView, 0)
+                .rightSpaceToView(self.contentView, 25);
+                
+                countLabel.sd_layout
+                .leftSpaceToView(shenHeLabel, 0)
+                .topSpaceToView(self.contentView, 12)
+                .widthIs((23 / SCW) * SCW)
+                .heightEqualToWidth();
+            }
+        }
         countLabel.layer.cornerRadius = countLabel.yj_width * 0.5;
         countLabel.layer.masksToBounds = YES;
         
