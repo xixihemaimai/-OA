@@ -355,12 +355,12 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (tableView == self.leftTableview) {
         if (IS_IPHONE) {
-             return 48;
+             return 60;
         }else{
             if (DEVICES_IS_PRO_12_9) {
-                return  80 * SCALE_TO_PRO;
+                return  96 * SCALE_TO_PRO;
             }else{
-                return (80 / SCW) * SCW;
+                return (96 / SCW) * SCW;
             }
         }
     }else{
@@ -399,7 +399,7 @@
         if (shenhemodel.flowCount == 0) {
             cell.countLabel.hidden = YES;
         }else{
-             cell.countLabel.hidden = NO;
+            cell.countLabel.hidden = NO;
         }
         
         if (indexPath.row == 0) {
@@ -415,8 +415,10 @@
             cell.shenHeImageView.hidden = YES;
         }
         if (indexPath.row == self.selectIndex) {
+            cell.shenHeLabel.textColor = [UIColor colorWithHexColorStr:@"#333333"];
             cell.contentView.backgroundColor = [UIColor colorWithHexColorStr:@"#ffffff"];
         }else{
+            cell.shenHeLabel.textColor = [UIColor colorWithHexColorStr:@"#7D7D7D"];
             cell.contentView.backgroundColor = [UIColor colorWithHexColorStr:@"#F8F8F8"];
         }
         return cell;
@@ -426,9 +428,16 @@
         if (!cell) {
             cell = [[RSApprovalCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CELLID];
         }
-        cell.contentView.backgroundColor = [UIColor colorWithHexColorStr:@"#ffffff"];
+       // cell.contentView.backgroundColor = [UIColor colorWithHexColorStr:@"#ffffff"];
         cell.auditemodel = self.rightArray[indexPath.row];
-        cell.selectedBackgroundView.backgroundColor = [UIColor colorWithHexColorStr:@"#F7F7F9"];
+        
+        UIColor * color = [UIColor colorWithRed:247/255.0 green:247/255.0 blue:249/255.0 alpha:1.0];//通过RGB来定义自己的颜色
+        cell.selectedBackgroundView = [[UIView alloc] initWithFrame:cell.frame];//这句不可省略
+        cell.selectedBackgroundView.backgroundColor = color;
+//        cell.selectedBackgroundView.backgroundColor = [UIColor colorWithRed:247/255.0 green:247/255.0 blue:249/255.0 alpha:1.0];
+        
+        
+        
         return cell;
     }
 }

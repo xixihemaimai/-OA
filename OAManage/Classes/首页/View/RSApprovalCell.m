@@ -51,7 +51,7 @@
         
         //部门
         UILabel * approvalDepartmentLabel = [[UILabel alloc]init];
-        approvalDepartmentLabel.textColor = [UIColor colorWithHexColorStr:@"#999999"];
+        approvalDepartmentLabel.textColor = [UIColor colorWithHexColorStr:@"#666666"];
         approvalDepartmentLabel.text = @"信息部";
         approvalDepartmentLabel.textAlignment = NSTextAlignmentLeft;
         approvalDepartmentLabel.font = [UIFont systemFontOfSize:Textadaptation(10)];
@@ -77,16 +77,16 @@
         //时间
         UILabel * approvalTimeLabel = [[UILabel alloc]init];
         approvalTimeLabel.text = @"10:40";
-        approvalTimeLabel.textColor = [UIColor colorWithHexColorStr:@"#999999"];
+        approvalTimeLabel.textColor = [UIColor colorWithHexColorStr:@"#666666"];
         approvalTimeLabel.textAlignment = NSTextAlignmentRight;
         approvalTimeLabel.font = [UIFont systemFontOfSize:Textadaptation(10)];
         [self.contentView addSubview:approvalTimeLabel];
         _approvalTimeLabel = approvalTimeLabel;
         
        //底部横线
-        UIView * approvalBottomView = [[UIView alloc]init];
-        approvalBottomView.backgroundColor = [UIColor colorWithHexColorStr:@"#F2F2F2"];
-        [self.contentView addSubview:approvalBottomView];
+//        UIView * approvalBottomView = [[UIView alloc]init];
+//        approvalBottomView.backgroundColor = [UIColor colorWithHexColorStr:@"#F2F2F2"];
+//        [self.contentView addSubview:approvalBottomView];
         
         
         approvalImageView.sd_layout
@@ -106,7 +106,8 @@
         
         approvalDepartmentLabel.sd_layout
         .leftSpaceToView(approvalNameLabel, -100)
-        .bottomEqualToView(approvalNameLabel)
+       // .bottomEqualToView(approvalNameLabel)
+        .bottomSpaceToView(approvalNameLabel, -19)
         .widthRatioToView(self.contentView, 0.2)
         .heightIs(14);
         
@@ -163,11 +164,11 @@
                 .heightIs(20);
             }
         }
-        approvalBottomView.sd_layout
-        .leftSpaceToView(self.contentView, 0)
-        .rightSpaceToView(self.contentView, 0)
-        .heightIs(1)
-        .bottomSpaceToView(self.contentView, 0);
+//        approvalBottomView.sd_layout
+//        .leftSpaceToView(self.contentView, 0)
+//        .rightSpaceToView(self.contentView, 0)
+//        .heightIs(1)
+//        .bottomSpaceToView(self.contentView, 0);
     }
     return self;
 }
@@ -202,7 +203,7 @@
     CGSize approvalDepartmentsize = [_approvalDepartmentLabel.text sizeWithAttributes:@{NSFontAttributeName:_approvalDepartmentLabel.font}];
     _approvalDepartmentLabel.sd_layout
     .leftSpaceToView(_approvalNameLabel, 5)
-    .bottomEqualToView(_approvalNameLabel)
+   .bottomSpaceToView(_approvalNameLabel, -19)
     .widthIs(approvalDepartmentsize.width)
     .heightIs(14);
     

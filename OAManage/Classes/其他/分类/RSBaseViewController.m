@@ -230,7 +230,7 @@
 /**密码设置有大小写字母和数字*/
 - (BOOL)validatePassword:(NSString *)passWord
 {
-    // NSString *passWordRegex = @"^[a-zA-Z0-9]{6,18}+$";
+    //NSString *passWordRegex = @"^[a-zA-Z0-9]{6,18}+$";
     //NSString * passWordRegex = @"[0-9a-zA-Z\u4e00-\u9fa5\\.\\*\\)\\(\\+\\$\\[\\?\\\\\\^\\{\\|\\]\\}%%%@\'\",。‘、-【】·！_——=:;；<>《》‘’“”!#~]+";
     
     NSString *passWordRegex = @"^[A-Za-z0-9\\u4e00-\u9fa5]+$";

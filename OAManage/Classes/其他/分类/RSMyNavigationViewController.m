@@ -168,9 +168,7 @@
             self.cover.alpha = 0.5 - ((tx / self.view.frame.size.width)/2);
             [window insertSubview:self.lastVcView atIndex:0];
             [window insertSubview:self.cover aboveSubview:self.lastVcView];
-            
         }
-
     }
 }
 

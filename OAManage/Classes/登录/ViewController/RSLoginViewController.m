@@ -22,7 +22,7 @@
 #import "FSAES128.h"
 
 #import "RSAEncryptor.h"
-
+typedef void(^Obtain)(BOOL isValue);
 
 @interface RSLoginViewController ()<JJOptionViewDelegate,UITextFieldDelegate>
 
@@ -43,20 +43,27 @@
 @property (nonatomic,assign)NSInteger roleInt;
 
 
+@property (nonatomic,strong) UIButton * loginBtn;
+
+
 @end
 
 @implementation RSLoginViewController
 
+
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     self.emptyView.hidden = YES;
     self.roleInt = 0;
     self.PublickKeyTemp = @"";
     //logo
     self.view.backgroundColor = [UIColor whiteColor];
     self.tableview.hidden = YES;
-    [self getPublicKey];
+    [self getPublicKeyobtain:^(BOOL isValue) {
+    }];
+    
     //这边设置成一个view
     UIView * loginView = [[UIView alloc]init];
     loginView.backgroundColor = [UIColor clearColor];
@@ -68,7 +75,7 @@
     [loginView addSubview:LoginImageView];
     
     JJOptionView * roleView = [[JJOptionView alloc]init];
-    roleView.title = @"请选择";
+    roleView.title = @"用户角色";
     roleView.delegate = self;
     [loginView addSubview:roleView];
     _roleView = roleView;
@@ -112,7 +119,7 @@
     UIView *leftpasswordview = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 39)];
     passwordField.leftViewMode = UITextFieldViewModeAlways;
     passwordField.leftView = leftpasswordview;
-    
+    passwordField.secureTextEntry = YES;
     UIButton * loginBtn = [[UIButton alloc]init];
     [loginBtn setTitle:@"确定" forState:UIControlStateNormal];
     [loginBtn setBackgroundColor:[UIColor colorWithHexColorStr:@"#3FE4B1"]];
@@ -120,7 +127,8 @@
     loginBtn.titleLabel.font = [UIFont systemFontOfSize:Textadaptation(16)];
     [loginView addSubview:loginBtn];
     [loginBtn addTarget:self action:@selector(LoginAction:) forControlEvents:UIControlEventTouchUpInside];
-    
+    loginBtn.enabled = YES;
+    _loginBtn = loginBtn;
     if (IS_IPHONE) {
         loginView.sd_layout
         .centerYEqualToView(self.view)
@@ -349,7 +357,7 @@
         if ([temp length] > 0) {
             //这边要对输入的值进行判断有什么角色
             //成功了才可以设置值出来
-            _roleView.title = @"请选择";
+            _roleView.title = @"用户角色";
             NetworkTool * network = [[NetworkTool alloc]init];
             NSString * canshu = URL_YIGODATA_USERCODE(temp);
             NSString * soapStr = URL_YIGODATA_IOS(URL_LOGINWEBSERVICE, URL_FINDROLE, canshu);
@@ -362,20 +370,20 @@
                     self.roleView.title = rolemodel.name;
                     self.roleInt = rolemodel.roleID;
                 }else{
-                    self.roleView.title = @"请选择";
+                    self.roleView.title = @"用户角色";
                     self.roleInt = 0;
                 }
             };
             network.failure = ^(NSDictionary *dict) {
                 NSMutableArray * array = [NSMutableArray array];
                 self.roleView.dataSource = array;
-                self.roleView.title = @"请选择";
+                self.roleView.title = @"用户角色";
             };
              self.userNameField.text = temp;
         }else{
             _userNameField.text = @"";
             [_userNameField resignFirstResponder];
-            _roleView.title = @"请选择";
+            _roleView.title = @"用户角色";
             NSMutableArray * array = [NSMutableArray array];
             _roleView.dataSource = array;
         }
@@ -393,88 +401,86 @@
 }
 
 
-- (BOOL)getPublicKey{
+- (void)getPublicKeyobtain:(Obtain)obtain{
     //设备的唯一标识号
-    __block BOOL isValue;
     NSString *udid = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
     _udidTemp = udid;
     NSString * canshu = URL_YIGODATA_PUBLICKKEY(udid);
     NSString * soapStr = URL_YIGODATA_IOS(URL_LOGINWEBSERVICE, URL_GENPUBLICKEY, canshu);
     NetworkTool * network = [[NetworkTool alloc]init];
     [network reloadWebServiceNoDataURL:URL_YIGO_IOS andParameters:soapStr andURLName:URL_GENPUBLICKEY];
+    //成功
     network.successReload = ^(NSDictionary *dict) {
         self.PublickKeyTemp = dict[@"data"][@"publicKeyStr"];
-        NSLog(@"6666666666666666");
         if ([self.PublickKeyTemp length] > 1) {
-            NSLog(@"88888888888888888");
-            isValue = true;
+            obtain(true);
         }else{
-            NSLog(@"77777777777777777");
-            isValue = false;
+            obtain(false);
         }
     };
-    return isValue;
+    //失败
+    network.failure = ^(NSDictionary *dict) {
+        obtain(false);
+    };
 }
 
 
-
-
-
-
-
-
-
-
-
-
 - (void)LoginAction:(UIButton *)logBtn{
+    logBtn.enabled = NO;
     NSString *temp = [_userNameField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-    if ([temp length] < 0){
-        NSLog(@"======================");
-        [SVProgressHUD showErrorWithStatus:@"请输入登录账号"];
+    
+    if ([temp length] < 1){
+        logBtn.enabled = YES;
+        [SVProgressHUD showErrorWithStatus:@"请输入用户名"];
         return;
     }
     NSString *passwordtemp = [_passwordField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-    if ([passwordtemp length] < 0){
-        NSLog(@"====------------------------");
+    
+    passwordtemp = [self delSpaceAndNewline:passwordtemp];
+    if ([passwordtemp length] < 1){
+        logBtn.enabled = YES;
         [SVProgressHUD showErrorWithStatus:@"请输入登录密码"];
         return;
     }
     if(![self validatePassword:_passwordField.text])
     {
-        [SVProgressHUD showErrorWithStatus:@"请输入登录密码"];
+        logBtn.enabled = YES;
+        [SVProgressHUD showErrorWithStatus:@"用户名或密码错误,包含了特殊字符"];
         return;
     }
     if (_passwordField.text.length<6)
     {
+        logBtn.enabled = YES;
         [SVProgressHUD showErrorWithStatus:@"用户名或密码错误"];
         return;
     }
     if (_passwordField.text.length>18)
     {
+        logBtn.enabled = YES;
         [SVProgressHUD showErrorWithStatus:@"用户名或密码错误"];
         return;
     }
-    if ([_roleView.title isEqualToString:@"请选择"]) {
+    if ([_roleView.title isEqualToString:@"用户角色"]) {
+        logBtn.enabled = YES;
         [SVProgressHUD showInfoWithStatus:@"请输入正确的用户名，在进行选择角色"];
         return;
     }
     if ([self.PublickKeyTemp length] < 1) {
-        BOOL isValue = [self getPublicKey];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            if (isValue) {
-                NSLog(@"444444444444444444444");
+        //self.isValue = [self getPublicKey];
+        [self getPublicKeyobtain:^(BOOL success) {
+            if (success) {
                 //重新获取值的情况下
+                self.loginBtn.enabled = NO;
                 [self loginUserSopaStr];
             }else{
-                NSLog(@"55555555555555555555");
+                self.loginBtn.enabled = YES;
                 //重新获取没有值的情况
                 [SVProgressHUD showInfoWithStatus:@"手机网络有问题"];
             }
-        });
+        }];
     }else{
         //原来就有值的情况
-        NSLog(@"33333333333333333333");
+        self.loginBtn.enabled = NO;
         [self loginUserSopaStr];
     }
 }
@@ -482,9 +488,8 @@
 
 - (void)loginUserSopaStr{
     
-    
-    
-    [SVProgressHUD showInfoWithStatus:@"正在登录中......."];
+    [SVProgressHUD showWithStatus:@"正在登录中......."];
+    [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeBlack];
     //账号，密码，角色，AES，唯一标示符，------》公钥加密
     //密码
     NSString * password =[MyMD5 md5:self.passwordField.text];
@@ -498,12 +503,12 @@
     int a = arc4random() % 100000;
     NSString *str = [NSString stringWithFormat:@"%06d", a];
     NSString * const aes2 = [NSString stringWithFormat:@"%@%@",aes1,str];
-    
     [user setObject:aes2 forKey:@"AES"];
     [user synchronize];
     // NSString *const kInitVector = @"16-Bytes--String";
     NSString * data = [NSString stringWithFormat:@"{userCode:'%@',password:'%@',roleId:%ld,aesKey:'%@'}",self.userNameField.text,password,_roleInt,aes2];
     //RSA加密
+   
     NSString * rsaEncryptor = [RSAEncryptor encryptString:data publicKey:self.PublickKeyTemp];
     //网络请求
     NetworkTool * network = [[NetworkTool alloc]init];
@@ -513,10 +518,7 @@
     //获取成功之后的操作
     network.successReload = ^(NSDictionary *dict) {
         [SVProgressHUD dismiss];
-        //        NSString * data1 = dict[@"data"];
-        //        NSString * userData = [FSAES128 decryptAES:data1 key:aes2 andKInItVector:kInitVector];
-        //        NSData *jsonData = [userData dataUsingEncoding:NSUTF8StringEncoding];
-        //        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:nil];
+        self.loginBtn.enabled = NO;
         RSUserModel * usermodel = [[RSUserModel alloc]init];
         usermodel.aesKey = dict[@"aesKey"];
         usermodel.appLoginToken = dict[@"appLoginToken"];
@@ -528,7 +530,7 @@
         NSData *data = [NSKeyedArchiver archivedDataWithRootObject:usermodel];
         [user setObject:data forKey:@"OAUSERMODEL"];
         [user synchronize];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             //登录之后要获取用户信息，然后在跳转到下面的界面
             //改变根控制器
             RSMyNavigationViewController *navigationController = [[RSMyNavigationViewController alloc] initWithRootViewController:[[RSHomeViewController alloc] init]];
@@ -541,6 +543,16 @@
             appdelegate.window.rootViewController = frostedViewController;
         });
     };
+    
+    network.failure = ^(NSDictionary *dict) {
+        self.loginBtn.enabled = YES;
+        [user removeObjectForKey:@"AES"];
+        [user removeObjectForKey:@"OAUSERMODEL"];
+        [user synchronize];
+    };
+    
+    
+    
 }
 
 
@@ -548,6 +560,9 @@
     RSRoleModel * rolemodel = [optionView.dataSource objectAtIndex:selectedIndex];
     _roleInt = rolemodel.roleID;
 }
+
+
+
 
 /*
 #pragma mark - Navigation

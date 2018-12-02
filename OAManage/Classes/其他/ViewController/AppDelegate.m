@@ -78,7 +78,7 @@
         usermodel.deptName = dict[@"deptName"];
         usermodel.sex = dict[@"sex"];
         usermodel.userCode = dict[@"userCode"];
-        usermodel.userId = dict[@"userId"];
+        usermodel.userId = [dict[@"userId"] integerValue];
         usermodel.userName = dict[@"userName"];
         [user removeObjectForKey:@"OAUSERMODEL"];
         NSData *data = [NSKeyedArchiver archivedDataWithRootObject:usermodel];

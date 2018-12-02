@@ -14,6 +14,17 @@
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         
        // self.contentView.backgroundColor = [UIColor colorWithHexColorStr:@"#F8F8F8"];
+        
+        
+        
+        //上面的view
+        UIView * topView = [[UIView alloc]init];
+        topView.backgroundColor = [UIColor clearColor];
+        [self.contentView addSubview:topView];
+        
+        
+        
+        
         //图片
         UIImageView * shenHeImageView = [[UIImageView alloc]init];
         shenHeImageView.image = [UIImage imageNamed:@"全部"];
@@ -40,6 +51,27 @@
         _countLabel = countLabel;
         
         
+        
+        //底部view
+        UIView * bottomView = [[UIView alloc]init];
+        bottomView.backgroundColor = [UIColor clearColor];
+        [self.contentView addSubview:bottomView];
+        
+        
+        topView.sd_layout
+        .leftSpaceToView(self.contentView, 0)
+        .topSpaceToView(self.contentView, 0)
+        .rightSpaceToView(self.contentView, 0)
+        .heightIs(8);
+        
+
+        bottomView.sd_layout
+        .leftSpaceToView(self.contentView, 0)
+        .rightSpaceToView(self.contentView, 0)
+        .bottomSpaceToView(self.contentView, 0)
+        .heightIs(8);
+        
+       
         shenHeImageView.sd_layout
         .centerYEqualToView(self.contentView)
         .leftSpaceToView(self.contentView, 2)
@@ -51,44 +83,42 @@
             
             if (iPhone4 || iPhone5) {
                 
-                
                 shenHeLabel.sd_layout
                 .leftSpaceToView(self.contentView, 12)
-                .topSpaceToView(self.contentView, 0)
-                .bottomSpaceToView(self.contentView, 0)
+                .topSpaceToView(topView, 0)
+                .bottomSpaceToView(bottomView, 0)
                 .rightSpaceToView(self.contentView, 25);
                 
                 countLabel.sd_layout
                 .leftSpaceToView(shenHeLabel, 0)
-                .topSpaceToView(self.contentView, 12)
+                .topSpaceToView(self.contentView, 20)
                 .widthIs(12)
                 .heightEqualToWidth();
+                
             }else if (iPhone6p || iPhoneXR || iPhoneXSMax){
                 
                 shenHeLabel.sd_layout
                 .leftSpaceToView(self.contentView, 12)
-                .topSpaceToView(self.contentView, 0)
-                .bottomSpaceToView(self.contentView, 0)
+                .topSpaceToView(topView, 0)
+                .bottomSpaceToView(bottomView, 0)
                 .rightSpaceToView(self.contentView, 15);
                 
                 countLabel.sd_layout
                 .leftSpaceToView(shenHeLabel, 0)
-                .topSpaceToView(self.contentView, 10)
+                .topSpaceToView(self.contentView, 18)
                 .widthIs(12)
                 .heightEqualToWidth();
-                
-                
             }
             else{
                 shenHeLabel.sd_layout
                 .leftSpaceToView(self.contentView, 12)
-                .topSpaceToView(self.contentView, 0)
-                .bottomSpaceToView(self.contentView, 0)
+                .topSpaceToView(topView, 0)
+                .bottomSpaceToView(bottomView, 0)
                 .rightSpaceToView(self.contentView, 20);
                 
                 countLabel.sd_layout
                 .leftSpaceToView(shenHeLabel, 0)
-                .topSpaceToView(self.contentView, 10)
+                .topSpaceToView(self.contentView, 16)
                 .widthIs(12)
                 .heightEqualToWidth();
             }
@@ -97,13 +127,13 @@
                 //return  120 * SCALE_TO_PRO;
                 shenHeLabel.sd_layout
                 .leftSpaceToView(self.contentView, 12)
-                .topSpaceToView(self.contentView, 0)
-                .bottomSpaceToView(self.contentView, 0)
+                .topSpaceToView(topView, 0)
+                .bottomSpaceToView(bottomView, 0)
                 .rightSpaceToView(self.contentView, 25);
                 
                 countLabel.sd_layout
                 .leftSpaceToView(shenHeLabel, 0)
-                .topSpaceToView(self.contentView, 12)
+                .topSpaceToView(self.contentView, 20)
                 .widthIs(23 * SCALE_TO_PRO)
                 .heightEqualToWidth();
             
@@ -111,13 +141,13 @@
                 //return (120 / SCW) * SCW;
                 shenHeLabel.sd_layout
                 .leftSpaceToView(self.contentView, 12)
-                .topSpaceToView(self.contentView, 0)
-                .bottomSpaceToView(self.contentView, 0)
+                .topSpaceToView(topView, 0)
+                .bottomSpaceToView(bottomView, 0)
                 .rightSpaceToView(self.contentView, 25);
                 
                 countLabel.sd_layout
                 .leftSpaceToView(shenHeLabel, 0)
-                .topSpaceToView(self.contentView, 12)
+                .topSpaceToView(self.contentView, 20)
                 .widthIs((23 / SCW) * SCW)
                 .heightEqualToWidth();
             }

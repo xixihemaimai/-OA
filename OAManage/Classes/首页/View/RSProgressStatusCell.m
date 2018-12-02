@@ -130,7 +130,7 @@
         rightImageView.contentMode = UIViewContentModeScaleAspectFill;
         rightImageView.image = [UIImage imageNamed:@"向右"];
         [transverseImageView addSubview:rightImageView];
-        
+        rightImageView.hidden = YES;
         
         
         //同意的图片

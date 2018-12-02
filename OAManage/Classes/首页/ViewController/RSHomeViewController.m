@@ -120,8 +120,6 @@
         [weakSelf reloadInformationData];
         [weakSelf reloadAuditedData];
     }];
-    
-    
 }
 
 - (void)reLoadCurrentViewData{

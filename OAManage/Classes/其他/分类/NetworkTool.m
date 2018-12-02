@@ -77,6 +77,11 @@
                 }
             }else if ([urlName isEqualToString:URL_LOGIN]){
                 [SVProgressHUD showErrorWithStatus:@"登录失败"];
+                
+                if (self.failure) {
+                    self.failure(responseObject);
+                }
+                
             }else if ([urlName isEqualToString:URL_LOGOUT]){
                 [SVProgressHUD showErrorWithStatus:@"退出登录失败"];
             }else {
@@ -194,15 +199,34 @@
                     appdelegate.window.rootViewController = loginVc;
             }
         }else {
-            if ([_tempStr isEqualToString:URL_GENPUBLICKEY] || [_tempStr isEqualToString:URL_LOGIN] || [_tempStr isEqualToString:URL_CHANGPWD] || [_tempStr isEqualToString:URL_NOTICE] || [_tempStr isEqualToString:URL_TOBEAUDIT] || [_tempStr isEqualToString:URL_FLOWLIST] || [_tempStr isEqualToString:URL_MYAUDIT] || [_tempStr isEqualToString:URL_AUDITFLOW] || [_tempStr isEqualToString:URL_LOGOUT]){
+            if (  [_tempStr isEqualToString:URL_CHANGPWD] || [_tempStr isEqualToString:URL_NOTICE] || [_tempStr isEqualToString:URL_TOBEAUDIT] || [_tempStr isEqualToString:URL_FLOWLIST] || [_tempStr isEqualToString:URL_MYAUDIT] || [_tempStr isEqualToString:URL_AUDITFLOW] || [_tempStr isEqualToString:URL_LOGOUT]){
                 [self errerAlertUserStatus:dict];
-            }else if ([_tempStr isEqualToString:URL_FINDROLE]){
+            }else if ([_tempStr isEqualToString:URL_LOGIN] ||[_tempStr isEqualToString:URL_GENPUBLICKEY] || [_tempStr isEqualToString:URL_FINDROLE]){
+                
                 [self errerAlertUserStatus:dict];
                 
                 if (self.failure) {
                     self.failure(dict);
                 }
-            }else if ([_tempStr isEqualToString:URL_USERINFO]){
+                
+                
+            }
+//            else if ( [_tempStr isEqualToString:URL_GENPUBLICKEY]){
+//
+//                [self errerAlertUserStatus:dict];
+//
+//                if (self.failure) {
+//                    self.failure(dict);
+//                }
+//
+//            }else if ([_tempStr isEqualToString:URL_FINDROLE]){
+//                [self errerAlertUserStatus:dict];
+//
+//                if (self.failure) {
+//                    self.failure(dict);
+//                }
+//            }
+        else if ([_tempStr isEqualToString:URL_USERINFO]){
 //                NSUserDefaults * user = [NSUserDefaults standardUserDefaults];
 //                [user removeObjectForKey:@"OAUSERMODEL"];
 //                [user removeObjectForKey:@"AES"];

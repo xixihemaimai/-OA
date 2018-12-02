@@ -258,17 +258,17 @@
     }
     if(![self validatePassword:_oldCipherField.text])
     {
-        [SVProgressHUD showErrorWithStatus:@"请输入登录密码"];
+        [SVProgressHUD showErrorWithStatus:@"密码只允许数字和大小字母组成"];
         return;
     }
     if(![self validatePassword:_renewCipherField.text])
     {
-        [SVProgressHUD showErrorWithStatus:@"请输入登录密码"];
+        [SVProgressHUD showErrorWithStatus:@"密码只允许数字和大小字母组成"];
         return;
     }
     if(![self validatePassword:_sureCipherField.text])
     {
-        [SVProgressHUD showErrorWithStatus:@"请输入登录密码"];
+        [SVProgressHUD showErrorWithStatus:@"密码只允许数字和大小字母组成"];
         return;
     }
     if (_oldCipherField.text.length<6)
