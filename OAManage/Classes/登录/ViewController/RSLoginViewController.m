@@ -428,6 +428,18 @@
 
 
 - (void)LoginAction:(UIButton *)logBtn{
+    NSString *temp = [_userNameField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    if ([temp length] < 0){
+        NSLog(@"======================");
+        [SVProgressHUD showErrorWithStatus:@"请输入登录账号"];
+        return;
+    }
+    NSString *passwordtemp = [_passwordField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    if ([passwordtemp length] < 0){
+        NSLog(@"====------------------------");
+        [SVProgressHUD showErrorWithStatus:@"请输入登录密码"];
+        return;
+    }
     if(![self validatePassword:_passwordField.text])
     {
         [SVProgressHUD showErrorWithStatus:@"请输入登录密码"];
@@ -435,32 +447,18 @@
     }
     if (_passwordField.text.length<6)
     {
-        [SVProgressHUD showErrorWithStatus:@"请设置6-18位密码"];
+        [SVProgressHUD showErrorWithStatus:@"用户名或密码错误"];
         return;
     }
     if (_passwordField.text.length>18)
     {
-        [SVProgressHUD showErrorWithStatus:@"请设置6-18位密码"];
-        return;
-    }
-    NSString *temp = [_userNameField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-    if ([temp length] < 0){
-        [SVProgressHUD showErrorWithStatus:@"请输入登录账号"];
-        return;
-    }
-    
-    NSString *passwordtemp = [_passwordField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-    if ([passwordtemp length] < 0){
-        [SVProgressHUD showErrorWithStatus:@"请输入登录密码"];
+        [SVProgressHUD showErrorWithStatus:@"用户名或密码错误"];
         return;
     }
     if ([_roleView.title isEqualToString:@"请选择"]) {
         [SVProgressHUD showInfoWithStatus:@"请输入正确的用户名，在进行选择角色"];
         return;
     }
-    
-    
-    
     if ([self.PublickKeyTemp length] < 1) {
         BOOL isValue = [self getPublicKey];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -482,11 +480,11 @@
 }
 
 
-
-
 - (void)loginUserSopaStr{
- 
     
+    
+    
+    [SVProgressHUD showInfoWithStatus:@"正在登录中......."];
     //账号，密码，角色，AES，唯一标示符，------》公钥加密
     //密码
     NSString * password =[MyMD5 md5:self.passwordField.text];
@@ -514,6 +512,7 @@
     [network reloadWebServiceNoDataURL:URL_YIGO_IOS andParameters:soapStr andURLName:URL_LOGIN];
     //获取成功之后的操作
     network.successReload = ^(NSDictionary *dict) {
+        [SVProgressHUD dismiss];
         //        NSString * data1 = dict[@"data"];
         //        NSString * userData = [FSAES128 decryptAES:data1 key:aes2 andKInItVector:kInitVector];
         //        NSData *jsonData = [userData dataUsingEncoding:NSUTF8StringEncoding];
@@ -529,7 +528,6 @@
         NSData *data = [NSKeyedArchiver archivedDataWithRootObject:usermodel];
         [user setObject:data forKey:@"OAUSERMODEL"];
         [user synchronize];
-        
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             //登录之后要获取用户信息，然后在跳转到下面的界面
             //改变根控制器
@@ -543,10 +541,6 @@
             appdelegate.window.rootViewController = frostedViewController;
         });
     };
-    
-    
-    
-    
 }
 
 

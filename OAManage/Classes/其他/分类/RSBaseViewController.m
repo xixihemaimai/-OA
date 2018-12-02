@@ -231,7 +231,9 @@
 - (BOOL)validatePassword:(NSString *)passWord
 {
     // NSString *passWordRegex = @"^[a-zA-Z0-9]{6,18}+$";
-    NSString * passWordRegex = @"[0-9a-zA-Z\u4e00-\u9fa5\\.\\*\\)\\(\\+\\$\\[\\?\\\\\\^\\{\\|\\]\\}%%%@\'\",。‘、-【】·！_——=:;；<>《》‘’“”!#~]+";
+    //NSString * passWordRegex = @"[0-9a-zA-Z\u4e00-\u9fa5\\.\\*\\)\\(\\+\\$\\[\\?\\\\\\^\\{\\|\\]\\}%%%@\'\",。‘、-【】·！_——=:;；<>《》‘’“”!#~]+";
+    
+    NSString *passWordRegex = @"^[A-Za-z0-9\\u4e00-\u9fa5]+$";
     NSPredicate *passWordPredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",passWordRegex];
     return [passWordPredicate evaluateWithObject:passWord];
 }

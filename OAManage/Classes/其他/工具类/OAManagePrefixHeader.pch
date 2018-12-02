@@ -73,9 +73,9 @@
 #import <MJExtension.h>
 #import <UIImageView+WebCache.h>
 
-
+//117.29.162.206
 //测试
-#define URL_YIGO_IOS @" http://192.168.1.48:8089/Yigo1.6/services/MapWebService?wsdl"
+#define URL_YIGO_IOS @" http://117.29.162.206:8089/Yigo1.6/services/MapWebService?wsdl"
 //正式
 //#define URL_YIGO_IOS @" http://121.204.136.234:48000/Yigo1.6/services/MapWebService?wsdl"
 

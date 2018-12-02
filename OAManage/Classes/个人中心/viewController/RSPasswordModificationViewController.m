@@ -45,7 +45,8 @@
     UITextField * oldCipherField = [[UITextField alloc]init];
     NSMutableParagraphStyle * style = [[NSMutableParagraphStyle alloc] init];
     style.alignment = NSTextAlignmentCenter;
-    NSAttributedString * attri = [[NSAttributedString alloc] initWithString:@"旧密码" attributes:@{NSForegroundColorAttributeName:[UIColor colorWithHexColorStr:@"#E0E0E0"],NSFontAttributeName:[UIFont systemFontOfSize:14], NSParagraphStyleAttributeName:style}];
+    NSAttributedString * attri = [[NSAttributedString alloc] initWithString:@"原密码" attributes:@{NSForegroundColorAttributeName:[UIColor colorWithHexColorStr:@"#E0E0E0"],NSFontAttributeName:[UIFont systemFontOfSize:14], NSParagraphStyleAttributeName:style}];
+    oldCipherField.secureTextEntry = YES;
     oldCipherField.attributedPlaceholder = attri;
     oldCipherField.backgroundColor = [UIColor colorWithHexColorStr:@"#FFFFFF"];
     oldCipherField.layer.cornerRadius = 20;
@@ -64,6 +65,7 @@
     passwordstyle.alignment = NSTextAlignmentCenter;
     NSAttributedString * passwordattri = [[NSAttributedString alloc] initWithString:@"新密码" attributes:@{NSForegroundColorAttributeName:[UIColor colorWithHexColorStr:@"#E0E0E0"],NSFontAttributeName:[UIFont systemFontOfSize:14], NSParagraphStyleAttributeName:passwordstyle}];
     renewCipherField.attributedPlaceholder = passwordattri;
+    renewCipherField.secureTextEntry = YES;
     renewCipherField.backgroundColor = [UIColor colorWithHexColorStr:@"#FFFFFF"];
     renewCipherField.layer.cornerRadius = 20;
     renewCipherField.layer.borderColor = [UIColor colorWithHexColorStr:@"#D3D3D3"].CGColor;
@@ -82,6 +84,7 @@
     sureCipherField.layer.cornerRadius = 20;
     sureCipherField.layer.borderColor = [UIColor colorWithHexColorStr:@"#D3D3D3"].CGColor;
     sureCipherField.layer.borderWidth = 1;
+    sureCipherField.secureTextEntry = YES;
     sureCipherField.layer.masksToBounds = YES;
     
     [rePasswordView addSubview:sureCipherField];
@@ -240,7 +243,7 @@
 - (void)sureAction:(UIButton *)sureBtn{
     if([self istext:_oldCipherField])
     {
-        [SVProgressHUD showErrorWithStatus:@"请输入旧密码"];
+        [SVProgressHUD showErrorWithStatus:@"请输入原密码"];
         return;
     }
     if([self istext:_renewCipherField])
@@ -270,7 +273,7 @@
     }
     if (_oldCipherField.text.length<6)
     {
-        [SVProgressHUD showErrorWithStatus:@"请设置6-18位密码"];
+        [SVProgressHUD showErrorWithStatus:@"原密码错误"];
         return;
     }
     if (_renewCipherField.text.length<6)
@@ -285,7 +288,7 @@
     }
     if (_oldCipherField.text.length>18)
     {
-        [SVProgressHUD showErrorWithStatus:@"请设置6-18位密码"];
+        [SVProgressHUD showErrorWithStatus:@"原密码错误"];
         return;
     }
     if (_renewCipherField.text.length>18)
@@ -305,12 +308,12 @@
     }
     if([_oldCipherField.text isEqualToString:_renewCipherField.text])
     {
-        [SVProgressHUD showErrorWithStatus:@"旧密码和新密码相同"];
+        [SVProgressHUD showErrorWithStatus:@"原密码和新密码相同"];
         return;
     }
     if([_oldCipherField.text isEqualToString:_sureCipherField.text])
     {
-        [SVProgressHUD showErrorWithStatus:@"旧密码和新密码相同"];
+        [SVProgressHUD showErrorWithStatus:@"原密码和新密码相同"];
         return;
     }
     NetworkTool * network = [[NetworkTool alloc]init];

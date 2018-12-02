@@ -49,10 +49,10 @@
     WKWebViewConfiguration * config = [[WKWebViewConfiguration alloc]init];
     WKUserContentController * userContent = [[WKUserContentController alloc]init];
     self.userContent = userContent;
-     [userContent addScriptMessageHandler:self name:@"jump"];
-     [userContent addScriptMessageHandler:self name:@"reload"];
-     [userContent addScriptMessageHandler:self name:@"Submission"];
-     [userContent addScriptMessageHandler:self name:@"Enclosure"];
+    [userContent addScriptMessageHandler:self name:@"jump"];
+    [userContent addScriptMessageHandler:self name:@"reload"];
+    [userContent addScriptMessageHandler:self name:@"Submission"];
+    [userContent addScriptMessageHandler:self name:@"Enclosure"];
     
     config.userContentController = userContent;
     WKWebView * webview = [[WKWebView alloc]initWithFrame:CGRectMake(0, 1, self.htmlView.bounds.size.width, self.htmlView.bounds.size.height) configuration:config];
@@ -65,12 +65,9 @@
     NSString * stoneUrlStr =[NSString stringWithFormat:@"%@?billId=%ld&billKey=%@&aesKey=%@&appLoginToken=%@&workItemId=%ld&username=%@&userdepartment=%@&usertime=%@&type=0",@"http://192.168.1.48:8089/Yigo1.6/Approval.html",(long)self.billId,self.billKey,aes,self.usermodel.appLoginToken,(long)self.workItemId,self.creatorName,self.deptName,self.usertime];
     NSLog(@"================%@",stoneUrlStr);
     if([[[UIDevice currentDevice] systemVersion] floatValue] >= 9.0){
-        
-       
         stoneUrlStr = [stoneUrlStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
         [NSCharacterSet URLQueryAllowedCharacterSet];
     }else{
-        
         stoneUrlStr= [stoneUrlStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     }
     NSURL * urlStr = [[NSURL alloc]initWithString:stoneUrlStr];
@@ -170,10 +167,6 @@
     }
 }
 
-
-
-
-
 -(NSInteger)numberOfPreviewItemsInPreviewController:(QLPreviewController *)controller{
     return 1;
 }
@@ -190,7 +183,6 @@
 
 
 - (void)previewControllerDidDismiss:(QLPreviewController *)controller{
-    NSLog(@"=================");
 }
 
 

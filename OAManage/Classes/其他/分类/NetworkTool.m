@@ -224,6 +224,8 @@
 
 //错误提醒的分类
 - (void)errerAlertUserStatus:(NSDictionary *)dict{
+    
+    [SVProgressHUD dismiss];
     /**
      // 正常状态
      public static final int RET_STATUS_NORMAL = 0 ;
