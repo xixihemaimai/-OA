@@ -87,7 +87,7 @@
     if (!_currentemptyView) {
         _currentemptyView = [[ZZQEmptyView alloc] initWithView:self.view];
         _currentemptyView.emptyMode = ZZQEmptyViewModeNoData;
-        _currentemptyView.label.text = @"没有数据展示";
+        _currentemptyView.label.text = @"暂无任务";
         [_currentemptyView.button setTitle:@"点击重新加载" forState:UIControlStateNormal];
         _currentemptyView.button.hidden = YES;
         _currentemptyView.showtype = @"1";

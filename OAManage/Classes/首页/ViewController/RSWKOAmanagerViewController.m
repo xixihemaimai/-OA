@@ -29,10 +29,14 @@
 
 @property (nonatomic,strong) WKUserContentController * userContent;
 
+
+
+
+
 @end
 
-@implementation RSWKOAmanagerViewController
 
+@implementation RSWKOAmanagerViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
 
@@ -121,7 +125,6 @@
 {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *path = [paths objectAtIndex:0];
-    NSLog(@"===============%@",path);
     NSString *filePath = [path stringByAppendingPathComponent:fileName];
     NSFileManager *fileManager = [NSFileManager defaultManager];
     BOOL result = [fileManager fileExistsAtPath:filePath];
@@ -129,12 +132,7 @@
 }
 
 
-
-
 - (void)jumpEnclosureTempStr:(NSString *)tempStr{
-   
-    
-    
     QLPreviewController *previewController =[[QLPreviewController alloc]init];
     previewController.delegate=self;
     previewController.dataSource=self;
@@ -168,7 +166,6 @@
         } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
             [SVProgressHUD dismiss];
             self.fileURL = filePath;
-           
             [self presentViewController:previewController animated:YES completion:nil];
             //刷新界面,如果不刷新的话，不重新走一遍代理方法，返回的url还是上一次的url
             [previewController refreshCurrentPreviewItem];
@@ -186,18 +183,18 @@
     return self.fileURL;
 }
 
-
-
 - (void)previewControllerDidDismiss:(QLPreviewController *)controller{
     RSMyNavigationViewController * myNavi = (RSMyNavigationViewController *)self.frostedViewController.contentViewController;
     [myNavi.images removeLastObject];
 }
 
 
+
 - (void)jumpPageIndex:(NSInteger)billId{
     RSApprovalProcessViewController * approvalProcessVc = [[RSApprovalProcessViewController alloc]init];
     approvalProcessVc.billId = billId;
     [self.navigationController pushViewController:approvalProcessVc animated:YES];
+   
 }
 
 

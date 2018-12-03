@@ -204,7 +204,7 @@ static NSString *const kDefaultNoNetImageName = @"noNet";
             
             
             [_imgView mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.centerX.equalTo(self).offset(-30);
+                make.centerX.equalTo(self).offset(-40);
                 make.centerY.equalTo(self.mas_centerY).offset(-imageSize.height/3);
                 make.size.mas_equalTo(imageSize);
             }];
@@ -239,7 +239,7 @@ static NSString *const kDefaultNoNetImageName = @"noNet";
         [_label mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.equalTo(self);
             if ([self hasImageView]) {
-                make.top.equalTo(_imgView.mas_bottom).offset(30);
+                make.top.equalTo(_imgView.mas_bottom).offset(10);
             } else {
                 make.centerY.equalTo(self);
             }
