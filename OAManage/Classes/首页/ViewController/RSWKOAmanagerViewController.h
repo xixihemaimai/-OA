@@ -26,6 +26,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong)NSString * deptName;
 
 
+@property (nonatomic,strong)NSString * type;
+
+@property (nonatomic,strong)NSString * URL;
+
 @end
 
 NS_ASSUME_NONNULL_END

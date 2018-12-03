@@ -70,22 +70,24 @@
             parser.delegate = self;
             [parser parse];
         }else{
-            //URL_USERINFO URL_LOGIN
+            NSLog(@"-303003003030-------------");
             if ([urlName isEqualToString:URL_USERINFO]) {
                 if (self.failure) {
                     self.failure(responseObject);
                 }
             }else if ([urlName isEqualToString:URL_LOGIN]){
                 [SVProgressHUD showErrorWithStatus:@"登录失败"];
-                
                 if (self.failure) {
                     self.failure(responseObject);
                 }
-                
             }else if ([urlName isEqualToString:URL_LOGOUT]){
                 [SVProgressHUD showErrorWithStatus:@"退出登录失败"];
             }else {
                [SVProgressHUD showErrorWithStatus:@"获取失败"];
+                if (self.failure) {
+                    NSLog(@"responseObject---00000-----%@",responseObject);
+                    self.failure(responseObject);
+                }
             }
         }
     }];
@@ -158,6 +160,7 @@
                 }
             }else if ([_tempStr isEqualToString:URL_NOTICE]){
                 NSDictionary * dic = [self decryptMethodWithDictionary:dict];
+                NSLog(@"=============%@",dic);
                 NSMutableArray * array = [RSInformationModel mj_objectArrayWithKeyValuesArray:dic[@"list"]];
                 if (self.successArrayReload) {
                     self.successArrayReload(array);
@@ -199,9 +202,9 @@
                     appdelegate.window.rootViewController = loginVc;
             }
         }else {
-            if (  [_tempStr isEqualToString:URL_CHANGPWD] || [_tempStr isEqualToString:URL_NOTICE] || [_tempStr isEqualToString:URL_TOBEAUDIT] || [_tempStr isEqualToString:URL_FLOWLIST] || [_tempStr isEqualToString:URL_MYAUDIT] || [_tempStr isEqualToString:URL_AUDITFLOW] || [_tempStr isEqualToString:URL_LOGOUT]){
+            if (  [_tempStr isEqualToString:URL_CHANGPWD] || [_tempStr isEqualToString:URL_FLOWLIST] || [_tempStr isEqualToString:URL_LOGOUT]){
                 [self errerAlertUserStatus:dict];
-            }else if ([_tempStr isEqualToString:URL_LOGIN] ||[_tempStr isEqualToString:URL_GENPUBLICKEY] || [_tempStr isEqualToString:URL_FINDROLE]){
+            }else if ([_tempStr isEqualToString:URL_LOGIN] ||[_tempStr isEqualToString:URL_GENPUBLICKEY] || [_tempStr isEqualToString:URL_FINDROLE] || [_tempStr isEqualToString:URL_MYAUDIT] || [_tempStr isEqualToString:URL_TOBEAUDIT] ||  [_tempStr isEqualToString:URL_AUDITFLOW] || [_tempStr isEqualToString:URL_NOTICE] ){
                 
                 [self errerAlertUserStatus:dict];
                 

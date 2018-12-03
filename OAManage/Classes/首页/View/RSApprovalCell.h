@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong)RSAuditedModel * auditemodel;
 
+
+@property (nonatomic,strong)UIView * approvalBottomView;
 @end
 
 NS_ASSUME_NONNULL_END

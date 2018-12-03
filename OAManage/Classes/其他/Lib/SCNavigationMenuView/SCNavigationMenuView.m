@@ -340,7 +340,7 @@
         NSNumber *cellHeight = [self.menuCellClass performSelector:@selector(cellHeightWithNavigationMenuItem:) withObject:item];
         tableViewHeight += cellHeight.floatValue;
     }
-    [self.menuTableView setTableViewHeight:tableViewHeight];
+    [self.menuTableView setTableViewHeight:tableViewHeight + 6];
     [self.menuTableView reloadTableViewData];
     
     [self.menuTableView showWithDuration:0.15 animations:^{

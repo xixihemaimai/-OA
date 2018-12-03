@@ -15,6 +15,7 @@
 
 #import <QuickLook/QuickLook.h>
 
+
 @interface RSWKOAmanagerViewController ()<WKNavigationDelegate,UINavigationControllerDelegate,WKScriptMessageHandler,QLPreviewControllerDelegate,QLPreviewControllerDataSource>
 
 @property (nonatomic,strong)RSViewProgressLine * progressLineview;
@@ -62,7 +63,13 @@
     
     NSUserDefaults * user = [NSUserDefaults standardUserDefaults];
     NSString * aes = [user objectForKey:@"AES"];
-    NSString * stoneUrlStr =[NSString stringWithFormat:@"%@?billId=%ld&billKey=%@&aesKey=%@&appLoginToken=%@&workItemId=%ld&username=%@&userdepartment=%@&usertime=%@&type=0",@"http://117.29.162.206:8089/Yigo1.6/Approval.html",(long)self.billId,self.billKey,aes,self.usermodel.appLoginToken,(long)self.workItemId,self.creatorName,self.deptName,self.usertime];
+    
+    NSString * stoneUrlStr = @"";
+    if ([self.type isEqualToString:@"0"]) {
+        stoneUrlStr =[NSString stringWithFormat:@"%@",self.URL];
+    }else{
+        stoneUrlStr =[NSString stringWithFormat:@"%@?billId=%ld&billKey=%@&aesKey=%@&appLoginToken=%@&workItemId=%ld&username=%@&userdepartment=%@&usertime=%@&type=0",@"http://117.29.162.206:8089/Yigo1.6/Approval.html",(long)self.billId,self.billKey,aes,self.usermodel.appLoginToken,(long)self.workItemId,self.creatorName,self.deptName,self.usertime];
+    }
     NSLog(@"================%@",stoneUrlStr);
     if([[[UIDevice currentDevice] systemVersion] floatValue] >= 9.0){
         stoneUrlStr = [stoneUrlStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
@@ -125,6 +132,9 @@
 
 
 - (void)jumpEnclosureTempStr:(NSString *)tempStr{
+   
+    
+    
     QLPreviewController *previewController =[[QLPreviewController alloc]init];
     previewController.delegate=self;
     previewController.dataSource=self;
@@ -154,11 +164,11 @@
         } destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
             NSURL *documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
             NSURL *url = [documentsDirectoryURL URLByAppendingPathComponent:fileName];
-            NSLog(@"0000-------323----------%@",URL);
             return url;
         } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
             [SVProgressHUD dismiss];
             self.fileURL = filePath;
+           
             [self presentViewController:previewController animated:YES completion:nil];
             //刷新界面,如果不刷新的话，不重新走一遍代理方法，返回的url还是上一次的url
             [previewController refreshCurrentPreviewItem];
@@ -177,12 +187,10 @@
 }
 
 
-- (void)previewControllerWillDismiss:(QLPreviewController *)controller{
-    [self.userContent addScriptMessageHandler:self name:@"Enclosure"];
-}
-
 
 - (void)previewControllerDidDismiss:(QLPreviewController *)controller{
+    RSMyNavigationViewController * myNavi = (RSMyNavigationViewController *)self.frostedViewController.contentViewController;
+    [myNavi.images removeLastObject];
 }
 
 
@@ -192,8 +200,8 @@
     [self.navigationController pushViewController:approvalProcessVc animated:YES];
 }
 
-- (void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
+
+- (void)dealloc{
     [_webView.configuration.userContentController removeScriptMessageHandlerForName:@"tixing"];
     [_webView.configuration.userContentController removeScriptMessageHandlerForName:@"reload"];
     [_webView.configuration.userContentController removeScriptMessageHandlerForName:@"Submission"];

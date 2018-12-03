@@ -18,6 +18,9 @@
 
 @property (nonatomic,strong)RSProgressView * progressView;
 
+
+
+
 @end
 
 @implementation RSApprovalProcessViewController
@@ -111,8 +114,14 @@
             
         }
     };
-    
-    
+    network.failure = ^(NSDictionary *dict) {
+        if (self.approvalArray.count > 0) {
+            self.emptyView.hidden = YES;
+        }else{
+            self.emptyView.hidden = NO;
+        }
+        [self.tableview.mj_header endRefreshing];
+    };
 }
 
 

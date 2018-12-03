@@ -13,10 +13,12 @@
 #import "RSShenHeViewController.h"
 #import "RSApprovalProcessViewController.h"
 #import "RSAuditedViewController.h"
+#import <QuickLook/QuickLook.h>
+#import "RSWKOAmanagerViewController.h"
+
 
 @interface RSMyNavigationViewController ()<UINavigationControllerDelegate>
-/**存放每一个控制器的全屏截图*/
-@property (nonatomic,strong)NSMutableArray * images;
+
 
 @property (nonatomic,strong)UIImageView * lastVcView;
 
@@ -91,7 +93,7 @@
         viewController.hidesBottomBarWhenPushed = YES;
         // 设置返回按钮,只有非根控制器
         viewController.navigationItem.leftBarButtonItem = [UIBarButtonItem backItemWithimage:[UIImage imageNamed:@"system-backnew"] highImage:[UIImage imageNamed:@"system-backnew"]  target:self action:@selector(back) title:nil];
-        [self createScreenShot];
+              [self createScreenShot];
     }
     // 真正在跳转
     [super pushViewController:viewController animated:animated];
@@ -117,6 +119,49 @@
     UIImage * image = UIGraphicsGetImageFromCurrentImageContext();
     [self.images addObject:image];
 }
+
+
+
+//获取当前屏幕显示的viewcontroller
+- (UIViewController *)getCurrentVC
+{
+    UIViewController *rootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
+    
+    UIViewController *currentVC = [self getCurrentVCFrom:rootViewController];
+    
+    return currentVC;
+}
+
+- (UIViewController *)getCurrentVCFrom:(UIViewController *)rootVC
+{
+    UIViewController *currentVC;
+    
+    if ([rootVC presentedViewController]) {
+        // 视图是被presented出来的
+        
+        rootVC = [rootVC presentedViewController];
+    }
+    
+    if ([rootVC isKindOfClass:[UITabBarController class]]) {
+        // 根视图为UITabBarController
+        
+        currentVC = [self getCurrentVCFrom:[(UITabBarController *)rootVC selectedViewController]];
+        
+    } else if ([rootVC isKindOfClass:[UINavigationController class]]){
+        // 根视图为UINavigationController
+        
+        currentVC = [self getCurrentVCFrom:[(UINavigationController *)rootVC visibleViewController]];
+        
+    } else {
+        // 根视图为非导航类
+        
+        currentVC = rootVC;
+    }
+    
+    return currentVC;
+}
+
+
 
 
 #pragma mark -
@@ -164,7 +209,7 @@
             //正在移动中
             self.view.transform = CGAffineTransformMakeTranslation(tx, 0);
             UIWindow * window = [UIApplication sharedApplication].keyWindow;
-             self.lastVcView.image = self.images[self.images.count - 1];
+            self.lastVcView.image = self.images[self.images.count - 1];
             self.cover.alpha = 0.5 - ((tx / self.view.frame.size.width)/2);
             [window insertSubview:self.lastVcView atIndex:0];
             [window insertSubview:self.cover aboveSubview:self.lastVcView];

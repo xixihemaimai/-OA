@@ -232,7 +232,7 @@ static CGFloat const rowheight = 42;
 - (UITableView *)tableView {
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-       // _tableView.tableFooterView = [UIView new];
+       // _tableView.tableFooterView = [[UIView new]initWithFrame:CGRectMake(0, 0, SCW, 20)];
         _tableView.rowHeight = rowheight;
         _tableView.delegate = self;
         _tableView.dataSource = self;

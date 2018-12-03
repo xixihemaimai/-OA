@@ -17,9 +17,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong)NSString * title;
 
 
+@property (nonatomic,assign)NSInteger pagerank;
 
-
-
+@property (nonatomic,strong)NSString * url;
 
 
 

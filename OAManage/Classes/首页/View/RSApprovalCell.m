@@ -84,10 +84,10 @@
         _approvalTimeLabel = approvalTimeLabel;
         
        //底部横线
-//        UIView * approvalBottomView = [[UIView alloc]init];
-//        approvalBottomView.backgroundColor = [UIColor colorWithHexColorStr:@"#F2F2F2"];
-//        [self.contentView addSubview:approvalBottomView];
-        
+        UIView * approvalBottomView = [[UIView alloc]init];
+        approvalBottomView.backgroundColor = [UIColor colorWithHexColorStr:@"#F2F2F2"];
+        [self.contentView addSubview:approvalBottomView];
+        _approvalBottomView = approvalBottomView;
         
         approvalImageView.sd_layout
         .leftSpaceToView(self.contentView, 12)
@@ -164,11 +164,11 @@
                 .heightIs(20);
             }
         }
-//        approvalBottomView.sd_layout
-//        .leftSpaceToView(self.contentView, 0)
-//        .rightSpaceToView(self.contentView, 0)
-//        .heightIs(1)
-//        .bottomSpaceToView(self.contentView, 0);
+        approvalBottomView.sd_layout
+        .leftSpaceToView(self.contentView, 0)
+        .rightSpaceToView(self.contentView, 0)
+        .heightIs(1)
+        .bottomSpaceToView(self.contentView, 0);
     }
     return self;
 }
@@ -177,15 +177,11 @@
     _auditemodel = auditemodel;
      if ([_auditemodel.billKey isEqualToString:@"Flow_ApplyLeave"] || [_auditemodel.billKey isEqualToString:@"Flow_RsApplyLeave"] || [_auditemodel.billKey isEqualToString:@"Flow_BreakDown"] || [_auditemodel.billKey isEqualToString:@"Flow_RsBreakDown"]) {
          _approvalContentLabel.text = [NSString stringWithFormat:@"%@:%0.1lf天",auditemodel.billName,auditemodel.amount];
-         
      }else if ([_auditemodel.billKey isEqualToString:@"Flow_Payment"]){
-         
          _approvalContentLabel.text = [NSString stringWithFormat:@"%@:¥%0.2lf",auditemodel.billName,auditemodel.amount];
      }else{
           _approvalContentLabel.text = [NSString stringWithFormat:@"%@",auditemodel.billName];
-         
      }
-    //
     _approvalNameLabel.text = [NSString stringWithFormat:@"%@",auditemodel.creatorName];
     CGSize size = [_approvalNameLabel.text sizeWithAttributes:@{NSFontAttributeName:_approvalNameLabel.font}];
 

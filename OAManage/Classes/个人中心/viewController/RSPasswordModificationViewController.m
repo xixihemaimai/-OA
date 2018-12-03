@@ -48,6 +48,7 @@
     NSAttributedString * attri = [[NSAttributedString alloc] initWithString:@"原密码" attributes:@{NSForegroundColorAttributeName:[UIColor colorWithHexColorStr:@"#E0E0E0"],NSFontAttributeName:[UIFont systemFontOfSize:14], NSParagraphStyleAttributeName:style}];
     oldCipherField.secureTextEntry = YES;
     oldCipherField.attributedPlaceholder = attri;
+    oldCipherField.textAlignment = NSTextAlignmentCenter;
     oldCipherField.backgroundColor = [UIColor colorWithHexColorStr:@"#FFFFFF"];
     oldCipherField.layer.cornerRadius = 20;
     oldCipherField.layer.borderColor = [UIColor colorWithHexColorStr:@"#D3D3D3"].CGColor;
@@ -71,7 +72,9 @@
     renewCipherField.layer.borderColor = [UIColor colorWithHexColorStr:@"#D3D3D3"].CGColor;
     renewCipherField.layer.borderWidth = 1;
     renewCipherField.layer.masksToBounds = YES;
+    renewCipherField.textAlignment = NSTextAlignmentCenter;
     [rePasswordView addSubview:renewCipherField];
+    
     _renewCipherField = renewCipherField;
        [_renewCipherField addTarget:self action:@selector(changeTextfieldContent:) forControlEvents:UIControlEventEditingChanged];
     
@@ -86,7 +89,7 @@
     sureCipherField.layer.borderWidth = 1;
     sureCipherField.secureTextEntry = YES;
     sureCipherField.layer.masksToBounds = YES;
-    
+    sureCipherField.textAlignment = NSTextAlignmentCenter;
     [rePasswordView addSubview:sureCipherField];
     _sureCipherField = sureCipherField;
      [_sureCipherField addTarget:self action:@selector(changeTextfieldContent:) forControlEvents:UIControlEventEditingChanged];

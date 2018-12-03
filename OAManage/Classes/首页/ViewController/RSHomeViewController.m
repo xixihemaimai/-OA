@@ -126,8 +126,6 @@
     [self.tableview.mj_header beginRefreshing];
 }
 
-
-
 - (void)reloadInformationData{
     NSUserDefaults * user = [NSUserDefaults standardUserDefaults];
     NSString * aes = [user objectForKey:@"AES"];
@@ -150,6 +148,16 @@
             self.emptyView.hidden = NO;
         }
     
+        [self.tableview.mj_header endRefreshing];
+    };
+    
+    network.failure = ^(NSDictionary *dict) {
+        NSLog(@"===================");
+        if (self.informationArray.count > 0 || self.dataArray.count > 0) {
+            self.emptyView.hidden = YES;
+        }else{
+            self.emptyView.hidden = NO;
+        }
         [self.tableview.mj_header endRefreshing];
     };
 }
@@ -177,6 +185,15 @@
             self.emptyView.hidden = NO;
         }
          [self.tableview.mj_header endRefreshing];
+    };
+    
+    network.failure = ^(NSDictionary *dict) {
+        if (self.informationArray.count > 0 || self.dataArray.count > 0) {
+            self.emptyView.hidden = YES;
+        }else{
+            self.emptyView.hidden = NO;
+        }
+        [self.tableview.mj_header endRefreshing];
     };
 }
 
@@ -252,8 +269,6 @@
             cell = [[RSHomeFirstCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CELLHOMEFRISTID];
         }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        
-
         RSInformationModel * informationmodel = self.informationArray[indexPath.row];
         cell.homeFirstContentLabel.text = informationmodel.title;
         CGFloat H = 0.0;
@@ -410,7 +425,14 @@
     if (indexPath.section == 0) {
        //这边也是跳到H5的页面
         
+        RSInformationModel * informationmodel = self.informationArray[indexPath.row];
+        RSWKOAmanagerViewController * wkOaVc = [[RSWKOAmanagerViewController alloc]init];
+        wkOaVc.URL = informationmodel.url;
+        wkOaVc.type = @"0";
+        [self.navigationController pushViewController:wkOaVc animated:YES];
         
+        
+       
        
         
     }else if (indexPath.section == 1){
@@ -425,6 +447,7 @@
         wkOaVc.usertime = auditedmodel.createtime;
         wkOaVc.creatorName = auditedmodel.creatorName;
         wkOaVc.deptName = auditedmodel.deptName;
+        wkOaVc.type = @"1";
         [self.navigationController pushViewController:wkOaVc animated:YES];
     }
 }

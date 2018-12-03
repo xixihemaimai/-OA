@@ -287,19 +287,27 @@
             }else{
                 self.currentemptyView.hidden = NO;
             }
-            NSLog(@"=============------00000===");
             [self.rightTableview.mj_header endRefreshing];
-            
              self.pageNum = 2;
         }else{
             self.currentemptyView.hidden = YES;
             NSArray * array1 = array;
             [self.rightArray addObjectsFromArray:array1];
             [self.rightTableview.mj_footer endRefreshing];
-            NSLog(@"++_++++++++++++++++++++++++");
+            
             self.pageNum++;
         }
         [self.rightTableview reloadData];
+    };
+    
+    network.failure = ^(NSDictionary *dict) {
+            if (self.rightArray.count > 0) {
+                self.currentemptyView.hidden = YES;
+            }else{
+                self.currentemptyView.hidden = NO;
+            }
+            [self.rightTableview.mj_header endRefreshing];
+            [self.rightTableview.mj_footer endRefreshing];
     };
 }
 
@@ -434,6 +442,8 @@
         UIColor * color = [UIColor colorWithRed:247/255.0 green:247/255.0 blue:249/255.0 alpha:1.0];//通过RGB来定义自己的颜色
         cell.selectedBackgroundView = [[UIView alloc] initWithFrame:cell.frame];//这句不可省略
         cell.selectedBackgroundView.backgroundColor = color;
+        cell.approvalBottomView.sd_layout
+        .heightIs(0);
 //        cell.selectedBackgroundView.backgroundColor = [UIColor colorWithRed:247/255.0 green:247/255.0 blue:249/255.0 alpha:1.0];
         
         
@@ -473,6 +483,7 @@
         wkOaVc.usertime = auditedmodel.createtime;
         wkOaVc.creatorName = auditedmodel.creatorName;
         wkOaVc.deptName = auditedmodel.deptName;
+        wkOaVc.type = @"1";
         [self.navigationController pushViewController:wkOaVc animated:YES];
     }
 }

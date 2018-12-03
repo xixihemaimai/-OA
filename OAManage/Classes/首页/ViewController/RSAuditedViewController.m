@@ -107,6 +107,16 @@
         }
         [self.tableview reloadData];
     };
+    
+    network.failure = ^(NSDictionary *dict) {
+            if (self.auditedArray.count > 0 ) {
+                self.emptyView.hidden = YES;
+            }else{
+                self.emptyView.hidden = NO;
+            }
+            [self.tableview.mj_header endRefreshing];
+            [self.tableview.mj_footer endRefreshing];
+    };
 }
 
 
@@ -129,7 +139,8 @@
     RSAuditedModel * auditemodel = self.auditedArray[indexPath.row];
     cell.auditemodel = auditemodel;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
+    cell.approvalBottomView.sd_layout
+    .heightIs(1);
  
     return cell;
 }
@@ -157,6 +168,7 @@
     wkOaVc.usertime = auditemodel.createtime;
     wkOaVc.creatorName = auditemodel.creatorName;
     wkOaVc.deptName = auditemodel.deptName;
+    wkOaVc.type = @"1";
     [self.navigationController pushViewController:wkOaVc animated:YES];
     
 }
