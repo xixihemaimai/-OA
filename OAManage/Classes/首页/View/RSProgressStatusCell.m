@@ -150,15 +150,7 @@
 //        .heightEqualToWidth();
         
         
-        
-     
-        
-        
-        
-        
         if (IS_IPHONE) {
-            
-            
             
             verticalImageView.sd_layout
             .leftSpaceToView(self.contentView, 11)
@@ -166,32 +158,23 @@
             .widthIs(16)
             .heightEqualToWidth();
             
-            
-            
             headImageview.sd_layout
             .leftEqualToView(departmentLabel)
             .topSpaceToView(statusLabel, 10)
             .widthIs((32 / SCW) * SCW)
             .heightEqualToWidth();
             
-            
-            
             nameLabel.sd_layout
             .leftSpaceToView(headImageview, 12)
             .topEqualToView(headImageview)
-            .widthRatioToView(transverseImageView, 0.6)
+            .widthRatioToView(transverseImageView, 0.4)
             .heightRatioToView(self.contentView, 0.1);
-            
             
             contentLabel.sd_layout
             .leftEqualToView(nameLabel)
             .topSpaceToView(nameLabel, 4)
             .rightSpaceToView(transverseImageView, 15)
             .heightRatioToView(self.contentView, 0.1);
-            
-            
-            
-            
             
             rightImageView.sd_layout
             .rightSpaceToView(transverseImageView, 15)
@@ -270,7 +253,7 @@
                 nameLabel.sd_layout
                 .leftSpaceToView(headImageview, 12)
                 .topSpaceToView(statusLabel, 3)
-                .widthRatioToView(transverseImageView, 0.6)
+                .widthRatioToView(transverseImageView, 0.4)
                 .heightRatioToView(self.contentView, 0.2);
                 
                 
@@ -341,7 +324,7 @@
                 nameLabel.sd_layout
                 .leftSpaceToView(headImageview, 12)
                 .topSpaceToView(statusLabel, 3)
-                .widthRatioToView(transverseImageView, 0.6)
+                .widthRatioToView(transverseImageView, 0.4)
                 .heightRatioToView(self.contentView, 0.2);
                 
                 
@@ -365,27 +348,17 @@
                 .widthIs(13)
                 .heightEqualToWidth()
                 .bottomEqualToView(headImageview);
-                
-                
-                
-                
             }
-            
-            
-          
-            
-            
         }
-
         headImageview.layer.cornerRadius = headImageview.yj_width * 0.5;
         headImageview.layer.masksToBounds = YES;
  
-        
         timeLabel.sd_layout
+        .leftSpaceToView(nameLabel, 0)
         .rightSpaceToView(transverseImageView, 15)
         .topEqualToView(nameLabel)
-        .bottomEqualToView(nameLabel)
-        .widthRatioToView(transverseImageView, 0.5);
+        .bottomEqualToView(nameLabel);
+        
     }
     return self;
 }
@@ -411,11 +384,7 @@
         _timeLabel.text = [NSString stringWithFormat:@"%@",current];
         _verticalImageView.image = [UIImage imageNamed:@"进行中图标"];
     }
-    
-    
 }
-
-
 
 - (void)awakeFromNib {
     [super awakeFromNib];
