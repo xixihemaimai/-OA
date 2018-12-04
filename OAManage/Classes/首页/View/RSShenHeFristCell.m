@@ -24,7 +24,6 @@
         
         
         
-        
         //图片
         UIImageView * shenHeImageView = [[UIImageView alloc]init];
         shenHeImageView.image = [UIImage imageNamed:@"全部"];
@@ -49,7 +48,6 @@
         countLabel.text = @"21";
         [self.contentView addSubview:countLabel];
         _countLabel = countLabel;
-        
         
         
         //底部view
@@ -104,9 +102,9 @@
                 .rightSpaceToView(self.contentView, 15);
                 
                 countLabel.sd_layout
-                .leftSpaceToView(shenHeLabel, 0)
-                .topSpaceToView(self.contentView, 18)
-                .widthIs(12)
+                .leftSpaceToView(shenHeLabel, -5)
+                .topSpaceToView(self.contentView, 16)
+                .widthIs(14)
                 .heightEqualToWidth();
             }
             else{
@@ -132,7 +130,7 @@
                 .rightSpaceToView(self.contentView, 25);
                 
                 countLabel.sd_layout
-                .leftSpaceToView(shenHeLabel, 0)
+                .leftSpaceToView(shenHeLabel, -5)
                 .topSpaceToView(self.contentView, 20)
                 .widthIs(23 * SCALE_TO_PRO)
                 .heightEqualToWidth();
@@ -146,7 +144,7 @@
                 .rightSpaceToView(self.contentView, 25);
                 
                 countLabel.sd_layout
-                .leftSpaceToView(shenHeLabel, 0)
+                .leftSpaceToView(shenHeLabel, -5)
                 .topSpaceToView(self.contentView, 20)
                 .widthIs((23 / SCW) * SCW)
                 .heightEqualToWidth();

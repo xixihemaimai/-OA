@@ -169,6 +169,7 @@
     wkOaVc.creatorName = auditemodel.creatorName;
     wkOaVc.deptName = auditemodel.deptName;
     wkOaVc.type = @"1";
+    wkOaVc.version = [UIDevice currentDevice].systemName.floatValue;
     [self.navigationController pushViewController:wkOaVc animated:YES];
     
 }

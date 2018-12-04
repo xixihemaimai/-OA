@@ -101,7 +101,13 @@
 - (UITableView *)leftTableview{
     if (!_leftTableview) {
         if (IS_IPHONE) {
-             _leftTableview = [[UITableView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.navigationController.navigationBar.frame), 88, SCH - CGRectGetMaxY(self.navigationController.navigationBar.frame)) style:UITableViewStylePlain];
+            CGFloat witdh = 0.0;
+            if (iPhone6p || iPhoneXR || iPhoneXSMax) {
+                witdh = 100;
+            }else{
+                witdh = 88;
+            }
+             _leftTableview = [[UITableView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.navigationController.navigationBar.frame), witdh, SCH - CGRectGetMaxY(self.navigationController.navigationBar.frame)) style:UITableViewStylePlain];
         }else{
              _leftTableview = [[UITableView alloc]initWithFrame:CGRectMake(0, 64, 160, SCH - 64) style:UITableViewStylePlain];
         }
@@ -272,10 +278,8 @@
             }
             [self.rightTableview.mj_header endRefreshing];
             self.pageNum = 2;
-            NSLog(@"__=+=======");
         }else{
             self.currentemptyView.hidden = YES;
-            NSLog(@"-----------");
             NSArray * array1 = array;
             [self.rightArray addObjectsFromArray:array1];
             [self.rightTableview.mj_footer endRefreshing];
@@ -468,6 +472,7 @@
         wkOaVc.creatorName = auditedmodel.creatorName;
         wkOaVc.deptName = auditedmodel.deptName;
         wkOaVc.type = @"1";
+        wkOaVc.version = [UIDevice currentDevice].systemName.floatValue;
         [self.navigationController pushViewController:wkOaVc animated:YES];
     }
 }

@@ -141,7 +141,7 @@ static CGFloat const rowheight = 42;
              weakSelf.headerview.frame =  CGRectMake(tableViewFrame.origin.x, tableViewFrame.origin.y, tableViewFrame.size.width, 7);
             weakSelf.headerImage.frame = CGRectMake(frame.size.width + 17, tableViewFrame.origin.y, 12, 7);
             weakSelf.tableView.frame = CGRectMake(tableViewFrame.origin.x, CGRectGetMaxY(weakSelf.headerview.frame), tableViewFrame.size.width, tableViewFrame.size.height + 7);
-            NSLog(@"%@",NSStringFromCGRect(self.tableView.frame));
+            //NSLog(@"%@",NSStringFromCGRect(self.tableView.frame));
         }];
     }
 }

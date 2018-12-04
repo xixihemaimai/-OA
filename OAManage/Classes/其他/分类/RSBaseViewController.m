@@ -46,7 +46,7 @@
     if (!_emptyView) {
         _emptyView = [[ZZQEmptyView alloc] initWithView:self.view];
         _emptyView.emptyMode = ZZQEmptyViewModeNoData;
-        _emptyView.label.text = @"没有数据展示";
+        _emptyView.label.text = @"暂无数据";
         [_emptyView.button setTitle:@"点击重新加载" forState:UIControlStateNormal];
         _emptyView.hidden = NO;
         _emptyView.button.hidden = YES;
@@ -513,7 +513,7 @@
     
     BOOL res=[fileManager removeItemAtPath:path error:nil];
     return res;
-    NSLog(@"文件是否存在: %@",[fileManager isExecutableFileAtPath:path]?@"YES":@"NO");
+   // NSLog(@"文件是否存在: %@",[fileManager isExecutableFileAtPath:path]?@"YES":@"NO");
 }
 
 

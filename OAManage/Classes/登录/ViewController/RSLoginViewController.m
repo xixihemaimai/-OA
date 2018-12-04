@@ -100,7 +100,6 @@ typedef void(^Obtain)(BOOL isValue);
     UIView *leftview = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 39)];
     userNameField.leftViewMode = UITextFieldViewModeAlways;
     userNameField.leftView = leftview;
-    
     _userNameField = userNameField;
     
     UITextField * passwordField = [[UITextField alloc]init];
@@ -260,9 +259,6 @@ typedef void(^Obtain)(BOOL isValue);
             .heightIs((60 / SCW)  * SCW);
             
             
-            
-            
-            
             roleView.sd_layout
             .centerXEqualToView(loginView)
             .topSpaceToView(passwordField, 18)
@@ -339,11 +335,6 @@ typedef void(^Obtain)(BOOL isValue);
         }
     }
 }
-
-
-
-
-
 
 
 - (void)getPublicKeyobtain:(Obtain)obtain{
@@ -457,10 +448,8 @@ typedef void(^Obtain)(BOOL isValue);
     NSString * data = [NSString stringWithFormat:@"{userCode:'%@',password:'%@',roleId:%ld,aesKey:'%@'}",self.userNameField.text,password,_roleInt,aes2];
     
     //RSA加密
-   
     NSString * rsaEncryptor = [RSAEncryptor encryptString:data publicKey:self.PublickKeyTemp];
     
-
     //网络请求
     NetworkTool * network = [[NetworkTool alloc]init];
     NSString * canshu = URL_YIGODATA_LOGIN(_udidTemp, rsaEncryptor);
@@ -501,9 +490,6 @@ typedef void(^Obtain)(BOOL isValue);
         [user removeObjectForKey:@"OAUSERMODEL"];
         [user synchronize];
     };
-    
-    
-    
 }
 
 
@@ -511,9 +497,6 @@ typedef void(^Obtain)(BOOL isValue);
     RSRoleModel * rolemodel = [optionView.dataSource objectAtIndex:selectedIndex];
     _roleInt = rolemodel.roleID;
 }
-
-
-
 
 /*
 #pragma mark - Navigation

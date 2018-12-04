@@ -145,12 +145,9 @@
         }else{
             self.emptyView.hidden = NO;
         }
-    
         [self.tableview.mj_header endRefreshing];
     };
-    
     network.failure = ^(NSDictionary *dict) {
-        NSLog(@"===================");
         if (self.informationArray.count > 0 || self.dataArray.count > 0) {
             self.emptyView.hidden = YES;
         }else{
@@ -268,9 +265,6 @@
         }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         RSInformationModel * informationmodel = self.informationArray[indexPath.row];
-        
-        NSLog(@"===============%@",informationmodel);
-        
         cell.homeFirstContentLabel.text = informationmodel.title;
         CGFloat H = 0.0;
         if (IS_IPHONE) {
@@ -297,9 +291,7 @@
             cornerRadiusLayer.frame = rect;
             cornerRadiusLayer.path = cornerRadiusPath.CGPath;
              cell.homeFristView.layer.mask = cornerRadiusLayer;
-            
             cell.homeFirstTransverseLineLabel.hidden = YES;
-            
         }
         return cell;
     }else if (indexPath.section == 1){
@@ -317,10 +309,8 @@
         if (!cell) {
             cell = [[RSHomeThirdCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CELLHOMETHIRDID];
         }
-
             RSAuditedModel * auditemodel = self.dataArray[indexPath.row];
         cell.auditedmodel = auditemodel;
-        
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }
@@ -445,6 +435,7 @@
         wkOaVc.creatorName = auditedmodel.creatorName;
         wkOaVc.deptName = auditedmodel.deptName;
         wkOaVc.type = @"1";
+        wkOaVc.version = [UIDevice currentDevice].systemName.floatValue;
         [self.navigationController pushViewController:wkOaVc animated:YES];
     }
 }

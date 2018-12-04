@@ -26,12 +26,7 @@
 
 @property (nonatomic, copy)NSURL *fileURL; //文件路径
 
-
 @property (nonatomic,strong) WKUserContentController * userContent;
-
-
-
-
 
 @end
 
@@ -39,21 +34,13 @@
 @implementation RSWKOAmanagerViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
-
     self.tableview.hidden = YES;
     self.emptyView.hidden = YES;
-    
-    
-    
     if ([self.type isEqualToString:@"0"]) {
         self.title = self.Currenttitle;
     }else{
         self.title = @"审批";
-        
-        
     }
-    
-    
     self.view.backgroundColor = [UIColor colorWithHexColorStr:@"#f9f9f9"];
     self.htmlView = [[UIView alloc]init];
     self.htmlView.backgroundColor = [UIColor whiteColor];
@@ -77,14 +64,13 @@
     
     NSUserDefaults * user = [NSUserDefaults standardUserDefaults];
     NSString * aes = [user objectForKey:@"AES"];
-    
     NSString * stoneUrlStr = @"";
     if ([self.type isEqualToString:@"0"]) {
         stoneUrlStr =[NSString stringWithFormat:@"%@",self.URL];
     }else{
-        stoneUrlStr =[NSString stringWithFormat:@"%@?billId=%ld&billKey=%@&aesKey=%@&appLoginToken=%@&workItemId=%ld&username=%@&userdepartment=%@&usertime=%@&type=0",@"http://117.29.162.206:8089/Yigo1.6/Approval.html",(long)self.billId,self.billKey,aes,self.usermodel.appLoginToken,(long)self.workItemId,self.creatorName,self.deptName,self.usertime];
+        //117.29.162.206:8089
+        stoneUrlStr =[NSString stringWithFormat:@"%@?billId=%ld&billKey=%@&aesKey=%@&appLoginToken=%@&workItemId=%ld&username=%@&userdepartment=%@&usertime=%@&type=0&version=%lf",@"http://121.204.136.234:48000/Yigo1.6/Approval.html",(long)self.billId,self.billKey,aes,self.usermodel.appLoginToken,(long)self.workItemId,self.creatorName,self.deptName,self.usertime,self.version];
     }
-    //NSLog(@"================%@",stoneUrlStr);
     if([[[UIDevice currentDevice] systemVersion] floatValue] >= 9.0){
         stoneUrlStr = [stoneUrlStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
         [NSCharacterSet URLQueryAllowedCharacterSet];
@@ -123,7 +109,6 @@
         [self.navigationController popViewControllerAnimated:YES];
     }else if ([message.name isEqualToString:@"Submission"]){
         //self.navigationItem.leftBarButtonItem.enabled = NO;
-        NSLog(@"==============888888=========%@",message.body);
     }else if ([message.name isEqualToString:@"Enclosure"]){
         [self jumpEnclosureTempStr:message.body];
     }

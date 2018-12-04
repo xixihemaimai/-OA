@@ -132,13 +132,10 @@
     RSNoticeCell * cell = [tableView dequeueReusableCellWithIdentifier:NOTICECELLID];
     if (!cell) {
         cell = [[RSNoticeCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:NOTICECELLID];
-        
     }
     cell.informationmodel = self.noticeArray[indexPath.row];
-    
     return cell;
 }
-
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

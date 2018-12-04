@@ -64,8 +64,6 @@
     URLstr =  [URLstr stringByReplacingOccurrencesOfString:@"%20" withString:@""];
     [self reloadWebServiceNetDataUrl:URLstr andParameters:soapStr withBlock:^(id responseObject, BOOL success) {
         if (success) {
-//            NSString *result = [[NSString alloc] initWithData:responseObject                            encoding:NSUTF8StringEncoding];
-//            NSLog(@"=========%@",result);
             NSXMLParser * parser = [[NSXMLParser alloc]initWithData:responseObject];
             parser.delegate = self;
             [parser parse];
@@ -84,7 +82,6 @@
             }else {
                [SVProgressHUD showErrorWithStatus:@"获取失败"];
                 if (self.failure) {
-                    NSLog(@"responseObject---00000-----%@",responseObject);
                     self.failure(responseObject);
                 }
             }
@@ -334,7 +331,7 @@
                                                           error:&err];
     if(err)
     {
-        NSLog(@"json解析失败：%@",err);
+        //NSLog(@"json解析失败：%@",err);
         return nil;
     }
     return dic;
