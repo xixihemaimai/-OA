@@ -186,26 +186,13 @@
    
     
      [self reloadShenHeNewData];
-    self.emptyView.hidden = YES;
-    
-    
-    
+    self.emptyView.hidden = NO;
     
     self.rightTableview.mj_header = [MJChiBaoZiHeader headerWithRefreshingTarget:self refreshingAction:@selector(reloadShenHeRightNewData)];
     
     self.rightTableview.mj_footer = [MJChiBaoZiFooter footerWithRefreshingTarget:self refreshingAction:@selector(reloadShenHeRightMoreData)];
+
     
-    
-//    self.rightTableview.mj_header = [MJChiBaoZiHeader headerWithRefreshingBlock:^{
-//        weakSelf.pageNum = 1;
-//        [weakSelf reloadRightShenHeNewData];
-//        [weakSelf.rightTableview.mj_header endRefreshing];
-//    }];
-//
-//    self.rightTableview.mj_footer = [MJRefreshFooter footerWithRefreshingBlock:^{
-//        [weakSelf reloadRightShenHeNewData];
-//        [weakSelf.rightTableview.mj_footer endRefreshing];
-//    }];
 }
 
 
@@ -217,10 +204,6 @@
 - (void)reloadShenHeRightMoreData{
     [self reloadRightShenHeData];
 }
-
-
-
-
 
 
 - (void)reloadShenHeNewData{
@@ -288,13 +271,14 @@
                 self.currentemptyView.hidden = NO;
             }
             [self.rightTableview.mj_header endRefreshing];
-             self.pageNum = 2;
+            self.pageNum = 2;
+            NSLog(@"__=+=======");
         }else{
             self.currentemptyView.hidden = YES;
+            NSLog(@"-----------");
             NSArray * array1 = array;
             [self.rightArray addObjectsFromArray:array1];
             [self.rightTableview.mj_footer endRefreshing];
-            
             self.pageNum++;
         }
         [self.rightTableview reloadData];

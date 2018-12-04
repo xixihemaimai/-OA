@@ -24,13 +24,10 @@
 #import "RSPasswordModificationViewController.h"
 //个人信息
 #import "RSPersonalInformationViewController.h"
-
+/**公告更多*/
+#import "RSNoticeViewController.h"
 #import "RSRedButton.h"
-
-
 #import <SDImageCache.h>
-
-
 //模型
 #import "RSInformationModel.h"
 #import "RSAuditedModel.h"
@@ -88,6 +85,7 @@
         _numberLabel.textAlignment = NSTextAlignmentCenter;
         _numberLabel.layer.cornerRadius = kNameLabelHeight * 0.5;
         _numberLabel.layer.masksToBounds = YES;
+        _numberLabel.hidden = YES;
     }
     return _numberLabel;
 }
@@ -270,6 +268,9 @@
         }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         RSInformationModel * informationmodel = self.informationArray[indexPath.row];
+        
+        NSLog(@"===============%@",informationmodel);
+        
         cell.homeFirstContentLabel.text = informationmodel.title;
         CGFloat H = 0.0;
         if (IS_IPHONE) {
@@ -373,9 +374,9 @@
 - (void)clickAction:(UIButton *)homeFristBtn{
     if (homeFristBtn.tag == 0) {
         //这边是跳转到H5的界面
- 
-        
-        
+        RSNoticeViewController * noticeVc = [[RSNoticeViewController alloc]init];
+        [self.navigationController pushViewController:noticeVc animated:YES];
+
     }else if (homeFristBtn.tag == 1){
         RSShenHeViewController * shenHeVc = [[RSShenHeViewController alloc]init];
         [self.navigationController pushViewController:shenHeVc animated:YES];
@@ -424,16 +425,12 @@
     [self.tableview deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.section == 0) {
        //这边也是跳到H5的页面
-        
         RSInformationModel * informationmodel = self.informationArray[indexPath.row];
         RSWKOAmanagerViewController * wkOaVc = [[RSWKOAmanagerViewController alloc]init];
         wkOaVc.URL = informationmodel.url;
         wkOaVc.type = @"0";
+        wkOaVc.Currenttitle = informationmodel.title;
         [self.navigationController pushViewController:wkOaVc animated:YES];
-        
-        
-       
-       
         
     }else if (indexPath.section == 1){
         RSShenHeViewController * shenHeVc = [[RSShenHeViewController alloc]init];

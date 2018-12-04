@@ -42,7 +42,17 @@
 
     self.tableview.hidden = YES;
     self.emptyView.hidden = YES;
-    self.title = @"审批";
+    
+    
+    
+    if ([self.type isEqualToString:@"0"]) {
+        self.title = self.Currenttitle;
+    }else{
+        self.title = @"审批";
+        
+        
+    }
+    
     
     self.view.backgroundColor = [UIColor colorWithHexColorStr:@"#f9f9f9"];
     self.htmlView = [[UIView alloc]init];
@@ -74,7 +84,7 @@
     }else{
         stoneUrlStr =[NSString stringWithFormat:@"%@?billId=%ld&billKey=%@&aesKey=%@&appLoginToken=%@&workItemId=%ld&username=%@&userdepartment=%@&usertime=%@&type=0",@"http://117.29.162.206:8089/Yigo1.6/Approval.html",(long)self.billId,self.billKey,aes,self.usermodel.appLoginToken,(long)self.workItemId,self.creatorName,self.deptName,self.usertime];
     }
-    NSLog(@"================%@",stoneUrlStr);
+    //NSLog(@"================%@",stoneUrlStr);
     if([[[UIDevice currentDevice] systemVersion] floatValue] >= 9.0){
         stoneUrlStr = [stoneUrlStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
         [NSCharacterSet URLQueryAllowedCharacterSet];
@@ -112,11 +122,14 @@
         [[NSNotificationCenter defaultCenter]postNotificationName:@"reLoadCurrentViewData" object:nil];
         [self.navigationController popViewControllerAnimated:YES];
     }else if ([message.name isEqualToString:@"Submission"]){
-        self.navigationItem.leftBarButtonItem.enabled = NO;
+        //self.navigationItem.leftBarButtonItem.enabled = NO;
+        NSLog(@"==============888888=========%@",message.body);
     }else if ([message.name isEqualToString:@"Enclosure"]){
         [self jumpEnclosureTempStr:message.body];
     }
 }
+
+
 
 
 

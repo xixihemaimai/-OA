@@ -86,8 +86,6 @@
         [transverseImageView addSubview:headImageview];
         
         
-        
-        
         //名字
         //name
         
@@ -99,8 +97,6 @@
         [transverseImageView addSubview:nameLabel];
         _nameLabel = nameLabel;
         
-        
-        
         //什么事情内容
         //content
         UILabel * contentLabel = [[UILabel alloc]init];
@@ -111,8 +107,6 @@
         [transverseImageView addSubview:contentLabel];
         _contentLabel = contentLabel;
         
-        
-        
         //时间
         //time
         UILabel * timeLabel = [[UILabel alloc]init];
@@ -121,7 +115,6 @@
         timeLabel.textColor = [UIColor colorWithHexColorStr:@"#999999"];
         timeLabel.font = [UIFont systemFontOfSize:Textadaptation(12)];
         [transverseImageView addSubview:timeLabel];
-        
         _timeLabel = timeLabel;
         
         //是否有向右的图片
@@ -192,7 +185,7 @@
             
             contentLabel.sd_layout
             .leftEqualToView(nameLabel)
-            .topSpaceToView(nameLabel, 0)
+            .topSpaceToView(nameLabel, 4)
             .rightSpaceToView(transverseImageView, 15)
             .heightRatioToView(self.contentView, 0.1);
             

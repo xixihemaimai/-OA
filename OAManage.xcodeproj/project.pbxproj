@@ -45,6 +45,8 @@
 		04C0474621787DA00006B8D4 /* RSShenHeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C0474521787DA00006B8D4 /* RSShenHeViewController.m */; };
 		04C0474C217885FF0006B8D4 /* RSLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C0474B217885FF0006B8D4 /* RSLoginViewController.m */; };
 		04CA3FBD219AC85C009C2D33 /* RSUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CA3FBC219AC85C009C2D33 /* RSUserModel.m */; };
+		04D09F3221B6678B0078D7DA /* RSNoticeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D09F3121B6678B0078D7DA /* RSNoticeViewController.m */; };
+		04D09F3521B66AE50078D7DA /* RSNoticeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D09F3421B66AE50078D7DA /* RSNoticeCell.m */; };
 		04D6CECB2190254E00B35A51 /* UIColor+HexColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D6CEC82190254E00B35A51 /* UIColor+HexColor.m */; };
 		04D6CECC2190254E00B35A51 /* Nonetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D6CECA2190254E00B35A51 /* Nonetwork.m */; };
 		04D6CECF219026AA00B35A51 /* NSString+Hash.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D6CECE219026AA00B35A51 /* NSString+Hash.m */; };
@@ -140,6 +142,10 @@
 		04C0474B217885FF0006B8D4 /* RSLoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSLoginViewController.m; sourceTree = "<group>"; };
 		04CA3FBB219AC85C009C2D33 /* RSUserModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSUserModel.h; sourceTree = "<group>"; };
 		04CA3FBC219AC85C009C2D33 /* RSUserModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSUserModel.m; sourceTree = "<group>"; };
+		04D09F3021B6678B0078D7DA /* RSNoticeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSNoticeViewController.h; sourceTree = "<group>"; };
+		04D09F3121B6678B0078D7DA /* RSNoticeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSNoticeViewController.m; sourceTree = "<group>"; };
+		04D09F3321B66AE50078D7DA /* RSNoticeCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSNoticeCell.h; sourceTree = "<group>"; };
+		04D09F3421B66AE50078D7DA /* RSNoticeCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSNoticeCell.m; sourceTree = "<group>"; };
 		04D6CEC72190254E00B35A51 /* UIColor+HexColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+HexColor.h"; sourceTree = "<group>"; };
 		04D6CEC82190254E00B35A51 /* UIColor+HexColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+HexColor.m"; sourceTree = "<group>"; };
 		04D6CEC92190254E00B35A51 /* Nonetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Nonetwork.h; sourceTree = "<group>"; };
@@ -381,6 +387,8 @@
 				0412B79021A6840300761547 /* RSMenuHeaderFootView.m */,
 				04A4F81F21ABF1990052EFC4 /* RSShenHeFristCell.h */,
 				04A4F82021ABF1990052EFC4 /* RSShenHeFristCell.m */,
+				04D09F3321B66AE50078D7DA /* RSNoticeCell.h */,
+				04D09F3421B66AE50078D7DA /* RSNoticeCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -400,6 +408,8 @@
 				04A6F15B219538F100D15F58 /* RSApprovalProcessViewController.m */,
 				0429906E21AD175C004503A7 /* RSWKOAmanagerViewController.h */,
 				0429906F21AD175C004503A7 /* RSWKOAmanagerViewController.m */,
+				04D09F3021B6678B0078D7DA /* RSNoticeViewController.h */,
+				04D09F3121B6678B0078D7DA /* RSNoticeViewController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -696,6 +706,7 @@
 				04A6F159219528D800D15F58 /* RSAuditedViewController.m in Sources */,
 				04D6CEE32191754000B35A51 /* SCNavigationMenuTitleCell.m in Sources */,
 				04A6F15C219538F100D15F58 /* RSApprovalProcessViewController.m in Sources */,
+				04D09F3221B6678B0078D7DA /* RSNoticeViewController.m in Sources */,
 				04E6A34721927A1A007A44F2 /* RSCustomMenuCell.m in Sources */,
 				0436F68F2178198300B0D6C8 /* OAManage.xcdatamodeld in Sources */,
 				04E6A344219189B7007A44F2 /* UIView+Frame.m in Sources */,
@@ -721,6 +732,7 @@
 				04E6A3502192C318007A44F2 /* RSHomeFirstCell.m in Sources */,
 				04A6F184219911F900D15F58 /* NetworkTool.m in Sources */,
 				04E6A3562192E6BF007A44F2 /* RSHomeFristHeaderView.m in Sources */,
+				04D09F3521B66AE50078D7DA /* RSNoticeCell.m in Sources */,
 				04E6A34A2192824F007A44F2 /* RSApprovalCell.m in Sources */,
 				04D6CECF219026AA00B35A51 /* NSString+Hash.m in Sources */,
 				04A6F16221955C2300D15F58 /* RSProgressStatusCell.m in Sources */,

@@ -61,14 +61,15 @@ typedef void(^Obtain)(BOOL isValue);
     //logo
     self.view.backgroundColor = [UIColor whiteColor];
     self.tableview.hidden = YES;
-    [self getPublicKeyobtain:^(BOOL isValue) {
-    }];
+//    [self getPublicKeyobtain:^(BOOL isValue) {
+//    }];
     
     //这边设置成一个view
     UIView * loginView = [[UIView alloc]init];
     loginView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:loginView];
-
+    loginView.userInteractionEnabled = YES;
+    
     //logo
     UIImageView * LoginImageView = [[UIImageView alloc]init];
     LoginImageView.image =  [UIImage imageNamed:@"logo"];
@@ -122,7 +123,8 @@ typedef void(^Obtain)(BOOL isValue);
     passwordField.leftViewMode = UITextFieldViewModeAlways;
     passwordField.leftView = leftpasswordview;
     passwordField.secureTextEntry = YES;
-    UIButton * loginBtn = [[UIButton alloc]init];
+    
+    UIButton * loginBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [loginBtn setTitle:@"确定" forState:UIControlStateNormal];
     [loginBtn setBackgroundColor:[UIColor colorWithHexColorStr:@"#3FE4B1"]];
     [loginBtn setTitleColor:[UIColor colorWithHexColorStr:@"#FFFFFF"] forState:UIControlStateNormal];
@@ -130,6 +132,7 @@ typedef void(^Obtain)(BOOL isValue);
     [loginView addSubview:loginBtn];
     [loginBtn addTarget:self action:@selector(LoginAction:) forControlEvents:UIControlEventTouchUpInside];
     loginBtn.enabled = YES;
+    
     _loginBtn = loginBtn;
     if (IS_IPHONE) {
         loginView.sd_layout
@@ -167,27 +170,6 @@ typedef void(^Obtain)(BOOL isValue);
         .rightEqualToView(passwordField)
         .heightIs(39);
         
-        
-//        roleView.sd_layout
-//        .centerXEqualToView(loginView)
-//        .topSpaceToView(LoginImageView, 46)
-//        .widthIs(266)
-//        .heightIs(39);
-        
-//        userNameField.sd_layout
-//        .centerXEqualToView(loginView)
-//        .topSpaceToView(roleView, 18)
-//        .leftEqualToView(roleView)
-//        .rightEqualToView(roleView)
-//        .heightIs(39);
-//
-//        passwordField.sd_layout
-//        .centerXEqualToView(loginView)
-//        .topSpaceToView(userNameField, 18)
-//        .leftEqualToView(userNameField)
-//        .rightEqualToView(userNameField)
-//        .heightIs(39);
-//
         loginBtn.sd_layout
         .centerXEqualToView(loginView)
         .topSpaceToView(roleView, 36)
@@ -237,29 +219,7 @@ typedef void(^Obtain)(BOOL isValue);
             .rightEqualToView(passwordField)
             .heightIs(60 * SCALE_TO_PRO);
             
-            
-//
-//            roleView.sd_layout
-//            .centerXEqualToView(loginView)
-//            .topSpaceToView(LoginImageView, 46)
-//            .leftSpaceToView(loginView, 54)
-//            .rightSpaceToView(loginView, 54)
-//            .heightIs(60 * SCALE_TO_PRO);
-//
-//            userNameField.sd_layout
-//            .centerXEqualToView(loginView)
-//            .topSpaceToView(roleView, 18)
-//            .leftEqualToView(roleView)
-//            .rightEqualToView(roleView)
-//            .heightIs(60 * SCALE_TO_PRO);
-//
-//            passwordField.sd_layout
-//            .centerXEqualToView(loginView)
-//            .topSpaceToView(userNameField, 18)
-//            .leftEqualToView(userNameField)
-//            .rightEqualToView(userNameField)
-//            .heightIs(60 * SCALE_TO_PRO);
-            
+
             loginBtn.sd_layout
             .centerXEqualToView(loginView)
             .topSpaceToView(roleView, 36)
@@ -309,28 +269,6 @@ typedef void(^Obtain)(BOOL isValue);
             .leftEqualToView(passwordField)
             .rightEqualToView(passwordField)
             .heightIs((60 / SCW)  * SCW);
-            
-            
-//            roleView.sd_layout
-//            .centerXEqualToView(loginView)
-//            .topSpaceToView(LoginImageView, 46)
-//            .leftSpaceToView(loginView, 54)
-//            .rightSpaceToView(loginView, 54)
-//            .heightIs((60 / SCW)  * SCW);
-//
-//            userNameField.sd_layout
-//            .centerXEqualToView(loginView)
-//            .topSpaceToView(roleView, 18)
-//            .leftEqualToView(roleView)
-//            .rightEqualToView(roleView)
-//            .heightIs((60 / SCW)  * SCW);
-//
-//            passwordField.sd_layout
-//            .centerXEqualToView(loginView)
-//            .topSpaceToView(userNameField, 18)
-//            .leftEqualToView(userNameField)
-//            .rightEqualToView(userNameField)
-//            .heightIs((60 / SCW)  * SCW);
             
             loginBtn.sd_layout
             .centerXEqualToView(loginView)
@@ -403,6 +341,11 @@ typedef void(^Obtain)(BOOL isValue);
 }
 
 
+
+
+
+
+
 - (void)getPublicKeyobtain:(Obtain)obtain{
     //设备的唯一标识号
     NSString *udid = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
@@ -415,13 +358,16 @@ typedef void(^Obtain)(BOOL isValue);
     network.successReload = ^(NSDictionary *dict) {
         self.PublickKeyTemp = dict[@"data"][@"publicKeyStr"];
         if ([self.PublickKeyTemp length] > 1) {
+            self.loginBtn.enabled = YES;
             obtain(true);
         }else{
+            self.loginBtn.enabled = YES;
             obtain(false);
         }
     };
     //失败
     network.failure = ^(NSDictionary *dict) {
+        self.loginBtn.enabled = YES;
         obtain(false);
     };
 }
@@ -467,7 +413,7 @@ typedef void(^Obtain)(BOOL isValue);
         [SVProgressHUD showInfoWithStatus:@"请输入正确的用户名，在进行选择角色"];
         return;
     }
-    if ([self.PublickKeyTemp length] < 1) {
+//    if ([self.PublickKeyTemp length] < 1) {
         //self.isValue = [self getPublicKey];
         [self getPublicKeyobtain:^(BOOL success) {
             if (success) {
@@ -480,11 +426,11 @@ typedef void(^Obtain)(BOOL isValue);
                 [SVProgressHUD showInfoWithStatus:@"手机网络有问题"];
             }
         }];
-    }else{
-        //原来就有值的情况
-        self.loginBtn.enabled = NO;
-        [self loginUserSopaStr];
-    }
+//    }else{
+//        //原来就有值的情况
+//        self.loginBtn.enabled = NO;
+//        [self loginUserSopaStr];
+//    }
 }
 
 
@@ -509,9 +455,12 @@ typedef void(^Obtain)(BOOL isValue);
     [user synchronize];
     // NSString *const kInitVector = @"16-Bytes--String";
     NSString * data = [NSString stringWithFormat:@"{userCode:'%@',password:'%@',roleId:%ld,aesKey:'%@'}",self.userNameField.text,password,_roleInt,aes2];
+    
     //RSA加密
    
     NSString * rsaEncryptor = [RSAEncryptor encryptString:data publicKey:self.PublickKeyTemp];
+    
+
     //网络请求
     NetworkTool * network = [[NetworkTool alloc]init];
     NSString * canshu = URL_YIGODATA_LOGIN(_udidTemp, rsaEncryptor);

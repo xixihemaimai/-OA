@@ -65,7 +65,7 @@
     [self setTitle:[NSBundle mj_localizedStringForKey:MJRefreshAutoFooterNoMoreDataText] forState:MJRefreshStateNoMoreData];
     
     // 监听label
-    self.stateLabel.userInteractionEnabled = YES;
+    self.stateLabel.userInteractionEnabled = NO;
     [self.stateLabel addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(stateLabelClick)]];
 }
 

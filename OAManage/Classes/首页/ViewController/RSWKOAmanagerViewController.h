@@ -30,6 +30,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong)NSString * URL;
 
+
+@property (nonatomic,strong)NSString * Currenttitle;
+
 @end
 
 NS_ASSUME_NONNULL_END

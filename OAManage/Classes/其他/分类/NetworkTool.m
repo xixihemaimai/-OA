@@ -70,7 +70,6 @@
             parser.delegate = self;
             [parser parse];
         }else{
-            NSLog(@"-303003003030-------------");
             if ([urlName isEqualToString:URL_USERINFO]) {
                 if (self.failure) {
                     self.failure(responseObject);
@@ -160,7 +159,7 @@
                 }
             }else if ([_tempStr isEqualToString:URL_NOTICE]){
                 NSDictionary * dic = [self decryptMethodWithDictionary:dict];
-                NSLog(@"=============%@",dic);
+                
                 NSMutableArray * array = [RSInformationModel mj_objectArrayWithKeyValuesArray:dic[@"list"]];
                 if (self.successArrayReload) {
                     self.successArrayReload(array);
