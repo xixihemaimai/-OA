@@ -81,6 +81,8 @@
     }
     
     
+    
+    
     //这边要获取用户信息
     NSUserDefaults * user = [NSUserDefaults standardUserDefaults];
     //已经登录

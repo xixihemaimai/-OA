@@ -275,7 +275,7 @@
     }else if (status == -4){
         [SVProgressHUD showErrorWithStatus:[NSString stringWithFormat:@"%@",dict[@"message"]]];
     }else if (status == -5){
-       // [SVProgressHUD showErrorWithStatus:@"未登录"];
+        [SVProgressHUD showErrorWithStatus:@"登录已失效"];
         NSUserDefaults * user = [NSUserDefaults standardUserDefaults];
         [user removeObjectForKey:@"OAUSERMODEL"];
         [user removeObjectForKey:@"AES"];
