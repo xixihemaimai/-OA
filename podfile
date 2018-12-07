@@ -14,5 +14,6 @@ pod 'MJExtension'
 
 pod 'SDWebImage'
 pod 'XLPhotoBrowser+CoderXL'
+pod 'JXTAlertManager'
 
 end

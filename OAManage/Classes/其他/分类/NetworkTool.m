@@ -275,14 +275,17 @@
     }else if (status == -4){
         [SVProgressHUD showErrorWithStatus:[NSString stringWithFormat:@"%@",dict[@"message"]]];
     }else if (status == -5){
-        [SVProgressHUD showErrorWithStatus:@"登录已失效"];
-        NSUserDefaults * user = [NSUserDefaults standardUserDefaults];
-        [user removeObjectForKey:@"OAUSERMODEL"];
-        [user removeObjectForKey:@"AES"];
-        [user synchronize];
-        AppDelegate * appdelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-        RSLoginViewController * loginVc = [[RSLoginViewController alloc]init];
-        appdelegate.window.rootViewController = loginVc;
+        
+        [self userloginOut];
+        
+//        [SVProgressHUD showErrorWithStatus:@"登录已失效"];
+//        NSUserDefaults * user = [NSUserDefaults standardUserDefaults];
+//        [user removeObjectForKey:@"OAUSERMODEL"];
+//        [user removeObjectForKey:@"AES"];
+//        [user synchronize];
+//        AppDelegate * appdelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+//        RSLoginViewController * loginVc = [[RSLoginViewController alloc]init];
+//        appdelegate.window.rootViewController = loginVc;
     }else if (status == -999){
         [SVProgressHUD showErrorWithStatus:@"未知错误"];
     }
@@ -296,14 +299,17 @@
     NSString * data1 = [NSString stringWithFormat:@"%@",dict[@"data"]];
     NSString * userData = [FSAES128 decryptAES:data1 key:aes andKInItVector:kInitVector];
     if ([userData length] < 1) {
-        [SVProgressHUD showErrorWithStatus:@"登录失效"];
-        NSUserDefaults * user = [NSUserDefaults standardUserDefaults];
-        [user removeObjectForKey:@"OAUSERMODEL"];
-        [user removeObjectForKey:@"AES"];
-        [user synchronize];
-        AppDelegate * appdelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-        RSLoginViewController * loginVc = [[RSLoginViewController alloc]init];
-        appdelegate.window.rootViewController = loginVc;
+        
+        
+        [self userloginOut];
+//        [SVProgressHUD showErrorWithStatus:@"登录失效"];
+//        NSUserDefaults * user = [NSUserDefaults standardUserDefaults];
+//        [user removeObjectForKey:@"OAUSERMODEL"];
+//        [user removeObjectForKey:@"AES"];
+//        [user synchronize];
+//        AppDelegate * appdelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+//        RSLoginViewController * loginVc = [[RSLoginViewController alloc]init];
+//        appdelegate.window.rootViewController = loginVc;
         return nil;
 
     }else{
@@ -312,6 +318,26 @@
          return dic;
     }
    
+}
+
+
+- (void)userloginOut{
+    
+    [JXTAlertView showToastViewWithTitle:@"登录已失效"
+                                 message:@"你的账号在其他手机上面登录"
+                                duration:2
+                       dismissCompletion:^(NSInteger buttonIndex) {
+                           NSLog(@"关闭");
+                           NSUserDefaults * user = [NSUserDefaults standardUserDefaults];
+                           [user removeObjectForKey:@"OAUSERMODEL"];
+                           [user removeObjectForKey:@"AES"];
+                           [user synchronize];
+                           AppDelegate * appdelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+                           RSLoginViewController * loginVc = [[RSLoginViewController alloc]init];
+                           appdelegate.window.rootViewController = loginVc;
+                       }];
+    
+    
 }
 
 

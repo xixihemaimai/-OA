@@ -408,12 +408,15 @@ typedef void(^Obtain)(BOOL isValue);
         //self.isValue = [self getPublicKey];
         [self getPublicKeyobtain:^(BOOL success) {
             if (success) {
-                //重新获取值的情况下
-                self.loginBtn.enabled = NO;
-                [self loginUserSopaStr];
+                jxt_showLoadingHUDTitleMessage(@"正在执行登录中", nil);
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    self.loginBtn.enabled = NO;
+                    [self loginUserSopaStr];
+                });
+                
+               
             }else{
                 self.loginBtn.enabled = YES;
-                //重新获取没有值的情况
                 [SVProgressHUD showInfoWithStatus:@"手机网络有问题"];
             }
         }];
@@ -427,8 +430,8 @@ typedef void(^Obtain)(BOOL isValue);
 
 - (void)loginUserSopaStr{
     
-    [SVProgressHUD showWithStatus:@"正在登录中......."];
-    [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeBlack];
+    //[SVProgressHUD showWithStatus:@"正在登录中......."];
+    //[SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeBlack];
     //账号，密码，角色，AES，唯一标示符，------》公钥加密
     //密码
     NSString * password =[MyMD5 md5:self.passwordField.text];
@@ -471,6 +474,7 @@ typedef void(^Obtain)(BOOL isValue);
         [user setObject:data forKey:@"OAUSERMODEL"];
         [user synchronize];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+             jxt_dismissHUD();
             //登录之后要获取用户信息，然后在跳转到下面的界面
             //改变根控制器
             RSMyNavigationViewController *navigationController = [[RSMyNavigationViewController alloc] initWithRootViewController:[[RSHomeViewController alloc] init]];

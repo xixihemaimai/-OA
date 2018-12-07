@@ -109,6 +109,7 @@
             [[NSNotificationCenter defaultCenter]postNotificationName:@"reLoadCurrentViewData" object:nil];
             [self.navigationController popViewControllerAnimated:YES];
         }else if ([message.name isEqualToString:@"Submission"]){
+            NSLog(@"----------------%@",message.body);
             [self Logout];
         }else if ([message.name isEqualToString:@"Enclosure"]){
             [self jumpEnclosureTempStr:message.body];
@@ -116,18 +117,20 @@
     }
 
 
-
-
 - (void)Logout{
-    
-    [SVProgressHUD showErrorWithStatus:@"登录已失效"];
-    NSUserDefaults * user = [NSUserDefaults standardUserDefaults];
-    [user removeObjectForKey:@"OAUSERMODEL"];
-    [user removeObjectForKey:@"AES"];
-    [user synchronize];
-    AppDelegate * appdelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-    RSLoginViewController * loginVc = [[RSLoginViewController alloc]init];
-    appdelegate.window.rootViewController = loginVc;
+    [JXTAlertView showToastViewWithTitle:@"登录已失效"
+                                 message:@"你的账号在其他手机上面登录"
+                                duration:2
+                       dismissCompletion:^(NSInteger buttonIndex) {
+                           NSLog(@"关闭");
+                           NSUserDefaults * user = [NSUserDefaults standardUserDefaults];
+                           [user removeObjectForKey:@"OAUSERMODEL"];
+                           [user removeObjectForKey:@"AES"];
+                           [user synchronize];
+                           AppDelegate * appdelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+                           RSLoginViewController * loginVc = [[RSLoginViewController alloc]init];
+                           appdelegate.window.rootViewController = loginVc;
+    }];
 }
 
 

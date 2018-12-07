@@ -72,7 +72,7 @@
 #import <SVProgressHUD.h>
 #import <MJExtension.h>
 #import <UIImageView+WebCache.h>
-
+#import <JXTAlertManager/JXTAlertManagerHeader.h>
 //117.29.162.206
 //测试
 #define URL_YIGO_IOS @" http://117.29.162.206:8089/Yigo1.6/services/MapWebService?wsdl"

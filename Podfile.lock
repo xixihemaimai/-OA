@@ -16,6 +16,7 @@ PODS:
     - AFNetworking/NSURLSession
   - DZNEmptyDataSet (1.8.1)
   - IQKeyboardManager (6.2.0)
+  - JXTAlertManager (1.0.2)
   - Masonry (1.1.0)
   - MJExtension (3.0.15.1)
   - MJRefresh (3.1.15.3)
@@ -32,6 +33,7 @@ DEPENDENCIES:
   - AFNetworking
   - DZNEmptyDataSet
   - IQKeyboardManager
+  - JXTAlertManager
   - Masonry
   - MJExtension
   - MJRefresh
@@ -46,6 +48,7 @@ SPEC REPOS:
     - AFNetworking
     - DZNEmptyDataSet
     - IQKeyboardManager
+    - JXTAlertManager
     - Masonry
     - MJExtension
     - MJRefresh
@@ -59,6 +62,7 @@ SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
   IQKeyboardManager: 6194101620b73af5e67900b8f89707a99de0b804
+  JXTAlertManager: 71a89e90ac1a6d72862fbe884eab513cb243a344
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MJExtension: 19bc33ce2eee2d319760f5622562cf581a6ff756
   MJRefresh: b48380ae2b927b46c4ef000de9adb8dc748e1df7
@@ -68,6 +72,6 @@ SPEC CHECKSUMS:
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   "XLPhotoBrowser+CoderXL": 2bf4036e2af4611b24bde1681e24c64ed01fbe98
 
-PODFILE CHECKSUM: a2fce2867677a614be2ba4bce7972f92f4d69fce
+PODFILE CHECKSUM: a6c702b6af594aadec7f171dc0b921e556988632
 
 COCOAPODS: 1.5.0
