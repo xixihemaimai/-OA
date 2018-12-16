@@ -44,6 +44,7 @@
 		04C0474321787B5E0006B8D4 /* UIScrollView+DRRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C0474121787B5E0006B8D4 /* UIScrollView+DRRefresh.m */; };
 		04C0474621787DA00006B8D4 /* RSShenHeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C0474521787DA00006B8D4 /* RSShenHeViewController.m */; };
 		04C0474C217885FF0006B8D4 /* RSLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C0474B217885FF0006B8D4 /* RSLoginViewController.m */; };
+		04C1D92621C5E79A00384F98 /* MXActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C1D92521C5E79A00384F98 /* MXActionSheet.m */; };
 		04CA3FBD219AC85C009C2D33 /* RSUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CA3FBC219AC85C009C2D33 /* RSUserModel.m */; };
 		04D09F3221B6678B0078D7DA /* RSNoticeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D09F3121B6678B0078D7DA /* RSNoticeViewController.m */; };
 		04D09F3521B66AE50078D7DA /* RSNoticeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D09F3421B66AE50078D7DA /* RSNoticeCell.m */; };
@@ -140,6 +141,8 @@
 		04C0474521787DA00006B8D4 /* RSShenHeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSShenHeViewController.m; sourceTree = "<group>"; };
 		04C0474A217885FF0006B8D4 /* RSLoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSLoginViewController.h; sourceTree = "<group>"; };
 		04C0474B217885FF0006B8D4 /* RSLoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSLoginViewController.m; sourceTree = "<group>"; };
+		04C1D92421C5E79A00384F98 /* MXActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MXActionSheet.h; sourceTree = "<group>"; };
+		04C1D92521C5E79A00384F98 /* MXActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MXActionSheet.m; sourceTree = "<group>"; };
 		04CA3FBB219AC85C009C2D33 /* RSUserModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSUserModel.h; sourceTree = "<group>"; };
 		04CA3FBC219AC85C009C2D33 /* RSUserModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSUserModel.m; sourceTree = "<group>"; };
 		04D09F3021B6678B0078D7DA /* RSNoticeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSNoticeViewController.h; sourceTree = "<group>"; };
@@ -302,6 +305,7 @@
 		0436F6A22178221700B0D6C8 /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				04C1D92321C5E79A00384F98 /* MXActionSheet */,
 				04FF49E021A4F21D00C4A2C2 /* RSA */,
 				04A6F17B219592D900D15F58 /* MyMD5 */,
 				04A6F1632195684A00D15F58 /* JJOptionView */,
@@ -519,6 +523,15 @@
 			path = "UITableview+YBRefresh";
 			sourceTree = "<group>";
 		};
+		04C1D92321C5E79A00384F98 /* MXActionSheet */ = {
+			isa = PBXGroup;
+			children = (
+				04C1D92421C5E79A00384F98 /* MXActionSheet.h */,
+				04C1D92521C5E79A00384F98 /* MXActionSheet.m */,
+			);
+			path = MXActionSheet;
+			sourceTree = "<group>";
+		};
 		04D6CED321904F5C00B35A51 /* ZZQEmptyView */ = {
 			isa = PBXGroup;
 			children = (
@@ -722,6 +735,7 @@
 				04D6CECC2190254E00B35A51 /* Nonetwork.m in Sources */,
 				04A6F1682195684A00D15F58 /* JJOptionView.m in Sources */,
 				0436F6972178198B00B0D6C8 /* main.m in Sources */,
+				04C1D92621C5E79A00384F98 /* MXActionSheet.m in Sources */,
 				04A6F1792195834600D15F58 /* RSPersonFirstCell.m in Sources */,
 				04A6F17421957BE600D15F58 /* RSPersonalInformationViewController.m in Sources */,
 				04A4F81E21ABF0020052EFC4 /* RSShenHeModel.m in Sources */,
