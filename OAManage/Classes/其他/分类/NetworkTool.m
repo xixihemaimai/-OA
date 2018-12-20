@@ -190,6 +190,9 @@
                 }
             }else if ([_tempStr isEqualToString:URL_LOGOUT]){
                     NSUserDefaults * user = [NSUserDefaults standardUserDefaults];
+                    NSData * data = [user objectForKey:@"OAUSERMODEL"];
+                    RSUserModel * usermodel  = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+                    [MiPushSDK unsetAccount:[NSString stringWithFormat:@"%ld",usermodel.userId]];
                     [user removeObjectForKey:@"OAUSERMODEL"];
                     [user removeObjectForKey:@"AES"];
                     [user synchronize];
@@ -320,15 +323,16 @@
    
 }
 
-
 - (void)userloginOut{
-    
     [JXTAlertView showToastViewWithTitle:@"登录已失效"
                                  message:@"你的账号在其他手机上面登录"
                                 duration:2
                        dismissCompletion:^(NSInteger buttonIndex) {
-                           NSLog(@"关闭");
+                           //NSLog(@"关闭");
                            NSUserDefaults * user = [NSUserDefaults standardUserDefaults];
+                           NSData * data = [user objectForKey:@"OAUSERMODEL"];
+                           RSUserModel * usermodel  = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+                           [MiPushSDK unsetAccount:[NSString stringWithFormat:@"%ld",(long)usermodel.userId]];
                            [user removeObjectForKey:@"OAUSERMODEL"];
                            [user removeObjectForKey:@"AES"];
                            [user synchronize];
@@ -336,8 +340,6 @@
                            RSLoginViewController * loginVc = [[RSLoginViewController alloc]init];
                            appdelegate.window.rootViewController = loginVc;
                        }];
-    
-    
 }
 
 

@@ -470,6 +470,7 @@ typedef void(^Obtain)(BOOL isValue);
         usermodel.userCode = dict[@"userCode"];
         usermodel.userId = [dict[@"userId"]integerValue];
         usermodel.userName = dict[@"userName"];
+        [MiPushSDK setAccount:[NSString stringWithFormat:@"%ld",(long)usermodel.userId]];
         NSData *data = [NSKeyedArchiver archivedDataWithRootObject:usermodel];
         [user setObject:data forKey:@"OAUSERMODEL"];
         [user synchronize];
@@ -490,6 +491,7 @@ typedef void(^Obtain)(BOOL isValue);
     
     network.failure = ^(NSDictionary *dict) {
         self.loginBtn.enabled = YES;
+        jxt_dismissHUD();
         [user removeObjectForKey:@"AES"];
         [user removeObjectForKey:@"OAUSERMODEL"];
         [user synchronize];

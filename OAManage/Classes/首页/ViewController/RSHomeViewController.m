@@ -252,7 +252,6 @@
         }else{
             return self.dataArray.count;
         }
-       
     }
 }
 

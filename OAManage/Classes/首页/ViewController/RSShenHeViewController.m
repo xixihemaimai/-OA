@@ -148,6 +148,23 @@
 }
 
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+     // [[NSNotificationCenter defaultCenter]postNotificationName:@"reLoadCurrentViewData" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(retrievingData) name:@"reLoadCurrentViewData" object:nil];
+    
+}
+
+
+- (void)retrievingData{
+    self.pageNum = 1;
+    self.selectType = @"1";
+    self.billKey = @"";
+    self.selectIndex = 0;
+    [self reloadShenHeNewData];
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
@@ -480,8 +497,8 @@
 
 
 
-- (void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
 }
 
 

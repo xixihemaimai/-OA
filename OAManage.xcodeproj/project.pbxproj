@@ -45,6 +45,15 @@
 		04C0474621787DA00006B8D4 /* RSShenHeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C0474521787DA00006B8D4 /* RSShenHeViewController.m */; };
 		04C0474C217885FF0006B8D4 /* RSLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C0474B217885FF0006B8D4 /* RSLoginViewController.m */; };
 		04C1D92621C5E79A00384F98 /* MXActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C1D92521C5E79A00384F98 /* MXActionSheet.m */; };
+		04C1D92A21C63DF300384F98 /* libMiPushSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04C1D92821C63DF300384F98 /* libMiPushSDK.a */; };
+		04C1D92C21C63F7400384F98 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04C1D92B21C63F7400384F98 /* UserNotifications.framework */; };
+		04C1D92E21C63F8C00384F98 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 04C1D92D21C63F8C00384F98 /* libresolv.tbd */; };
+		04C1D93021C63F9E00384F98 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 04C1D92F21C63F9E00384F98 /* libxml2.tbd */; };
+		04C1D93221C63FAE00384F98 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 04C1D93121C63FAD00384F98 /* libz.tbd */; };
+		04C1D93421C63FBB00384F98 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04C1D93321C63FBB00384F98 /* SystemConfiguration.framework */; };
+		04C1D93621C63FC700384F98 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04C1D93521C63FC700384F98 /* MobileCoreServices.framework */; };
+		04C1D93821C63FD600384F98 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04C1D93721C63FD600384F98 /* CFNetwork.framework */; };
+		04C1D93A21C63FE500384F98 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04C1D93921C63FE500384F98 /* CoreTelephony.framework */; };
 		04CA3FBD219AC85C009C2D33 /* RSUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CA3FBC219AC85C009C2D33 /* RSUserModel.m */; };
 		04D09F3221B6678B0078D7DA /* RSNoticeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D09F3121B6678B0078D7DA /* RSNoticeViewController.m */; };
 		04D09F3521B66AE50078D7DA /* RSNoticeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D09F3421B66AE50078D7DA /* RSNoticeCell.m */; };
@@ -143,6 +152,17 @@
 		04C0474B217885FF0006B8D4 /* RSLoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSLoginViewController.m; sourceTree = "<group>"; };
 		04C1D92421C5E79A00384F98 /* MXActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MXActionSheet.h; sourceTree = "<group>"; };
 		04C1D92521C5E79A00384F98 /* MXActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MXActionSheet.m; sourceTree = "<group>"; };
+		04C1D92821C63DF300384F98 /* libMiPushSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMiPushSDK.a; sourceTree = "<group>"; };
+		04C1D92921C63DF300384F98 /* MiPushSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MiPushSDK.h; sourceTree = "<group>"; };
+		04C1D92B21C63F7400384F98 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
+		04C1D92D21C63F8C00384F98 /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
+		04C1D92F21C63F9E00384F98 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
+		04C1D93121C63FAD00384F98 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		04C1D93321C63FBB00384F98 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		04C1D93521C63FC700384F98 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		04C1D93721C63FD600384F98 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		04C1D93921C63FE500384F98 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		04C1D93B21C63FF600384F98 /* OAManage.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OAManage.entitlements; sourceTree = "<group>"; };
 		04CA3FBB219AC85C009C2D33 /* RSUserModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSUserModel.h; sourceTree = "<group>"; };
 		04CA3FBC219AC85C009C2D33 /* RSUserModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSUserModel.m; sourceTree = "<group>"; };
 		04D09F3021B6678B0078D7DA /* RSNoticeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSNoticeViewController.h; sourceTree = "<group>"; };
@@ -198,6 +218,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04C1D93A21C63FE500384F98 /* CoreTelephony.framework in Frameworks */,
+				04C1D93821C63FD600384F98 /* CFNetwork.framework in Frameworks */,
+				04C1D93621C63FC700384F98 /* MobileCoreServices.framework in Frameworks */,
+				04C1D93421C63FBB00384F98 /* SystemConfiguration.framework in Frameworks */,
+				04C1D93221C63FAE00384F98 /* libz.tbd in Frameworks */,
+				04C1D93021C63F9E00384F98 /* libxml2.tbd in Frameworks */,
+				04C1D92E21C63F8C00384F98 /* libresolv.tbd in Frameworks */,
+				04C1D92C21C63F7400384F98 /* UserNotifications.framework in Frameworks */,
+				04C1D92A21C63DF300384F98 /* libMiPushSDK.a in Frameworks */,
 				3E37A3CC73786F01A8AEED07 /* libPods-OAManage.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -226,6 +255,7 @@
 		0436F6832178198300B0D6C8 /* OAManage */ = {
 			isa = PBXGroup;
 			children = (
+				04C1D93B21C63FF600384F98 /* OAManage.entitlements */,
 				0436F69D2178221700B0D6C8 /* Classes */,
 				0436F6872178198300B0D6C8 /* ViewController.h */,
 				0436F6882178198300B0D6C8 /* ViewController.m */,
@@ -305,6 +335,7 @@
 		0436F6A22178221700B0D6C8 /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				04C1D92721C63DF300384F98 /* SDK */,
 				04C1D92321C5E79A00384F98 /* MXActionSheet */,
 				04FF49E021A4F21D00C4A2C2 /* RSA */,
 				04A6F17B219592D900D15F58 /* MyMD5 */,
@@ -532,6 +563,15 @@
 			path = MXActionSheet;
 			sourceTree = "<group>";
 		};
+		04C1D92721C63DF300384F98 /* SDK */ = {
+			isa = PBXGroup;
+			children = (
+				04C1D92821C63DF300384F98 /* libMiPushSDK.a */,
+				04C1D92921C63DF300384F98 /* MiPushSDK.h */,
+			);
+			path = SDK;
+			sourceTree = "<group>";
+		};
 		04D6CED321904F5C00B35A51 /* ZZQEmptyView */ = {
 			isa = PBXGroup;
 			children = (
@@ -565,6 +605,14 @@
 		9003A5D94784D936DD044D8B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				04C1D93921C63FE500384F98 /* CoreTelephony.framework */,
+				04C1D93721C63FD600384F98 /* CFNetwork.framework */,
+				04C1D93521C63FC700384F98 /* MobileCoreServices.framework */,
+				04C1D93321C63FBB00384F98 /* SystemConfiguration.framework */,
+				04C1D93121C63FAD00384F98 /* libz.tbd */,
+				04C1D92F21C63F9E00384F98 /* libxml2.tbd */,
+				04C1D92D21C63F8C00384F98 /* libresolv.tbd */,
+				04C1D92B21C63F7400384F98 /* UserNotifications.framework */,
 				425A1ECECB928E2700E33380 /* libPods-OAManage.a */,
 			);
 			name = Frameworks;
@@ -613,6 +661,11 @@
 				TargetAttributes = {
 					0436F6802178198300B0D6C8 = {
 						CreatedOnToolsVersion = 10.0;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -895,6 +948,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = OAManage/OAManage.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -907,6 +961,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/OAManage/Classes/其他/Lib/SDK",
+				);
+				MiSDKRun = debug;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ruishi.OAManage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -920,6 +979,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = OAManage/OAManage.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -932,6 +992,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/OAManage/Classes/其他/Lib/SDK",
+				);
+				MiSDKRun = online;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ruishi.OAManage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

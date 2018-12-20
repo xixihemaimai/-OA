@@ -20,7 +20,7 @@
      sex 性别
      */
     //[aCoder encodeObject:self.userId forKey:@"userID"];
-    [aCoder encodeInteger:self.userId forKey:@"userID"];
+    [aCoder encodeInteger:self.userId forKey:@"userId"];
     [aCoder encodeObject:self.userName forKey:@"userName"];
     [aCoder encodeObject:self.userCode forKey:@"userCode"];
     [aCoder encodeObject:self.appLoginToken forKey:@"appLoginToken"];
@@ -32,7 +32,7 @@
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder{
     if (self = [super init]) {
-        self.userId = [[aDecoder decodeObjectForKey:@"userID"] integerValue];
+        self.userId = [aDecoder decodeIntegerForKey:@"userId"];
         self.userCode = [aDecoder decodeObjectForKey:@"userCode"];
         self.userName = [aDecoder decodeObjectForKey:@"userName"];
         self.appLoginToken = [aDecoder decodeObjectForKey:@"appLoginToken"];
