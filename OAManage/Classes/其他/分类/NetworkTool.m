@@ -68,6 +68,7 @@
             parser.delegate = self;
             [parser parse];
         }else{
+            
             if ([urlName isEqualToString:URL_USERINFO]) {
                 if (self.failure) {
                     self.failure(responseObject);
@@ -140,6 +141,9 @@
                 }
             }else if ([_tempStr isEqualToString:URL_LOGIN]){
                 //这边也可以做解密
+                
+                
+                
                 NSDictionary * dic = [self decryptMethodWithDictionary:dict];
                 if (self.successReload) {
                     self.successReload(dic);
@@ -251,7 +255,7 @@
 //错误提醒的分类
 - (void)errerAlertUserStatus:(NSDictionary *)dict{
     
-    [SVProgressHUD dismiss];
+   // [SVProgressHUD dismiss];
     /**
      // 正常状态
      public static final int RET_STATUS_NORMAL = 0 ;
@@ -268,15 +272,25 @@
      // 未知错误
      public static final int RET_STATUS_UNKNOWN = -999 ;
     */
+    jxt_dismissHUD();
     NSInteger status = [dict[@"status"] integerValue];
     if (status == -2) {
-        [SVProgressHUD showErrorWithStatus:@"参数错误"];
+       // [SVProgressHUD showErrorWithStatus:@"参数错误"];
+        jxt_showToastMessage(@"参数错误", 0.75);
     }else if (status == -1){
-        [SVProgressHUD showErrorWithStatus:@"系统错误"];
+        //[SVProgressHUD showErrorWithStatus:@"系统错误"];
+        
+        jxt_showToastMessage(@"系统错误", 0.75);
     }else if (status == -3){
-        [SVProgressHUD showErrorWithStatus:@"接口不存在"];
+        //[SVProgressHUD showErrorWithStatus:@"接口不存在"];
+        
+         jxt_showToastMessage(@"接口不存在", 0.75);
+        
     }else if (status == -4){
-        [SVProgressHUD showErrorWithStatus:[NSString stringWithFormat:@"%@",dict[@"message"]]];
+        // [SVProgressHUD showErrorWithStatus:[NSString stringWithFormat:@"%@",dict[@"message"]]];
+        //jxt_showAlertMessage([NSString stringWithFormat:@"%@",dict[@"message"]]);
+        jxt_showToastMessage([NSString stringWithFormat:@"%@",dict[@"message"]], 0.75);
+
     }else if (status == -5){
         
         [self userloginOut];

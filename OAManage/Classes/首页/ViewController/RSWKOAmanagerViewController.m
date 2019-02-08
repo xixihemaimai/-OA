@@ -109,7 +109,7 @@
             [[NSNotificationCenter defaultCenter]postNotificationName:@"reLoadCurrentViewData" object:nil];
             [self.navigationController popViewControllerAnimated:YES];
         }else if ([message.name isEqualToString:@"Submission"]){
-            NSLog(@"----------------%@",message.body);
+           // NSLog(@"----------------%@",message.body);
             [self Logout];
         }else if ([message.name isEqualToString:@"Enclosure"]){
             [self jumpEnclosureTempStr:message.body];
