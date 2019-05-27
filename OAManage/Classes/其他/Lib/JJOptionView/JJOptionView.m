@@ -152,7 +152,7 @@ static CGFloat const rowheight = 42;
        // weakSelf.rightImageView.transform = CGAffineTransformIdentity;
         weakSelf.tableView.frame = CGRectMake(weakSelf.tableView.frame.origin.x, weakSelf.tableView.frame.origin.y+(self.isDirectionUp?self.tableViewHeight:0), weakSelf.tableView.frame.size.width, 0);
         weakSelf.headerview.frame = CGRectMake(weakSelf.tableView.frame.origin.x, weakSelf.tableView.frame.origin.y+(self.isDirectionUp?self.tableViewHeight:0), weakSelf.tableView.frame.size.width, 0);
-        self.headerImage.frame =CGRectMake(weakSelf.tableView.frame.origin.x, weakSelf.tableView.frame.origin.y+(self.isDirectionUp?self.tableViewHeight:0), weakSelf.tableView.frame.size.width, 0);
+        weakSelf.headerImage.frame =CGRectMake(weakSelf.tableView.frame.origin.x, weakSelf.tableView.frame.origin.y+(self.isDirectionUp?self.tableViewHeight:0), weakSelf.tableView.frame.size.width, 0);
     } completion:^(BOOL finished) {
         [weakSelf.backgroundBtn removeFromSuperview];
         [weakSelf.tableView removeFromSuperview];

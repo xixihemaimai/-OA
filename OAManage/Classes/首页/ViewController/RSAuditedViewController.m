@@ -48,15 +48,9 @@
     }
     self.title = @"待审核";
     self.pageNum = 1;
-    
-    
     self.tableview.mj_header = [MJChiBaoZiHeader headerWithRefreshingTarget:self refreshingAction:@selector(reloadAuditedNewData)];
-    
-    
     self.tableview.mj_footer = [MJChiBaoZiFooter footerWithRefreshingTarget:self refreshingAction:@selector(reloadAuditedMoreNewData)];
-    
     [self.tableview.mj_header beginRefreshing];
-    
 }
 
 - (void)reLoadCurrentViewAudditedData{
