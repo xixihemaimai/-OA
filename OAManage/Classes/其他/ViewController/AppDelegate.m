@@ -258,6 +258,7 @@
     };
     [Nonet bringSubviewToFront:viewController.view];
     [viewController.view addSubview:Nonet];
+    
 }
 
 #pragma mark -- 有WIFT的时候
