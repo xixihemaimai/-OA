@@ -44,8 +44,8 @@
 		04C0474321787B5E0006B8D4 /* UIScrollView+DRRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C0474121787B5E0006B8D4 /* UIScrollView+DRRefresh.m */; };
 		04C0474621787DA00006B8D4 /* RSShenHeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C0474521787DA00006B8D4 /* RSShenHeViewController.m */; };
 		04C0474C217885FF0006B8D4 /* RSLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C0474B217885FF0006B8D4 /* RSLoginViewController.m */; };
+		04C0942B2362A8320077AB23 /* libMiPushSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04C094292362A8320077AB23 /* libMiPushSDK.a */; };
 		04C1D92621C5E79A00384F98 /* MXActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C1D92521C5E79A00384F98 /* MXActionSheet.m */; };
-		04C1D92A21C63DF300384F98 /* libMiPushSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04C1D92821C63DF300384F98 /* libMiPushSDK.a */; };
 		04C1D92C21C63F7400384F98 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04C1D92B21C63F7400384F98 /* UserNotifications.framework */; };
 		04C1D92E21C63F8C00384F98 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 04C1D92D21C63F8C00384F98 /* libresolv.tbd */; };
 		04C1D93021C63F9E00384F98 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 04C1D92F21C63F9E00384F98 /* libxml2.tbd */; };
@@ -150,10 +150,10 @@
 		04C0474521787DA00006B8D4 /* RSShenHeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSShenHeViewController.m; sourceTree = "<group>"; };
 		04C0474A217885FF0006B8D4 /* RSLoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSLoginViewController.h; sourceTree = "<group>"; };
 		04C0474B217885FF0006B8D4 /* RSLoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSLoginViewController.m; sourceTree = "<group>"; };
+		04C094292362A8320077AB23 /* libMiPushSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMiPushSDK.a; sourceTree = "<group>"; };
+		04C0942A2362A8320077AB23 /* MiPushSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MiPushSDK.h; sourceTree = "<group>"; };
 		04C1D92421C5E79A00384F98 /* MXActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MXActionSheet.h; sourceTree = "<group>"; };
 		04C1D92521C5E79A00384F98 /* MXActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MXActionSheet.m; sourceTree = "<group>"; };
-		04C1D92821C63DF300384F98 /* libMiPushSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMiPushSDK.a; sourceTree = "<group>"; };
-		04C1D92921C63DF300384F98 /* MiPushSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MiPushSDK.h; sourceTree = "<group>"; };
 		04C1D92B21C63F7400384F98 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		04C1D92D21C63F8C00384F98 /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
 		04C1D92F21C63F9E00384F98 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
@@ -218,6 +218,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04C0942B2362A8320077AB23 /* libMiPushSDK.a in Frameworks */,
 				04C1D93A21C63FE500384F98 /* CoreTelephony.framework in Frameworks */,
 				04C1D93821C63FD600384F98 /* CFNetwork.framework in Frameworks */,
 				04C1D93621C63FC700384F98 /* MobileCoreServices.framework in Frameworks */,
@@ -226,7 +227,6 @@
 				04C1D93021C63F9E00384F98 /* libxml2.tbd in Frameworks */,
 				04C1D92E21C63F8C00384F98 /* libresolv.tbd in Frameworks */,
 				04C1D92C21C63F7400384F98 /* UserNotifications.framework in Frameworks */,
-				04C1D92A21C63DF300384F98 /* libMiPushSDK.a in Frameworks */,
 				3E37A3CC73786F01A8AEED07 /* libPods-OAManage.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -566,8 +566,8 @@
 		04C1D92721C63DF300384F98 /* SDK */ = {
 			isa = PBXGroup;
 			children = (
-				04C1D92821C63DF300384F98 /* libMiPushSDK.a */,
-				04C1D92921C63DF300384F98 /* MiPushSDK.h */,
+				04C094292362A8320077AB23 /* libMiPushSDK.a */,
+				04C0942A2362A8320077AB23 /* MiPushSDK.h */,
 			);
 			path = SDK;
 			sourceTree = "<group>";

@@ -181,7 +181,7 @@ typedef NS_ENUM(NSUInteger, MiPushSDKRegionType) {
  * @param 
  *      messageId:Payload里面对应的miid参数
  */
-+ (void)openAppNotify:(NSString *)messageId;
++ (void)openAppNotify:(NSString *)messageId __deprecated;
 
 
 /**
