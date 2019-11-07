@@ -226,6 +226,10 @@
             });
         }];
         [alert addAction:actionConfirm];
+        if ([UIDevice currentDevice].systemVersion.floatValue >= 13.0) {
+            
+            alert.modalPresentationStyle = UIModalPresentationFullScreen;
+        }
         [self presentViewController:alert animated:YES completion:nil];
     }
 }

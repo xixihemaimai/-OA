@@ -141,9 +141,6 @@
                 }
             }else if ([_tempStr isEqualToString:URL_LOGIN]){
                 //这边也可以做解密
-                
-                
-                
                 NSDictionary * dic = [self decryptMethodWithDictionary:dict];
                 if (self.successReload) {
                     self.successReload(dic);
