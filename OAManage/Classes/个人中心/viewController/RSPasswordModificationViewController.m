@@ -23,6 +23,15 @@
 
 @implementation RSPasswordModificationViewController
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBar.hidden = NO;
+    
+}
+
+
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"修改密码";
@@ -325,7 +334,7 @@
     NSString * password = URL_YIGODATA_PASSWORD(oldPassword, newPassword);
     NSUserDefaults * user = [NSUserDefaults standardUserDefaults];
     NSString * aes = [user objectForKey:@"AES"];
-      NSString *const kInitVector = @"16-Bytes--String";
+    NSString *const kInitVector = @"16-Bytes--String";
     NSString * aes2 = [FSAES128 encryptAES:password key:aes andKInItVector:kInitVector];
     NSString * canshu = URL_YIGODATA_CHANGPWD(self.usermodel.appLoginToken, aes2);
     NSString * soapStr = URL_YIGODATA_IOS(URL_LOGINWEBSERVICE, URL_CHANGPWD, canshu);

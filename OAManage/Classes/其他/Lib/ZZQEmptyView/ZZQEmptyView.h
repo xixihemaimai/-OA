@@ -26,7 +26,8 @@ typedef NS_ENUM(NSInteger, ZZQEmptyViewMode) {
     
     ZZQEmptyViewModeNoButton,
     ZZQEmptyViewModeNoImage,
-    ZZQEmptyViewModeTextOnly
+    ZZQEmptyViewModeTextOnly,
+    ZZQEmptyViewModeWorkOnly
 };
 
 
@@ -54,8 +55,10 @@ typedef void(^REAction)(void);
 
 @property (nonatomic, weak) id<ZZQEmptyViewDelegate> delegate;
 
-
+//判断是显示流程审核样式，还是其他样式
 @property (nonatomic,strong)NSString * showtype;
+//判断是显示其他样式的文字地方，还是想工作日志文字现在样式
+@property (nonatomic,strong)NSString * workType;
 
 @property (nonatomic,copy)REAction reAction;
 

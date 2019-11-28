@@ -15,6 +15,9 @@ PODS:
   - AFNetworking/UIKit (3.2.1):
     - AFNetworking/NSURLSession
   - DZNEmptyDataSet (1.8.1)
+  - FMDB (2.7.5):
+    - FMDB/standard (= 2.7.5)
+  - FMDB/standard (2.7.5)
   - IQKeyboardManager (6.2.0)
   - JXTAlertManager (1.0.2)
   - Masonry (1.1.0)
@@ -26,12 +29,17 @@ PODS:
     - SDWebImage/Core (= 4.0.0)
   - SDWebImage/Core (4.0.0)
   - SVProgressHUD (2.2.5)
+  - TZImagePickerController (3.0.9)
+  - UMCAnalytics (5.5.1):
+    - UMCCommon
+  - UMCCommon (1.5.2)
   - "XLPhotoBrowser+CoderXL (1.2.0)":
     - SDWebImage (~> 4.0.0)
 
 DEPENDENCIES:
   - AFNetworking
   - DZNEmptyDataSet
+  - FMDB
   - IQKeyboardManager
   - JXTAlertManager
   - Masonry
@@ -41,12 +49,16 @@ DEPENDENCIES:
   - SDAutoLayout
   - SDWebImage
   - SVProgressHUD
+  - TZImagePickerController
+  - UMCAnalytics
+  - UMCCommon
   - "XLPhotoBrowser+CoderXL"
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - AFNetworking
     - DZNEmptyDataSet
+    - FMDB
     - IQKeyboardManager
     - JXTAlertManager
     - Masonry
@@ -56,11 +68,15 @@ SPEC REPOS:
     - SDAutoLayout
     - SDWebImage
     - SVProgressHUD
+    - TZImagePickerController
+    - UMCAnalytics
+    - UMCCommon
     - "XLPhotoBrowser+CoderXL"
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
+  FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   IQKeyboardManager: 6194101620b73af5e67900b8f89707a99de0b804
   JXTAlertManager: 71a89e90ac1a6d72862fbe884eab513cb243a344
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
@@ -70,8 +86,11 @@ SPEC CHECKSUMS:
   SDAutoLayout: c5509e77ae75735d9a39f7bc83dba6d3f75d49d8
   SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
+  TZImagePickerController: ea3e906af8caa7088f612ad673feb73cc6aa6bfc
+  UMCAnalytics: 0aff87e39008e2a650e5917430db0da2de2f8495
+  UMCCommon: 4392868ac47ff1b101663106bb114ba616fabbad
   "XLPhotoBrowser+CoderXL": 2bf4036e2af4611b24bde1681e24c64ed01fbe98
 
-PODFILE CHECKSUM: a6c702b6af594aadec7f171dc0b921e556988632
+PODFILE CHECKSUM: 04329d14b525a91bbc55ac4eef159e6ff5b29aaf
 
 COCOAPODS: 1.5.0

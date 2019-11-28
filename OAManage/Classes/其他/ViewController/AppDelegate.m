@@ -10,10 +10,18 @@
 #import "RSHomeViewController.h"
 #import "RSMenuViewController.h"
 #import "RSLoginViewController.h"
-
 #import "NetworkTool.h"
-
 #import "FSAES128.h"
+#import <UMCommon/UMCommon.h>
+#import <UMAnalytics/MobClick.h>
+
+
+
+//新版本
+#import "RSMainViewController.h"
+
+
+
 @interface AppDelegate ()
 {
     
@@ -31,6 +39,13 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    
+    [UMConfigure setLogEnabled:YES];
+    [UMConfigure initWithAppkey:@"5dca71324ca357eb33000a23" channel:@"App Store"];
+    [MobClick setScenarioType:E_UM_NORMAL];
+    
+    
     //这边要对登录的数据进行判断是否有用户信息保存，有的话，先去重新获取用户信息在跳转页面
     NSUserDefaults * user = [NSUserDefaults standardUserDefaults];
     NSData * data = [user objectForKey:@"OAUSERMODEL"];
@@ -61,8 +76,9 @@
         self.window.rootViewController = loginVc;
     }else{
         //假的根控制器
-      UIViewController * viewVc= [[UIViewController alloc]init];
-      self.window.rootViewController = viewVc;
+    UIViewController * viewVc= [[UIViewController alloc]init];
+        viewVc.view.alpha = 0;
+    self.window.rootViewController = viewVc;
     NSString * canshu = URL_YIGODATA_APPLOGINTOKEN(usermodel.appLoginToken);
     NSString * soapStr = URL_YIGODATA_IOS(URL_LOGINWEBSERVICE, URL_USERINFO, canshu);
     NetworkTool * network = [[NetworkTool alloc]init];
@@ -81,6 +97,59 @@
         usermodel.userCode = dict[@"userCode"];
         usermodel.userId = [dict[@"userId"] integerValue];
         usermodel.userName = dict[@"userName"];
+        usermodel.deptId = [dict[@"deptId"] integerValue];
+        usermodel.AM_Requisition = [dict[@"flowAccess"][@"AM_Requisition"]boolValue];
+        usermodel.AM_SetlleIn = [dict[@"flowAccess"][@"AM_SetlleIn"]boolValue];
+        usermodel.BL_OutNotice = [dict[@"flowAccess"][@"BL_OutNotice"]boolValue];
+        usermodel.BM_MtlReturn = [dict[@"flowAccess"][@"BM_MtlReturn"]boolValue];
+        usermodel.BM_OutNotice = [dict[@"flowAccess"][@"BM_OutNotice"]boolValue];
+        usermodel.BM_Transfer = [dict[@"flowAccess"][@"BM_Transfer"]boolValue];
+        usermodel.BS_OutNotice = [dict[@"flowAccess"][@"BS_OutNotice"]boolValue];
+        usermodel.ES_OutNotice = [dict[@"flowAccess"][@"ES_OutNotice"]boolValue];
+        usermodel.ES_Transfer = [dict[@"flowAccess"][@"ES_Transfer"]boolValue];
+        usermodel.FG_EngQuotation = [dict[@"flowAccess"][@"FG_EngQuotation"]boolValue];
+        usermodel.FG_ProcessProduct = [dict[@"flowAccess"][@"FG_ProcessProduct"]boolValue];
+        usermodel.FG_ProcessProtocol = [dict[@"flowAccess"][@"FG_ProcessProtocol"]boolValue];
+        usermodel.FG_ProfitQuote = [dict[@"flowAccess"][@"FG_ProfitQuote"]boolValue];
+        usermodel.Flow_Advertising = [dict[@"flowAccess"][@"Flow_Advertising"]boolValue];
+        usermodel.Flow_ApplyActivity = [dict[@"flowAccess"][@"Flow_ApplyActivity"]boolValue];
+        usermodel.Flow_ApplyLeave = [dict[@"flowAccess"][@"Flow_ApplyLeave"]boolValue];
+        usermodel.Flow_Become = [dict[@"flowAccess"][@"Flow_Become"]boolValue];
+        usermodel.Flow_BreakDown = [dict[@"flowAccess"][@"Flow_BreakDown"]boolValue];
+        usermodel.Flow_Business = [dict[@"flowAccess"][@"Flow_Business"]boolValue];
+        usermodel.Flow_Cachet = [dict[@"flowAccess"][@"Flow_Cachet"]boolValue];
+        usermodel.Flow_Chapter = [dict[@"flowAccess"][@"Flow_Chapter"]boolValue];
+        usermodel.Flow_Contract = [dict[@"flowAccess"][@"Flow_Contract"]boolValue];
+        usermodel.Flow_Entertain = [dict[@"flowAccess"][@"Flow_Entertain"]boolValue];
+        usermodel.Flow_Entertain2 = [dict[@"flowAccess"][@"Flow_Entertain2"]boolValue];
+        usermodel.Flow_EquipService = [dict[@"flowAccess"][@"Flow_EquipService"]boolValue];
+        usermodel.Flow_Equipment = [dict[@"flowAccess"][@"Flow_Equipment"]boolValue];
+        usermodel.Flow_FileUpdate = [dict[@"flowAccess"][@"Flow_FileUpdate"]boolValue];
+        usermodel.Flow_FixedAssets = [dict[@"flowAccess"][@"Flow_FixedAssets"]boolValue];
+        usermodel.Flow_HumanNeed = [dict[@"flowAccess"][@"Flow_HumanNeed"]boolValue];
+        usermodel.Flow_InCachet = [dict[@"flowAccess"][@"Flow_InCachet"]boolValue];
+        usermodel.Flow_InvestContract = [dict[@"flowAccess"][@"Flow_InvestContract"]boolValue];
+        usermodel.Flow_Payment = [dict[@"flowAccess"][@"Flow_Payment"]boolValue];
+        usermodel.Flow_PostMove = [dict[@"flowAccess"][@"Flow_PostMove"]boolValue];
+        usermodel.Flow_Purchase = [dict[@"flowAccess"][@"Flow_Purchase"]boolValue];
+        usermodel.Flow_Quit = [dict[@"flowAccess"][@"Flow_Quit"]boolValue];
+        usermodel.Flow_Receptions = [dict[@"flowAccess"][@"Flow_Receptions"]boolValue];
+        usermodel.Flow_Restaurant = [dict[@"flowAccess"][@"Flow_Restaurant"]boolValue];
+        usermodel.Flow_RsApplyLeave = [dict[@"flowAccess"][@"Flow_RsApplyLeave"]boolValue];
+        usermodel.Flow_RsBreakDown = [dict[@"flowAccess"][@"Flow_RsBreakDown"]boolValue];
+        usermodel.Flow_RsPayment = [dict[@"flowAccess"][@"Flow_RsPayment"]boolValue];
+        usermodel.Flow_SaleContract = [dict[@"flowAccess"][@"Flow_SaleContract"]boolValue];
+        usermodel.Flow_SupplierConsume = [dict[@"flowAccess"][@"Flow_SupplierConsume"]boolValue];
+        usermodel.Flow_UsedIdle = [dict[@"flowAccess"][@"Flow_UsedIdle"]boolValue];
+        usermodel.Flow_VehicleReservation = [dict[@"flowAccess"][@"Flow_VehicleReservation"]boolValue];
+        usermodel.Flow_WasteDisposal = [dict[@"flowAccess"][@"Flow_WasteDisposal"]boolValue];
+        usermodel.SC_PayIn = [dict[@"flowAccess"][@"SC_PayIn"]boolValue];
+        usermodel.SL_OutNotice = [dict[@"flowAccess"][@"SL_OutNotice"]boolValue];
+        usermodel.SL_Transfer = [dict[@"flowAccess"][@"SL_Transfer"]boolValue];
+        usermodel.SM_SendNotice = [dict[@"flowAccess"][@"SM_SendNotice"]boolValue];
+        usermodel.SM_Transfer = [dict[@"flowAccess"][@"SM_Transfer"]boolValue];
+        usermodel.UseCar = [dict[@"flowAccess"][@"UseCar"]boolValue];
+
         [MiPushSDK setAccount:[NSString stringWithFormat:@"%ld",(long)usermodel.userId]];
         [user removeObjectForKey:@"OAUSERMODEL"];
         NSData *data = [NSKeyedArchiver archivedDataWithRootObject:usermodel];
@@ -90,14 +159,18 @@
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             //登录之后要获取用户信息，然后在跳转到下面的界面
             //改变根控制器
-            RSMyNavigationViewController *navigationController = [[RSMyNavigationViewController alloc] initWithRootViewController:[[RSHomeViewController alloc] init]];
-            RSMenuViewController *menuController = [[RSMenuViewController alloc] init];
-            REFrostedViewController *frostedViewController = [[REFrostedViewController alloc] initWithContentViewController:navigationController menuViewController:menuController];
-            frostedViewController.direction = REFrostedViewControllerDirectionLeft;
-            frostedViewController.liveBlurBackgroundStyle = REFrostedViewControllerLiveBackgroundStyleLight;
+//            RSMyNavigationViewController *navigationController = [[RSMyNavigationViewController alloc] initWithRootViewController:[[RSHomeViewController alloc] init]];
+//            RSMenuViewController *menuController = [[RSMenuViewController alloc] init];
+//            REFrostedViewController *frostedViewController = [[REFrostedViewController alloc] initWithContentViewController:navigationController menuViewController:menuController];
+//            frostedViewController.direction = REFrostedViewControllerDirectionLeft;
+//            frostedViewController.liveBlurBackgroundStyle = REFrostedViewControllerLiveBackgroundStyleLight;
+            
             AppDelegate * appdelegate =(AppDelegate *)[UIApplication sharedApplication].delegate;
-            appdelegate.frostedViewController = frostedViewController;
-            appdelegate.window.rootViewController = frostedViewController;
+//            appdelegate.frostedViewController = frostedViewController;
+//            appdelegate.window.rootViewController = frostedViewController;
+            RSMainViewController * mainVc = [[RSMainViewController alloc]init];
+            appdelegate.window.rootViewController = mainVc;
+            
         });
     };
     network.failure = ^(NSDictionary *dict) {

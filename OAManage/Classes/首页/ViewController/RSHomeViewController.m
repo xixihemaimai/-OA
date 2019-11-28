@@ -8,16 +8,13 @@
 
 #import "RSHomeViewController.h"
 #import "RSShenHeViewController.h"
-#import "RSMenuViewController.h"
+
 
 #import "RSHomeFirstCell.h"
 #import "RSHomeSecondCell.h"
 #import "RSHomeThirdCell.h"
 #import "RSHomeFristHeaderView.h"
 #import "RSAuditedViewController.h"
-
-
-
 
 #import "RSWKOAmanagerViewController.h"
 //修改密码
@@ -33,8 +30,7 @@
 #import "RSAuditedModel.h"
 
 
-
-@interface RSHomeViewController ()<RSMenuViewControllerDelegate>
+@interface RSHomeViewController ()
 
 //资讯的数组
 @property (nonatomic,strong)NSMutableArray * informationArray;
@@ -100,19 +96,26 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    self.title = @"首页";
-    UIButton * menuBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
-    [menuBtn setImage:[UIImage imageNamed:@"默认头像"] forState:UIControlStateNormal];
-    [menuBtn addSubview:self.numberLabel];
-    [menuBtn addTarget:(RSMyNavigationViewController *)self.navigationController action:@selector(showMenu) forControlEvents:UIControlEventTouchUpInside];
-        //menuBtn.contentEdgeInsets = UIEdgeInsetsMake(0, -10, 0, 0);
-    UIBarButtonItem * item = [[UIBarButtonItem alloc]initWithCustomView:menuBtn];
-    self.navigationItem.leftBarButtonItem = item;
-    RSMenuViewController * menuVc = (RSMenuViewController *)self.frostedViewController.menuViewController;
-        menuVc.delegate = self;
-       [self reloadInformationData];
-       [self reloadAuditedData];
+   
     
+    
+    // self.title = @"首页";
+//    UIButton * menuBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
+//    [menuBtn setImage:[UIImage imageNamed:@"默认头像"] forState:UIControlStateNormal];
+//    [menuBtn addSubview:self.numberLabel];
+//    [menuBtn addTarget:(RSMyNavigationViewController *)self.navigationController action:@selector(showMenu) forControlEvents:UIControlEventTouchUpInside];
+//        //menuBtn.contentEdgeInsets = UIEdgeInsetsMake(0, -10, 0, 0);
+//    UIBarButtonItem * item = [[UIBarButtonItem alloc]initWithCustomView:menuBtn];
+//    self.navigationItem.leftBarButtonItem = item;
+//
+//
+//    RSMenuViewController * menuVc = (RSMenuViewController *)self.frostedViewController.menuViewController;
+//    menuVc.delegate = self;
+    
+    
+    
+    [self reloadInformationData];
+    [self reloadAuditedData];
     RSWeakself
     self.tableview.mj_header = [MJChiBaoZiHeader headerWithRefreshingBlock:^{
         [weakSelf reloadInformationData];
@@ -193,46 +196,41 @@
 }
 
 
-- (void)didTableViewIndexpath:(NSIndexPath *)indexpath andViewController:(RSMenuViewController *)menVc{
-     [self.frostedViewController hideMenuViewController];
-    if (indexpath.row == 0) {
-        RSPersonalInformationViewController * personalInformationVc = [[RSPersonalInformationViewController alloc]init];
-        [self.navigationController pushViewController:personalInformationVc animated:YES];
-        
-    }else if (indexpath.row == 1) {
-        RSPasswordModificationViewController * passwordModificationVc = [[RSPasswordModificationViewController alloc]init];
-        
-        [self.navigationController pushViewController:passwordModificationVc animated:YES];
-    }else{
-     //清除缓存
-       // NSUInteger bytesCache = [[SDImageCache sharedImageCache] getSize];
-        
-        
-        
-        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        NSString *path = [paths objectAtIndex:0];
-        
-        float MBCache = [self sizeOfDirectory:path];
-        //换算成 MB (注意iOS中的字节之间的换算是1000不是1024)
-         MBCache = MBCache/1000/1000;
-        NSString * text = [NSString stringWithFormat:@"已清理:%0.3lfM",MBCache];
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:text message:nil preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction * actionConfirm = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            //这边是清理缓存
-            //异步清除图片缓存 （磁盘中的）
-            dispatch_async(dispatch_get_global_queue(0, 0), ^{
-                //[[SDImageCache sharedImageCache] clearMemory];
-                [self deleteFileByPath:path];
-            });
-        }];
-        [alert addAction:actionConfirm];
-        if ([UIDevice currentDevice].systemVersion.floatValue >= 13.0) {
-            
-            alert.modalPresentationStyle = UIModalPresentationFullScreen;
-        }
-        [self presentViewController:alert animated:YES completion:nil];
-    }
-}
+//- (void)didTableViewIndexpath:(NSIndexPath *)indexpath andViewController:(RSMenuViewController *)menVc{
+//     [self.frostedViewController hideMenuViewController];
+//    if (indexpath.row == 0) {
+//        RSPersonalInformationViewController * personalInformationVc = [[RSPersonalInformationViewController alloc]init];
+//        [self.navigationController pushViewController:personalInformationVc animated:YES];
+//
+//    }else if (indexpath.row == 1) {
+//        RSPasswordModificationViewController * passwordModificationVc = [[RSPasswordModificationViewController alloc]init];
+//
+//        [self.navigationController pushViewController:passwordModificationVc animated:YES];
+//    }else{
+//     //清除缓存
+//       // NSUInteger bytesCache = [[SDImageCache sharedImageCache] getSize];
+//        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//        NSString *path = [paths objectAtIndex:0];
+//        float MBCache = [self sizeOfDirectory:path];
+//        //换算成 MB (注意iOS中的字节之间的换算是1000不是1024)
+//         MBCache = MBCache/1000/1000;
+//        NSString * text = [NSString stringWithFormat:@"已清理:%0.3lfM",MBCache];
+//        UIAlertController *alert = [UIAlertController alertControllerWithTitle:text message:nil preferredStyle:UIAlertControllerStyleAlert];
+//        UIAlertAction * actionConfirm = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//            //这边是清理缓存
+//            //异步清除图片缓存 （磁盘中的）
+//            dispatch_async(dispatch_get_global_queue(0, 0), ^{
+//                //[[SDImageCache sharedImageCache] clearMemory];
+//                [self deleteFileByPath:path];
+//            });
+//        }];
+//        [alert addAction:actionConfirm];
+//        if ([UIDevice currentDevice].systemVersion.floatValue >= 13.0) {
+//            alert.modalPresentationStyle = UIModalPresentationFullScreen;
+//        }
+//        [self presentViewController:alert animated:YES completion:nil];
+//    }
+//}
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -246,7 +244,6 @@
         }else{
              return self.informationArray.count;
         }
-    
     }else if (section == 1){
         return 1;
     }

@@ -17,6 +17,7 @@ static NSString *const kDefaultNoDateDesc = @"没有数据";
 static NSString *const kDefaultNoNetDesc = @"没有网络";
 static NSString *const kDefaultNoDataImageName = @"暂无任务";
 static NSString *const kDefaultNoNetImageName = @"noNet";
+static NSString *const kDefaultNoWorkImageName = @"编组";
 
 @interface ZZQEmptyView ()
 
@@ -124,9 +125,9 @@ static NSString *const kDefaultNoNetImageName = @"noNet";
     [button setTitleColor:defaultColor forState:UIControlStateNormal];
     [button setTitle:kDefaultBtnTitle forState:UIControlStateNormal];
     [button addTarget:self action:@selector(emptyViewClick) forControlEvents:UIControlEventTouchUpInside];
-    button.layer.cornerRadius = 2.f;
-    button.layer.borderColor = defaultColor.CGColor;
-    button.layer.borderWidth = 1.f;
+//    button.layer.cornerRadius = 2.f;
+//    button.layer.borderColor = defaultColor.CGColor;
+//    button.layer.borderWidth = 1.f;
     _button = button;
 }
 
@@ -139,70 +140,50 @@ static NSString *const kDefaultNoNetImageName = @"noNet";
 
 
 - (void)addSubviews {
-    
     [self addSubview:_label];
     [self addSubview:_detailsLabel];
-
     BOOL hasImage = _imgView.image;
     BOOL hasLabelText = (_label.text.length || _label.attributedText.length);
-    
     ZZQEmptyViewMode mode = self.emptyMode;
-    
     if (mode == ZZQEmptyViewModeNoData) {
-
         [self addSubview:_imgView];
         [self addSubview:_button];
-        
         _imgView.image = hasImage ? _imgView.image : [UIImage imageNamed:kDefaultNoDataImageName];
         _label.text = hasLabelText ? _label.text : kDefaultNoDateDesc;
-        
     } else if (mode == ZZQEmptyViewModeNONet) {
-
         [self addSubview:_imgView];
         [self addSubview:_button];
         _imgView.image = hasImage ? _imgView.image : [UIImage imageNamed:kDefaultNoNetImageName];
         _label.text = hasLabelText ? _label.text : kDefaultNoNetDesc;
-        
     } else if (mode == ZZQEmptyViewModeNoImage) {
-
         [self addSubview:_button];
         _label.text = hasLabelText ? _label.text : kDefaultNoNetDesc;
-
     } else if (mode == ZZQEmptyViewModeNoButton) {
-
         [self addGestureRecognizer:_tapGesture];
         [self addSubview:_imgView];
-        
         _imgView.image = hasImage ? _imgView.image : [UIImage imageNamed:kDefaultNoDataImageName];
         _label.text = hasLabelText ? _label.text : kDefaultNoDateDesc;
-
     } else if (mode == ZZQEmptyViewModeTextOnly) {
-      
         [self addGestureRecognizer:_tapGesture];
         _label.text = hasLabelText ? _label.text : kDefaultNoDateDesc;
-        
+    }else if (mode == ZZQEmptyViewModeWorkOnly){
+        [self addSubview:_imgView];
+        [self addSubview:_button];
+        _imgView.image = hasImage ? _imgView.image : [UIImage imageNamed:kDefaultNoWorkImageName];
+        _label.text = hasLabelText ? _label.text : kDefaultNoDateDesc;
     }
 }
 
-
-
 - (void)makeSubviewsLayout {
-    
     CGSize imageSize = _imgView.image.size;
-    
     if ([self hasImageView]) {
-        
         if ([self.showtype isEqualToString:@"0"]) {
-            
             [_imgView mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.centerX.equalTo(self).offset(-10);
+                make.centerX.equalTo(self).offset(10);
                 make.centerY.equalTo(self.mas_centerY).offset(-imageSize.height/3);
                 make.size.mas_equalTo(imageSize);
             }];
-            
         }else{
-            
-            
             [_imgView mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.centerX.equalTo(self).offset(-40);
                 make.centerY.equalTo(self.mas_centerY).offset(-imageSize.height/3);
@@ -210,32 +191,46 @@ static NSString *const kDefaultNoNetImageName = @"noNet";
             }];
             
         }
-        
-       
     }
-    
     if ([self.showtype isEqualToString:@"0"]) {
-        [_label mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerX.equalTo(self);
-            if ([self hasImageView]) {
-                make.top.equalTo(_imgView.mas_bottom).offset(30);
-            } else {
-                make.centerY.equalTo(self);
-            }
-            make.left.equalTo(self.mas_left).offset(40);
-            make.right.equalTo(self.mas_right).offset(-40);
-        }];
-        
-        
-        [_detailsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerX.equalTo(self);
-            make.left.equalTo(self.mas_left).offset(40);
-            make.right.equalTo(self.mas_right).offset(-40);
-            make.top.equalTo(_label.mas_bottom).offset(20);
-        }];
-        
+        if ([self.workType isEqualToString:@"1"]) {
+            [_label mas_makeConstraints:^(MASConstraintMaker *make) {
+                //make.centerX.equalTo(self);
+                if ([self hasImageView]) {
+                    make.top.equalTo(_imgView.mas_bottom).offset(15.5);
+                } else {
+                    make.centerY.equalTo(self);
+                }
+                make.left.equalTo(self).offset(SCW/2 - 81.5);
+                make.width.mas_equalTo(115);
+            }];
+            _label.textAlignment = NSTextAlignmentLeft;
+            [_detailsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.centerX.equalTo(self);
+                make.left.equalTo(self.mas_left).offset(40);
+                make.right.equalTo(self.mas_right).offset(-40);
+                make.top.equalTo(_label.mas_bottom).offset(20);
+            }];
+            _detailsLabel.hidden = YES;
+        }else{
+            [_label mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.centerX.equalTo(self);
+                if ([self hasImageView]) {
+                    make.top.equalTo(_imgView.mas_bottom).offset(30);
+                } else {
+                    make.centerY.equalTo(self);
+                }
+                make.left.equalTo(self.mas_left).offset(40);
+                make.right.equalTo(self.mas_right).offset(-40);
+            }];
+            [_detailsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.centerX.equalTo(self);
+                make.left.equalTo(self.mas_left).offset(40);
+                make.right.equalTo(self.mas_right).offset(-40);
+                make.top.equalTo(_label.mas_bottom).offset(20);
+            }];
+        }
     }else{
-        
         [_label mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.equalTo(self);
             if ([self hasImageView]) {
@@ -246,30 +241,28 @@ static NSString *const kDefaultNoNetImageName = @"noNet";
             make.left.equalTo(self.mas_left).offset(-5);
             make.right.equalTo(self.mas_right).offset(-40);
         }];
-        
-        
         [_detailsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.equalTo(self);
             make.left.equalTo(self.mas_left).offset(-5);
             make.right.equalTo(self.mas_right).offset(-40);
             make.top.equalTo(_label.mas_bottom).offset(20);
         }];
-        
-        
-        
-        
     }
-    
-  
-    
-   
-    
     if ([self hasButton]) {
-        [_button mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerX.equalTo(self);
-            make.top.equalTo(_detailsLabel.mas_bottom).offset(20);
-            make.size.mas_equalTo(CGSizeMake(120, 42));
-        }];
+        if ([self.workType isEqualToString:@"1"]) {
+            [_button mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.top.mas_equalTo(_label);
+                make.bottom.mas_equalTo(_label);
+                make.left.equalTo(_label.mas_right).offset(-5);
+                make.width.mas_equalTo(63);
+            }];
+        }else{
+            [_button mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.centerX.equalTo(self);
+                make.top.equalTo(_detailsLabel.mas_bottom).offset(20);
+                make.size.mas_equalTo(CGSizeMake(120, 42));
+            }];
+        }
     }
 }
 

@@ -14,5 +14,5 @@
 @property (nonatomic,strong)NSMutableArray * images;
 
 
-- (void)showMenu;
+//- (void)showMenu;
 @end

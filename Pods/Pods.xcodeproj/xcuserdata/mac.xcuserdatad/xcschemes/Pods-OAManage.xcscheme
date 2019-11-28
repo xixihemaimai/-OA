@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "323FA5A3613CA77BEE1A78B941CBB5D8"
+               BlueprintIdentifier = "AE9398F2A7B855F12DADB8E49BE28311"
                BlueprintName = "Pods-OAManage"
                ReferencedContainer = "container:Pods.xcodeproj"
                BuildableName = "libPods-OAManage.a">

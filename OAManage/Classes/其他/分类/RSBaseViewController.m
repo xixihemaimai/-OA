@@ -12,6 +12,7 @@
 #import "RSMenuViewController.h"
 
 #import "RSLoginViewController.h"
+#import "RSMailDetailViewController.h"
 @interface RSBaseViewController ()
 
 @end
@@ -51,6 +52,7 @@
         _emptyView.hidden = NO;
         _emptyView.button.hidden = YES;
         _emptyView.showtype = @"0";
+        
         [_emptyView.button setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
     }
     return _emptyView;
@@ -74,15 +76,12 @@
       self.automaticallyAdjustsScrollViewInsets = NO;
     }
     [self.navigationController.navigationBar setBackgroundColor:[UIColor clearColor]];
-    if ([self isKindOfClass:[RSHomeViewController class]]) {
-        self.frostedViewController.panGestureEnabled = YES;
-    }else{
-        self.frostedViewController.panGestureEnabled = NO;
-    }
     
-    
-    
-    
+//    if ([self isKindOfClass:[RSHomeViewController class]]) {
+//        self.frostedViewController.panGestureEnabled = YES;
+//    }else{
+//        self.frostedViewController.panGestureEnabled = NO;
+//    }
     //这边要获取用户信息
     NSUserDefaults * user = [NSUserDefaults standardUserDefaults];
     //已经登录
@@ -98,11 +97,22 @@
         }
     }
         [self.view addSubview:self.tableview];
+    
+    
+    if ([self isKindOfClass:[RSMenuViewController class]] || [self isKindOfClass:[RSMailDetailViewController class]]) {
+        self.tableview.sd_layout
+        .leftSpaceToView(self.view, 0)
+        .rightSpaceToView(self.view, 0)
+        .topSpaceToView(self.view, 0)
+        .bottomSpaceToView(self.view, 0);
+        
+    }else{
         self.tableview.sd_layout
         .leftSpaceToView(self.view, 0)
         .rightSpaceToView(self.view, 0)
         .topSpaceToView(self.navigationController.navigationBar, 0)
         .bottomSpaceToView(self.view, 0);
+    }
     [self.view addSubview:self.emptyView];
 }
 
@@ -526,6 +536,117 @@
   //  [IQKeyboardManager sharedManager].enable = YES;
 }
 
+#pragma mark -- 将数组拆分成固定长度
+ 
+/**
+ *  将数组拆分成固定长度的子数组
+ *
+ *  @param array 需要拆分的数组
+ *
+ *  @param subSize 指定长度
+ *
+ */
+- (NSArray *)splitArray: (NSArray *)array withSubSize : (int)subSize{
+  //数组将被拆分成指定长度数组的个数
+  unsigned long count = array.count % subSize == 0 ? (array.count / subSize) : (array.count / subSize + 1);
+  //用来保存指定长度数组的可变数组对象
+  NSMutableArray *arr = [[NSMutableArray alloc] init];
+  //利用总个数进行循环，将指定长度的元素加入数组
+  for (int i = 0; i < count; i ++) {
+    //数组下标
+    int index = i * subSize;
+    //保存拆分的固定长度的数组元素的可变数组
+    NSMutableArray *arr1 = [[NSMutableArray alloc] init];
+    //移除子数组的所有元素
+    [arr1 removeAllObjects];
+    int j = index;
+    //将数组下标乘以1、2、3，得到拆分时数组的最大下标值，但最大不能超过数组的总大小
+    while (j < subSize*(i + 1) && j < array.count) {
+      [arr1 addObject:[array objectAtIndex:j]];
+      j += 1;
+    }
+    //将子数组添加到保存子数组的数组中
+    [arr addObject:[arr1 copy]];
+  }
+  return [arr copy];
+}
 
+
+
+- (NSMutableArray *)changeArrayRule:(NSArray *)contentarray{
+    NSMutableArray *dateMutablearray = [NSMutableArray array];
+    NSMutableArray *array = [NSMutableArray arrayWithArray:contentarray];
+    for (int i = 0; i < array.count; i ++) {
+        //NSString *string = array[i];
+        RSMailModel * taobaoInventoryDetmodel = array[i];
+        NSMutableArray *tempArray = [NSMutableArray array];
+        [tempArray addObject:taobaoInventoryDetmodel];
+        for (int j = i+1;j < array.count; j ++) {
+            RSMailModel * taobaoInventoryDetmodel1 = array[j];
+            if([taobaoInventoryDetmodel1.department isEqualToString:taobaoInventoryDetmodel.department]){
+                [tempArray addObject:taobaoInventoryDetmodel1];
+                [array removeObjectAtIndex:j];
+                j = j - 1;
+            }
+        }
+        [dateMutablearray addObject:tempArray];
+    }
+    return dateMutablearray;
+}
+
+
+//根据时间来获取星期几
+- (NSString*)weekDayStr:(NSString*)format{
+    NSString *weekDayStr = nil;
+    NSDateComponents *comps = [[NSDateComponents alloc] init];
+    if(format.length>=10) {
+        NSString *nowString = [format substringToIndex:10];
+        NSArray *array = [nowString componentsSeparatedByString:@"-"];
+        if(array.count==0) {
+            array = [nowString componentsSeparatedByString:@"/"];
+        }
+        if(array.count>=3) {
+            NSInteger year = [[array objectAtIndex:0] integerValue];
+            NSInteger month = [[array objectAtIndex:1] integerValue];
+            NSInteger day = [[array objectAtIndex:2] integerValue];
+            [comps setYear:year];
+            [comps setMonth:month];
+            [comps setDay:day];
+        }
+    }
+    //日历
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    //获取传入date
+    NSDate *_date = [gregorian dateFromComponents:comps];
+    NSDateComponents *weekdayComponents = [gregorian components:NSCalendarUnitWeekday fromDate:_date];
+    NSInteger week = [weekdayComponents weekday];
+    switch(week) {
+        case 1:
+            weekDayStr =@"星期日";
+            break;
+        case 2:
+            weekDayStr =@"星期一";
+            break;
+        case 3:
+            weekDayStr =@"星期二";
+            break;
+        case 4:
+            weekDayStr =@"星期三";
+            break;
+        case 5:
+            weekDayStr =@"星期四";
+            break;
+        case 6:
+            weekDayStr =@"星期五";
+            break;
+        case 7:
+            weekDayStr =@"星期六";
+            break;
+        default:
+            weekDayStr =@"";
+            break;
+    }
+    return weekDayStr;
+}
 
 @end

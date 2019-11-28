@@ -99,6 +99,13 @@
 //根据路径删除文件
 -(BOOL)deleteFileByPath:(NSString *)path;
 
+//对数组进行拆分的方法
+- (NSArray *)splitArray: (NSArray *)array withSubSize : (int)subSize;
+//将不同的部门的数组进行数组的重组
+- (NSMutableArray *)changeArrayRule:(NSArray *)contentarray;
+
+//根据时间来获取星期几
+- (NSString*)weekDayStr:(NSString*)format;
 @end
 
 

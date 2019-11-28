@@ -75,6 +75,8 @@
 #import <MJExtension.h>
 #import <UIImageView+WebCache.h>
 #import <JXTAlertManager/JXTAlertManagerHeader.h>
+#import <TZImagePickerController/TZImagePickerController.h>
+#import <FMDatabase.h>
 
 //117.29.162.206
 //测试
@@ -159,6 +161,9 @@ xsi:type=\"q0:Array\">" \
 #define URL_AUDITFLOW @"auditflow"
 //11. 登出账户接口（主接口: LoginWebService方法名logout）
 #define URL_LOGOUT @"logout"
+//12. 加载通讯录 （主接口: WorkFlowWebService方法名loadMailList）
+#define URL_LOADMAILLIST @"loadMailList"
+
 
 //第一种参数类型{ ukey:'U_SA_BCASX0136' }
 #define URL_YIGODATA_PUBLICKKEY(A) [NSString stringWithFormat:@"{ ukey:'%@' }",A]

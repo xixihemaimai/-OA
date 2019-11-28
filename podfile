@@ -11,9 +11,12 @@ pod 'SVProgressHUD'
 pod 'Masonry'
 pod 'MJExtension'
 
+pod 'UMCCommon'
+pod 'UMCAnalytics'
 
 pod 'SDWebImage'
 pod 'XLPhotoBrowser+CoderXL'
 pod 'JXTAlertManager'
-
+pod 'TZImagePickerController'
+pod 'FMDB'
 end
