@@ -62,6 +62,10 @@
 #import "MXActionSheet.h"
 #import "MiPushSDK.h"
 
+//新增
+#import "RSNewCustomLabel.h"
+#import "RSNewCustomImageView.h"
+
 
 
 //第三方框架
