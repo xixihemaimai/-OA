@@ -139,7 +139,6 @@
         }
         [self.tableview reloadData];
     };
-    
     network.failure = ^(NSDictionary *dict) {
             if (self.auditedArray.count > 0 ) {
                 self.emptyView.hidden = YES;

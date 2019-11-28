@@ -10,6 +10,8 @@
 		0412B79121A6840400761547 /* RSMenuHeaderFootView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0412B79021A6840300761547 /* RSMenuHeaderFootView.m */; };
 		041930DF238E133800DD2508 /* RSApprovalProcessSecondModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 041930DE238E133800DD2508 /* RSApprovalProcessSecondModel.m */; };
 		041930E2238E162700DD2508 /* RSApprovalProcessCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 041930E1238E162700DD2508 /* RSApprovalProcessCell.m */; };
+		041930E5238FA4AE00DD2508 /* RSNewCustomLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 041930E4238FA4AE00DD2508 /* RSNewCustomLabel.m */; };
+		041930E8238FAB9400DD2508 /* RSNewCustomImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 041930E7238FAB9400DD2508 /* RSNewCustomImageView.m */; };
 		041E070E237D2B9D00766441 /* 欢迎页.png in Resources */ = {isa = PBXBuildFile; fileRef = 041E070D237D2B9D00766441 /* 欢迎页.png */; };
 		041E0711237E588800766441 /* RSLaunchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 041E0710237E588800766441 /* RSLaunchCell.m */; };
 		041E0714237E983700766441 /* RSLaunchReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 041E0713237E983700766441 /* RSLaunchReusableView.m */; };
@@ -117,6 +119,10 @@
 		041930DE238E133800DD2508 /* RSApprovalProcessSecondModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSApprovalProcessSecondModel.m; sourceTree = "<group>"; };
 		041930E0238E162700DD2508 /* RSApprovalProcessCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSApprovalProcessCell.h; sourceTree = "<group>"; };
 		041930E1238E162700DD2508 /* RSApprovalProcessCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSApprovalProcessCell.m; sourceTree = "<group>"; };
+		041930E3238FA4AE00DD2508 /* RSNewCustomLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSNewCustomLabel.h; sourceTree = "<group>"; };
+		041930E4238FA4AE00DD2508 /* RSNewCustomLabel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSNewCustomLabel.m; sourceTree = "<group>"; };
+		041930E6238FAB9400DD2508 /* RSNewCustomImageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSNewCustomImageView.h; sourceTree = "<group>"; };
+		041930E7238FAB9400DD2508 /* RSNewCustomImageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSNewCustomImageView.m; sourceTree = "<group>"; };
 		041E070D237D2B9D00766441 /* 欢迎页.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "欢迎页.png"; sourceTree = "<group>"; };
 		041E070F237E588800766441 /* RSLaunchCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSLaunchCell.h; sourceTree = "<group>"; };
 		041E0710237E588800766441 /* RSLaunchCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSLaunchCell.m; sourceTree = "<group>"; };
@@ -517,6 +523,10 @@
 				0436F6B82178282500B0D6C8 /* RSMyNavigationViewController.m */,
 				04D6CED02190329000B35A51 /* RSBaseViewController.h */,
 				04D6CED12190329000B35A51 /* RSBaseViewController.m */,
+				041930E3238FA4AE00DD2508 /* RSNewCustomLabel.h */,
+				041930E4238FA4AE00DD2508 /* RSNewCustomLabel.m */,
+				041930E6238FAB9400DD2508 /* RSNewCustomImageView.h */,
+				041930E7238FAB9400DD2508 /* RSNewCustomImageView.m */,
 			);
 			path = "分类";
 			sourceTree = "<group>";
@@ -1027,6 +1037,7 @@
 				041E07522387B38C00766441 /* SHESelectTable.m in Sources */,
 				04A6F159219528D800D15F58 /* RSAuditedViewController.m in Sources */,
 				04D6CEE32191754000B35A51 /* SCNavigationMenuTitleCell.m in Sources */,
+				041930E5238FA4AE00DD2508 /* RSNewCustomLabel.m in Sources */,
 				04A6F15C219538F100D15F58 /* RSApprovalProcessViewController.m in Sources */,
 				04D09F3221B6678B0078D7DA /* RSNoticeViewController.m in Sources */,
 				04E6A34721927A1A007A44F2 /* RSCustomMenuCell.m in Sources */,
@@ -1035,6 +1046,7 @@
 				04E6A344219189B7007A44F2 /* UIView+Frame.m in Sources */,
 				0436F6B72178280000B0D6C8 /* RSMenuViewController.m in Sources */,
 				04C0474621787DA00006B8D4 /* RSShenHeViewController.m in Sources */,
+				041930E8238FAB9400DD2508 /* RSNewCustomImageView.m in Sources */,
 				04FF49DF21A3F04B00C4A2C2 /* RSRoleModel.m in Sources */,
 				04A6F17E219592D900D15F58 /* MyMD5.m in Sources */,
 				041E072F2384DF3800766441 /* RSServiceCell.m in Sources */,
