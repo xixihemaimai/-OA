@@ -212,20 +212,28 @@
 }
 
 
-- (void)handleCellTapAction
+- (void)handleCellTapAction:(UITapGestureRecognizer *)tap
 {
+    CGPoint  point = [tap locationInView:self];
+    NSLog(@"---------------------%lf-----------%lf",point.x,point.y);
+    NSInteger row = 0;
+    if (point.y > 0 && point.y < 18.f) {
+        row = 0;
+    }else{
+        row = 1;
+    }
     int count = (int)[self.dataSource numberOfRowsForRollingNoticeView:self];
     if (_currentIndex > count - 1) {
         _currentIndex = 0;
     }
-    if ([self.delegate respondsToSelector:@selector(didClickRollingNoticeView:forIndex:)]) {
-        [self.delegate didClickRollingNoticeView:self forIndex:_currentIndex];
+    if ([self.delegate respondsToSelector:@selector(didClickRollingNoticeView:forIndex:andRow:)]) {
+        [self.delegate didClickRollingNoticeView:self forIndex:_currentIndex andRow:row];
     }
 }
 
 - (UITapGestureRecognizer *)createTapGesture
 {
-   return [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(handleCellTapAction)];
+    return [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(handleCellTapAction:)];
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(nullable UIEvent *)event{}

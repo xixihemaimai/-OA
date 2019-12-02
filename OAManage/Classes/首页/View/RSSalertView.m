@@ -117,6 +117,7 @@
     [deleteBtn setTitle:@"删除" forState:UIControlStateNormal];
     [deleteBtn setTitleColor:[UIColor colorWithHexColorStr:@"#6666666"] forState:UIControlStateNormal];
     deleteBtn.frame = CGRectMake(0, self.bounds.size.height - 47, self.bounds.size.width/2 - 0.5, 47);
+    [deleteBtn addTarget:self action:@selector(deleteSalertAction:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:deleteBtn];
     
     
@@ -130,6 +131,7 @@
     UIButton * sureBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [sureBtn setTitle:@"确定" forState:UIControlStateNormal];
     [sureBtn setTitleColor:[UIColor colorWithHexColorStr:@"#6666666"] forState:UIControlStateNormal];
+    [sureBtn addTarget:self action:@selector(sureSalertAction:) forControlEvents:UIControlEventTouchUpInside];
     sureBtn.frame = CGRectMake(CGRectGetMaxX(midView.frame), self.bounds.size.height - 47, self.bounds.size.width/2 - 0.5, 47);
     [self addSubview:sureBtn];
 }
@@ -280,6 +282,43 @@
     }];
 }
 
+
+//删除
+- (void)deleteSalertAction:(UIButton *)deleteBtn{
+    if ([self.addType isEqualToString:@"add"]) {
+        //添加
+        [self closeView];
+    }else{
+        //删除
+        
+    }
+}
+
+//确定
+- (void)sureSalertAction:(UIButton *)sureBtn{
+    
+    NSString *temp = [_contentTextview.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    temp = [self delSpaceAndNewline:temp];
+    if ([temp length] < 1){
+        [SVProgressHUD showErrorWithStatus:@"请输入具体内容"];
+        return;
+    }
+    
+    NSString *temp1 = [_resultTextview.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+       temp1 = [self delSpaceAndNewline:temp1];
+    if ([temp1 length] < 1) {
+        [SVProgressHUD showErrorWithStatus:@"请输入输出结果的内容"];
+        return;
+    }
+    
+    if ([self.delegate respondsToSelector:@selector(backSalertViewDataWithTitle:andChoiceTitle:andSelect:andContentTextview:andResultTextview:andIndexpath:andAddType:)]) {
+//        if ([self.addType isEqualToString:@"add"]) {
+//             [self.delegate backSalertViewDataWithTitle:_titleLabel.text andChoiceTitle:_choiceBtn.currentTitle andSelect:self.select andContentTextview:_contentTextview.text andResultTextview:_resultTextview.text andIndexpath:nil andAddType:self.addType];
+//        }else{
+             [self.delegate backSalertViewDataWithTitle:_titleLabel.text andChoiceTitle:_choiceBtn.currentTitle andSelect:self.select andContentTextview:_contentTextview.text andResultTextview:_resultTextview.text andIndexpath:self.indexpath andAddType:self.addType];
+//        }
+    }
+}
 
 - (void)dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];

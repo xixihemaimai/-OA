@@ -61,31 +61,15 @@
 static NSString * APPROVALHEADERVIEW = @"APPROVALHEADERVIEW";
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    
     self.title = @"填写日志";
-    
-    
-    
+    self.tableview.contentInset = UIEdgeInsetsMake(0, 0, 50, 0);
     self.emptyView.hidden = YES;
-    
-    
-    
-    
-    
-    
     for (int i = 0 ; i < 5; i++) {
         NSMutableDictionary * dict = [NSMutableDictionary dictionary];
         RSApprovalProcessSecondModel * approvalprocessmodel = [RSApprovalProcessSecondModel statusWithDict:dict];
         [self.approvalArray addObject:approvalprocessmodel];
     }
-    
     [self.tableview reloadData];
-    
-    
-    
-    
-    
 //    self.title = @"审批";
 //    CGFloat H = 0.0;
 //    if (IS_IPHONE) {
@@ -334,6 +318,27 @@ static NSString * APPROVALHEADERVIEW = @"APPROVALHEADERVIEW";
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     //NSLog(@"======-----------------------%ld-----------%ld",indexPath.section,indexPath.row);
     
+    //要进去带进去的，是那个类型，具体内容，重要程度，重要程度的位置，输出结果，那个组，哪一个行，
+    [self.salertview showView];
+    switch (indexPath.section) {
+        case 0:
+            self.salertview.titleLabel.text = @"今日计划";
+            break;
+        case 1:
+            self.salertview.titleLabel.text = @"明日计划";
+            break;
+        case 2:
+            self.salertview.titleLabel.text = @"今日未完成工作";
+            break;
+        default:
+            self.salertview.titleLabel.text = @"今日计划";
+            break;
+    }
+    
+    
+    
+    
+    
 }
 
 
@@ -354,6 +359,8 @@ static NSString * APPROVALHEADERVIEW = @"APPROVALHEADERVIEW";
             break;
     }
     [self.salertview.choiceBtn setTitle:@"低" forState:UIControlStateNormal];
+    self.salertview.addType = @"add";
+   // self.salertview.indexpath = [NSIndexPath indexPathForRow: inSection:addBtn.tag];
     self.salertview.select = 0;
     
 }

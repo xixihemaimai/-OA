@@ -124,7 +124,7 @@ static NSString * SERVICEHEADERVIEWID = @"SERVICEHEADERVIEWID";
     noticeView.delegate = self;
     noticeView.backgroundColor = [UIColor colorWithHexColorStr:@"#ffffff"];
     [noticeView registerClass:[RSGyRollingCell class] forCellReuseIdentifier:@"RSGyRollingCell"];
-       [noticeView reloadDataAndStartRoll];
+    [noticeView reloadDataAndStartRoll];
     [headerView addSubview:noticeView];
     
     noticeView.sd_layout
@@ -303,7 +303,6 @@ static NSString * SERVICEHEADERVIEWID = @"SERVICEHEADERVIEWID";
 }
 
 
-
 - (NSInteger)numberOfRowsForRollingNoticeView:(GYRollingNoticeView *)rollingView
 {
     return _arr0.count;
@@ -312,7 +311,7 @@ static NSString * SERVICEHEADERVIEWID = @"SERVICEHEADERVIEWID";
 - (__kindof GYNoticeViewCell *)rollingNoticeView:(GYRollingNoticeView *)rollingView cellAtIndex:(NSUInteger)index
 {
     RSGyRollingCell * cell = [rollingView dequeueReusableCellWithIdentifier:@"RSGyRollingCell"];
-    NSDictionary *dic = _arr0[index];
+    NSDictionary * dic = _arr0[index];
     cell.tagImageView.image = [UIImage imageNamed:[dic[@"arr"] firstObject][@"tag"]];
     cell.titelLabel.text = [dic[@"arr"] firstObject][@"title"];
     cell.secondImageView.image = [UIImage imageNamed:[dic[@"arr"] lastObject][@"tag"]];
@@ -320,9 +319,11 @@ static NSString * SERVICEHEADERVIEWID = @"SERVICEHEADERVIEWID";
     return cell;
 }
 
-- (void)didClickRollingNoticeView:(GYRollingNoticeView *)rollingView forIndex:(NSUInteger)index
+- (void)didClickRollingNoticeView:(GYRollingNoticeView *)rollingView forIndex:(NSUInteger)index andRow:(NSInteger)row
 {
-    NSLog(@"点击的index: %lu", (unsigned long)index);
+    
+    
+    NSLog(@"点击的第几组: %lu 第几行:%lu", (unsigned long)index,(unsigned long)row);
 }
 
 

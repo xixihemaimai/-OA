@@ -18,7 +18,7 @@
 
 @protocol GYRollingNoticeViewDelegate <NSObject>
 @optional
-- (void)didClickRollingNoticeView:(GYRollingNoticeView *)rollingView forIndex:(NSUInteger)index;
+- (void)didClickRollingNoticeView:(GYRollingNoticeView *)rollingView forIndex:(NSUInteger)index andRow:(NSInteger)row;
 
 @end
 

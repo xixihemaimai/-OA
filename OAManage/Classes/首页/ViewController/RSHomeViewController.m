@@ -232,7 +232,6 @@
 //    }
 //}
 
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 3;
 }
@@ -314,7 +313,6 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }
-    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -377,8 +375,6 @@
     }
 }
 
-
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (IS_IPHONE) {
         if (indexPath.section == 0) {
@@ -405,11 +401,9 @@
             }else{
                 return (120 / SCW ) * SCW;
             }
-            
         }
     }
 }
-
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [self.tableview deselectRowAtIndexPath:indexPath animated:YES];
@@ -421,7 +415,6 @@
         wkOaVc.type = @"0";
         wkOaVc.Currenttitle = informationmodel.title;
         [self.navigationController pushViewController:wkOaVc animated:YES];
-        
     }else if (indexPath.section == 1){
         RSShenHeViewController * shenHeVc = [[RSShenHeViewController alloc]init];
         [self.navigationController pushViewController:shenHeVc animated:YES];
@@ -440,12 +433,9 @@
     }
 }
 
-
 - (void)dealloc{
     [[NSNotificationCenter defaultCenter]removeObserver:self];
 }
-
-
 
 /*
 #pragma mark - Navigation

@@ -54,6 +54,7 @@
         //具体内容
         UILabel * concreteContentLabel = [[UILabel alloc]init];
         concreteContentLabel.font = [UIFont systemFontOfSize:14];
+        concreteContentLabel.textColor = [UIColor colorWithHexColorStr:@"#666666"];
         concreteContentLabel.numberOfLines = 0;
         [showview addSubview:concreteContentLabel];
         self.concreteContentLabel = concreteContentLabel;
@@ -78,12 +79,14 @@
         UILabel * informationLabel = [[UILabel alloc]init];
         informationLabel.font = [UIFont systemFontOfSize:14];
         informationLabel.numberOfLines = 0;
+        informationLabel.textColor = [UIColor colorWithHexColorStr:@"#666666"];
         [showview addSubview:informationLabel];
         self.informationLabel = informationLabel;
         
         //输出结果
         UILabel * outResultLabel = [[UILabel alloc]init];
         outResultLabel.font = [UIFont systemFontOfSize:14];
+        outResultLabel.textColor = [UIColor colorWithHexColorStr:@"#666666"];
         outResultLabel.numberOfLines = 0;
         [showview addSubview:outResultLabel];
         self.outResultLabel = outResultLabel;
