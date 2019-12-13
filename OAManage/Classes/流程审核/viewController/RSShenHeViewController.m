@@ -206,18 +206,11 @@
     NSIndexPath * indexpath = [NSIndexPath indexPathForRow:0 inSection:0];
     RSShenHeFristCell * cell = [self.leftTableview cellForRowAtIndexPath:indexpath];
     cell.shenHeLabel.backgroundColor = [UIColor colorWithHexColorStr:@"#ffffff"];
-   
-    
-     [self reloadShenHeNewData];
+    [self reloadShenHeNewData];
     self.emptyView.hidden = NO;
-    
     self.rightTableview.mj_header = [MJChiBaoZiHeader headerWithRefreshingTarget:self refreshingAction:@selector(reloadShenHeRightNewData)];
-    
     self.rightTableview.mj_footer = [MJChiBaoZiFooter footerWithRefreshingTarget:self refreshingAction:@selector(reloadShenHeRightMoreData)];
-
-    
 }
-
 
 - (void)reloadShenHeRightNewData{
      self.pageNum = 1;
@@ -227,7 +220,6 @@
 - (void)reloadShenHeRightMoreData{
     [self reloadRightShenHeData];
 }
-
 
 - (void)reloadShenHeNewData{
     NSUserDefaults * user = [NSUserDefaults standardUserDefaults];
@@ -304,7 +296,6 @@
         }
         [self.rightTableview reloadData];
     };
-    
     network.failure = ^(NSDictionary *dict) {
             if (self.rightArray.count > 0) {
                 self.currentemptyView.hidden = YES;
@@ -315,10 +306,6 @@
             [self.rightTableview.mj_footer endRefreshing];
     };
 }
-
-
-
-
 #pragma mark - SCNavigationMenuViewDelegate
 - (void)navigationMenuView:(SCNavigationMenuView *)navigationMenuView didSelectItemAtIndex:(NSUInteger)index{
     //SCMenuItem * item =(SCMenuItem *)[navigationMenuView.navigationMenuItems objectAtIndex:index];
@@ -345,17 +332,14 @@
             self.selectType = @"1";
             break;
     }
-    
     self.pageNum = 1;
     //[self.rightTableview.mj_header beginRefreshing];
     [self reloadShenHeNewData];
-    
 }
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
 }
-
-
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (tableView == self.leftTableview) {
@@ -389,9 +373,6 @@
     }
 }
 
-
-
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (tableView == self.leftTableview) {
         static NSString * CELLID = @"SHEID";
@@ -401,20 +382,16 @@
         }
         RSShenHeModel * shenhemodel = self.leftArray[indexPath.row];
         cell.shenHeLabel.text = [NSString stringWithFormat:@"%@",shenhemodel.billName];
-        
         if (shenhemodel.flowCount >= 99) {
             cell.countLabel.text = [NSString stringWithFormat:@"99"];
         }else{
             cell.countLabel.text = [NSString stringWithFormat:@"%ld",(long)shenhemodel.flowCount];
         }
-        
-        
         if (shenhemodel.flowCount == 0) {
             cell.countLabel.hidden = YES;
         }else{
             cell.countLabel.hidden = NO;
         }
-        
         if (indexPath.row == 0) {
             cell.shenHeImageView.hidden = NO;
             cell.shenHeLabel.textAlignment = NSTextAlignmentCenter;
@@ -454,11 +431,6 @@
     }
 }
 
-
-
-
-
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (tableView == self.leftTableview) {
         //[self.leftTableview deselectRowAtIndexPath:indexPath animated:YES];
@@ -490,9 +462,6 @@
         [self.navigationController pushViewController:wkOaVc animated:YES];
     }
 }
-
-
-
 
 - (void)dealloc{
     [[NSNotificationCenter defaultCenter]removeObserver:self];
