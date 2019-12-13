@@ -201,14 +201,15 @@ static NSString * LAUNCHREUSABFOOTCELLID = @"LAUNCHREUSABFOOTCELLID";
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    NSLog(@"+++++++++++++++================%ld",indexPath.row);
-    
-    
-    
-    
-    
-    
-    
+    NSMutableArray * array = self.array[indexPath.section];
+    NSDictionary * dict = array[indexPath.row];
+    NSString * billkey = [dict objectForKey:@"key"];
+    NSLog(@"=========================%@",billkey);
+    RSWKOAmanagerViewController * wkOaManagerVc = [[RSWKOAmanagerViewController alloc]init];
+    wkOaManagerVc.type = @"2";
+    wkOaManagerVc.title = [dict objectForKey:@"title"];
+    wkOaManagerVc.billKey = billkey;
+    [self.navigationController pushViewController:wkOaManagerVc animated:YES];
 }
 
 

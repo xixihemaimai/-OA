@@ -41,6 +41,12 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>瑞石OA需要访问你的媒体资料库</string>
+	<key>NSCameraUsageDescription</key>
+	<string>瑞石OA需要用的你的相机</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>瑞石OA需要访问你的相册</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

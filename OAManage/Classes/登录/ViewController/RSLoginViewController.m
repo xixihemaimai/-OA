@@ -141,7 +141,50 @@ typedef void(^Obtain)(BOOL isValue);
     loginBtn.enabled = YES;
     
     _loginBtn = loginBtn;
-    if (IS_IPHONE) {
+    
+    
+    
+    UILabel *label = [[UILabel alloc]init];
+     label.text = @"登录即代表阅读并同意";
+     CGRect disCountrect = [label.text boundingRectWithSize:CGSizeMake(MAXFLOAT, 20)options:NSStringDrawingUsesLineFragmentOrigin
+                                          attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]} context:nil];
+     label.font = [UIFont systemFontOfSize:14];
+     label.textAlignment = NSTextAlignmentLeft;
+     label.textColor = [UIColor colorWithHexColorStr:@"#333333"];
+     [loginView addSubview:label];
+     
+     UIButton * userProtocolBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+     [userProtocolBtn setTitle:@"用户协议指引" forState:UIControlStateNormal];
+     CGRect userProtocol = [userProtocolBtn.currentTitle boundingRectWithSize:CGSizeMake(MAXFLOAT, 20)options:NSStringDrawingUsesLineFragmentOrigin
+                                          attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]} context:nil];
+     userProtocolBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+     userProtocolBtn.tag = 0;
+     [userProtocolBtn addTarget:self action:@selector(jumpInformationAction:) forControlEvents:UIControlEventTouchUpInside];
+     [userProtocolBtn setTitleColor:[UIColor colorWithHexColorStr:@"#3385ff"] forState:UIControlStateNormal];
+     [loginView addSubview:userProtocolBtn];
+     
+     UILabel * andLabel = [[UILabel alloc]init];
+     andLabel.text = @"和";
+     andLabel.textAlignment = NSTextAlignmentCenter;
+     andLabel.textColor = [UIColor colorWithHexColorStr:@"#333333"];
+     CGRect andLabelRect = [andLabel.text boundingRectWithSize:CGSizeMake(MAXFLOAT, 20)options:NSStringDrawingUsesLineFragmentOrigin
+                                                                   attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]} context:nil];
+     andLabel.font = [UIFont systemFontOfSize:14];
+     [loginView addSubview:andLabel];
+     
+     UIButton * userPrivacyBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+     [userPrivacyBtn setTitle:@"隐私政策指引" forState:UIControlStateNormal];
+     userPrivacyBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+     CGRect userPrivacy = [userPrivacyBtn.currentTitle boundingRectWithSize:CGSizeMake(MAXFLOAT, 20)options:NSStringDrawingUsesLineFragmentOrigin
+                                                                   attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]} context:nil];
+     userPrivacyBtn.tag = 1;
+     [userPrivacyBtn setTitleColor:[UIColor colorWithHexColorStr:@"#3385ff"] forState:UIControlStateNormal];
+     [loginView addSubview:userPrivacyBtn];
+    
+    
+    
+    
+//    if (IS_IPHONE) {
         loginView.sd_layout
         .centerYEqualToView(self.view)
         .centerXEqualToView(self.view)
@@ -183,110 +226,139 @@ typedef void(^Obtain)(BOOL isValue);
         .leftEqualToView(roleView)
         .rightEqualToView(roleView)
         .heightIs(39);
+    
+        label.sd_layout
+        .leftSpaceToView(loginView, 12)
+        .topSpaceToView(loginBtn, 10)
+        .widthIs(disCountrect.size.width)
+        .heightIs(20);
         
-    }else{
         
-        if (DEVICES_IS_PRO_12_9) {
-
-            loginView.sd_layout
-            .centerYEqualToView(self.view)
-            .centerXEqualToView(self.view)
-            .widthRatioToView(self.view, 0.9)
-            .autoHeightRatio(0);
-            
-            LoginImageView.sd_layout
-            .centerXEqualToView(loginView)
-            .widthIs(180 * SCALE_TO_PRO)
-            .heightEqualToWidth()
-            .topSpaceToView(loginView, 10);
-            
-            
-            
-            userNameField.sd_layout
-            .centerXEqualToView(loginView)
-            .topSpaceToView(LoginImageView, 46)
-            .leftSpaceToView(loginView, 54)
-            .rightSpaceToView(loginView, 54)
-            .heightIs(60 * SCALE_TO_PRO);
-            
-            
-            passwordField.sd_layout
-            .centerXEqualToView(loginView)
-            .topSpaceToView(userNameField, 18)
-            .leftEqualToView(userNameField)
-            .rightEqualToView(userNameField)
-            .heightIs(60 * SCALE_TO_PRO);
-            
-            
-            
-            roleView.sd_layout
-            .centerXEqualToView(loginView)
-            .topSpaceToView(passwordField, 18)
-            .leftEqualToView(passwordField)
-            .rightEqualToView(passwordField)
-            .heightIs(60 * SCALE_TO_PRO);
-            
-
-            loginBtn.sd_layout
-            .centerXEqualToView(loginView)
-            .topSpaceToView(roleView, 36)
-            .leftEqualToView(roleView)
-            .rightEqualToView(roleView)
-            .heightIs(60 * SCALE_TO_PRO);
-            
-        }else{
-            
-            loginView.sd_layout
-            .centerYEqualToView(self.view)
-            .centerXEqualToView(self.view)
-            .widthRatioToView(self.view, 0.9)
-            .autoHeightRatio(0);
-            
-            LoginImageView.sd_layout
-            .centerXEqualToView(loginView)
-            .widthIs((180 / SCW)  * SCW)
-            .heightEqualToWidth()
-            .topSpaceToView(loginView, 10);
-            
-            
-            
-            userNameField.sd_layout
-            .centerXEqualToView(loginView)
-            .topSpaceToView(LoginImageView, 46)
-            .leftSpaceToView(loginView, 54)
-            .rightSpaceToView(loginView, 54)
-            .heightIs((60 / SCW)  * SCW);
-            
-            
-            
-            passwordField.sd_layout
-            .centerXEqualToView(loginView)
-            .topSpaceToView(userNameField, 18)
-            .leftEqualToView(userNameField)
-            .rightEqualToView(userNameField)
-            .heightIs((60 / SCW)  * SCW);
-            
-            
-            roleView.sd_layout
-            .centerXEqualToView(loginView)
-            .topSpaceToView(passwordField, 18)
-            .leftEqualToView(passwordField)
-            .rightEqualToView(passwordField)
-            .heightIs((60 / SCW)  * SCW);
-            
-            loginBtn.sd_layout
-            .centerXEqualToView(loginView)
-            .topSpaceToView(roleView, 36)
-            .leftEqualToView(roleView)
-            .rightEqualToView(roleView)
-            .heightIs((60 / SCW)  * SCW);
-        }
-    }
+         userProtocolBtn.sd_layout
+    .topEqualToView(label)
+    .bottomEqualToView(label)
+    .leftSpaceToView(label, 0)
+    .widthIs(userProtocol.size.width);
+    
+    andLabel.sd_layout
+    .leftSpaceToView(userProtocolBtn, 0)
+    .topEqualToView(userProtocolBtn)
+    .bottomEqualToView(userProtocolBtn)
+    .widthIs(andLabelRect.size.width);
+    
+    
+    userPrivacyBtn.sd_layout
+    .topEqualToView(andLabel)
+    .bottomEqualToView(andLabel)
+    .leftSpaceToView(andLabel,  0)
+    .widthIs(userPrivacy.size.width);
+    
+    
+    
+//    }else{
+//
+//        if (DEVICES_IS_PRO_12_9) {
+//
+//            loginView.sd_layout
+//            .centerYEqualToView(self.view)
+//            .centerXEqualToView(self.view)
+//            .widthRatioToView(self.view, 0.9)
+//            .autoHeightRatio(0);
+//
+//            LoginImageView.sd_layout
+//            .centerXEqualToView(loginView)
+//            .widthIs(180 * SCALE_TO_PRO)
+//            .heightEqualToWidth()
+//            .topSpaceToView(loginView, 10);
+//
+//
+//
+//            userNameField.sd_layout
+//            .centerXEqualToView(loginView)
+//            .topSpaceToView(LoginImageView, 46)
+//            .leftSpaceToView(loginView, 54)
+//            .rightSpaceToView(loginView, 54)
+//            .heightIs(60 * SCALE_TO_PRO);
+//
+//
+//            passwordField.sd_layout
+//            .centerXEqualToView(loginView)
+//            .topSpaceToView(userNameField, 18)
+//            .leftEqualToView(userNameField)
+//            .rightEqualToView(userNameField)
+//            .heightIs(60 * SCALE_TO_PRO);
+//
+//
+//
+//            roleView.sd_layout
+//            .centerXEqualToView(loginView)
+//            .topSpaceToView(passwordField, 18)
+//            .leftEqualToView(passwordField)
+//            .rightEqualToView(passwordField)
+//            .heightIs(60 * SCALE_TO_PRO);
+//
+//
+//            loginBtn.sd_layout
+//            .centerXEqualToView(loginView)
+//            .topSpaceToView(roleView, 36)
+//            .leftEqualToView(roleView)
+//            .rightEqualToView(roleView)
+//            .heightIs(60 * SCALE_TO_PRO);
+//
+//        }else{
+//
+//            loginView.sd_layout
+//            .centerYEqualToView(self.view)
+//            .centerXEqualToView(self.view)
+//            .widthRatioToView(self.view, 0.9)
+//            .autoHeightRatio(0);
+//
+//            LoginImageView.sd_layout
+//            .centerXEqualToView(loginView)
+//            .widthIs((180 / SCW)  * SCW)
+//            .heightEqualToWidth()
+//            .topSpaceToView(loginView, 10);
+//
+//
+//
+//            userNameField.sd_layout
+//            .centerXEqualToView(loginView)
+//            .topSpaceToView(LoginImageView, 46)
+//            .leftSpaceToView(loginView, 54)
+//            .rightSpaceToView(loginView, 54)
+//            .heightIs((60 / SCW)  * SCW);
+//
+//
+//
+//            passwordField.sd_layout
+//            .centerXEqualToView(loginView)
+//            .topSpaceToView(userNameField, 18)
+//            .leftEqualToView(userNameField)
+//            .rightEqualToView(userNameField)
+//            .heightIs((60 / SCW)  * SCW);
+//
+//
+//            roleView.sd_layout
+//            .centerXEqualToView(loginView)
+//            .topSpaceToView(passwordField, 18)
+//            .leftEqualToView(passwordField)
+//            .rightEqualToView(passwordField)
+//            .heightIs((60 / SCW)  * SCW);
+//
+//            loginBtn.sd_layout
+//            .centerXEqualToView(loginView)
+//            .topSpaceToView(roleView, 36)
+//            .leftEqualToView(roleView)
+//            .rightEqualToView(roleView)
+//            .heightIs((60 / SCW)  * SCW);
+//        }
+//    }
     loginBtn.layer.cornerRadius = 20;
     loginBtn.layer.masksToBounds = YES;
 
     [loginView layoutSubviews];
-    [loginView setupAutoHeightWithBottomView:loginBtn bottomMargin:0];
+    [loginView setupAutoHeightWithBottomView:label bottomMargin:0];
+
 }
 
 

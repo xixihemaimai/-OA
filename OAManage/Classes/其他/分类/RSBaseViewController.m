@@ -649,4 +649,41 @@
     return weekDayStr;
 }
 
+-(NSString *)UIImageToBase64Str:(UIImage *) image
+{
+NSData *data = UIImageJPEGRepresentation(image, 1.0f);
+NSString *encodedImageStr = [data base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithCarriageReturn];
+return encodedImageStr;
+}
+
+
+- (NSString *)fileToToBase64Data:(NSData *)data{
+    NSString *encodedImageStr = [data base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithCarriageReturn];
+    return encodedImageStr;
+}
+
+
+- (NSString *)typeForImageData:(NSData *)data {
+    uint8_t c;
+    [data getBytes:&c length:1];
+    
+    switch (c) {
+        case 0xFF:
+            return @".jpeg";
+        case 0x89:
+            return @".png";
+        case 0x47:
+            return @".gif";
+        case 0x49:
+        case 0x4D:
+            return @".tiff";
+    }
+    return nil;
+}
+
+
+
+
+
+
 @end

@@ -48,6 +48,12 @@ static NSString * SERVICEHEADERVIEWID = @"SERVICEHEADERVIEWID";
     self.tableview.contentInset = UIEdgeInsetsMake(0, 0, 60, 0);
     
     
+    
+    
+    
+    
+    
+    
     UIButton * menuBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
     [menuBtn setImage:[UIImage imageNamed:@"通讯录复制"] forState:UIControlStateNormal];
     [menuBtn addTarget:self action:@selector(showPhoneContentMenu:) forControlEvents:UIControlEventTouchUpInside];
@@ -358,6 +364,7 @@ static NSString * SERVICEHEADERVIEWID = @"SERVICEHEADERVIEWID";
         
     }
 }
+
 
 
 

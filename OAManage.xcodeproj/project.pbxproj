@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		040476D523A0D2DA00B4D528 /* iCloudManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 040476D423A0D2DA00B4D528 /* iCloudManager.m */; };
+		040476D823A0D33900B4D528 /* ZZDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 040476D723A0D33800B4D528 /* ZZDocument.m */; };
 		0412B79121A6840400761547 /* RSMenuHeaderFootView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0412B79021A6840300761547 /* RSMenuHeaderFootView.m */; };
 		041930DF238E133800DD2508 /* RSApprovalProcessSecondModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 041930DE238E133800DD2508 /* RSApprovalProcessSecondModel.m */; };
 		041930E2238E162700DD2508 /* RSApprovalProcessCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 041930E1238E162700DD2508 /* RSApprovalProcessCell.m */; };
@@ -113,6 +115,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		040476D323A0D2DA00B4D528 /* iCloudManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iCloudManager.h; sourceTree = "<group>"; };
+		040476D423A0D2DA00B4D528 /* iCloudManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iCloudManager.m; sourceTree = "<group>"; };
+		040476D623A0D33800B4D528 /* ZZDocument.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZZDocument.h; sourceTree = "<group>"; };
+		040476D723A0D33800B4D528 /* ZZDocument.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZZDocument.m; sourceTree = "<group>"; };
+		040476D923A1291300B4D528 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
+		040476DB23A12BB300B4D528 /* libiconv.2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.2.tbd; path = usr/lib/libiconv.2.tbd; sourceTree = SDKROOT; };
 		0412B78F21A6840300761547 /* RSMenuHeaderFootView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSMenuHeaderFootView.h; sourceTree = "<group>"; };
 		0412B79021A6840300761547 /* RSMenuHeaderFootView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSMenuHeaderFootView.m; sourceTree = "<group>"; };
 		041930DD238E133800DD2508 /* RSApprovalProcessSecondModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSApprovalProcessSecondModel.h; sourceTree = "<group>"; };
@@ -582,6 +590,10 @@
 				041E07412386247F00766441 /* RSOALocalDB.m */,
 				041E0743238625B600766441 /* RSOACreatFile.h */,
 				041E0744238625B600766441 /* RSOACreatFile.m */,
+				040476D323A0D2DA00B4D528 /* iCloudManager.h */,
+				040476D423A0D2DA00B4D528 /* iCloudManager.m */,
+				040476D623A0D33800B4D528 /* ZZDocument.h */,
+				040476D723A0D33800B4D528 /* ZZDocument.m */,
 			);
 			path = "工具类";
 			sourceTree = "<group>";
@@ -850,6 +862,8 @@
 		9003A5D94784D936DD044D8B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				040476DB23A12BB300B4D528 /* libiconv.2.tbd */,
+				040476D923A1291300B4D528 /* libiconv.tbd */,
 				04215DA0237AAA7C001EFE11 /* libsqlite3.tbd */,
 				04C1D93921C63FE500384F98 /* CoreTelephony.framework */,
 				04C1D93721C63FD600384F98 /* CFNetwork.framework */,
@@ -1029,6 +1043,7 @@
 				04D6CEDB21914B2100B35A51 /* MJChiBaoZiHeader.m in Sources */,
 				04CA3FBD219AC85C009C2D33 /* RSUserModel.m in Sources */,
 				041E0714237E983700766441 /* RSLaunchReusableView.m in Sources */,
+				040476D523A0D2DA00B4D528 /* iCloudManager.m in Sources */,
 				0436F6892178198300B0D6C8 /* ViewController.m in Sources */,
 				041E07562387CD8E00766441 /* RSNewAuditedCell.m in Sources */,
 				041E071723823E7900766441 /* RSLaunchFootReusableView.m in Sources */,
@@ -1040,6 +1055,7 @@
 				041930E5238FA4AE00DD2508 /* RSNewCustomLabel.m in Sources */,
 				04A6F15C219538F100D15F58 /* RSApprovalProcessViewController.m in Sources */,
 				04D09F3221B6678B0078D7DA /* RSNoticeViewController.m in Sources */,
+				040476D823A0D33900B4D528 /* ZZDocument.m in Sources */,
 				04E6A34721927A1A007A44F2 /* RSCustomMenuCell.m in Sources */,
 				041E07482387874100766441 /* RSSalertView.m in Sources */,
 				0436F68F2178198300B0D6C8 /* OAManage.xcdatamodeld in Sources */,

@@ -17,7 +17,7 @@
 #import "AppDelegate.h"
 #import "RSLoginViewController.h"
 
-@interface RSWKOAmanagerViewController ()<WKNavigationDelegate,UINavigationControllerDelegate,WKScriptMessageHandler,QLPreviewControllerDelegate,QLPreviewControllerDataSource>
+@interface RSWKOAmanagerViewController ()<WKNavigationDelegate,UINavigationControllerDelegate,WKScriptMessageHandler,QLPreviewControllerDelegate,QLPreviewControllerDataSource,TZImagePickerControllerDelegate,UIDocumentPickerDelegate>
 
 @property (nonatomic,strong)RSViewProgressLine * progressLineview;
 
@@ -31,14 +31,27 @@
 
 @end
 
-
 @implementation RSWKOAmanagerViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
+    if ([[[UIDevice currentDevice]systemVersion]intValue ] >= 9.0) {
+        NSArray * types =@[WKWebsiteDataTypeMemoryCache,WKWebsiteDataTypeDiskCache]; // 9.0之后才有的
+        NSSet *websiteDataTypes = [NSSet setWithArray:types];
+        NSDate *dateFrom = [NSDate dateWithTimeIntervalSince1970:0];
+        [[WKWebsiteDataStore defaultDataStore] removeDataOfTypes:websiteDataTypes modifiedSince:dateFrom completionHandler:^{
+        }];
+    }else{
+        NSString *libraryPath = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory,NSUserDomainMask,YES) objectAtIndex:0];
+        NSString *cookiesFolderPath = [libraryPath stringByAppendingString:@"/Cookies"];
+        NSLog(@"%@", cookiesFolderPath);
+        NSError *errors;
+        [[NSFileManager defaultManager] removeItemAtPath:cookiesFolderPath error:&errors];
+    }
     self.tableview.hidden = YES;
     self.emptyView.hidden = YES;
     if ([self.type isEqualToString:@"0"]) {
         self.title = self.Currenttitle;
+    }else if ([self.type isEqualToString:@"2"]){
     }else{
         self.title = @"审批";
     }
@@ -56,6 +69,8 @@
     [userContent addScriptMessageHandler:self name:@"reload"];
     [userContent addScriptMessageHandler:self name:@"Submission"];
     [userContent addScriptMessageHandler:self name:@"Enclosure"];
+    [userContent addScriptMessageHandler:self name:@"annexImgClick"];
+    [userContent addScriptMessageHandler:self name:@"annexFileClick"];
     
     config.userContentController = userContent;
     WKWebView * webview = [[WKWebView alloc]initWithFrame:CGRectMake(0, 1, self.htmlView.bounds.size.width, self.htmlView.bounds.size.height) configuration:config];
@@ -68,8 +83,9 @@
     NSString * stoneUrlStr = @"";
     if ([self.type isEqualToString:@"0"]) {
         stoneUrlStr =[NSString stringWithFormat:@"%@",self.URL];
+    }else if ([self.type isEqualToString:@"2"]){
+        stoneUrlStr = [NSString stringWithFormat:@"%@?billKey=%@&jiamikey=%@&appLoginToken=%@&type=0",URL_H5FQ_IOS,self.billKey,aes,self.usermodel.appLoginToken];
     }else{
-        //117.29.162.206:8089
         stoneUrlStr =[NSString stringWithFormat:@"%@?billId=%ld&billKey=%@&aesKey=%@&appLoginToken=%@&workItemId=%ld&username=%@&userdepartment=%@&usertime=%@&type=0&version=%lf",URL_H5_IOS,(long)self.billId,self.billKey,aes,self.usermodel.appLoginToken,(long)self.workItemId,self.creatorName,self.deptName,self.usertime,self.version];
     }
     if([[[UIDevice currentDevice] systemVersion] floatValue] >= 9.0){
@@ -109,45 +125,83 @@
         [[NSNotificationCenter defaultCenter]postNotificationName:@"reLoadCurrentViewData" object:nil];
         [self.navigationController popViewControllerAnimated:YES];
     }else if ([message.name isEqualToString:@"Submission"]){
-        // NSLog(@"----------------%@",message.body);
         [self Logout];
     }else if ([message.name isEqualToString:@"Enclosure"]){
         [self jumpEnclosureTempStr:message.body];
-    }else{
-        
-        //self.webView evaluateJavaScript:<#(nonnull NSString *)#> completionHandler:<#^(id _Nullable, NSError * _Nullable error)completionHandler#>
-        
-        
-        
-        
-        
-        
+    }else if ([message.name isEqualToString:@"annexImgClick"]){
+        [self selectPicture];
+    }else if ([message.name isEqualToString:@"annexFileClick"]){
+        [self selectFile];
     }
 }
+//选择相册图片
+- (void)selectPicture{
+    TZImagePickerController * tzimagepicker = [[TZImagePickerController alloc]initWithMaxImagesCount:5 delegate:self];
+    tzimagepicker.allowTakeVideo = NO;
+    tzimagepicker.allowTakePicture = YES;
+    NSMutableArray * imageArray = [NSMutableArray array];
+    [tzimagepicker setDidFinishPickingPhotosHandle:^(NSArray<UIImage *> *photos, NSArray *assets, BOOL isSelectOriginalPhoto) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^
+                       {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                for (int i=0; i<photos.count; i++)
+                {
+                    UIImage * tempImg = photos[i];
+                    NSString * str = [self UIImageToBase64Str:tempImg];
+                    NSData * data = UIImageJPEGRepresentation(tempImg, 1.0f);
+                    NSString * format = [self typeForImageData:data];
+                    NSMutableDictionary * dict = [NSMutableDictionary dictionary];
+                    [dict setValue:str forKey:@"content"];
+                    [dict setValue:format forKey:@"format"];
+                    [imageArray addObject:dict];
+                }
+                for (int i = 0; i < imageArray.count; i++) {
+                    NSMutableDictionary * dict = imageArray[i];
+                    NSString * imageStr = [dict objectForKey:@"content"];
+                    NSString * format = [dict objectForKey:@"format"];
+                    NSString * newImageStr = [NSString stringWithFormat:@"IOSReceiveAttachment('%@/%@')",format,imageStr];
+                    [self.webView evaluateJavaScript:newImageStr completionHandler:^(id _Nullable response, NSError * _Nullable error) {
+                    }];
+                }
+            });
+        });
+    }];
+    if ([UIDevice currentDevice].systemVersion.floatValue >= 13.0) {
+        tzimagepicker.modalPresentationStyle = UIModalPresentationFullScreen;
+    }
+    [self presentViewController:tzimagepicker animated:YES completion:nil];
+}
+//选择icloud文件
+- (void)selectFile{
+    NSArray *documentTypes = @[@"public.content", @"public.text", @"public.source-code ", @"public.image", @"public.audiovisual-content", @"com.adobe.pdf", @"com.apple.keynote.key", @"com.microsoft.word.doc", @"com.microsoft.excel.xls", @"com.microsoft.powerpoint.ppt"];
+    UIDocumentPickerViewController *documentPickerViewController = [[UIDocumentPickerViewController alloc] initWithDocumentTypes:documentTypes
+                                                                                                                          inMode:UIDocumentPickerModeOpen];
+    documentPickerViewController.delegate = self;
+    [self presentViewController:documentPickerViewController animated:YES completion:nil];
+}
 
-/**
- TZImagePickerController * tzimagepicker = [[TZImagePickerController alloc]initWithMaxImagesCount:1 delegate:self];
- tzimagepicker.allowTakeVideo = NO;
- tzimagepicker.allowTakePicture = YES;
- [tzimagepicker setDidFinishPickingPhotosHandle:^(NSArray<UIImage *> *photos, NSArray *assets, BOOL isSelectOriginalPhoto) {
- dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^
- {
- for (int i=0; i<photos.count; i++)
- {
- UIImage * tempImg = photos[i];
- dispatch_async(dispatch_get_main_queue(), ^{
- [weakSelf reloadVideoAndPictureNewData:@"picture" andImage:tempImg];
- });
- }
- });
- }];
- if ([UIDevice currentDevice].systemVersion.floatValue >= 13.0) {
- 
- tzimagepicker.modalPresentationStyle = UIModalPresentationFullScreen;
- }
- [self presentViewController:tzimagepicker animated:YES completion:nil];*/
-
-
+#pragma mark - UIDocumentPickerDelegate
+- (void)documentPicker:(UIDocumentPickerViewController *)controller didPickDocumentAtURL:(NSURL *)url {
+    NSArray *array = [[url absoluteString] componentsSeparatedByString:@"/"];
+    NSString * fileName = [array lastObject];
+    fileName = [fileName stringByRemovingPercentEncoding];
+    if ([iCloudManager iCloudEnable]) {
+        [iCloudManager downloadWithDocumentURL:url callBack:^(id obj) {
+            NSData * data = obj;
+            NSString * fileStr = [self fileToToBase64Data:data];
+            NSString * format = [NSString string];
+            NSRange rage = [fileName rangeOfString:@"." options:NSBackwardsSearch];// NSBackwardsSearch 表示最后的一个 // 去掉options表示从第一个开始
+            if (rage.location != NSNotFound) {
+                format = [fileName substringFromIndex:rage.location];
+            }
+            //NSRange range = [fileName rangeOfString:@"."];//匹配得到的下标
+            // NSString * format = [fileName substringFromIndex:range.location];
+            NSString * newImageStr = [NSString stringWithFormat:@"IOSReceiveAttachment('%@/%@')",format,fileStr];
+            [self.webView evaluateJavaScript:newImageStr completionHandler:^(id _Nullable response, NSError * _Nullable error) {
+            }];
+        }];
+    }
+}
 
 - (void)Logout{
     [JXTAlertView showToastViewWithTitle:@"登录已失效"
@@ -167,8 +221,6 @@
         appdelegate.window.rootViewController = loginVc;
     }];
 }
-
-
 //判断文件是否已经在沙盒中存在
 -(BOOL) isFileExist:(NSString *)fileName
 {
@@ -179,7 +231,6 @@
     BOOL result = [fileManager fileExistsAtPath:filePath];
     return result;
 }
-
 
 - (void)jumpEnclosureTempStr:(NSString *)tempStr{
     QLPreviewController *previewController =[[QLPreviewController alloc]init];
@@ -203,7 +254,6 @@
         NSURL *url = [documentsDirectoryURL URLByAppendingPathComponent:fileName];
         self.fileURL = url;
         if ([UIDevice currentDevice].systemVersion.floatValue >= 13.0) {
-            
             previewController.modalPresentationStyle = UIModalPresentationFullScreen;
         }
         [self presentViewController:previewController animated:YES completion:nil];
@@ -220,7 +270,6 @@
             [SVProgressHUD dismiss];
             self.fileURL = filePath;
             if ([UIDevice currentDevice].systemVersion.floatValue >= 13.0) {
-                
                 previewController.modalPresentationStyle = UIModalPresentationFullScreen;
             }
             [self presentViewController:previewController animated:YES completion:nil];
@@ -234,7 +283,6 @@
 -(NSInteger)numberOfPreviewItemsInPreviewController:(QLPreviewController *)controller{
     return 1;
 }
-
 //QuickLook代理
 -(id<QLPreviewItem>)previewController:(QLPreviewController *)controller previewItemAtIndex:(NSInteger)index{
     return self.fileURL;
@@ -245,8 +293,6 @@
     [myNavi.images removeLastObject];
 }
 
-
-
 - (void)jumpPageIndex:(NSInteger)billId{
     RSApprovalProcessViewController * approvalProcessVc = [[RSApprovalProcessViewController alloc]init];
     approvalProcessVc.billId = billId;
@@ -254,31 +300,24 @@
     
 }
 
-
 - (void)dealloc{
     [_webView.configuration.userContentController removeScriptMessageHandlerForName:@"tixing"];
     [_webView.configuration.userContentController removeScriptMessageHandlerForName:@"reload"];
     [_webView.configuration.userContentController removeScriptMessageHandlerForName:@"Submission"];
     [_webView.configuration.userContentController removeScriptMessageHandlerForName:@"Enclosure"];
+    [_webView.configuration.userContentController removeScriptMessageHandlerForName:@"annexImgClick"];
+    [_webView.configuration.userContentController removeScriptMessageHandlerForName:@"annexFileClick"];
 }
-
 //开始加载
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation{
     [self.progressLineview startLoadingAnimation];
 }
-
-
 //网页导航加载完毕
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation{
     [self.progressLineview endLoadingAnimation];
 }
-
 //网页由于某些原因加载失败
 - (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(WKNavigation *)navigation{
     [self.progressLineview endLoadingAnimation];
 }
-
-
-
-
 @end

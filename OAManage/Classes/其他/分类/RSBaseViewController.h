@@ -106,6 +106,15 @@
 
 //根据时间来获取星期几
 - (NSString*)weekDayStr:(NSString*)format;
+
+
+//图片转字符串
+-(NSString *)UIImageToBase64Str:(UIImage *) image;
+//二进制转字符串
+- (NSString *)fileToToBase64Data:(NSData *)data;
+//获取图片的格式
+- (NSString *)typeForImageData:(NSData *)data;
+
 @end
 
 

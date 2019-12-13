@@ -61,6 +61,9 @@
 #import "FSAES128.h"
 #import "MXActionSheet.h"
 #import "MiPushSDK.h"
+#import "iCloudManager.h"
+#import "ZZDocument.h"
+
 
 //新增
 #import "RSNewCustomLabel.h"
@@ -91,6 +94,10 @@
 
 //H5测试
 #define URL_H5_IOS  @"http://117.29.162.206:8089/Yigo1.6/Approval.html"
+
+//H5发起流程测试
+#define URL_H5FQ_IOS @"http://117.29.162.206:8089/Yigo1.6/Application.html"
+
 
 //H5正式
 //#define URL_H5_IOS   @"http://121.204.136.234:48000/Yigo1.6/Approval.html"
