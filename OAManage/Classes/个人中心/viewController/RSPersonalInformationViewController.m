@@ -26,15 +26,13 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.hidden = NO;
-    
 }
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.frostedViewController.panGestureEnabled = NO;
+    //self.frostedViewController.panGestureEnabled = NO;
     self.title = @"个人信息";
+    self.view.backgroundColor = [UIColor whiteColor];
     self.emptyView.hidden = YES;
     self.fristArray = @[@"昵称",@"性别"];
     self.secondArray = @[@"所在部门",@"所在职位"];

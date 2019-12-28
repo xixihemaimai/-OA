@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "RSInformationModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface RSServiceCell : UITableViewCell
+
+@property (nonatomic,strong)RSInformationModel * informationmodel;
 
 @end
 

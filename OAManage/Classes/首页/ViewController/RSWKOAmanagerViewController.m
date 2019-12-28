@@ -16,6 +16,7 @@
 #import <QuickLook/QuickLook.h>
 #import "AppDelegate.h"
 #import "RSLoginViewController.h"
+#import "QLPreviewItemCustom.h"
 
 @interface RSWKOAmanagerViewController ()<WKNavigationDelegate,UINavigationControllerDelegate,WKScriptMessageHandler,QLPreviewControllerDelegate,QLPreviewControllerDataSource,TZImagePickerControllerDelegate,UIDocumentPickerDelegate>
 
@@ -29,9 +30,17 @@
 
 @property (nonatomic,strong) WKUserContentController * userContent;
 
+
+@property (nonatomic,strong)NSString * fileNewName;
+
 @end
 
 @implementation RSWKOAmanagerViewController
+
+- (void)viewWillAppear:(BOOL)animated{
+    self.navigationController.navigationBar.hidden = NO;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     if ([[[UIDevice currentDevice]systemVersion]intValue ] >= 9.0) {
@@ -52,8 +61,12 @@
     if ([self.type isEqualToString:@"0"]) {
         self.title = self.Currenttitle;
     }else if ([self.type isEqualToString:@"2"]){
-    }else{
-        self.title = @"审批";
+        
+    }else if ([self.type isEqualToString:@"5"]){
+        self.title = @"隐私政策";
+    }
+    else{
+        //self.title = @"审批";
     }
     self.view.backgroundColor = [UIColor colorWithHexColorStr:@"#f9f9f9"];
     self.htmlView = [[UIView alloc]init];
@@ -84,9 +97,15 @@
     if ([self.type isEqualToString:@"0"]) {
         stoneUrlStr =[NSString stringWithFormat:@"%@",self.URL];
     }else if ([self.type isEqualToString:@"2"]){
-        stoneUrlStr = [NSString stringWithFormat:@"%@?billKey=%@&jiamikey=%@&appLoginToken=%@&type=0",URL_H5FQ_IOS,self.billKey,aes,self.usermodel.appLoginToken];
-    }else{
-        stoneUrlStr =[NSString stringWithFormat:@"%@?billId=%ld&billKey=%@&aesKey=%@&appLoginToken=%@&workItemId=%ld&username=%@&userdepartment=%@&usertime=%@&type=0&version=%lf",URL_H5_IOS,(long)self.billId,self.billKey,aes,self.usermodel.appLoginToken,(long)self.workItemId,self.creatorName,self.deptName,self.usertime,self.version];
+        stoneUrlStr = [NSString stringWithFormat:@"%@?billKey=%@&jiamikey=%@&appLoginToken=%@&type=0&billId=%ld&isaddProcess=%@&deptName=%@&empName=%@&deptId=%ld&empId=%ld",URL_H5FQ_IOS,self.billKey,aes,self.usermodel.appLoginToken,self.billId,self.isaddProcess,self.usermodel.deptName,self.usermodel.empName,self.usermodel.deptId,self.usermodel.empId];
+    }else if ([self.type isEqualToString:@"3"]){
+        stoneUrlStr = self.URL;
+    }else if ([self.type isEqualToString:@"5"]){
+        
+        stoneUrlStr = @"http://121.204.136.234:48000/Yigo1.6/agreement.html";
+    }
+    else{
+        stoneUrlStr =[NSString stringWithFormat:@"%@?billId=%ld&billKey=%@&aesKey=%@&appLoginToken=%@&workItemId=%ld&username=%@&userdepartment=%@&usertime=%@&type=0&version=%lf&isApproval=%@",URL_H5_IOS,(long)self.billId,self.billKey,aes,self.usermodel.appLoginToken,(long)self.workItemId,self.creatorName,self.deptName,self.usertime,self.version,self.isApproval];
     }
     if([[[UIDevice currentDevice] systemVersion] floatValue] >= 9.0){
         stoneUrlStr = [stoneUrlStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
@@ -177,6 +196,10 @@
     UIDocumentPickerViewController *documentPickerViewController = [[UIDocumentPickerViewController alloc] initWithDocumentTypes:documentTypes
                                                                                                                           inMode:UIDocumentPickerModeOpen];
     documentPickerViewController.delegate = self;
+    
+    if ([UIDevice currentDevice].systemVersion.floatValue >= 13.0) {
+        documentPickerViewController.modalPresentationStyle = UIModalPresentationFullScreen;
+    }
     [self presentViewController:documentPickerViewController animated:YES completion:nil];
 }
 
@@ -203,6 +226,19 @@
     }
 }
 
+//图片的取消
+- (void)tz_imagePickerControllerDidCancel:(TZImagePickerController *)picker{
+    
+    [self.webView evaluateJavaScript:@"annexNOSelect()" completionHandler:nil];
+}
+
+//文件取消
+- (void)documentPickerWasCancelled:(UIDocumentPickerViewController *)controller{
+    
+    [self.webView evaluateJavaScript:@"annexNOSelect()" completionHandler:nil];
+}
+
+
 - (void)Logout{
     [JXTAlertView showToastViewWithTitle:@"登录已失效"
                                  message:@"你的账号在其他手机上面登录"
@@ -221,19 +257,21 @@
         appdelegate.window.rootViewController = loginVc;
     }];
 }
-//判断文件是否已经在沙盒中存在
--(BOOL) isFileExist:(NSString *)fileName
-{
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *path = [paths objectAtIndex:0];
-    NSString *filePath = [path stringByAppendingPathComponent:fileName];
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    BOOL result = [fileManager fileExistsAtPath:filePath];
-    return result;
-}
+
 
 - (void)jumpEnclosureTempStr:(NSString *)tempStr{
     QLPreviewController *previewController =[[QLPreviewController alloc]init];
+    
+    NSRange rage = [tempStr rangeOfString:@"/" options:NSBackwardsSearch];// NSBackwardsSearch 表示最后的一个 // 去掉options表示从第一个开始
+           if (rage.location != NSNotFound) {
+               //NSLog(@"%ld",rage.location);
+               self.fileNewName = [tempStr substringFromIndex:rage.location+1];
+               //NSLog(@"%@",tempStr);
+           }
+    
+    
+    
+    
     previewController.delegate=self;
     previewController.dataSource=self;
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
@@ -285,19 +323,33 @@
 }
 //QuickLook代理
 -(id<QLPreviewItem>)previewController:(QLPreviewController *)controller previewItemAtIndex:(NSInteger)index{
-    return self.fileURL;
+    //return self.fileURL;
+    
+    QLPreviewItemCustom * previewItem = [QLPreviewItemCustom new];
+    
+//    RSSystemModel * systemmodel = self.systemArray[index];
+//
+//
+//
+    previewItem.previewItemTitle = self.fileNewName;
+    
+    
+    
+    previewItem.previewItemURL = self.fileURL;
+    return previewItem;
+    
+    
 }
 
-- (void)previewControllerDidDismiss:(QLPreviewController *)controller{
-    RSMyNavigationViewController * myNavi = (RSMyNavigationViewController *)self.frostedViewController.contentViewController;
-    [myNavi.images removeLastObject];
-}
+//- (void)previewControllerDidDismiss:(QLPreviewController *)controller{
+////    RSMyNavigationViewController * myNavi = (RSMyNavigationViewController *)self.frostedViewController.contentViewController;
+////    [myNavi.images removeLastObject];
+//}
 
 - (void)jumpPageIndex:(NSInteger)billId{
     RSApprovalProcessViewController * approvalProcessVc = [[RSApprovalProcessViewController alloc]init];
     approvalProcessVc.billId = billId;
     [self.navigationController pushViewController:approvalProcessVc animated:YES];
-    
 }
 
 - (void)dealloc{

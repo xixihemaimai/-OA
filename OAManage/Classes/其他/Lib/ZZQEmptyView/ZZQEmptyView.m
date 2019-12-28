@@ -179,7 +179,8 @@ static NSString *const kDefaultNoWorkImageName = @"编组";
     if ([self hasImageView]) {
         if ([self.showtype isEqualToString:@"0"]) {
             [_imgView mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.centerX.equalTo(self).offset(10);
+                //make.centerX.equalTo(self).offset(10);
+                make.centerX.mas_equalTo(self);
                 make.centerY.equalTo(self.mas_centerY).offset(-imageSize.height/3);
                 make.size.mas_equalTo(imageSize);
             }];

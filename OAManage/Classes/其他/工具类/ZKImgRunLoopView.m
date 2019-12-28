@@ -21,7 +21,7 @@
 /** 定时器*/
 @property (nonatomic,strong) NSTimer *timer;
 /** 回调block*/
-@property (nonatomic,copy) void (^block)();
+@property (nonatomic,copy) void (^block)(void);
 @property (nonatomic,strong) UIImage *placeholderImg;
 @property (nonatomic,assign) float oldContentOffsetX;
 @property (nonatomic,assign) NSInteger imgCount;

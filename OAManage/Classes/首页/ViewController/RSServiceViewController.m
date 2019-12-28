@@ -21,22 +21,48 @@
 #import "RSGyRollingCell.h"
 //工作日志
 #import "RSAuditedViewController.h"
-//更多公告
+//更多资讯
 #import "RSNoticeViewController.h"
+//体系文件
+#import "RSSystemViewController.h"
+//更多公告
+#import "RSNoticeMoreViewController.h"
+
+#import "RSBannerModel.h"
+
+#import "RSNoticeModel.h"
+
+
+
 
 @interface RSServiceViewController ()<GYRollingNoticeViewDelegate,GYRollingNoticeViewDataSource>
-{
-    NSArray *_arr0;
-    
-    GYRollingNoticeView * _noticeView;
-}
+
+@property (nonatomic,strong)ZKImgRunLoopView * kimageRun;
+
+@property (nonatomic,strong)NSMutableArray * contentArray;
+
+@property (nonatomic,strong)GYRollingNoticeView * noticeView;
+
+@property (nonatomic,strong)NSMutableArray * informationArray;
+
 
 @end
 
 @implementation RSServiceViewController
 
+- (NSMutableArray *)contentArray{
+    if (!_contentArray) {
+        _contentArray = [NSMutableArray array];
+    }
+    return _contentArray;
+}
 
-
+- (NSMutableArray *)informationArray{
+    if (!_informationArray) {
+        _informationArray = [NSMutableArray array];
+    }
+    return _informationArray;
+}
 
 static NSString * SERVICEHEADERVIEWID = @"SERVICEHEADERVIEWID";
 - (void)viewDidLoad {
@@ -49,11 +75,6 @@ static NSString * SERVICEHEADERVIEWID = @"SERVICEHEADERVIEWID";
     
     
     
-    
-    
-    
-    
-    
     UIButton * menuBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
     [menuBtn setImage:[UIImage imageNamed:@"通讯录复制"] forState:UIControlStateNormal];
     [menuBtn addTarget:self action:@selector(showPhoneContentMenu:) forControlEvents:UIControlEventTouchUpInside];
@@ -62,46 +83,113 @@ static NSString * SERVICEHEADERVIEWID = @"SERVICEHEADERVIEWID";
         self.navigationItem.leftBarButtonItem = item;
     
     
-    _arr0 = @[@{@"arr": @[@{@"tag": @"奖惩", @"title": @"关于某一位优秀员工的奖励…"}, @{@"tag": @"通知", @"title": @"关于海西OA重新升级相关通知…"}]},@{@"arr": @[@{@"tag": @"其他", @"title": @"三星中端新机改名，全面屏火力全开"}, @{@"tag": @"通知", @"title": @"关于海西OA重新升级相关通知…"}]},@{@"arr": @[@{@"tag": @"奖惩", @"title": @"关于某一位优秀员工的奖励…"}, @{@"tag": @"通知", @"title": @"关于海西OA重新升级相关通知…"}]}];
-       
-       
-  
-    NSMutableArray * array = [NSMutableArray arrayWithObjects:@"123",@"456",@"789",@"qwe",@"nba",@"cba",@"cuba",@"wnba",@"wcba",@"nb",nil];
-    NSArray * array1 = [self splitArray:array withSubSize:2];
     
-    NSLog(@"++++++++++++++++++%@",array1);
+ 
     
     
-    NSString * day = [self weekDayStr:@"2019-11-22"];
     
-    NSLog(@"-------------------%@",day);
+    
+               
+    NSMutableDictionary * dict = [NSMutableDictionary dictionary];
+    NSMutableArray * array = [NSMutableArray array];
+    RSNoticeModel * noticemodel = [[RSNoticeModel alloc]init];
+    [array addObject:noticemodel];
+    [dict setValue:array forKey:@"arr"];
+    [self.contentArray addObject:dict];
+    
+    
+
+    //NSString * day = [self weekDayStr:@"2019-12-16"];
+    
+    //NSLog(@"-------------------%@",day);
+
+    [self reloadBannerNewData];
+    
+    [self reloadNoticeNewData];
+    
+    [self reloadInformationNewData];
+    
     
     [self showCustomHeaderview];
+    
 }
 
 
 
 
+
+- (void)reloadBannerNewData{
+    NetworkTool * network = [[NetworkTool alloc]init];
+    NSMutableDictionary * dict = [NSMutableDictionary dictionary];
+    [dict setValue:self.usermodel.appLoginToken forKey:@"loginToken"];
+    [dict setValue:URL_NEWBANNER_IOS(1, 6) forKey:@"data"];
+    [network newReloadWebServiceNoDataURL:URL_BANNER_IOS andParameters:dict andURLName:URL_BANNER_IOS];
+    network.successArrayReload = ^(NSMutableArray *array) {
+        NSMutableArray * imageArray = [NSMutableArray array];
+        for (int i = 0; i < array.count; i++) {
+            RSBannerModel * bannermodel = array[i];
+            [imageArray addObject:[NSString stringWithFormat:@"%@%@",URL_NEWPOST_IOS,bannermodel.imageUrl]];
+        }
+        //[self.kimageRun.imgUrlArray addObjectsFromArray:imagearray];
+        self.kimageRun.imgUrlArray = imageArray;
+    };
+}
+
+- (void)reloadNoticeNewData{
+    NetworkTool * network = [[NetworkTool alloc]init];
+    NSMutableDictionary * dict = [NSMutableDictionary dictionary];
+    [dict setValue:self.usermodel.appLoginToken forKey:@"loginToken"];
+    [dict setValue:URL_NEWNOTICE_IOS((long)1, 6) forKey:@"data"];
+    [network newReloadWebServiceNoDataURL:URL_NOTICE_IOS andParameters:dict andURLName:URL_NOTICE_IOS];
+    network.successArrayReload = ^(NSMutableArray *array) {
+        [self.contentArray removeAllObjects];
+        NSArray * array1 = [self splitArray:array withSubSize:2];
+        for (int i = 0; i < array1.count; i++) {
+            NSMutableDictionary * dict = [NSMutableDictionary dictionary];
+            [dict setValue:array1[i] forKey:@"arr"];
+            [self.contentArray addObject:dict];
+        }
+        [self.noticeView reloadDataAndStartRoll];
+    };
+}
+
+- (void)reloadInformationNewData{
+    NetworkTool * network = [[NetworkTool alloc]init];
+    NSMutableDictionary * dict = [NSMutableDictionary dictionary];
+    [dict setValue:self.usermodel.appLoginToken forKey:@"loginToken"];
+    [dict setValue:URL_NEWINFORMATION_IOS(1, 6) forKey:@"data"];
+    [network newReloadWebServiceNoDataURL:URL_INFORMATION_IOS andParameters:dict andURLName:URL_INFORMATION_IOS];
+    network.successArrayReload = ^(NSMutableArray *array) {
+        [self.informationArray removeAllObjects];
+        self.informationArray = array;
+        [self.tableview reloadData];
+    };
+   
+}
+
 - (void)showCustomHeaderview{
     UIView * headerView = [[UIView alloc]init];
-    ZKImgRunLoopView * kimageRun = [[ZKImgRunLoopView alloc]initWithFrame:CGRectMake(15, 13, SCW - 30, 160) placeholderImg:[UIImage imageNamed:@"背景"]];
+    ZKImgRunLoopView * kimageRun = [[ZKImgRunLoopView alloc]initWithFrame:CGRectMake(15, 13, SCW - 30, 160) placeholderImg:[UIImage imageNamed:@"默认图"]];
     kimageRun.pageControl.numberOfPages = 3;
     kimageRun.pageControl.currentPage = 0;
     kimageRun.pageControl.marginSpacing = 8.5;
     kimageRun.pageControl.controlSize = CGSizeMake(5, 5);
-    NSMutableArray * array = [NSMutableArray arrayWithObjects:@"背景",@"背景", @"背景",nil];
-    kimageRun.imgArray = array;
+    //NSMutableArray * array = [NSMutableArray arrayWithObjects:@"背景",@"背景", @"背景",nil];
+    //kimageRun.imgArray = array;
     [kimageRun touchImageIndexBlock:^(NSInteger index) {
-        
+ 
     }];
     kimageRun.layer.cornerRadius = 4;
     kimageRun.layer.masksToBounds = YES;
     [headerView addSubview:kimageRun];
+     _kimageRun = kimageRun;
     
     //公告
     
-    UIImageView * noticeImage = [[UIImageView alloc]init];
-    noticeImage.image = [UIImage imageNamed:@"最新 公告"];
+    UIButton * noticeImage = [[UIButton alloc]init];
+    //noticeImage.image = [UIImage imageNamed:@"最新 公告"];
+    [noticeImage setImage:[UIImage imageNamed:@"最新 公告"] forState:UIControlStateNormal];
+    [noticeImage addTarget:self action:@selector(showMoreNoticeAction:) forControlEvents:UIControlEventTouchUpInside];
     [headerView addSubview:noticeImage];
     
     noticeImage.sd_layout
@@ -134,7 +222,7 @@ static NSString * SERVICEHEADERVIEWID = @"SERVICEHEADERVIEWID";
     [headerView addSubview:noticeView];
     
     noticeView.sd_layout
-    .leftSpaceToView(midView, 9.5)
+    .leftSpaceToView(midView, 0)
     .topEqualToView(midView)
     .bottomEqualToView(midView)
     .rightSpaceToView(headerView, 15);
@@ -175,10 +263,10 @@ static NSString * SERVICEHEADERVIEWID = @"SERVICEHEADERVIEWID";
     [firstBtn addSubview:firstImage];
     
     firstImage.sd_layout
-    .leftSpaceToView(firstBtn, 30)
-    .topSpaceToView(firstBtn, 22)
-    .bottomSpaceToView(firstBtn, 22)
-    .widthIs(28.5);
+    .leftSpaceToView(firstBtn, 28.5)
+    .topSpaceToView(firstBtn, 16)
+    .widthIs(36)
+    .heightIs(36);
     
     UILabel * firstLabel = [[UILabel alloc]init];
     firstLabel.text = @"工作日志";
@@ -188,7 +276,7 @@ static NSString * SERVICEHEADERVIEWID = @"SERVICEHEADERVIEWID";
     [firstBtn addSubview:firstLabel];
     
     firstLabel.sd_layout
-    .leftSpaceToView(firstImage, 11)
+    .leftSpaceToView(firstImage, 9)
     .topSpaceToView(firstBtn,16)
     .heightIs(22.5)
     .rightSpaceToView(firstBtn, 0);
@@ -228,9 +316,10 @@ static NSString * SERVICEHEADERVIEWID = @"SERVICEHEADERVIEWID";
     
     secondImage.sd_layout
     .leftSpaceToView(secondBtn, 30)
-    .topSpaceToView(secondBtn, 22)
-    .bottomSpaceToView(secondBtn, 22)
-    .widthIs(28.5);
+    .topSpaceToView(secondBtn, 16)
+    .widthIs(36)
+    .heightEqualToWidth();
+    
     
     UILabel * secondLabel = [[UILabel alloc]init];
     secondLabel.text = @"体系文件";
@@ -240,7 +329,7 @@ static NSString * SERVICEHEADERVIEWID = @"SERVICEHEADERVIEWID";
     [secondBtn addSubview:secondLabel];
     
     secondLabel.sd_layout
-    .leftSpaceToView(secondImage, 11)
+    .leftSpaceToView(secondImage, 9)
     .topSpaceToView(secondBtn,16)
     .heightIs(22.5)
     .rightSpaceToView(secondBtn, 0);
@@ -258,18 +347,17 @@ static NSString * SERVICEHEADERVIEWID = @"SERVICEHEADERVIEWID";
     .rightEqualToView(secondLabel)
     .topSpaceToView(secondLabel, 0.5)
     .heightIs(14);
-    
-    
-    
-    
-    
+
     [headerView setupAutoHeightWithBottomView:firstBtn bottomMargin:0];
-    
     [headerView layoutIfNeeded];
     self.tableview.tableHeaderView = headerView;
-    
-    
-    
+}
+
+
+- (void)showMoreNoticeAction:(UIButton *)noticeBtn{
+    RSNoticeMoreViewController * notcieMoreVc = [[RSNoticeMoreViewController alloc]init];
+    notcieMoreVc.title = @"最新公告";
+    [self.navigationController pushViewController:notcieMoreVc animated:YES];
 }
 
 
@@ -281,7 +369,7 @@ static NSString * SERVICEHEADERVIEWID = @"SERVICEHEADERVIEWID";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 4;
+    return self.informationArray.count;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
@@ -304,32 +392,79 @@ static NSString * SERVICEHEADERVIEWID = @"SERVICEHEADERVIEWID";
     if (!cell) {
         cell = [[RSServiceCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:FIRSTCELLID];
     }
+    cell.informationmodel = self.informationArray[indexPath.row];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    RSInformationModel * informationmodel = self.informationArray[indexPath.row];
+    RSWKOAmanagerViewController * wkoamanagerVc = [[RSWKOAmanagerViewController alloc]init];
+    wkoamanagerVc.type = @"3";
+    wkoamanagerVc.title = informationmodel.title;
+    wkoamanagerVc.URL = [NSString stringWithFormat:@"%@%@",URL_NEWPOST_IOS,informationmodel.url];
+    [self.navigationController pushViewController:wkoamanagerVc animated:YES];
+}
 
 - (NSInteger)numberOfRowsForRollingNoticeView:(GYRollingNoticeView *)rollingView
 {
-    return _arr0.count;
+    return self.contentArray.count;
 }
 
 - (__kindof GYNoticeViewCell *)rollingNoticeView:(GYRollingNoticeView *)rollingView cellAtIndex:(NSUInteger)index
 {
     RSGyRollingCell * cell = [rollingView dequeueReusableCellWithIdentifier:@"RSGyRollingCell"];
-    NSDictionary * dic = _arr0[index];
-    cell.tagImageView.image = [UIImage imageNamed:[dic[@"arr"] firstObject][@"tag"]];
-    cell.titelLabel.text = [dic[@"arr"] firstObject][@"title"];
-    cell.secondImageView.image = [UIImage imageNamed:[dic[@"arr"] lastObject][@"tag"]];
-    cell.secondtitelLabel.text = [dic[@"arr"] lastObject][@"title"];
+    NSMutableDictionary * dic = self.contentArray[index];
+    NSArray * array = [dic objectForKey:@"arr"];
+    for (int i = 0; i < array.count; i++) {
+        RSNoticeModel * noticemodel = array[i];
+        if (i == 0) {
+            if ([noticemodel.noticeType isEqualToString:@"通告"]) {
+                cell.tagImageView.image = [UIImage imageNamed:@"通告复制"];
+            }else if ([noticemodel.noticeType isEqualToString:@"奖惩"]){
+                 cell.tagImageView.image = [UIImage imageNamed:@"奖惩"];
+            }else if ([noticemodel.noticeType isEqualToString:@"通知"]){
+                cell.tagImageView.image = [UIImage imageNamed:@"通知"];
+            }
+            else{
+                cell.tagImageView.image = [UIImage imageNamed:@"其他"];
+            }
+            cell.titelLabel.text = noticemodel.title;
+        }else{
+            if ([noticemodel.noticeType isEqualToString:@"通告"]) {
+                cell.secondImageView.image = [UIImage imageNamed:@"通告复制"];
+            }else if ([noticemodel.noticeType isEqualToString:@"奖惩"]){
+                 cell.secondImageView.image = [UIImage imageNamed:@"奖惩"];
+            }else if ([noticemodel.noticeType isEqualToString:@"通知"]){
+                cell.secondImageView.image = [UIImage imageNamed:@"通知"];
+            }
+            else{
+                cell.secondImageView.image = [UIImage imageNamed:@"其他"];
+            }
+            cell.secondtitelLabel.text = noticemodel.title;
+        }
+    }
     return cell;
 }
 
 - (void)didClickRollingNoticeView:(GYRollingNoticeView *)rollingView forIndex:(NSUInteger)index andRow:(NSInteger)row
 {
     
+    RSNoticeMoreViewController * notcieMoreVc = [[RSNoticeMoreViewController alloc]init];
+    notcieMoreVc.title = @"最新公告";
+    [self.navigationController pushViewController:notcieMoreVc animated:YES];
     
-    NSLog(@"点击的第几组: %lu 第几行:%lu", (unsigned long)index,(unsigned long)row);
+    
+//    NSMutableDictionary * dic = self.contentArray[index];
+//    NSArray * array = [dic objectForKey:@"arr"];
+//    RSNoticeModel * noticemodel = array[row];
+//    RSWKOAmanagerViewController * wkoamanagerVc = [[RSWKOAmanagerViewController alloc]init];
+//    wkoamanagerVc.type = @"3";
+//    wkoamanagerVc.title = noticemodel.title;
+//    wkoamanagerVc.URL = [NSString stringWithFormat:@"%@%@",URL_NEWPOST_IOS,noticemodel.url];
+//    [self.navigationController pushViewController:wkoamanagerVc animated:YES];
+//    NSLog(@"点击的第几组: %lu 第几行:%lu", (unsigned long)index,(unsigned long)row);
 }
 
 
@@ -361,7 +496,8 @@ static NSString * SERVICEHEADERVIEWID = @"SERVICEHEADERVIEWID";
         [self.navigationController pushViewController:auditedVc animated:YES];
     }else{
         NSLog(@"体系文件");
-        
+        RSSystemViewController * systemVc = [[RSSystemViewController alloc]init];
+        [self.navigationController pushViewController:systemVc animated:YES];
     }
 }
 

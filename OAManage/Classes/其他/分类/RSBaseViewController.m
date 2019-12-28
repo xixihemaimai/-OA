@@ -7,12 +7,15 @@
 //
 
 #import "RSBaseViewController.h"
-#import "RSHomeViewController.h"
 #import "RSShenHeViewController.h"
 #import "RSMenuViewController.h"
 
 #import "RSLoginViewController.h"
 #import "RSMailDetailViewController.h"
+
+
+#import "RSSLPieceModel.h"
+
 @interface RSBaseViewController ()
 
 @end
@@ -379,21 +382,13 @@
     return isValid;
 }
 
-
 // 昵称
 - (BOOL) validateNickname:(NSString *)nickname
-
 {
-    
     NSString *nicknameRegex = @"^[\u4e00-\u9fa5]{4,8}$";
-    
     NSPredicate *passWordPredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",nicknameRegex];
-    
     return [passWordPredicate evaluateWithObject:nickname];
-    
 }
-
-
 
 - (BOOL) validateUserName:(NSString *)name
 {
@@ -595,6 +590,32 @@
 }
 
 
+- (NSMutableArray *)changeNewArrayRule:(NSArray *)contentarray{
+    NSMutableArray *dateMutablearray = [NSMutableArray array];
+    NSMutableArray *array = [NSMutableArray arrayWithArray:contentarray];
+    for (int i = 0; i < array.count; i ++) {
+        //NSString *string = array[i];
+        RSSLPieceModel * slpiecemodel = array[i];
+        NSMutableArray *tempArray = [NSMutableArray array];
+        [tempArray addObject:slpiecemodel];
+        for (int j = i+1;j < array.count; j ++) {
+            RSSLPieceModel * slpiecemodel1 = array[j];
+            if([slpiecemodel1.turnsNo isEqualToString:slpiecemodel.turnsNo]){
+                [tempArray addObject:slpiecemodel1];
+                [array removeObjectAtIndex:j];
+                j = j - 1;
+            }
+        }
+        [dateMutablearray addObject:tempArray];
+    }
+    return dateMutablearray;
+}
+
+
+
+
+
+
 //根据时间来获取星期几
 - (NSString*)weekDayStr:(NSString*)format{
     NSString *weekDayStr = nil;
@@ -666,7 +687,6 @@ return encodedImageStr;
 - (NSString *)typeForImageData:(NSData *)data {
     uint8_t c;
     [data getBytes:&c length:1];
-    
     switch (c) {
         case 0xFF:
             return @".jpeg";
@@ -680,6 +700,62 @@ return encodedImageStr;
     }
     return nil;
 }
+
+
+//判断文件是否已经在沙盒中存在
+-(BOOL) isFileExist:(NSString *)fileName
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *path = [paths objectAtIndex:0];
+    NSString *filePath = [path stringByAppendingPathComponent:fileName];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    BOOL result = [fileManager fileExistsAtPath:filePath];
+    return result;
+}
+
+- (NSString *)dataChangString{
+    NSDate *date = [NSDate date];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    NSString *strDate = [dateFormatter stringFromDate:date];
+    return strDate;
+}
+
+- (void)showDisplayTheTimeToSelectTime:(UIButton *)firstTimeBtn andSecondTime:(UIButton *)secondTimeBtn{
+    //获取系统当前时间
+    NSDate *currentDate = [NSDate date];
+    //用于格式化NSDate对象
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    //设置格式：zzz表示时区
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    //NSDate转NSString
+    NSString *currentDateString = [dateFormatter stringFromDate:currentDate];
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSDateComponents *comps = nil;
+    comps = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitMonth fromDate:currentDate];
+    NSDateComponents *adcomps = [[NSDateComponents alloc] init];
+    [adcomps setYear:0];
+    [adcomps setMonth:0];
+    [adcomps setDay:0];
+    NSDate *newdate = [calendar dateByAddingComponents:adcomps toDate:currentDate options:0];
+    NSString *beforDate = [dateFormatter stringFromDate:newdate];
+    NSString * newBefordate = [beforDate substringToIndex:8];
+    newBefordate = [NSString stringWithFormat:@"%@01",newBefordate];
+    [firstTimeBtn setTitle:newBefordate forState:UIControlStateNormal];
+    [secondTimeBtn setTitle:currentDateString forState:UIControlStateNormal];
+}
+
+-(NSDate *)nsstringConversionNSDate:(NSString *)dateStr
+{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"YYYY-MM-dd"];
+    NSDate *datestr = [dateFormatter dateFromString:dateStr];
+    return datestr;
+}
+
+
+
+
 
 
 

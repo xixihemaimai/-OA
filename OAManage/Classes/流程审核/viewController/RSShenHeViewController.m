@@ -30,18 +30,14 @@
 - (NSString *)navigationTitle
 {
     return self.title1 ?: @"";
-    
 }
 
 - (NSString *)menuTitle
 {
     return self.title2 ?: @"";
-    
 }
 
-
 @end
-
 
 @interface RSShenHeViewController ()<SCNavigationMenuViewDelegate,UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) SCNavigationMenuView *menuView;
@@ -59,10 +55,8 @@
 @property (nonatomic,strong)NSString * selectType;
 //选择左边cell的位置
 @property (nonatomic,strong)NSString * billKey;
-
 //选择的位置
 @property (nonatomic,assign)NSInteger selectIndex;
-
 
 @property (nonatomic,strong) ZZQEmptyView * currentemptyView;
 @end
@@ -96,8 +90,6 @@
     return _currentemptyView;
 }
 
-
-
 - (UITableView *)leftTableview{
     if (!_leftTableview) {
         if (IS_IPHONE) {
@@ -121,7 +113,6 @@
     return _leftTableview;
 }
 
-
 - (UITableView *)rightTableview{
     if (!_rightTableview) {
         _rightTableview = [[UITableView alloc]initWithFrame:CGRectMake(CGRectGetMaxX(self.leftTableview.frame), 64,SCW -CGRectGetMaxX(self.leftTableview.frame) , SCH - 64) style:UITableViewStylePlain];
@@ -133,9 +124,6 @@
     }
     return _rightTableview;
 }
-
-
-
 
 - (SCNavigationMenuView *)menuView
 {
@@ -158,10 +146,12 @@
 
 - (void)retrievingData{
     self.pageNum = 1;
-    self.selectType = @"1";
-    self.billKey = @"";
-    self.selectIndex = 0;
+    
+//    self.selectType = @"1";
+//    self.billKey = @"";
+//    self.selectIndex = 0;
     [self reloadShenHeNewData];
+    [self reloadRightShenHeData];
 }
 
 
@@ -351,25 +341,9 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (tableView == self.leftTableview) {
-        if (IS_IPHONE) {
-             return 60;
-        }else{
-            if (DEVICES_IS_PRO_12_9) {
-                return  96 * SCALE_TO_PRO;
-            }else{
-                return (96 / SCW) * SCW;
-            }
-        }
+        return 60;
     }else{
-        if (IS_IPHONE) {
-            return (93 / SCW) * SCW;
-        }else{
-            if (DEVICES_IS_PRO_12_9) {
-                return  120 * SCALE_TO_PRO;
-            }else{
-                return (120 / SCW) * SCW;
-            }
-        }
+        return (93 / SCW) * SCW;
     }
 }
 
@@ -457,6 +431,11 @@
         wkOaVc.usertime = auditedmodel.createtime;
         wkOaVc.creatorName = auditedmodel.creatorName;
         wkOaVc.deptName = auditedmodel.deptName;
+        if ([self.selectType isEqualToString:@"1"]) {
+            wkOaVc.isApproval = @"1";
+        }else{
+            wkOaVc.isApproval = @"0";
+        }
         wkOaVc.type = @"1";
         wkOaVc.version = [[[UIDevice currentDevice] systemVersion] floatValue];
         [self.navigationController pushViewController:wkOaVc animated:YES];

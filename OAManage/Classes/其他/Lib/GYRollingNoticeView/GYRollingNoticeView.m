@@ -215,7 +215,7 @@
 - (void)handleCellTapAction:(UITapGestureRecognizer *)tap
 {
     CGPoint  point = [tap locationInView:self];
-    NSLog(@"---------------------%lf-----------%lf",point.x,point.y);
+    
     NSInteger row = 0;
     if (point.y > 0 && point.y < 18.f) {
         row = 0;

@@ -12,16 +12,22 @@
 #import "RSLaunchFootReusableView.h"
 
 
+#import "RSToBeInitiatedViewController.h"
 #import "RSWKOAmanagerViewController.h"
 
 
 @interface RSLaunchViewController ()<UICollectionViewDelegate,UICollectionViewDataSource>
 {
     
-    UIView * _headerView;
+   
     
-    UILabel * _headerLabel;
+   
 }
+
+ @property (nonatomic,strong)UIView * headerView;
+
+@property (nonatomic,strong) UILabel * headerLabel;
+
 
 @property (nonatomic,strong)NSMutableArray * array;
 
@@ -31,6 +37,8 @@
 @end
 
 @implementation RSLaunchViewController
+
+
 -(NSMutableArray *)array{
     if (!_array) {
         _array = [NSMutableArray array];
@@ -41,13 +49,23 @@
 static NSString * COLLECTIONCELLID = @"COLLECTIONCELLID";
 static NSString * LAUNCHREUSABLECELLID = @"LAUNCHREUSABLECELLID";
 static NSString * LAUNCHREUSABFOOTCELLID = @"LAUNCHREUSABFOOTCELLID";
+
+- (void)viewWillAppear:(BOOL)animated{
+    
+    [self reloadShenHeNewData];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(reloadNoticationNew) name:@"reLoadCurrentViewData" object:nil];
+    
+}
+
+
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     
     [self.tableview removeFromSuperview];
     [self.emptyView removeFromSuperview];
     
-    _array = [self changShowStyple];
+    self.array = [self changShowStyple];
     
     [self reloadShenHeNewData];
     
@@ -74,16 +92,34 @@ static NSString * LAUNCHREUSABFOOTCELLID = @"LAUNCHREUSABFOOTCELLID";
 }
 
 
+- (void)reloadNoticationNew{
+    [self reloadShenHeNewData];
+}
+
+
+
+
 - (void)setCustomHeaderView{
-    
-    UIView * headerView = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.navigationController.navigationBar.frame), SCW, 40)];
+
+    UIView * headerView = [[UIView alloc]init];
+    if (@available(iOS 13.0, *)) {
+        if (iphonex || iPhoneXR || iPhoneXS || iPhoneXSMax) {
+            headerView.frame = CGRectMake(0, CGRectGetMaxY(self.navigationController.navigationBar.frame) + 44, SCW, 40);
+        }else{
+            headerView.frame = CGRectMake(0, CGRectGetMaxY(self.navigationController.navigationBar.frame) + 22, SCW, 40);
+        }
+    }else{
+        if (iphonex || iPhoneXR || iPhoneXS || iPhoneXSMax) {
+            headerView.frame = CGRectMake(0, navY + navHeight, SCW, 40);
+        }else{
+            headerView.frame = CGRectMake(0, CGRectGetMaxY(self.navigationController.navigationBar.frame), SCW, 40);
+        }
+    }
     headerView.backgroundColor = [UIColor colorWithHexColorStr:@"#FC8C78"];
-    
     _headerView = headerView;
+    
     UIButton * headerBtn = [[UIButton alloc]init];
     [headerView addSubview:headerBtn];
-    
-    
     headerBtn.sd_layout
     .leftSpaceToView(headerView, 0)
     .topSpaceToView(headerView, 0)
@@ -100,7 +136,10 @@ static NSString * LAUNCHREUSABFOOTCELLID = @"LAUNCHREUSABFOOTCELLID";
     .leftSpaceToView(headerBtn, 12)
     .topSpaceToView(headerBtn, 0)
     .bottomSpaceToView(headerBtn, 0)
-    .rightSpaceToView(headerBtn, 100);
+    .rightSpaceToView(headerBtn, 0);
+    
+    [headerBtn addTarget:self action:@selector(showTobeInitianAction:) forControlEvents:UIControlEventTouchUpInside];
+
     
     
     //方向
@@ -108,7 +147,8 @@ static NSString * LAUNCHREUSABFOOTCELLID = @"LAUNCHREUSABFOOTCELLID";
     rightImage.image = [UIImage imageNamed:@"system-backnew copy"];
     [headerBtn addSubview:rightImage];
     
-    rightImage.sd_layout.rightSpaceToView(headerBtn, 12)
+    rightImage.sd_layout
+    .rightSpaceToView(headerBtn, 12)
     .topSpaceToView(headerBtn, 14)
     .bottomSpaceToView(headerBtn, 14)
     .widthIs(7.5)
@@ -118,6 +158,8 @@ static NSString * LAUNCHREUSABFOOTCELLID = @"LAUNCHREUSABFOOTCELLID";
     //[headerView layoutSubviews];
     
     [self.view addSubview:headerView];
+    
+    
     
     //self.collectview.hea = headerView;
     //self.collectview.
@@ -137,13 +179,25 @@ static NSString * LAUNCHREUSABFOOTCELLID = @"LAUNCHREUSABFOOTCELLID";
     NSString * sopaStr = URL_YIGODATA_IOS(URL_WORKFLOWWEBSERVICE, URL_MYAUDIT, canshu);
     [network reloadWebServiceNoDataURL:URL_YIGO_IOS andParameters:sopaStr andURLName:URL_MYAUDIT];
     network.successArrayReload = ^(NSMutableArray *array) {
-        _headerLabel.text = [NSString stringWithFormat:@"你有%ld条待发起流程",array.count];
+        if ((long)array.count < 1) {
+            self.headerView.hidden = YES;
+            self.headerView.yj_height = 0;
+            self.collectview.frame = CGRectMake(0, CGRectGetMaxY(self.headerView.frame), SCW, SCH - CGRectGetMaxY(self.headerView.frame));
+        }else{
+            self.headerView.yj_height = 40;
+            self.headerView.hidden = NO;
+            self.collectview.frame = CGRectMake(0, CGRectGetMaxY(self.headerView.frame), SCW, SCH - CGRectGetMaxY(self.headerView.frame));
+            self.headerLabel.text = [NSString stringWithFormat:@"你有%ld条待发起流程",(long)array.count];
+        }
     };
 }
 
 
-
-
+- (void)showTobeInitianAction:(UIButton *)headerBtn{
+    RSToBeInitiatedViewController * tobeVc = [[RSToBeInitiatedViewController alloc]init];
+    tobeVc.title = @"待发起流程";
+    [self.navigationController pushViewController:tobeVc animated:YES];
+}
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
     return self.array.count;
@@ -204,10 +258,11 @@ static NSString * LAUNCHREUSABFOOTCELLID = @"LAUNCHREUSABFOOTCELLID";
     NSMutableArray * array = self.array[indexPath.section];
     NSDictionary * dict = array[indexPath.row];
     NSString * billkey = [dict objectForKey:@"key"];
-    NSLog(@"=========================%@",billkey);
     RSWKOAmanagerViewController * wkOaManagerVc = [[RSWKOAmanagerViewController alloc]init];
     wkOaManagerVc.type = @"2";
     wkOaManagerVc.title = [dict objectForKey:@"title"];
+    wkOaManagerVc.billId = -1;
+    wkOaManagerVc.isaddProcess = @"0";
     wkOaManagerVc.billKey = billkey;
     [self.navigationController pushViewController:wkOaManagerVc animated:YES];
 }
@@ -258,6 +313,7 @@ static NSString * LAUNCHREUSABFOOTCELLID = @"LAUNCHREUSABFOOTCELLID";
 
 //这边是变化有什么权限
 - (NSMutableArray *)changShowStyple{
+    
     //1.这边要判断有什么权限----大的统筹的地方，大的统筹的地方必须有小的权限
     //2.只要有一个小的权限就有大的统筹的地方
     NSMutableArray * array = [NSMutableArray array];
@@ -273,17 +329,7 @@ static NSString * LAUNCHREUSABFOOTCELLID = @"LAUNCHREUSABFOOTCELLID";
     NSMutableArray * array5 = [NSMutableArray array];
     //其他
     NSMutableArray * array6 = [NSMutableArray array];
-    [array addObject:array1];
-    [array addObject:array2];
-    [array addObject:array3];
-    [array addObject:array4];
-    [array addObject:array5];
-    [array addObject:array6];
-    
-    
-    
-    
-    
+   
     
     /**部门ID    deptId
     "Flow_Purchase"                      行政采购审批            行政流程
@@ -293,8 +339,8 @@ static NSString * LAUNCHREUSABFOOTCELLID = @"LAUNCHREUSABFOOTCELLID";
     "Flow_SupplierConsume"        用品领用                   行政流程
     "Flow_VehicleReservation"      车辆预约登记            行政流程
     "Flow_ApplyActivity"                员工活动申请            行政流程
-    "Flow_Entertain"                      招待住宿申请            行政流程
-    "Flow_Entertain2"                    招待申请                   行政流程
+    "Entertain"                      招待住宿申请            行政流程
+    "Flow_Entertain"                    招待申请                   行政流程
     
 
     "Flow_ApplyLeave"                 请假申请                   人事流程
@@ -373,10 +419,10 @@ static NSString * LAUNCHREUSABFOOTCELLID = @"LAUNCHREUSABFOOTCELLID";
         NSDictionary * dict = @{@"img":@"发起流程复制 4",@"title":@"招待用品申购单",@"key":@"Flow_Receptions"};
         [array1 addObject:dict];
     }
-    if (self.usermodel.Flow_SupplierConsume == true) {
-        NSDictionary * dict = @{@"img":@"发起流程复制 5",@"title":@"用品领用",@"key":@"Flow_SupplierConsume"};
-        [array1 addObject:dict];
-    }
+//    if (self.usermodel.Flow_SupplierConsume == true) {
+//        NSDictionary * dict = @{@"img":@"发起流程复制 5",@"title":@"用品领用",@"key":@"Flow_SupplierConsume"};
+//        [array1 addObject:dict];
+//    }
     if (self.usermodel.Flow_VehicleReservation == true) {
         NSDictionary * dict = @{@"img":@"发起流程复制 8",@"title":@"车辆预约登记",@"key":@"Flow_VehicleReservation"};
         [array1 addObject:dict];
@@ -385,12 +431,12 @@ static NSString * LAUNCHREUSABFOOTCELLID = @"LAUNCHREUSABFOOTCELLID";
         NSDictionary * dict = @{@"img":@"发起流程复制 7",@"title":@"员工活动申请",@"key":@"Flow_ApplyActivity"};
         [array1 addObject:dict];
     }
-    if (self.usermodel.Flow_Entertain == true) {
-        NSDictionary * dict = @{@"img":@"发起流程复制 10",@"title":@"招待住宿申请",@"key":@"Flow_Entertain"};
+    if (self.usermodel.Entertain == true) {
+        NSDictionary * dict = @{@"img":@"发起流程复制 10",@"title":@"招待住宿申请",@"key":@"Entertain"};
         [array1 addObject:dict];
     }
-    if (self.usermodel.Flow_Entertain2 == true) {
-        NSDictionary * dict = @{@"img":@"发起流程复制 9",@"title":@"招待申请",@"key":@"Flow_Entertain2"};
+    if (self.usermodel.Flow_Entertain == true) {
+        NSDictionary * dict = @{@"img":@"发起流程复制 9",@"title":@"招待申请",@"key":@"Flow_Entertain"};
         [array1 addObject:dict];
     }
     
@@ -453,10 +499,10 @@ static NSString * LAUNCHREUSABFOOTCELLID = @"LAUNCHREUSABFOOTCELLID";
         NSDictionary * dict = @{@"img":@"发起流程复制 20",@"title":@"公章使用申请",@"key":@"Flow_InCachet"};
         [array3 addObject:dict];
     }
-    if (self.usermodel.Flow_FileUpdate == true) {
-        NSDictionary * dict = @{@"img":@"发起流程复制 23",@"title":@"文件编制修订废止申请单",@"key":@"Flow_FileUpdate"};
-        [array3 addObject:dict];
-    }
+//    if (self.usermodel.Flow_FileUpdate == true) {
+//        NSDictionary * dict = @{@"img":@"发起流程复制 23",@"title":@"文件编制修订废止申请单",@"key":@"Flow_FileUpdate"};
+//        [array3 addObject:dict];
+//    }
     if (self.usermodel.Flow_Chapter == true) {
         NSDictionary * dict = @{@"img":@"发起流程复制 22",@"title":@"海西股份刻章申请表",@"key":@"Flow_Chapter"};
         [array3 addObject:dict];
@@ -525,15 +571,19 @@ static NSString * LAUNCHREUSABFOOTCELLID = @"LAUNCHREUSABFOOTCELLID";
         NSDictionary * dict = @{@"img":@"发起流程复制 36",@"title":@"废料处理申请单",@"key":@"Flow_WasteDisposal"};
         [array6 addObject:dict];
     }
-    if (self.usermodel.AM_Requisition == true) {
-        NSDictionary * dict = @{@"img":@"发起流程复制 34",@"title":@"辅料采购申购单",@"key":@"AM_Requisition"};
-        [array6 addObject:dict];
-    }
-    if (self.usermodel.AM_SetlleIn == true) {
-        NSDictionary * dict = @{@"img":@"发起流程复制 35",@"title":@"辅料应付结算单",@"key":@"AM_SetlleIn"};
-        [array6 addObject:dict];
-    }
+//    if (self.usermodel.AM_Requisition == true) {
+//        NSDictionary * dict = @{@"img":@"发起流程复制 34",@"title":@"辅料采购申购单",@"key":@"AM_Requisition"};
+//        [array6 addObject:dict];
+//    }
+//    if (self.usermodel.AM_SetlleIn == true) {
+//        NSDictionary * dict = @{@"img":@"发起流程复制 35",@"title":@"辅料应付结算单",@"key":@"AM_SetlleIn"};
+//        [array6 addObject:dict];
+//    }
       [array addObject:array6];
+    
+    
+    
+       
 //    for (int i = 0; i < array.count; i++) {
 //        NSMutableArray * array0 = array[i];
 //        if (array0.count == 0) {
@@ -542,6 +592,11 @@ static NSString * LAUNCHREUSABFOOTCELLID = @"LAUNCHREUSABFOOTCELLID";
 //    }
     [self.collectview reloadData];
     return array;
+}
+
+
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
 }
 
 

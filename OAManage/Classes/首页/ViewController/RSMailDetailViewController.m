@@ -69,7 +69,8 @@
     headerView.backgroundColor = [UIColor colorWithHexColorStr:@"#ffffff"];
     
     UIButton * backgroundBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [backgroundBtn setImage:[UIImage imageNamed:@"背景"] forState:UIControlStateNormal];
+    //[backgroundBtn setba:[UIImage imageNamed:@"背景"] forState:UIControlStateNormal];
+    [backgroundBtn setBackgroundImage:[UIImage imageNamed:@"背景"] forState:UIControlStateNormal];
     [headerView addSubview:backgroundBtn];
     backgroundBtn.sd_layout
     .leftSpaceToView(headerView, 0)

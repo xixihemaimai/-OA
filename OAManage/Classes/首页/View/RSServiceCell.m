@@ -7,6 +7,17 @@
 //
 
 #import "RSServiceCell.h"
+#import "RSInformationLabel.h"
+@interface RSServiceCell()
+
+@property (nonatomic,strong)UILabel * contentLabel;
+
+@property (nonatomic,strong)UIImageView * contentImage;
+
+
+@end
+
+
 
 @implementation RSServiceCell
 
@@ -22,25 +33,23 @@
 }
 
 
-
-
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         
-        UILabel * newLabel = [[UILabel alloc]init];
-        newLabel.numberOfLines = 0;
-        newLabel.font = [UIFont systemFontOfSize:12];
-        newLabel.textColor = [UIColor colorWithHexColorStr:@"#333333"];
-        newLabel.textAlignment = NSTextAlignmentLeft;
-        newLabel.text = @"海西石材城由福建三叶集团重磅打造，地处世界石材加工中心--中国·水头，占地2000亩,海西石材城由福建三叶集团重磅打造，地处世界石材加工中心--中国·水头，占地2000亩,海西石材城由福建三叶集团重磅打造，地处世界石材加工中心--中国·水头，占地2000亩,海西石材城由福建三叶集团重磅打造，地处世界石材加工中心--中国·水头，占地2000亩,海西石材城由福建三叶集团重磅打造，地处世界石材加工中心--中国·水头，占地2000亩,";
-        [self.contentView addSubview:newLabel];
+        RSInformationLabel * contentLabel = [[RSInformationLabel alloc]init];
+        contentLabel.numberOfLines = 0;
+        contentLabel.font = [UIFont systemFontOfSize:12];
+        contentLabel.textColor = [UIColor colorWithHexColorStr:@"#333333"];
+        contentLabel.textAlignment = NSTextAlignmentLeft;
+        contentLabel.text = @"海西石材城由福建三叶集团重磅打造，地处世界石材加工中心--中国·水头，占地2000亩,海西石材城由福建三叶集团重磅打造，地处世界石材加工中心--中国·水头，占地2000亩,海西石材城由福建三叶集团重磅打造，地处世界石材加工中心--中国·水头，占地2000亩,海西石材城由福建三叶集团重磅打造，地处世界石材加工中心--中国·水头，占地2000亩,海西石材城由福建三叶集团重磅打造，地处世界石材加工中心--中国·水头，占地2000亩,";
+        [self.contentView addSubview:contentLabel];
+        _contentLabel = contentLabel;
         
         
-        
-        UIImageView * newImage = [[UIImageView alloc]init];
-        newImage.image = [UIImage imageNamed:@"背景"];
-        [self.contentView addSubview:newImage];
-        
+        UIImageView * contentImage = [[UIImageView alloc]init];
+        contentImage.image = [UIImage imageNamed:@"背景"];
+        [self.contentView addSubview:contentImage];
+        _contentImage = contentImage;
         
         
         UIView * bottomview = [[UIView alloc]init];
@@ -48,22 +57,18 @@
         [self.contentView addSubview:bottomview];
         
         
-        newImage.sd_layout
+        contentImage.sd_layout
         .rightSpaceToView(self.contentView, 15)
         .topSpaceToView(self.contentView, 8)
         .widthIs(65.5)
         .heightIs(50);
-        newImage.layer.cornerRadius = 4.76;
-        newImage.layer.masksToBounds = YES;
+        contentImage.layer.cornerRadius = 4.76;
+        contentImage.layer.masksToBounds = YES;
         
-        
-        
-        
-        
-        newLabel.sd_layout
+        contentLabel.sd_layout
         .leftSpaceToView(self.contentView, 15)
-        .topEqualToView(newImage)
-        .rightSpaceToView(newImage, 6.5)
+        .topEqualToView(contentImage)
+        .rightSpaceToView(contentImage, 6.5)
         .bottomSpaceToView(self.contentView, 8);
         
         
@@ -72,11 +77,15 @@
         .rightSpaceToView(self.contentView, 15)
         .bottomSpaceToView(self.contentView, 0)
         .heightIs(0.5);
-        
-        
-        
+                
     }
     return self;
+}
+
+- (void)setInformationmodel:(RSInformationModel *)informationmodel{
+    _informationmodel = informationmodel;
+    _contentLabel.text = _informationmodel.title;
+    [_contentImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_NEWPOST_IOS,_informationmodel.imageUrl]] placeholderImage:[UIImage imageNamed:@"默认图"]];
 }
 
 

@@ -37,6 +37,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,assign)CGFloat version;
 
 
+@property (nonatomic,strong)NSString * isaddProcess;
+
+@property (nonatomic,strong)NSString * isApproval;
+
+
 @end
 
 NS_ASSUME_NONNULL_END

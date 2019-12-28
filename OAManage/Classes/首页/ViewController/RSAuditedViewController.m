@@ -15,27 +15,42 @@
 //新的cell
 #import "RSNewAuditedCell.h"
 //新的跳转界面
-#import "RSApprovalProcessViewController.h"
+#import "RSInputWorkViewController.h"
+#import "RSNewAuditedModel.h"
 
 
 @interface RSAuditedViewController ()<ZZQEmptyViewDelegate>
 
 @property (nonatomic,assign)NSInteger pageNum;
 
+@property (nonatomic,strong)NSMutableArray * workArray;
+
 @end
 
 @implementation RSAuditedViewController
 
-- (NSMutableArray *)auditedArray{
-    if (!_auditedArray) {
-        _auditedArray = [NSMutableArray array];
+- (NSMutableArray *)workArray{
+    if (!_workArray) {
+        _workArray = [NSMutableArray array];
     }
-    return _auditedArray;
+    return _workArray;
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
    //  [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(reLoadCurrentViewAudditedData) name:@"reLoadCurrentViewData" object:nil];
+    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(reloadWork) name:@"reloadWork" object:nil];
+    
+    
+}
+
+
+- (void)reloadWork{
+    
+    self.pageNum = 1;
+     [self.tableview.mj_header beginRefreshing];
+    
 }
 
 
@@ -88,7 +103,7 @@
     self.pageNum = 1;
     self.tableview.mj_header = [MJChiBaoZiHeader headerWithRefreshingTarget:self refreshingAction:@selector(reloadAuditedNewData)];
     self.tableview.mj_footer = [MJChiBaoZiFooter footerWithRefreshingTarget:self refreshingAction:@selector(reloadAuditedMoreNewData)];
-   // [self.tableview.mj_header beginRefreshing];
+    [self.tableview.mj_header beginRefreshing];
 }
 
 - (void)reLoadCurrentViewAudditedData{
@@ -107,44 +122,40 @@
     [self reloadAuditedData];
 }
 
-
-
 - (void)reloadAuditedData{
-    NSUserDefaults * user = [NSUserDefaults standardUserDefaults];
-    NSString * aes = [user objectForKey:@"AES"];
-    NSString *const kInitVector = @"16-Bytes--String";
     NetworkTool * network = [[NetworkTool alloc]init];
-    NSNumber * number = [NSNumber numberWithInteger:self.pageNum];
-    NSString * notice = URL_YIGODATA_DATA(number,@(10));
-    NSString * aes2 = [FSAES128 encryptAES:notice key:aes andKInItVector:kInitVector];
-    NSString * canshu = URL_YIGODATA_NOTICE(self.usermodel.appLoginToken, aes2);
-    NSString * sopaStr = URL_YIGODATA_IOS(URL_WORKFLOWWEBSERVICE, URL_TOBEAUDIT, canshu);
-    [network reloadWebServiceNoDataURL:URL_YIGO_IOS andParameters:sopaStr andURLName:URL_TOBEAUDIT];
+    NSMutableDictionary * dict = [NSMutableDictionary dictionary];
+    [dict setValue:self.usermodel.appLoginToken forKey:@"loginToken"];
+    [dict setValue:URL_NEWDIARY_IOS((long)self.pageNum, 10) forKey:@"data"];
+    [network newReloadWebServiceNoDataURL:URL_DIARY_IOS andParameters:dict andURLName:URL_DIARY_IOS];
     network.successArrayReload = ^(NSMutableArray *array) {
-        if (self.pageNum == 1) {
-            [self.auditedArray removeAllObjects];
-            self.auditedArray = array;
-            self.pageNum = 2;
-            [self.tableview.mj_header endRefreshing];
-        }else{
-            NSArray * array1 = array;
-            [self.auditedArray addObjectsFromArray:array1];
-            [self.tableview.mj_footer endRefreshing];
-            self.pageNum++;
-        }
-        if (self.auditedArray.count > 0 ) {
+      if (self.pageNum == 1) {
+          [self.workArray removeAllObjects];
+          //self.auditedArray = array;
+          [self.workArray addObjectsFromArray:array];
+          self.pageNum = 2;
+          [self.tableview reloadData];
+          [self.tableview.mj_header endRefreshing];
+      }else{
+          NSArray * array1 = array;
+          [self.workArray addObjectsFromArray:array1];
+          self.pageNum++;
+          [self.tableview reloadData];
+          [self.tableview.mj_footer endRefreshing];
+      }
+      if (self.workArray.count > 0 ) {
+          self.emptyView.hidden = YES;
+      }else{
+          self.emptyView.hidden = NO;
+      }
+    };
+    
+    network.failure = ^(NSDictionary *dict) {
+        if (self.workArray.count > 0 ) {
             self.emptyView.hidden = YES;
         }else{
             self.emptyView.hidden = NO;
         }
-        [self.tableview reloadData];
-    };
-    network.failure = ^(NSDictionary *dict) {
-            if (self.auditedArray.count > 0 ) {
-                self.emptyView.hidden = YES;
-            }else{
-                self.emptyView.hidden = NO;
-            }
             [self.tableview.mj_header endRefreshing];
             [self.tableview.mj_footer endRefreshing];
     };
@@ -158,91 +169,72 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    //return self.auditedArray.count;
-    return 3;
+    return self.workArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString * CELLID = @"CELLID";
-    RSNewAuditedCell * cell = [tableView dequeueReusableCellWithIdentifier:CELLID];
+    static NSString * NEWCELLID = @"NEWCELLID";
+    RSNewAuditedCell * cell = [tableView dequeueReusableCellWithIdentifier:NEWCELLID];
     if (!cell) {
-        cell = [[RSNewAuditedCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CELLID];
+        cell = [[RSNewAuditedCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:NEWCELLID];
     }
+    cell.auditedmodel = self.workArray[indexPath.row];
+    cell.deleteBtn.tag = indexPath.row;
+    cell.editBtn.tag = indexPath.row;
+    [cell.deleteBtn addTarget:self action:@selector(deleteWorkAction:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.editBtn addTarget:self action:@selector(editWorkAction:) forControlEvents:UIControlEventTouchUpInside];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
-    
-    
-    
-    
-    
-//    static NSString * CELLID = @"CELLID";
-//    RSApprovalCell * cell = [tableView dequeueReusableCellWithIdentifier:CELLID];
-//    if (!cell) {
-//        cell = [[RSApprovalCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CELLID];
-//    }
-//    RSAuditedModel * auditemodel = self.auditedArray[indexPath.row];
-//    cell.auditemodel = auditemodel;
-//    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//    cell.approvalBottomView.sd_layout
-//    .heightIs(1);
-//
-//    return cell;
+}
+
+
+- (void)deleteWorkAction:(UIButton *)deleteBtn{
+    [JHSysAlertUtil presentAlertViewWithTitle:@"是否删除工作日志" message:nil cancelTitle:@"取消" defaultTitle:@"确定" distinct:YES cancel:^{
+           //取消
+    } confirm:^{
+       //确定
+        RSNewAuditedModel * auditemodel = self.workArray[deleteBtn.tag];
+        NetworkTool * network = [[NetworkTool alloc]init];
+        NSMutableDictionary * dict = [NSMutableDictionary dictionary];
+        [dict setValue:self.usermodel.appLoginToken forKey:@"loginToken"];
+        [dict setValue:URL_DIARY_NEWDELETE_IOS((long)auditemodel.auditedId) forKey:@"data"];
+        [network newReloadWebServiceNoDataURL:URL_DIARY_DELETE_IOS andParameters:dict andURLName:URL_DIARY_DELETE_IOS];
+        network.deleteSuccess = ^{
+            //[self.workArray removeObjectAtIndex:deleteBtn.tag];
+            self.pageNum = 1;
+            [self.tableview.mj_header beginRefreshing];
+        };
+    }];
+}
+
+- (void)editWorkAction:(UIButton *)editBtn{
+    RSNewAuditedModel * auditemodel = self.workArray[editBtn.tag];
+    RSInputWorkViewController * inputWorkVc = [[RSInputWorkViewController alloc]init];
+    inputWorkVc.showType = @"update";
+    inputWorkVc.auditedId = auditemodel.auditedId;
+    [self.navigationController pushViewController:inputWorkVc animated:YES];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
     return 54;
-    
-//    if (IS_IPHONE) {
-//        return (93 / SCW) * SCW;
-//    }else{
-//        if (DEVICES_IS_PRO_12_9) {
-//            return  120 * SCALE_TO_PRO;
-//        }else{
-//            return (120 / SCW) * SCW;
-//        }
-//    }
 }
-
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    [self.tableview deselectRowAtIndexPath:indexPath animated:YES];
-    
-    
-    
-//    RSAuditedModel * auditemodel = self.auditedArray[indexPath.row];
-//    RSWKOAmanagerViewController * wkOaVc = [[RSWKOAmanagerViewController alloc]init];
-//    wkOaVc.billId = auditemodel.billId;
-//    wkOaVc.workItemId = auditemodel.workItemId;
-//    wkOaVc.billKey = auditemodel.billKey;
-//    wkOaVc.usertime = auditemodel.createtime;
-//    wkOaVc.creatorName = auditemodel.creatorName;
-//    wkOaVc.deptName = auditemodel.deptName;
-//    wkOaVc.type = @"1";
-//    wkOaVc.version = [[[UIDevice currentDevice] systemVersion] floatValue];
-//    [self.navigationController pushViewController:wkOaVc animated:YES];
-    
-}
-
 
 - (void)emptyViewHadClick:(ZZQEmptyView *)emptyView{
     //新增工作日志
-    RSApprovalProcessViewController * approvalProceessVc = [[RSApprovalProcessViewController alloc]init];
-    [self.navigationController pushViewController:approvalProceessVc animated:YES];
+    RSInputWorkViewController * inputWorkVc = [[RSInputWorkViewController alloc]init];
+    inputWorkVc.showType = @"add";
+    [self.navigationController pushViewController:inputWorkVc animated:YES];
 }
-
-
-
 //新增工作日志
 - (void)addWorkAction:(UIButton *)addBtn{
     //新增工作日志
-    RSApprovalProcessViewController * approvalProceessVc = [[RSApprovalProcessViewController alloc]init];
-    [self.navigationController pushViewController:approvalProceessVc animated:YES];
+    RSInputWorkViewController * inputWorkVc = [[RSInputWorkViewController alloc]init];
+    inputWorkVc.showType = @"add";
+    [self.navigationController pushViewController:inputWorkVc animated:YES];
 }
 
-
 - (void)dealloc{
-  //  [[NSNotificationCenter defaultCenter]removeObserver:self];
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
 }
 
 

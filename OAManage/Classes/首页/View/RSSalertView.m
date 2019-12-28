@@ -35,7 +35,7 @@
     self.layer.cornerRadius = 15;
     self.clipsToBounds = YES;
     
-    UILabel * titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 32, self.bounds.size.width, 28)];
+    UILabel * titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 25, self.bounds.size.width, 28)];
     //titleLabel.text = @"今日计划";
     titleLabel.textColor = [UIColor colorWithHexColorStr:@"#333333"];
     titleLabel.font = [UIFont systemFontOfSize:20];
@@ -90,7 +90,7 @@
     contentTextview.layer.masksToBounds = YES;
     
     //输出结果
-    UILabel * resultLabel = [[UILabel alloc]initWithFrame:CGRectMake(15, CGRectGetMaxY(contentTextview.frame) + 5, self.bounds.size.width - 30, 20)];
+    UILabel * resultLabel = [[UILabel alloc]initWithFrame:CGRectMake(40, CGRectGetMaxY(contentTextview.frame) + 5, self.bounds.size.width - 30, 20)];
     resultLabel.text = @"输出结果";
     resultLabel.textAlignment = NSTextAlignmentLeft;
     resultLabel.textColor = [UIColor colorWithHexColorStr:@"#666666"];
@@ -122,7 +122,7 @@
     
     
     
-    UIView * midView = [[UIView alloc]initWithFrame:CGRectMake(CGRectGetMaxX(deleteBtn.frame), self.bounds.size.height - 35, 1, 30)];
+    UIView * midView = [[UIView alloc]initWithFrame:CGRectMake(CGRectGetMaxX(deleteBtn.frame), CGRectGetMaxY(bottomview.frame) + 8.5, 1, 30)];
     midView.backgroundColor = [UIColor colorWithHexColorStr:@"#F2F2F2"];
     [self addSubview:midView];
     
@@ -139,16 +139,6 @@
 
 - (void)showView
 {
-    
-//    if ([self.selectType isEqualToString:@"edit"]) {
-//        //编辑
-//
-//
-//    }else{
-//        //新建
-//        self.index = 0;
-//        self.secondIndex = 0;
-//    }
     if (self.bgView) {
         return;
     }
@@ -169,7 +159,6 @@
     [self closeView];
 }
 
-
 - (void)cancelAction:(UIButton *)cancelBtn{
     [self closeView];
 }
@@ -185,8 +174,6 @@
     }
     //[[[UIApplication sharedApplication].keyWindow viewWithTag:6521] removeFromSuperview];
 }
-
-
 //选择低，或中，高
 - (void)selectButtonClick:(UIButton *)sender{
     NSArray *seleArray=@[@"低",@"中",@"高"];
@@ -213,7 +200,6 @@
 - (void)cancelSelectAction:(UIButton *)cancelBtn{
     [self closeView];
 }
-
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
     if ([text isEqualToString:@"\n"]){ //判断输入的字是否是回车，即按下return
@@ -243,8 +229,6 @@
     return YES;
 }
 
-
-
 - (NSString *)delSpaceAndNewline:(NSString *)string{
     NSMutableString *mutStr = [NSMutableString stringWithString:string];
     NSRange range = {0,mutStr.length};
@@ -253,8 +237,6 @@
     [mutStr replaceOccurrencesOfString:@"\n" withString:@"" options:NSLiteralSearch range:range2];
     return mutStr;
 }
-
-
 #pragma mark -- 显示键盘
 - (void)keyboardWillShow:(NSNotification *)notification {
     //获取键盘高度，在不同设备上，以及中英文下是不同的
@@ -270,7 +252,6 @@
         }];
     }
 }
-
 #pragma mark ---- 当键盘消失后，视图需要恢复原状
 ///键盘消失事件
 - (void)keyboardWillHide:(NSNotification *)notify {
@@ -281,43 +262,38 @@
         self.frame = CGRectMake(33, (SCH/2) - 214, SCW - 66, 428);
     }];
 }
-
-
 //删除
 - (void)deleteSalertAction:(UIButton *)deleteBtn{
     if ([self.addType isEqualToString:@"add"]) {
         //添加
-        [self closeView];
+         [self closeView];
     }else{
+        //这边是修改的情况
         //删除
-        
+        if ([self.delegate respondsToSelector:@selector(deleteSalertViewContentIndexpath:andType:)]) {
+            [self.delegate deleteSalertViewContentIndexpath:self.indexpath andType:self.addType];
+        }
+        [self closeView];
     }
 }
-
 //确定
 - (void)sureSalertAction:(UIButton *)sureBtn{
-    
     NSString *temp = [_contentTextview.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     temp = [self delSpaceAndNewline:temp];
     if ([temp length] < 1){
-        [SVProgressHUD showErrorWithStatus:@"请输入具体内容"];
+        jxt_showToastMessage(@"请输入具体内容", 0.75);
         return;
     }
-    
     NSString *temp1 = [_resultTextview.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
        temp1 = [self delSpaceAndNewline:temp1];
     if ([temp1 length] < 1) {
-        [SVProgressHUD showErrorWithStatus:@"请输入输出结果的内容"];
+        jxt_showToastMessage(@"请输入输出结果的内容", 0.75);
         return;
     }
-    
     if ([self.delegate respondsToSelector:@selector(backSalertViewDataWithTitle:andChoiceTitle:andSelect:andContentTextview:andResultTextview:andIndexpath:andAddType:)]) {
-//        if ([self.addType isEqualToString:@"add"]) {
-//             [self.delegate backSalertViewDataWithTitle:_titleLabel.text andChoiceTitle:_choiceBtn.currentTitle andSelect:self.select andContentTextview:_contentTextview.text andResultTextview:_resultTextview.text andIndexpath:nil andAddType:self.addType];
-//        }else{
-             [self.delegate backSalertViewDataWithTitle:_titleLabel.text andChoiceTitle:_choiceBtn.currentTitle andSelect:self.select andContentTextview:_contentTextview.text andResultTextview:_resultTextview.text andIndexpath:self.indexpath andAddType:self.addType];
-//        }
+        [self.delegate backSalertViewDataWithTitle:_titleLabel.text andChoiceTitle:_choiceBtn.currentTitle andSelect:self.select andContentTextview:_contentTextview.text andResultTextview:_resultTextview.text andIndexpath:self.indexpath andAddType:self.addType];
     }
+    [self closeView];
 }
 
 - (void)dealloc{

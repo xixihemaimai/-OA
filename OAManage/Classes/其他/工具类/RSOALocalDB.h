@@ -37,6 +37,11 @@ NS_ASSUME_NONNULL_BEGIN
 /**搜索内容*/
 - (NSMutableArray *)serachContent:(NSString*)searchText;
 
+/**搜索库区的内容*/
+- (NSMutableArray*)serachWhsID:(NSInteger)whsid;
+/**库区的搜索内容*/
+- (NSMutableArray*)serachNewContent:(NSInteger)whsid andName:(NSString *)name;
+
 
 /**批处理数据 仅作示例*/
 - (void)batchAddMutableArray:(NSMutableArray *)array;

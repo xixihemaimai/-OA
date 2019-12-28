@@ -10,6 +10,11 @@
 #import "RSOACreatFile.h"
 #import "RSMailModel.h"
 
+#import "RSShipperMode.h"
+
+#import "RSWarehouseModel.h"
+#import "RSStoreAreaModel.h"
+
 @implementation RSOALocalDB
 
 
@@ -24,7 +29,7 @@
         BOOL existFile = [fileManager fileExistsAtPath:dbPath];
         if (existFile == NO) {
            NSString* poemDBPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:creatList];
-           [fileManager copyItemAtPath:poemDBPath toPath:dbPath error:nil];
+           [fileManager copyItemAtPath:poemDBPath toPath:dbPath error:nil];    
         }
         _db = [[FMDatabase alloc] initWithPath:dbPath];
         BOOL success = [_db open];
@@ -43,7 +48,13 @@
     BOOL success = false;
     //仓库
     if ([self.creatList isEqualToString:@"mailList.sqlite"]) {
-        success  = [_db executeUpdate:@"CREATE TABLE IF NOT EXISTS t_mailList(mailListID integer primary key autoincrement,'code' text,'name' text,'sex' text,'department' text, 'position' text,'phone1' text,'phone2' text,'phone3' text,'email' text);"];
+        success = [_db executeUpdate:@"CREATE TABLE IF NOT EXISTS t_mailList(mailListID integer primary key autoincrement,'code' text,'name' text,'sex' text,'department' text, 'position' text,'phone1' text,'phone2' text,'phone3' text,'email' text);"];
+    }else if ([self.creatList isEqualToString:@"shipper.sqlite"]){
+        success = [_db executeUpdate:@"CREATE TABLE IF NOT EXISTS t_shipper(shipperListID integer primary key autoincrement,'shipperId' integer,'name' text);"];
+    }else if ([self.creatList isEqualToString:@"warehouse.sqlite"]){
+        success = [_db executeUpdate:@"CREATE TABLE IF NOT EXISTS t_warehouse(warehouseListID integer primary key autoincrement,'warehouseId' integer,'name' text);"];
+    }else if ([self.creatList isEqualToString:@"storeArea.sqlite"]){
+        success = [_db executeUpdate:@"CREATE TABLE IF NOT EXISTS t_storeArea(storeAreaListID integer primary key autoincrement,'storeAreaId' integer,'name' text,'whsId' integer);"];
     }
     [_db commit];
     if (!success || [_db hadError]) {
@@ -73,6 +84,17 @@
                 RSMailModel * mailmodel = array[i];
                
                 success = [_db executeUpdate:@"INSERT INTO t_mailList(code,name,sex,department,position,phone1,phone2,phone3,email) VALUES (?,?,?,?,?,?,?,?,?);",mailmodel.code,mailmodel.name,mailmodel.sex,mailmodel.department,mailmodel.position,mailmodel.phone1,mailmodel.phone2,mailmodel.phone3,mailmodel.email];
+            }else if ([self.creatList isEqualToString:@"shipper.sqlite"]){
+                RSShipperMode * shippermodel = array[i];
+//                NSLog(@"=================%@",shippermodel.name);
+                 success = [_db executeUpdate:@"INSERT INTO t_shipper(shipperId,name) VALUES (?,?);",[NSNumber numberWithInteger:shippermodel.shipperId],shippermodel.name];
+            }else if ([self.creatList isEqualToString:@"warehouse.sqlite"]){
+                RSWarehouseModel * warehousemodel = array[i];
+                NSLog(@"=================%@",warehousemodel.name);
+                success = [_db executeUpdate:@"INSERT INTO t_warehouse(warehouseId,name) VALUES (?,?);",[NSNumber numberWithInteger:warehousemodel.warehouseId],warehousemodel.name];
+            }else if ([self.creatList isEqualToString:@"storeArea.sqlite"]){
+                RSStoreAreaModel * storeAreamodel = array[i];
+                 success = [_db executeUpdate:@"INSERT INTO t_storeArea(storeAreaId,name,whsId) VALUES (?,?,?);",[NSNumber numberWithInteger:storeAreamodel.storeAreaId],storeAreamodel.name,[NSNumber numberWithInteger:storeAreamodel.whsId]];
             }
             if (!success ) {
                 NSLog(@"插入失败1");
@@ -98,6 +120,14 @@
     BOOL success = NO;
     if ([self.creatList isEqualToString:@"mailList.sqlite"]) {
         success = [_db executeUpdate:@"DELETE  FROM t_mailList;"];
+    }else if ([self.creatList isEqualToString:@"shipper.sqlite"]){
+        success = [_db executeUpdate:@"DELETE  FROM t_shipper;"];
+    }else if ([self.creatList isEqualToString:@"warehouse.sqlite"]){
+        success = [_db executeUpdate:@"DELETE  FROM t_warehouse;"];
+        
+    }else if ([self.creatList isEqualToString:@"storeArea.sqlite"]){
+        
+        success = [_db executeUpdate:@"DELETE  FROM t_storeArea;"];
     }
     [_db commit];
     if (!success || [_db hadError]) {
@@ -115,6 +145,14 @@
     NSString * sqlStr = [NSString string];
     if ([self.creatList isEqualToString:@"mailList.sqlite"]) {
          sqlStr=[NSString stringWithFormat:@"SELECT  *  FROM t_mailList"];
+    }else if ([self.creatList isEqualToString:@"shipper.sqlite"]){
+        
+        sqlStr=[NSString stringWithFormat:@"SELECT  *  FROM t_shipper"];
+    }else if ([self.creatList isEqualToString:@"warehouse.sqlite"]){
+        sqlStr=[NSString stringWithFormat:@"SELECT  *  FROM t_warehouse"];
+    }else if ([self.creatList isEqualToString:@"storeArea.sqlite"]){
+        
+        sqlStr=[NSString stringWithFormat:@"SELECT  *  FROM t_storeArea"];
     }
     FMResultSet* rs = [_db executeQuery:sqlStr];
     while ([rs next]) {
@@ -130,6 +168,26 @@
             mailmodel.phone3 = [rs stringForColumn:@"phone3"];
             mailmodel.email = [rs stringForColumn:@"email"];
             [result addObject:mailmodel];
+        }else if ([self.creatList isEqualToString:@"shipper.sqlite"]){
+            RSShipperMode * shippermodel = [[RSShipperMode alloc]init];
+            shippermodel.shipperId = [rs intForColumn:@"shipperId"];
+            
+            shippermodel.name =  [rs stringForColumn:@"name"];
+            [result addObject:shippermodel];
+        }else if ([self.creatList isEqualToString:@"warehouse.sqlite"]){
+            RSWarehouseModel * warehousemodel = [[RSWarehouseModel alloc]init];
+            warehousemodel.warehouseId = [rs intForColumn:@"warehouseId"];
+            
+            warehousemodel.name =  [rs stringForColumn:@"name"];
+            [result addObject:warehousemodel];
+            
+        }else if ([self.creatList isEqualToString:@"storeArea.sqlite"]){
+            
+            RSStoreAreaModel * storeAreamodel = [[RSStoreAreaModel alloc]init];
+            storeAreamodel.storeAreaId = [rs intForColumn:@"storeAreaId"];
+            storeAreamodel.whsId = [rs intForColumn:@"whsId"];
+            storeAreamodel.name =  [rs stringForColumn:@"name"];
+            [result addObject:storeAreamodel];
         }
     }
     [rs close];
@@ -142,7 +200,15 @@
     NSMutableArray* result = [[NSMutableArray alloc] init];
     NSString * sqlStr = [NSString string];
     if ([self.creatList isEqualToString:@"mailList.sqlite"]) {
-        sqlStr=[NSString stringWithFormat:@"SELECT  *  FROM t_mailList WHERE name LIKE '%@%%'", searchText];
+        sqlStr=[NSString stringWithFormat:@"SELECT  *  FROM t_mailList WHERE name LIKE '%%%@%%'", searchText];
+    }else if ([self.creatList isEqualToString:@"shipper.sqlite"]){
+        sqlStr=[NSString stringWithFormat:@"SELECT  *  FROM t_shipper WHERE name LIKE '%%%@%%'", searchText];
+    }else if ([self.creatList isEqualToString:@"warehouse.sqlite"]){
+        
+        sqlStr=[NSString stringWithFormat:@"SELECT  *  FROM t_warehouse WHERE name LIKE '%%%@%%'", searchText];
+    }else if ([self.creatList isEqualToString:@"storeArea.sqlite"]){
+        sqlStr=[NSString stringWithFormat:@"SELECT  *  FROM t_storeArea WHERE name LIKE '%%%@%%'", searchText];
+        
     }
     FMResultSet* rs = [_db executeQuery:sqlStr];
     while ([rs next]) {
@@ -158,11 +224,81 @@
            mailmodel.phone3 = [rs stringForColumn:@"phone3"];
            mailmodel.email = [rs stringForColumn:@"email"];
            [result addObject:mailmodel];
+        }else if ([self.creatList isEqualToString:@"shipper.sqlite"]){
+            RSShipperMode * shippermodel = [[RSShipperMode alloc]init];
+            shippermodel.shipperId = [rs intForColumn:@"shipperId"];
+            shippermodel.name =  [rs stringForColumn:@"name"];
+            [result addObject:shippermodel];
+        }else if ([self.creatList isEqualToString:@"warehouse.sqlite"]){
+            RSWarehouseModel * warehousemodel = [[RSWarehouseModel alloc]init];
+            warehousemodel.warehouseId = [rs intForColumn:@"warehouseId"];
+            
+            warehousemodel.name =  [rs stringForColumn:@"name"];
+            [result addObject:warehousemodel];
+            
+        }else if ([self.creatList isEqualToString:@"storeArea.sqlite"]){
+            
+            RSStoreAreaModel * storeAreamodel = [[RSStoreAreaModel alloc]init];
+            storeAreamodel.storeAreaId = [rs intForColumn:@"storeAreaId"];
+            storeAreamodel.whsId = [rs intForColumn:@"whsId"];
+            storeAreamodel.name =  [rs stringForColumn:@"name"];
+            [result addObject:storeAreamodel];
         }
     }
     [rs close];
     return result;
 }
+
+
+
+
+- (NSMutableArray*)serachWhsID:(NSInteger)whsid
+{
+    NSMutableArray* result = [[NSMutableArray alloc] init];
+    NSString * sqlStr = [NSString string];
+   if ([self.creatList isEqualToString:@"storeArea.sqlite"]){
+        sqlStr=[NSString stringWithFormat:@"SELECT  *  FROM t_storeArea WHERE whsId LIKE '%%%ld%%'", whsid];
+    }
+    FMResultSet* rs = [_db executeQuery:sqlStr];
+    while ([rs next]) {
+        if ([self.creatList isEqualToString:@"storeArea.sqlite"]){
+            RSStoreAreaModel * storeAreamodel = [[RSStoreAreaModel alloc]init];
+            storeAreamodel.storeAreaId = [rs intForColumn:@"storeAreaId"];
+            storeAreamodel.whsId = [rs intForColumn:@"whsId"];
+            storeAreamodel.name =  [rs stringForColumn:@"name"];
+            [result addObject:storeAreamodel];
+        }
+    }
+    [rs close];
+    return result;
+}
+
+
+
+
+- (NSMutableArray*)serachNewContent:(NSInteger)whsid andName:(NSString *)name
+{
+    NSMutableArray* result = [[NSMutableArray alloc] init];
+    NSString * sqlStr = [NSString string];
+   if ([self.creatList isEqualToString:@"storeArea.sqlite"]){
+        sqlStr=[NSString stringWithFormat:@"SELECT  *  FROM t_storeArea WHERE name LIKE '%%%@%%'and  whsId LIKE '%%%ld%%'", name,whsid];
+    }
+    FMResultSet* rs = [_db executeQuery:sqlStr];
+    while ([rs next]) {
+        if ([self.creatList isEqualToString:@"storeArea.sqlite"]){
+            RSStoreAreaModel * storeAreamodel = [[RSStoreAreaModel alloc]init];
+            storeAreamodel.storeAreaId = [rs intForColumn:@"storeAreaId"];
+            storeAreamodel.whsId = [rs intForColumn:@"whsId"];
+            storeAreamodel.name =  [rs stringForColumn:@"name"];
+            [result addObject:storeAreamodel];
+        }
+    }
+    [rs close];
+    return result;
+}
+
+
+
 
 
 @end

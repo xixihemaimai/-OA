@@ -35,8 +35,8 @@ sex 性别
  "Flow_SupplierConsume"        用品领用                   行政流程
  "Flow_VehicleReservation"      车辆预约登记            行政流程
  "Flow_ApplyActivity"                员工活动申请            行政流程
- "Flow_Entertain"                      招待住宿申请            行政流程
- "Flow_Entertain2"                    招待申请                   行政流程
+ "Entertain"                      招待住宿申请            行政流程
+ "Flow_Entertain"                    招待申请                   行政流程
  
 
  "Flow_ApplyLeave"                 请假申请                   人事流程
@@ -109,14 +109,20 @@ sex 性别
 @property (nonatomic,strong)NSString * userCode;
 
 @property (nonatomic,strong)NSString * appLoginToken;
-
+//申请部门
 @property (nonatomic,strong)NSString * deptName;
 
 @property (nonatomic,strong)NSString * sex;
 
 @property (nonatomic,strong)NSString * aesKey;
-
+//申请部门ID
 @property (nonatomic,assign)NSInteger deptId;
+//申请人
+@property (nonatomic,strong)NSString * empName;
+//申请人ID
+@property (nonatomic,assign)NSInteger empId;
+
+
 
 @property (nonatomic,assign)BOOL  Flow_Purchase;
 @property (nonatomic,assign)BOOL  Flow_Restaurant;
@@ -125,8 +131,8 @@ sex 性别
 @property (nonatomic,assign)BOOL  Flow_SupplierConsume;
 @property (nonatomic,assign)BOOL  Flow_VehicleReservation;
 @property (nonatomic,assign)BOOL  Flow_ApplyActivity;
+@property (nonatomic,assign)BOOL  Entertain;
 @property (nonatomic,assign)BOOL  Flow_Entertain;
-@property (nonatomic,assign)BOOL  Flow_Entertain2;
 
 
 @property (nonatomic,assign)BOOL  Flow_ApplyLeave;

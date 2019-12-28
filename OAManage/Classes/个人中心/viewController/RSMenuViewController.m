@@ -21,6 +21,7 @@
 //密码修改
 #import "RSPasswordModificationViewController.h"
 
+#import "RSTouchViewController.h"
 
 @interface RSMenuViewController ()
 
@@ -53,7 +54,7 @@ static NSString * MENUHEADER = @"MENUHEADER";
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < 5; i++) {
         NSString * str = [NSString stringWithFormat:@"%d",i];
         [self.menuArray addObject:str];
     }
@@ -245,6 +246,14 @@ static NSString * MENUHEADER = @"MENUHEADER";
     }else if (indexPath.row == 2){
         cell.menuImageView.image = [UIImage imageNamed:@"清除缓存"];
         cell.menuLabel.text = @"清除缓存";
+    }else if (indexPath.row == 3){
+        cell.menuImageView.image = [UIImage imageNamed:@"图标"];
+        cell.menuLabel.text = @"荒料解控";
+        
+    }else if (indexPath.row == 4){
+        cell.menuImageView.image = [UIImage imageNamed:@"图标复制"];
+        cell.menuLabel.text = @"大板解控";
+        
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
@@ -282,12 +291,10 @@ static NSString * MENUHEADER = @"MENUHEADER";
     if (indexpath.row == 0) {
         RSPersonalInformationViewController * personalInformationVc = [[RSPersonalInformationViewController alloc]init];
         [self.navigationController pushViewController:personalInformationVc animated:YES];
-        
     }else if (indexpath.row == 1) {
         RSPasswordModificationViewController * passwordModificationVc = [[RSPasswordModificationViewController alloc]init];
-        
         [self.navigationController pushViewController:passwordModificationVc animated:YES];
-    }else{
+    }else if(indexpath.row == 2){
      //清除缓存
        // NSUInteger bytesCache = [[SDImageCache sharedImageCache] getSize];
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -310,17 +317,18 @@ static NSString * MENUHEADER = @"MENUHEADER";
             alert.modalPresentationStyle = UIModalPresentationFullScreen;
         }
         [self presentViewController:alert animated:YES completion:nil];
+    }else if (indexpath.row == 3){
+        RSTouchViewController * touchVc = [[RSTouchViewController alloc]init];
+        touchVc.selectType = @"huangliao";
+           [self.navigationController pushViewController:touchVc animated:YES];
+        
+    }else if (indexpath.row == 4){
+        
+        RSTouchViewController * touchVc = [[RSTouchViewController alloc]init];
+        touchVc.selectType = @"daban";
+           [self.navigationController pushViewController:touchVc animated:YES];
+        
     }
-}
-
-- (void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
-    
-}
-
-- (void)viewDidDisappear:(BOOL)animated{
-    [super viewDidDisappear:animated];
-    
 }
 
 //FIXME:退出

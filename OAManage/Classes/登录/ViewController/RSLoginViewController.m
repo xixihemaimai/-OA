@@ -9,7 +9,6 @@
 #import "RSLoginViewController.h"
 #import "JJOptionView.h"
 
-#import "RSHomeViewController.h"
 #import "RSMenuViewController.h"
 #import "AppDelegate.h"
 
@@ -26,6 +25,8 @@
 
 //新版本首界面
 #import "RSMainViewController.h"
+
+#import "RSWKOAmanagerViewController.h"
 
 
 
@@ -59,7 +60,10 @@ typedef void(^Obtain)(BOOL isValue);
 @implementation RSLoginViewController
 
 
-
+-(void)viewWillAppear:(BOOL)animated{
+    
+    self.navigationController.navigationBar.hidden = YES;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -153,24 +157,24 @@ typedef void(^Obtain)(BOOL isValue);
      label.textColor = [UIColor colorWithHexColorStr:@"#333333"];
      [loginView addSubview:label];
      
-     UIButton * userProtocolBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-     [userProtocolBtn setTitle:@"用户协议指引" forState:UIControlStateNormal];
-     CGRect userProtocol = [userProtocolBtn.currentTitle boundingRectWithSize:CGSizeMake(MAXFLOAT, 20)options:NSStringDrawingUsesLineFragmentOrigin
-                                          attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]} context:nil];
-     userProtocolBtn.titleLabel.font = [UIFont systemFontOfSize:14];
-     userProtocolBtn.tag = 0;
-     [userProtocolBtn addTarget:self action:@selector(jumpInformationAction:) forControlEvents:UIControlEventTouchUpInside];
-     [userProtocolBtn setTitleColor:[UIColor colorWithHexColorStr:@"#3385ff"] forState:UIControlStateNormal];
-     [loginView addSubview:userProtocolBtn];
-     
-     UILabel * andLabel = [[UILabel alloc]init];
-     andLabel.text = @"和";
-     andLabel.textAlignment = NSTextAlignmentCenter;
-     andLabel.textColor = [UIColor colorWithHexColorStr:@"#333333"];
-     CGRect andLabelRect = [andLabel.text boundingRectWithSize:CGSizeMake(MAXFLOAT, 20)options:NSStringDrawingUsesLineFragmentOrigin
-                                                                   attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]} context:nil];
-     andLabel.font = [UIFont systemFontOfSize:14];
-     [loginView addSubview:andLabel];
+//     UIButton * userProtocolBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//     [userProtocolBtn setTitle:@"用户协议指引" forState:UIControlStateNormal];
+//     CGRect userProtocol = [userProtocolBtn.currentTitle boundingRectWithSize:CGSizeMake(MAXFLOAT, 20)options:NSStringDrawingUsesLineFragmentOrigin
+//                                          attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]} context:nil];
+//     userProtocolBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+//     userProtocolBtn.tag = 0;
+//     [userProtocolBtn addTarget:self action:@selector(jumpInformationAction:) forControlEvents:UIControlEventTouchUpInside];
+//     [userProtocolBtn setTitleColor:[UIColor colorWithHexColorStr:@"#3385ff"] forState:UIControlStateNormal];
+//     [loginView addSubview:userProtocolBtn];
+//
+//     UILabel * andLabel = [[UILabel alloc]init];
+//     andLabel.text = @"和";
+//     andLabel.textAlignment = NSTextAlignmentCenter;
+//     andLabel.textColor = [UIColor colorWithHexColorStr:@"#333333"];
+//     CGRect andLabelRect = [andLabel.text boundingRectWithSize:CGSizeMake(MAXFLOAT, 20)options:NSStringDrawingUsesLineFragmentOrigin
+//                                                                   attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]} context:nil];
+//     andLabel.font = [UIFont systemFontOfSize:14];
+//     [loginView addSubview:andLabel];
      
      UIButton * userPrivacyBtn = [UIButton buttonWithType:UIButtonTypeCustom];
      [userPrivacyBtn setTitle:@"隐私政策指引" forState:UIControlStateNormal];
@@ -178,13 +182,10 @@ typedef void(^Obtain)(BOOL isValue);
      CGRect userPrivacy = [userPrivacyBtn.currentTitle boundingRectWithSize:CGSizeMake(MAXFLOAT, 20)options:NSStringDrawingUsesLineFragmentOrigin
                                                                    attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]} context:nil];
      userPrivacyBtn.tag = 1;
+    [userPrivacyBtn addTarget:self action:@selector(jumpInformationAction:) forControlEvents:UIControlEventTouchUpInside];
      [userPrivacyBtn setTitleColor:[UIColor colorWithHexColorStr:@"#3385ff"] forState:UIControlStateNormal];
      [loginView addSubview:userPrivacyBtn];
     
-    
-    
-    
-//    if (IS_IPHONE) {
         loginView.sd_layout
         .centerYEqualToView(self.view)
         .centerXEqualToView(self.view)
@@ -228,131 +229,31 @@ typedef void(^Obtain)(BOOL isValue);
         .heightIs(39);
     
         label.sd_layout
-        .leftSpaceToView(loginView, 12)
+        .centerXIs(SCW/2 - 60)
         .topSpaceToView(loginBtn, 10)
         .widthIs(disCountrect.size.width)
         .heightIs(20);
         
         
-         userProtocolBtn.sd_layout
-    .topEqualToView(label)
-    .bottomEqualToView(label)
-    .leftSpaceToView(label, 0)
-    .widthIs(userProtocol.size.width);
-    
-    andLabel.sd_layout
-    .leftSpaceToView(userProtocolBtn, 0)
-    .topEqualToView(userProtocolBtn)
-    .bottomEqualToView(userProtocolBtn)
-    .widthIs(andLabelRect.size.width);
-    
+//         userProtocolBtn.sd_layout
+//    .topEqualToView(label)
+//    .bottomEqualToView(label)
+//    .leftSpaceToView(label, 0)
+//    .widthIs(userProtocol.size.width);
+//
+//    andLabel.sd_layout
+//    .leftSpaceToView(userProtocolBtn, 0)
+//    .topEqualToView(userProtocolBtn)
+//    .bottomEqualToView(userProtocolBtn)
+//    .widthIs(andLabelRect.size.width);
+//
     
     userPrivacyBtn.sd_layout
-    .topEqualToView(andLabel)
-    .bottomEqualToView(andLabel)
-    .leftSpaceToView(andLabel,  0)
+    .topEqualToView(label)
+    .bottomEqualToView(label)
+    .leftSpaceToView(label,  0)
     .widthIs(userPrivacy.size.width);
-    
-    
-    
-//    }else{
-//
-//        if (DEVICES_IS_PRO_12_9) {
-//
-//            loginView.sd_layout
-//            .centerYEqualToView(self.view)
-//            .centerXEqualToView(self.view)
-//            .widthRatioToView(self.view, 0.9)
-//            .autoHeightRatio(0);
-//
-//            LoginImageView.sd_layout
-//            .centerXEqualToView(loginView)
-//            .widthIs(180 * SCALE_TO_PRO)
-//            .heightEqualToWidth()
-//            .topSpaceToView(loginView, 10);
-//
-//
-//
-//            userNameField.sd_layout
-//            .centerXEqualToView(loginView)
-//            .topSpaceToView(LoginImageView, 46)
-//            .leftSpaceToView(loginView, 54)
-//            .rightSpaceToView(loginView, 54)
-//            .heightIs(60 * SCALE_TO_PRO);
-//
-//
-//            passwordField.sd_layout
-//            .centerXEqualToView(loginView)
-//            .topSpaceToView(userNameField, 18)
-//            .leftEqualToView(userNameField)
-//            .rightEqualToView(userNameField)
-//            .heightIs(60 * SCALE_TO_PRO);
-//
-//
-//
-//            roleView.sd_layout
-//            .centerXEqualToView(loginView)
-//            .topSpaceToView(passwordField, 18)
-//            .leftEqualToView(passwordField)
-//            .rightEqualToView(passwordField)
-//            .heightIs(60 * SCALE_TO_PRO);
-//
-//
-//            loginBtn.sd_layout
-//            .centerXEqualToView(loginView)
-//            .topSpaceToView(roleView, 36)
-//            .leftEqualToView(roleView)
-//            .rightEqualToView(roleView)
-//            .heightIs(60 * SCALE_TO_PRO);
-//
-//        }else{
-//
-//            loginView.sd_layout
-//            .centerYEqualToView(self.view)
-//            .centerXEqualToView(self.view)
-//            .widthRatioToView(self.view, 0.9)
-//            .autoHeightRatio(0);
-//
-//            LoginImageView.sd_layout
-//            .centerXEqualToView(loginView)
-//            .widthIs((180 / SCW)  * SCW)
-//            .heightEqualToWidth()
-//            .topSpaceToView(loginView, 10);
-//
-//
-//
-//            userNameField.sd_layout
-//            .centerXEqualToView(loginView)
-//            .topSpaceToView(LoginImageView, 46)
-//            .leftSpaceToView(loginView, 54)
-//            .rightSpaceToView(loginView, 54)
-//            .heightIs((60 / SCW)  * SCW);
-//
-//
-//
-//            passwordField.sd_layout
-//            .centerXEqualToView(loginView)
-//            .topSpaceToView(userNameField, 18)
-//            .leftEqualToView(userNameField)
-//            .rightEqualToView(userNameField)
-//            .heightIs((60 / SCW)  * SCW);
-//
-//
-//            roleView.sd_layout
-//            .centerXEqualToView(loginView)
-//            .topSpaceToView(passwordField, 18)
-//            .leftEqualToView(passwordField)
-//            .rightEqualToView(passwordField)
-//            .heightIs((60 / SCW)  * SCW);
-//
-//            loginBtn.sd_layout
-//            .centerXEqualToView(loginView)
-//            .topSpaceToView(roleView, 36)
-//            .leftEqualToView(roleView)
-//            .rightEqualToView(roleView)
-//            .heightIs((60 / SCW)  * SCW);
-//        }
-//    }
+
     loginBtn.layer.cornerRadius = 20;
     loginBtn.layer.masksToBounds = YES;
 
@@ -377,6 +278,7 @@ typedef void(^Obtain)(BOOL isValue);
             NetworkTool * network = [[NetworkTool alloc]init];
             NSString * canshu = URL_YIGODATA_USERCODE(temp);
             NSString * soapStr = URL_YIGODATA_IOS(URL_LOGINWEBSERVICE, URL_FINDROLE, canshu);
+            
            [network reloadWebServiceNoDataURL:URL_YIGO_IOS andParameters:soapStr andURLName:URL_FINDROLE];
             //NSMutableArray * array = [NSMutableArray arrayWithObjects:@"管理员",@"游客",@"货主",@"超级管理人员",@"服务人员", nil];
             network.successArrayReload = ^(NSMutableArray *array) {
@@ -551,6 +453,10 @@ typedef void(^Obtain)(BOOL isValue);
         usermodel.userId = [dict[@"userId"]integerValue];
         usermodel.userName = dict[@"userName"];
         usermodel.deptId = [dict[@"deptId"] integerValue];
+        usermodel.empId = [dict[@"empId"] integerValue];
+        usermodel.empName = dict[@"empName"];
+        
+        
         usermodel.AM_Requisition = [dict[@"flowAccess"][@"AM_Requisition"]boolValue];
         usermodel.AM_SetlleIn = [dict[@"flowAccess"][@"AM_SetlleIn"]boolValue];
         usermodel.BL_OutNotice = [dict[@"flowAccess"][@"BL_OutNotice"]boolValue];
@@ -573,8 +479,8 @@ typedef void(^Obtain)(BOOL isValue);
         usermodel.Flow_Cachet = [dict[@"flowAccess"][@"Flow_Cachet"]boolValue];
         usermodel.Flow_Chapter = [dict[@"flowAccess"][@"Flow_Chapter"]boolValue];
         usermodel.Flow_Contract = [dict[@"flowAccess"][@"Flow_Contract"]boolValue];
+        usermodel.Entertain = [dict[@"flowAccess"][@"Entertain"]boolValue];
         usermodel.Flow_Entertain = [dict[@"flowAccess"][@"Flow_Entertain"]boolValue];
-        usermodel.Flow_Entertain2 = [dict[@"flowAccess"][@"Flow_Entertain2"]boolValue];
         usermodel.Flow_EquipService = [dict[@"flowAccess"][@"Flow_EquipService"]boolValue];
         usermodel.Flow_Equipment = [dict[@"flowAccess"][@"Flow_Equipment"]boolValue];
         usermodel.Flow_FileUpdate = [dict[@"flowAccess"][@"Flow_FileUpdate"]boolValue];
@@ -624,7 +530,6 @@ typedef void(^Obtain)(BOOL isValue);
             
         });
     };
-    
     network.failure = ^(NSDictionary *dict) {
         self.loginBtn.enabled = YES;
         jxt_dismissHUD();
@@ -634,20 +539,23 @@ typedef void(^Obtain)(BOOL isValue);
     };
 }
 
-
 - (void)optionView:(JJOptionView *)optionView selectedIndex:(NSInteger)selectedIndex {
     RSRoleModel * rolemodel = [optionView.dataSource objectAtIndex:selectedIndex];
     _roleInt = rolemodel.roleID;
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+//用户协议指引或者隐私政策指引
+- (void)jumpInformationAction:(UIButton *)btn{
+//    if (btn.tag == 0) {
+//       //用户协议指引
+//    }else{
+       //隐私政策指引
+//    }
+    RSWKOAmanagerViewController * wkOAstr = [[RSWKOAmanagerViewController alloc]init];
+    wkOAstr.type = @"5";
+    [self.navigationController pushViewController:wkOAstr animated:YES];
+    
 }
-*/
+
 
 @end

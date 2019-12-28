@@ -21,7 +21,7 @@
 
 - (void)saveContext;
 
-@property (nonatomic,strong) REFrostedViewController *frostedViewController;
+//@property (nonatomic,strong) REFrostedViewController *frostedViewController;
 
 
 @end

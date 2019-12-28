@@ -13,11 +13,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol RSSalertViewDelegate <NSObject>
 
+//确实，包括修改和添加
 - (void)backSalertViewDataWithTitle:(NSString *)title andChoiceTitle:(NSString *)choiceTitle andSelect:(NSInteger)select andContentTextview:(NSString *)contentTextStr andResultTextview:(NSString *)resultTextStr andIndexpath:(NSIndexPath *)indexpath andAddType:(NSString *)addType;
 
+//删除
+- (void)deleteSalertViewContentIndexpath:(NSIndexPath *)indexpath andType:(NSString *)addType;
+
+
 @end
-
-
 
 
 @interface RSSalertView : UIView
@@ -33,6 +36,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong)UITextView * resultTextview;
 //第几组第几行
 @property (nonatomic,strong)NSIndexPath * indexpath;
+
 //添加新的，还是修改 ,add添加，update(修改或者删除）
 @property (nonatomic,strong)NSString * addType;
 

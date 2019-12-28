@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface RSAuditedViewController : RSBaseViewController
-@property (nonatomic,strong)NSMutableArray * auditedArray;
+
 @end
 
 NS_ASSUME_NONNULL_END

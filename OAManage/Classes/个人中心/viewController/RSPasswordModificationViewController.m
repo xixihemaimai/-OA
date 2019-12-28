@@ -25,17 +25,13 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    self.navigationController.navigationBar.hidden = NO;
-    
+    self.navigationController.navigationBar.hidden = NO;    
 }
-
-
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"修改密码";
-    self.frostedViewController.panGestureEnabled = NO;
+    //self.frostedViewController.panGestureEnabled = NO;
     self.view.backgroundColor = [UIColor whiteColor];
     self.emptyView.hidden = YES;
     
@@ -344,8 +340,13 @@
         [user removeObjectForKey:@"AES"];
         [user synchronize];
         AppDelegate * appdelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+        
         RSLoginViewController * loginVc = [[RSLoginViewController alloc]init];
-        appdelegate.window.rootViewController = loginVc;
+               RSMyNavigationViewController * mayNa = [[RSMyNavigationViewController alloc]initWithRootViewController:loginVc];
+               
+        
+//        RSLoginViewController * loginVc = [[RSLoginViewController alloc]init];
+        appdelegate.window.rootViewController = mayNa;
     };
 }
 

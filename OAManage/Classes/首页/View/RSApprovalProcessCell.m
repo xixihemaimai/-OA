@@ -14,8 +14,6 @@
 
 
 
-@property (nonatomic,strong)UILabel * concreteContentLabel;
-
 @property (nonatomic,strong)UIView * midView;
 
 @property (nonatomic,strong)UILabel * outResultLabel;
@@ -96,29 +94,28 @@
     return self;
 }
 
-
-
 - (void)layoutSubviews{
-    
-    self.showview.frame = self.approvalProcessmodel.viewFrame;
-    self.concreteContentLabel.frame = self.approvalProcessmodel.concreteContentFrame;
-    self.openBtn.frame = self.approvalProcessmodel.oepnBtnFrame;
-    self.midView.frame = self.approvalProcessmodel.midFrame;
-    self.informationLabel.frame = self.approvalProcessmodel.informationFrame;
-    self.outResultLabel.frame = self.approvalProcessmodel.outResultFrame;
-    
+    self.showview.frame = self.workTypemodel.viewFrame;
+    self.concreteContentLabel.frame = self.workTypemodel.concreteContentFrame;
+    self.openBtn.frame = self.workTypemodel.oepnBtnFrame;
+    self.midView.frame = self.workTypemodel.midFrame;
+    self.informationLabel.frame = self.workTypemodel.informationFrame;
+    self.outResultLabel.frame = self.workTypemodel.outResultFrame;
 }
 
-
-- (void)setApprovalProcessmodel:(RSApprovalProcessSecondModel *)approvalProcessmodel{
-    
-    _approvalProcessmodel = approvalProcessmodel;
-    self.openBtn.selected = approvalProcessmodel.open;
-    self.concreteContentLabel.text = _approvalProcessmodel.concreteContent;
-    self.informationLabel.text = _approvalProcessmodel.information;
-    self.outResultLabel.text = _approvalProcessmodel.outResult;
-    
+- (void)setWorkTypemodel:(RSWorkTypeModel *)workTypemodel{
+    _workTypemodel = workTypemodel;
+    self.openBtn.selected = _workTypemodel.open;
+    if (self.openBtn.selected) {
+        self.midView.hidden = NO;
+    }else{
+        self.midView.hidden = YES;
+    }
+    self.concreteContentLabel.text = _workTypemodel.content;
+    self.informationLabel.text = _workTypemodel.level;
+    self.outResultLabel.text = _workTypemodel.result;
 }
+
 
 
 @end

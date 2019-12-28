@@ -8,9 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-
-#import "RSHomeViewController.h"
-
 @class RSMenuViewController;
 @protocol RSMenuViewControllerDelegate <NSObject>
 

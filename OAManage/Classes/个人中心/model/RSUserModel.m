@@ -106,6 +106,11 @@
     [aCoder encodeObject:self.aesKey forKey:@"aesKey"];
     [aCoder encodeInteger:self.deptId forKey:@"deptId"];
     
+    [aCoder encodeInteger:self.empId forKey:@"empId"];
+     [aCoder encodeObject:self.empName forKey:@"empName"];
+    
+    
+    
     [aCoder encodeBool:self.Flow_Purchase forKey:@"Flow_Purchase"];
     [aCoder encodeBool:self.Flow_Restaurant forKey:@"Flow_Restaurant"];
     [aCoder encodeBool:self.UseCar forKey:@"UseCar"];
@@ -113,8 +118,8 @@
     [aCoder encodeBool:self.Flow_SupplierConsume forKey:@"Flow_SupplierConsume"];
     [aCoder encodeBool:self.Flow_VehicleReservation forKey:@"Flow_VehicleReservation"];
     [aCoder encodeBool:self.Flow_ApplyActivity forKey:@"Flow_ApplyActivity"];
+    [aCoder encodeBool:self.Entertain forKey:@"Entertain"];
     [aCoder encodeBool:self.Flow_Entertain forKey:@"Flow_Entertain"];
-    [aCoder encodeBool:self.Flow_Entertain2 forKey:@"Flow_Entertain2"];
     
     
     [aCoder encodeBool:self.Flow_ApplyLeave forKey:@"Flow_ApplyLeave"];
@@ -187,6 +192,8 @@
         self.aesKey = [aDecoder decodeObjectForKey:@"aesKey"];
         
         self.deptId = [aDecoder decodeIntegerForKey:@"deptId"];
+        self.empId = [aDecoder decodeIntegerForKey:@"empId"];
+        self.empName = [aDecoder decodeObjectForKey:@"empName"];
         
         
         
@@ -197,8 +204,8 @@
         self.Flow_SupplierConsume = [aDecoder decodeBoolForKey:@"Flow_SupplierConsume"];
         self.Flow_VehicleReservation = [aDecoder decodeBoolForKey:@"Flow_VehicleReservation"];
         self.Flow_ApplyActivity = [aDecoder decodeBoolForKey:@"Flow_ApplyActivity"];
+        self.Entertain = [aDecoder decodeBoolForKey:@"Entertain"];
         self.Flow_Entertain = [aDecoder decodeBoolForKey:@"Flow_Entertain"];
-        self.Flow_Entertain2 = [aDecoder decodeBoolForKey:@"Flow_Entertain2"];
         
         
         
@@ -271,6 +278,9 @@
     usermodel.sex = self.sex;
     usermodel.aesKey = self.aesKey;
     usermodel.deptId = self.deptId;
+    usermodel.empId = self.empId;
+    usermodel.empName = self.empName;
+    
     
     usermodel.Flow_Purchase = self.Flow_Purchase;
     usermodel.Flow_Restaurant = self.Flow_Restaurant;
@@ -279,8 +289,8 @@
     usermodel.Flow_SupplierConsume = self.Flow_SupplierConsume;
     usermodel.Flow_VehicleReservation = self.Flow_VehicleReservation;
     usermodel.Flow_ApplyActivity = self.Flow_ApplyActivity;
+    usermodel.Entertain = self.Entertain;
     usermodel.Flow_Entertain = self.Flow_Entertain;
-    usermodel.Flow_Entertain2 = self.Flow_Entertain2;
     
     
     usermodel.Flow_ApplyLeave = self.Flow_ApplyLeave;
