@@ -257,7 +257,21 @@
                 }
             }else if ([urlName isEqualToString:URL_LOGOUT]){
                 [SVProgressHUD showErrorWithStatus:@"退出登录失败"];
-            }else {
+            }else if ([urlName isEqualToString:URL_VALIDUSERCODE]){
+                
+                //这边是判断账号是否重名
+                [SVProgressHUD showErrorWithStatus:@"判断账号重名失败"];
+                if (self.failure) {
+                    self.failure(responseObject);
+                }
+            }else if ([urlName isEqualToString:URL_REGISTERUSER]){
+                [SVProgressHUD showErrorWithStatus:@"注册失败"];
+                if (self.failure) {
+                    self.failure(responseObject);
+                }
+                
+            }
+            else {
                [SVProgressHUD showErrorWithStatus:@"获取失败"];
                 if (self.failure) {
                     self.failure(responseObject);
@@ -329,12 +343,8 @@
                 if (self.successArrayReload) {
                     self.successArrayReload(array);
                 }
-                
-                
             }else if ([_tempStr isEqualToString:URL_STOCK]){
-                
                 NSDictionary * dic = [self decryptMethodWithDictionary:dict];
-                
                 if (self.successReload) {
                     self.successReload(dic);
                 }
@@ -352,9 +362,6 @@
                 if (self.successReload) {
                     self.successReload(dic);
                 }
-                
-                
-                
             }else if ([_tempStr isEqualToString:URL_LIFTDELETE]){
                 NSDictionary * dic = [self decryptMethodWithDictionary:dict];
                 
@@ -380,10 +387,16 @@
                 if (self.successReload) {
                         self.successReload(dic);
                 }
-                
-                
-                
+            }else if ([_tempStr isEqualToString:URL_VALIDUSERCODE]){
+                if (self.successReload) {
+                    self.successReload(dict);
+                }
+            }else if ([_tempStr isEqualToString:URL_REGISTERUSER]){
+                if (self.successReload) {
+                    self.successReload(dict);
+                }
             }
+            
 //            else if ([_tempStr isEqualToString:URL_NOTICE]){
 //                NSDictionary * dic = [self decryptMethodWithDictionary:dict];
 //
@@ -473,13 +486,12 @@
             //|| [_tempStr isEqualToString:URL_NOTICE] || [_tempStr isEqualToString:URL_TOBEAUDIT]
             if (  [_tempStr isEqualToString:URL_CHANGPWD] || [_tempStr isEqualToString:URL_FLOWLIST] || [_tempStr isEqualToString:URL_LOGOUT]){
                 [self errerAlertUserStatus:dict];
-            }else if ([_tempStr isEqualToString:URL_LOGIN] ||[_tempStr isEqualToString:URL_GENPUBLICKEY] || [_tempStr isEqualToString:URL_FINDROLE] || [_tempStr isEqualToString:URL_MYAUDIT] ||  [_tempStr isEqualToString:URL_AUDITFLOW] || [_tempStr isEqualToString:URL_LIFTLIST] || [_tempStr isEqualToString:URL_LIFTSAVE] || [_tempStr isEqualToString:URL_LIFTLOAD] || [_tempStr isEqualToString:URL_LIFTDELETE] || [_tempStr isEqualToString:URL_LIFTUPDATE] || [_tempStr isEqualToString:URL_LIFTSTATE]){
+            }else if ([_tempStr isEqualToString:URL_LOGIN] ||[_tempStr isEqualToString:URL_GENPUBLICKEY] || [_tempStr isEqualToString:URL_FINDROLE] || [_tempStr isEqualToString:URL_MYAUDIT] ||  [_tempStr isEqualToString:URL_AUDITFLOW] || [_tempStr isEqualToString:URL_LIFTLIST] || [_tempStr isEqualToString:URL_LIFTSAVE] || [_tempStr isEqualToString:URL_LIFTLOAD] || [_tempStr isEqualToString:URL_LIFTDELETE] || [_tempStr isEqualToString:URL_LIFTUPDATE] || [_tempStr isEqualToString:URL_LIFTSTATE] || [_tempStr isEqualToString:URL_VALIDUSERCODE] || [_tempStr isEqualToString:URL_REGISTERUSER]){
                 [self errerAlertUserStatus:dict];
                 if (self.failure) {
                     self.failure(dict);
                 }
             }
-            
 //            else if ( [_tempStr isEqualToString:URL_GENPUBLICKEY]){
 //
 //                [self errerAlertUserStatus:dict];

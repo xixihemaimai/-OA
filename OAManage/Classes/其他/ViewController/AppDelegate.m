@@ -64,29 +64,21 @@
             [user synchronize];
         }
     }
-
     if (usermodel.appLoginToken.length < 1) {
         RSLoginViewController * loginVc = [[RSLoginViewController alloc]init];
         RSMyNavigationViewController * mayNa = [[RSMyNavigationViewController alloc]initWithRootViewController:loginVc];
         self.window.rootViewController = mayNa;
+
     }else{
-        
     //假的根控制器
     RSShowImageViewController * viewVc= [[RSShowImageViewController alloc]init];
-    //viewVc.view.alpha = 0;
+
     self.window.rootViewController = viewVc;
-        
-        
     NSString * canshu = URL_YIGODATA_APPLOGINTOKEN(usermodel.appLoginToken);
     NSString * soapStr = URL_YIGODATA_IOS(URL_LOGINWEBSERVICE, URL_USERINFO, canshu);
     NetworkTool * network = [[NetworkTool alloc]init];
     [network reloadWebServiceNoDataURL:URL_YIGO_IOS andParameters:soapStr andURLName:URL_USERINFO];
-//    NSString *const kInitVector = @"16-Bytes--String";
     network.successReload = ^(NSDictionary *dict) {
-//        NSString * data1 = dict[@"data"];
-//        NSString * userData = [FSAES128 decryptAES:data1 key:usermodel.aesKey andKInItVector:kInitVector];
-//        NSData *jsonData = [userData dataUsingEncoding:NSUTF8StringEncoding];
-//        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:nil];
         RSUserModel * usermodel = [[RSUserModel alloc]init];
         usermodel.aesKey = dict[@"aesKey"];
         usermodel.appLoginToken = dict[@"appLoginToken"];
@@ -98,7 +90,7 @@
         usermodel.deptId = [dict[@"deptId"] integerValue];
         usermodel.empId = [dict[@"empId"] integerValue];
         usermodel.empName = dict[@"empName"];
-        
+
         usermodel.AM_Requisition = [dict[@"flowAccess"][@"AM_Requisition"]boolValue];
         usermodel.AM_SetlleIn = [dict[@"flowAccess"][@"AM_SetlleIn"]boolValue];
         usermodel.BL_OutNotice = [dict[@"flowAccess"][@"BL_OutNotice"]boolValue];
@@ -157,20 +149,9 @@
         [user setObject:data forKey:@"OAUSERMODEL"];
         [user synchronize];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            //登录之后要获取用户信息，然后在跳转到下面的界面
-            //改变根控制器
-//            RSMyNavigationViewController *navigationController = [[RSMyNavigationViewController alloc] initWithRootViewController:[[RSHomeViewController alloc] init]];
-//            RSMenuViewController *menuController = [[RSMenuViewController alloc] init];
-//            REFrostedViewController *frostedViewController = [[REFrostedViewController alloc] initWithContentViewController:navigationController menuViewController:menuController];
-//            frostedViewController.direction = REFrostedViewControllerDirectionLeft;
-//            frostedViewController.liveBlurBackgroundStyle = REFrostedViewControllerLiveBackgroundStyleLight;
-            
-          //  AppDelegate * appdelegate =(AppDelegate *)[UIApplication sharedApplication].delegate;
-//            appdelegate.frostedViewController = frostedViewController;
-//            appdelegate.window.rootViewController = frostedViewController;
             RSMainViewController * mainVc = [[RSMainViewController alloc]init];
             self.window.rootViewController = mainVc;
-            
+
         });
     };
     network.failure = ^(NSDictionary *dict) {
@@ -178,7 +159,7 @@
         [user removeObjectForKey:@"AES"];
         [user removeObjectForKey:@"OAUSERMODEL"];
         [user synchronize];
-        
+
        // AppDelegate * appdelegate =(AppDelegate *)[UIApplication sharedApplication].delegate;
         RSLoginViewController * loginVc = [[RSLoginViewController alloc]init];
         RSMyNavigationViewController *  mayNa = [[RSMyNavigationViewController alloc]initWithRootViewController:loginVc];

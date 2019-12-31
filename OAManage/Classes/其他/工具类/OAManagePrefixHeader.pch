@@ -68,11 +68,6 @@
 #import "UITextView+ZWPlaceHolder.h"
 #import "JHSysAlertUtil.h"
 
-//新增
-//#import "RSNewCustomLabel.h"
-//#import "RSNewCustomImageView.h"
-
-
 
 //第三方框架
 #import <AFNetworking.h>
@@ -196,7 +191,10 @@ xsi:type=\"q0:Array\">" \
 //12. 加载通讯录 （主接口: WorkFlowWebService方法名loadMailList）
 #define URL_LOADMAILLIST @"loadMailList"
 
-
+//判断用户名是否可用
+#define URL_VALIDUSERCODE @"validUserCode"
+//注册接口
+#define URL_REGISTERUSER @"registeUser"
 
 
 
@@ -218,7 +216,8 @@ xsi:type=\"q0:Array\">" \
 
 
 
-
+//注册的参数
+#define URL_YIGODATA_REGISTEUSER(A,B,C) [NSString stringWithFormat:@"{ data:{userCode:'%@',password:'%@',userName:'小%@'}}",A,B,C]
 
 //第一种参数类型{ ukey:'U_SA_BCASX0136' }
 #define URL_YIGODATA_PUBLICKKEY(A) [NSString stringWithFormat:@"{ ukey:'%@' }",A]

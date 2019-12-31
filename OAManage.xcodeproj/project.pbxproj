@@ -26,8 +26,6 @@
 		0404775323AB7E7300B4D528 /* RSSystemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0404775223AB7E7300B4D528 /* RSSystemCell.m */; };
 		0412B79121A6840400761547 /* RSMenuHeaderFootView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0412B79021A6840300761547 /* RSMenuHeaderFootView.m */; };
 		041930E2238E162700DD2508 /* RSApprovalProcessCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 041930E1238E162700DD2508 /* RSApprovalProcessCell.m */; };
-		041930E5238FA4AE00DD2508 /* RSNewCustomLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 041930E4238FA4AE00DD2508 /* RSNewCustomLabel.m */; };
-		041930E8238FAB9400DD2508 /* RSNewCustomImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 041930E7238FAB9400DD2508 /* RSNewCustomImageView.m */; };
 		041E070E237D2B9D00766441 /* 欢迎页.png in Resources */ = {isa = PBXBuildFile; fileRef = 041E070D237D2B9D00766441 /* 欢迎页.png */; };
 		041E0711237E588800766441 /* RSLaunchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 041E0710237E588800766441 /* RSLaunchCell.m */; };
 		041E0714237E983700766441 /* RSLaunchReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 041E0713237E983700766441 /* RSLaunchReusableView.m */; };
@@ -117,6 +115,7 @@
 		04B3F75723B4C8B900CDD821 /* RSSLPieceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B3F75623B4C8B900CDD821 /* RSSLPieceModel.m */; };
 		04B3F75A23B5D78600CDD821 /* RSWarehouseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B3F75923B5D78600CDD821 /* RSWarehouseModel.m */; };
 		04B3F75D23B5D7BB00CDD821 /* RSStoreAreaModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B3F75C23B5D7BB00CDD821 /* RSStoreAreaModel.m */; };
+		04BD6B1D23BAF125006693E3 /* RSRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BD6B1C23BAF125006693E3 /* RSRegisterViewController.m */; };
 		04C0474221787B5E0006B8D4 /* UIScrollView+DREmptyDataSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C0473E21787B5E0006B8D4 /* UIScrollView+DREmptyDataSet.m */; };
 		04C0474321787B5E0006B8D4 /* UIScrollView+DRRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C0474121787B5E0006B8D4 /* UIScrollView+DRRefresh.m */; };
 		04C0474621787DA00006B8D4 /* RSShenHeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C0474521787DA00006B8D4 /* RSShenHeViewController.m */; };
@@ -191,10 +190,6 @@
 		0412B79021A6840300761547 /* RSMenuHeaderFootView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSMenuHeaderFootView.m; sourceTree = "<group>"; };
 		041930E0238E162700DD2508 /* RSApprovalProcessCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSApprovalProcessCell.h; sourceTree = "<group>"; };
 		041930E1238E162700DD2508 /* RSApprovalProcessCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSApprovalProcessCell.m; sourceTree = "<group>"; };
-		041930E3238FA4AE00DD2508 /* RSNewCustomLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSNewCustomLabel.h; sourceTree = "<group>"; };
-		041930E4238FA4AE00DD2508 /* RSNewCustomLabel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSNewCustomLabel.m; sourceTree = "<group>"; };
-		041930E6238FAB9400DD2508 /* RSNewCustomImageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSNewCustomImageView.h; sourceTree = "<group>"; };
-		041930E7238FAB9400DD2508 /* RSNewCustomImageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSNewCustomImageView.m; sourceTree = "<group>"; };
 		041E070D237D2B9D00766441 /* 欢迎页.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "欢迎页.png"; sourceTree = "<group>"; };
 		041E070F237E588800766441 /* RSLaunchCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSLaunchCell.h; sourceTree = "<group>"; };
 		041E0710237E588800766441 /* RSLaunchCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSLaunchCell.m; sourceTree = "<group>"; };
@@ -365,6 +360,8 @@
 		04B3F75923B5D78600CDD821 /* RSWarehouseModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSWarehouseModel.m; sourceTree = "<group>"; };
 		04B3F75B23B5D7BB00CDD821 /* RSStoreAreaModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSStoreAreaModel.h; sourceTree = "<group>"; };
 		04B3F75C23B5D7BB00CDD821 /* RSStoreAreaModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSStoreAreaModel.m; sourceTree = "<group>"; };
+		04BD6B1B23BAF125006693E3 /* RSRegisterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSRegisterViewController.h; sourceTree = "<group>"; };
+		04BD6B1C23BAF125006693E3 /* RSRegisterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSRegisterViewController.m; sourceTree = "<group>"; };
 		04C0473E21787B5E0006B8D4 /* UIScrollView+DREmptyDataSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+DREmptyDataSet.m"; sourceTree = "<group>"; };
 		04C0473F21787B5E0006B8D4 /* UIScrollView+DRRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+DRRefresh.h"; sourceTree = "<group>"; };
 		04C0474021787B5E0006B8D4 /* UIScrollView+DREmptyDataSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+DREmptyDataSet.h"; sourceTree = "<group>"; };
@@ -658,10 +655,6 @@
 				0436F6B82178282500B0D6C8 /* RSMyNavigationViewController.m */,
 				04D6CED02190329000B35A51 /* RSBaseViewController.h */,
 				04D6CED12190329000B35A51 /* RSBaseViewController.m */,
-				041930E3238FA4AE00DD2508 /* RSNewCustomLabel.h */,
-				041930E4238FA4AE00DD2508 /* RSNewCustomLabel.m */,
-				041930E6238FAB9400DD2508 /* RSNewCustomImageView.h */,
-				041930E7238FAB9400DD2508 /* RSNewCustomImageView.m */,
 			);
 			path = "分类";
 			sourceTree = "<group>";
@@ -878,6 +871,8 @@
 			children = (
 				04C0474A217885FF0006B8D4 /* RSLoginViewController.h */,
 				04C0474B217885FF0006B8D4 /* RSLoginViewController.m */,
+				04BD6B1B23BAF125006693E3 /* RSRegisterViewController.h */,
+				04BD6B1C23BAF125006693E3 /* RSRegisterViewController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1301,7 +1296,6 @@
 				041E07522387B38C00766441 /* SHESelectTable.m in Sources */,
 				04A6F159219528D800D15F58 /* RSAuditedViewController.m in Sources */,
 				04D6CEE32191754000B35A51 /* SCNavigationMenuTitleCell.m in Sources */,
-				041930E5238FA4AE00DD2508 /* RSNewCustomLabel.m in Sources */,
 				04A8E7BA23B0680D004E8013 /* RSXNoticeCell.m in Sources */,
 				04B3F72F23B1B5DB00CDD821 /* RSSLFootView.m in Sources */,
 				040476E523A7981800B4D528 /* RSBannerModel.m in Sources */,
@@ -1320,7 +1314,6 @@
 				04B3F72323B0C89800CDD821 /* RSStockViewController.m in Sources */,
 				04B3F74E23B4B31800CDD821 /* RSShipperMode.m in Sources */,
 				04C0474621787DA00006B8D4 /* RSShenHeViewController.m in Sources */,
-				041930E8238FAB9400DD2508 /* RSNewCustomImageView.m in Sources */,
 				04FF49DF21A3F04B00C4A2C2 /* RSRoleModel.m in Sources */,
 				04A6F17E219592D900D15F58 /* MyMD5.m in Sources */,
 				0404775323AB7E7300B4D528 /* RSSystemCell.m in Sources */,
@@ -1352,6 +1345,7 @@
 				041E07532387B38C00766441 /* SHESelectCell.m in Sources */,
 				04A8E7B423B065DC004E8013 /* QLPreviewItemCustom.m in Sources */,
 				0404774423AB220000B4D528 /* RSWorkContentModel.m in Sources */,
+				04BD6B1D23BAF125006693E3 /* RSRegisterViewController.m in Sources */,
 				041E073C2385098D00766441 /* RSGyRollingCell.m in Sources */,
 				04A4F82121ABF1990052EFC4 /* RSShenHeFristCell.m in Sources */,
 				0404773E23AA31E500B4D528 /* RSSystemTypeModel.m in Sources */,
@@ -1516,7 +1510,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.2;
+				CURRENT_PROJECT_VERSION = 1.4;
 				DEVELOPMENT_TEAM = 5CVKEU8NXR;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/OAManage/Classes/其他/工具类/OAManagePrefixHeader.pch";
@@ -1549,7 +1543,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.2;
+				CURRENT_PROJECT_VERSION = 1.4;
 				DEVELOPMENT_TEAM = 5CVKEU8NXR;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/OAManage/Classes/其他/工具类/OAManagePrefixHeader.pch";
@@ -1565,6 +1559,7 @@
 				);
 				MARKETING_VERSION = 2.0.0;
 				MiSDKRun = online;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ruishi.OAManage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
