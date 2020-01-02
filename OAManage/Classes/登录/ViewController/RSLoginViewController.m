@@ -387,7 +387,6 @@ typedef void(^Obtain)(BOOL isValue);
         return;
     }
     NSString *passwordtemp = [_passwordField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-    
     passwordtemp = [self delSpaceAndNewline:passwordtemp];
     if ([passwordtemp length] < 1){
         logBtn.enabled = YES;
@@ -419,20 +418,18 @@ typedef void(^Obtain)(BOOL isValue);
     }
 //    if ([self.PublickKeyTemp length] < 1) {
         //self.isValue = [self getPublicKey];
-        [self getPublicKeyobtain:^(BOOL success) {
-            if (success) {
-                jxt_showLoadingHUDTitleMessage(@"正在执行登录中", nil);
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    self.loginBtn.enabled = NO;
-                    [self loginUserSopaStr];
-                });
-                
-               
-            }else{
-                self.loginBtn.enabled = YES;
-                [SVProgressHUD showInfoWithStatus:@"手机网络有问题"];
-            }
-        }];
+    [self getPublicKeyobtain:^(BOOL success) {
+        if (success) {
+            jxt_showLoadingHUDTitleMessage(@"正在执行登录中", nil);
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                self.loginBtn.enabled = NO;
+                [self loginUserSopaStr];
+            });
+        }else{
+            self.loginBtn.enabled = YES;
+            [SVProgressHUD showInfoWithStatus:@"手机网络有问题"];
+        }
+    }];
 //    }else{
 //        //原来就有值的情况
 //        self.loginBtn.enabled = NO;
@@ -440,9 +437,7 @@ typedef void(^Obtain)(BOOL isValue);
 //    }
 }
 
-
 - (void)loginUserSopaStr{
-    
     //[SVProgressHUD showWithStatus:@"正在登录中......."];
     //[SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeBlack];
     //账号，密码，角色，AES，唯一标示符，------》公钥加密
@@ -462,10 +457,8 @@ typedef void(^Obtain)(BOOL isValue);
     [user synchronize];
     // NSString *const kInitVector = @"16-Bytes--String";
     NSString * data = [NSString stringWithFormat:@"{userCode:'%@',password:'%@',roleId:%ld,aesKey:'%@'}",self.userNameField.text,password,(long)_roleInt,aes2];
-    
     //RSA加密
     NSString * rsaEncryptor = [RSAEncryptor encryptString:data publicKey:self.PublickKeyTemp];
-    
     //网络请求
     NetworkTool * network = [[NetworkTool alloc]init];
     NSString * canshu = URL_YIGODATA_LOGIN(_udidTemp, rsaEncryptor);
@@ -486,7 +479,6 @@ typedef void(^Obtain)(BOOL isValue);
         usermodel.deptId = [dict[@"deptId"] integerValue];
         usermodel.empId = [dict[@"empId"] integerValue];
         usermodel.empName = dict[@"empName"];
-        
         
         usermodel.AM_Requisition = [dict[@"flowAccess"][@"AM_Requisition"]boolValue];
         usermodel.AM_SetlleIn = [dict[@"flowAccess"][@"AM_SetlleIn"]boolValue];
@@ -547,18 +539,16 @@ typedef void(^Obtain)(BOOL isValue);
              jxt_dismissHUD();
             //登录之后要获取用户信息，然后在跳转到下面的界面
             //改变根控制器
-//            RSMyNavigationViewController *navigationController = [[RSMyNavigationViewController alloc] initWithRootViewController:[[RSHomeViewController alloc] init]];
-//            RSMenuViewController *menuController = [[RSMenuViewController alloc] init];
-//            REFrostedViewController *frostedViewController = [[REFrostedViewController alloc] initWithContentViewController:navigationController menuViewController:menuController];
-//            frostedViewController.direction = REFrostedViewControllerDirectionLeft;
-//            frostedViewController.liveBlurBackgroundStyle = REFrostedViewControllerLiveBackgroundStyleLight;
+//          RSMyNavigationViewController *navigationController = [[RSMyNavigationViewController alloc] initWithRootViewController:[[RSHomeViewController alloc] init]];
+//          RSMenuViewController *menuController = [[RSMenuViewController alloc] init];
+//          REFrostedViewController *frostedViewController = [[REFrostedViewController alloc] initWithContentViewController:navigationController menuViewController:menuController];
+            //frostedViewController.direction = REFrostedViewControllerDirectionLeft;
+            //frostedViewController.liveBlurBackgroundStyle = REFrostedViewControllerLiveBackgroundStyleLight;
             RSMainViewController * mainVc = [[RSMainViewController alloc]init];
             AppDelegate * appdelegate =(AppDelegate *)[UIApplication sharedApplication].delegate;
-//            appdelegate.frostedViewController = frostedViewController;
-//            appdelegate.window.rootViewController = frostedViewController;
+            //appdelegate.frostedViewController = frostedViewController;
+            //appdelegate.window.rootViewController = frostedViewController;
             appdelegate.window.rootViewController = mainVc;
-            
-            
         });
     };
     network.failure = ^(NSDictionary *dict) {

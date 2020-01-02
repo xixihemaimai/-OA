@@ -10,9 +10,7 @@
 
 @interface RSRegisterViewController ()<UITextFieldDelegate>
 
-
 @property (nonatomic,strong)UITextField * accountTextfield;
-
 
 @property (nonatomic,strong)UITextField * nicknameTextfield;
 
@@ -31,25 +29,15 @@
     self.navigationController.navigationBar.hidden = YES;
 }
 
-
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     self.view.backgroundColor = [UIColor colorWithHexColorStr:@"#ffffff"];
-    
     self.emptyView.hidden = YES;
     self.isRepeat = false;
-    
     [self setUI];
-    
 }
 
-
-
-
 - (void)setUI{
-    
-    
     UIView * contentView = [[UIView alloc]init];
     contentView.backgroundColor = [UIColor colorWithHexColorStr:@"#ffffff"];
     [self.view addSubview:contentView];
@@ -61,8 +49,7 @@
     .rightSpaceToView(self.view, 54)
     .topSpaceToView(self.view, 64)
     .bottomSpaceToView(self.view, 64);
-    
-    
+        
     //请填写一下注册信息
     UILabel * titleLabel = [[UILabel alloc]init];
     titleLabel.text = @"请填写一下注册信息";
@@ -91,7 +78,6 @@
     .topSpaceToView(titleLabel, 26)
     .heightIs(16.5);
     
- 
     //账号的输入
     UITextField * accountTextfield = [[UITextField alloc]init];
     accountTextfield.placeholder = @"请输入账号";
@@ -107,8 +93,6 @@
     .topSpaceToView(accountLabel, 5)
     .heightIs(20);
     
-    
-    
     //分隔线
     UIView * accountView = [[UIView alloc]init];
     accountView.backgroundColor = [UIColor colorWithHexColorStr:@"#D3D3D3"];
@@ -119,7 +103,6 @@
     .rightEqualToView(accountTextfield)
     .topSpaceToView(accountTextfield, 5)
     .heightIs(0.5);
-    
     
     //昵称
     UILabel * nicknameLabel = [[UILabel alloc]init];
@@ -134,7 +117,6 @@
     .rightEqualToView(accountView)
     .topSpaceToView(accountView, 14.5)
     .heightIs(16.5);
-    
     
     //昵称输入
     UITextField * nicknameTextfield = [[UITextField alloc]init];
@@ -151,12 +133,10 @@
     .topSpaceToView(nicknameLabel, 5)
     .heightIs(20);
     
-    
     //分隔线
     UIView * nicknameView = [[UIView alloc]init];
     nicknameView.backgroundColor = [UIColor colorWithHexColorStr:@"#D3D3D3"];
     [contentView addSubview:nicknameView];
-    
     
     nicknameView.sd_layout
     .leftEqualToView(nicknameTextfield)
@@ -178,8 +158,6 @@
     .topSpaceToView(nicknameView, 14.5)
     .heightIs(16.5);
     
-    
-    
     //密码输入
     UITextField * passwordTextfield = [[UITextField alloc]init];
     passwordTextfield.placeholder = @"请输入密码";
@@ -195,11 +173,10 @@
     .topSpaceToView(passwordLabel, 5)
     .heightIs(20);
     
-    
     //分隔线
-       UIView * passwordView = [[UIView alloc]init];
-       passwordView.backgroundColor = [UIColor colorWithHexColorStr:@"#D3D3D3"];
-       [contentView addSubview:passwordView];
+    UIView * passwordView = [[UIView alloc]init];
+    passwordView.backgroundColor = [UIColor colorWithHexColorStr:@"#D3D3D3"];
+    [contentView addSubview:passwordView];
     
     passwordView.sd_layout
     .leftEqualToView(passwordTextfield)
@@ -208,12 +185,12 @@
     .heightIs(0.5);
     
     //再次确认密码
-       UILabel * secondPasswordLabel = [[UILabel alloc]init];
-       secondPasswordLabel.text = @"确认密码";
-       secondPasswordLabel.textAlignment = NSTextAlignmentLeft;
-       secondPasswordLabel.font = [UIFont systemFontOfSize:12];
-       secondPasswordLabel.textColor = [UIColor colorWithHexColorStr:@"#333333"];
-       [contentView addSubview:secondPasswordLabel];
+    UILabel * secondPasswordLabel = [[UILabel alloc]init];
+    secondPasswordLabel.text = @"确认密码";
+    secondPasswordLabel.textAlignment = NSTextAlignmentLeft;
+    secondPasswordLabel.font = [UIFont systemFontOfSize:12];
+    secondPasswordLabel.textColor = [UIColor colorWithHexColorStr:@"#333333"];
+    [contentView addSubview:secondPasswordLabel];
     
     secondPasswordLabel.sd_layout
     .leftEqualToView(passwordView)
@@ -221,15 +198,13 @@
     .topSpaceToView(passwordView, 5)
     .heightIs(16.5);
        
-       
-       //确认密码的输入
-       UITextField * secondPasswordTextfield = [[UITextField alloc]init];
+    //确认密码的输入
+    UITextField * secondPasswordTextfield = [[UITextField alloc]init];
     secondPasswordTextfield.delegate = self;
     secondPasswordTextfield.placeholder = @"请再次输入密码";
     secondPasswordTextfield.textColor = [UIColor colorWithHexColorStr:@"#999999"];
     secondPasswordTextfield.font = [UIFont systemFontOfSize:12];
-    
-       [contentView addSubview:secondPasswordTextfield];
+    [contentView addSubview:secondPasswordTextfield];
     _secondPasswordTextfield = secondPasswordTextfield;
     
     secondPasswordTextfield.sd_layout
@@ -248,11 +223,8 @@
     .rightEqualToView(secondPasswordTextfield)
     .topSpaceToView(secondPasswordTextfield, 5)
     .heightIs(0.5);
-    
-    
-    
+
     //注册
-    
     UIButton * submissionBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [submissionBtn setTitle:@"注册" forState:UIControlStateNormal];
     [submissionBtn setTitleColor:[UIColor colorWithHexColorStr:@"#ffffff"] forState:UIControlStateNormal];
@@ -270,8 +242,6 @@
     submissionBtn.layer.cornerRadius = 19.25;
     submissionBtn.layer.masksToBounds = YES;
     
-    
-    
     //已有账号，登录
     UILabel * ownLabel = [[UILabel alloc]init];
     ownLabel.text = @"已有账号?";
@@ -288,12 +258,8 @@
     [contentView addSubview:ownBtn];
     [ownBtn addTarget:self action:@selector(backUpViewController:) forControlEvents:UIControlEventTouchUpInside];
     
-    
     CGRect disCountrect = [ownLabel.text boundingRectWithSize:CGSizeMake(MAXFLOAT, 20)options:NSStringDrawingUsesLineFragmentOrigin
                                          attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12]} context:nil];
-  
-    
-    
     ownLabel.sd_layout
     .centerXIs(SCW/2 - 70)
     .topSpaceToView(submissionBtn, 12.5)
@@ -308,14 +274,7 @@
     .topEqualToView(ownLabel)
     .bottomEqualToView(ownLabel)
     .widthIs(userPrivacy.size.width);
-    
-    
-    
 }
-
-
-
-
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     return YES;
@@ -366,34 +325,21 @@
     }
 }
 
-
-
-
-
 - (void)backUpViewController:(UIButton *)backBtn{
-    
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-
-
 - (void)submissionAction:(UIButton *)submissionBtn{
     [self setEditing:YES];
-    
-    
     if ([_accountTextfield.text length] < 1) {
         jxt_showToastMessage(@"账号没有填写", 0.75);
         return;
     }
-    
     //账号
     if (self.isRepeat == false) {
         jxt_showToastMessage(@"账号重复了", 0.75);
         return;
     }
-    
-    
-    
     //昵称
     if ([_nicknameTextfield.text length] < 1) {
         jxt_showToastMessage(@"请输入昵称", 0.75);
@@ -420,14 +366,12 @@
         jxt_showToastMessage(@"请设置6-18位密码", 0.75);
         return;
     }
-    
     //    if ([self isValidPassword:_passwordTextField.text]) {
     //
     //        //以字母开头，只能包含“字母”，“数字”，“下划线”，长度6~18
     //        [SVProgressHUD showErrorWithStatus:@"密码包含无效字符"];
     //        return;
     //    }
-        
      //确认密码
         if(![self validatePassword:_secondPasswordTextfield.text])
         {

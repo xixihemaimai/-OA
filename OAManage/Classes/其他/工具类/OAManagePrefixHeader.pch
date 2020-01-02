@@ -87,30 +87,30 @@
 
 
 //测试
-//#define URL_POST_IOS @"http://117.29.162.206:8089"
+#define URL_POST_IOS @"http://117.29.162.206:8089"
 
 //正式
-#define URL_POST_IOS @"http://121.204.136.234:48000"
+//#define URL_POST_IOS @"http://121.204.136.234:48000"
 
 
 //测试
-//#define URL_YIGO_IOS @""URL_POST_IOS"/Yigo1.6/services/MapWebService?wsdl"
-//正式
 #define URL_YIGO_IOS @""URL_POST_IOS"/Yigo1.6/services/MapWebService?wsdl"
+//正式
+//#define URL_YIGO_IOS @""URL_POST_IOS"/Yigo1.6/services/MapWebService?wsdl"
 
 
 //H5测试
-//#define URL_H5_IOS @""URL_POST_IOS"/Yigo1.6/Approval.html"
+#define URL_H5_IOS @""URL_POST_IOS"/Yigo1.6/Approval.html"
 
 //H5发起流程测试
-//#define URL_H5FQ_IOS @""URL_POST_IOS"/Yigo1.6/Application.html"
+#define URL_H5FQ_IOS @""URL_POST_IOS"/Yigo1.6/Application.html"
 
 
 //H5正式
-#define URL_H5_IOS @""URL_POST_IOS"/Yigo1.6/Approval.html"
+//#define URL_H5_IOS @""URL_POST_IOS"/Yigo1.6/Approval.html"
 
 //H5正式发起流程
-#define URL_H5FQ_IOS @""URL_POST_IOS"/Yigo1.6/Application.html"
+//#define URL_H5FQ_IOS @""URL_POST_IOS"/Yigo1.6/Application.html"
 
 
 
@@ -258,11 +258,11 @@ xsi:type=\"q0:Array\">" \
 
 
 //新的请求方式
-//#define URL_NEWPOST_IOS @"http://117.29.162.206:8090"
+#define URL_NEWPOST_IOS @"http://117.29.162.206:8090"
 
 
 //新的请求正式方式
-#define URL_NEWPOST_IOS @"http://121.204.136.234:48001"
+//#define URL_NEWPOST_IOS @"http://121.204.136.234:48001"
 
 #define URL_BANNER_IOS @""URL_NEWPOST_IOS"/api/banner/get"
 #define URL_NEWBANNER_IOS(A,B) [NSString stringWithFormat:@"{pageNum:%d,pageSize:%d,filter:{location:'app_index'}}",A,B]

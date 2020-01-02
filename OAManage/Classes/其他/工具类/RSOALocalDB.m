@@ -90,7 +90,7 @@
                  success = [_db executeUpdate:@"INSERT INTO t_shipper(shipperId,name) VALUES (?,?);",[NSNumber numberWithInteger:shippermodel.shipperId],shippermodel.name];
             }else if ([self.creatList isEqualToString:@"warehouse.sqlite"]){
                 RSWarehouseModel * warehousemodel = array[i];
-                NSLog(@"=================%@",warehousemodel.name);
+                //NSLog(@"=================%@",warehousemodel.name);
                 success = [_db executeUpdate:@"INSERT INTO t_warehouse(warehouseId,name) VALUES (?,?);",[NSNumber numberWithInteger:warehousemodel.warehouseId],warehousemodel.name];
             }else if ([self.creatList isEqualToString:@"storeArea.sqlite"]){
                 RSStoreAreaModel * storeAreamodel = array[i];

@@ -123,7 +123,6 @@
 - (void)setAuditedmodel:(RSNewAuditedModel *)auditedmodel{
     _auditedmodel = auditedmodel;
     _timeLabel.text = [_auditedmodel.diaryDate substringToIndex:10];
-    NSLog(@"++++++++++++++++++%@",[self weekDayStr:_timeLabel.text]);
     [_timeBtn setTitle:[self weekDayStr:_timeLabel.text] forState:UIControlStateNormal];
 }
 
