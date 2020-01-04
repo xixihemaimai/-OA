@@ -345,11 +345,11 @@
         jxt_showToastMessage(@"请输入昵称", 0.75);
         return;
     }
-//    if(![self isEnglishAndChinese:_nicknameTextfield.text])
-//    {
-//        jxt_showToastMessage(@"请输入昵称", 0.75);
-//           return;
-//    }
+    //    if(![self isEnglishAndChinese:_nicknameTextfield.text])
+    //    {
+    //        jxt_showToastMessage(@"请输入昵称", 0.75);
+    //           return;
+    //    }
     //密码
     if(![self validatePassword:_passwordTextfield.text])
     {
@@ -372,48 +372,40 @@
     //        [SVProgressHUD showErrorWithStatus:@"密码包含无效字符"];
     //        return;
     //    }
-     //确认密码
-        if(![self validatePassword:_secondPasswordTextfield.text])
-        {
-            jxt_showToastMessage(@"请设置确认注册密码", 0.75);
-            return;
-        }
-        if (_secondPasswordTextfield.text.length<6)
-        {
-            jxt_showToastMessage(@"请设置6-18位密码", 0.75);
-            return;
-        }
-        if (_secondPasswordTextfield.text.length>20)
-        {
-            jxt_showToastMessage(@"请设置6-18位密码", 0.75);
-            return;
-        }
+    //确认密码
+    if(![self validatePassword:_secondPasswordTextfield.text])
+    {
+        jxt_showToastMessage(@"请设置确认注册密码", 0.75);
+        return;
+    }
+    if (_secondPasswordTextfield.text.length<6)
+    {
+        jxt_showToastMessage(@"请设置6-18位密码", 0.75);
+        return;
+    }
+    if (_secondPasswordTextfield.text.length>20)
+    {
+        jxt_showToastMessage(@"请设置6-18位密码", 0.75);
+        return;
+    }
     //    if(![self isValidPassword:_againpasswordTextField.text])
     //    {
     //        //以字母开头，只能包含“字母”，“数字”，“下划线”，长度6~18
     //        [SVProgressHUD showErrorWithStatus:@"密码包含无效字符"];
     //        return;
     //    }
-        if(![_passwordTextfield.text isEqualToString:_secondPasswordTextfield.text])
-        {
-            jxt_showToastMessage(@"密码不一致", 0.75);
-            return;
-        }
-    
-   
-    
+    if(![_passwordTextfield.text isEqualToString:_secondPasswordTextfield.text])
+    {
+        jxt_showToastMessage(@"密码不一致", 0.75);
+        return;
+    }
     //注册的请求方式
-    
-    //URL_REGISTERUSER
-    
-    
     NetworkTool * network = [[NetworkTool alloc]init];
     NSString * password = [MyMD5 md5:_passwordTextfield.text];
     NSString * canshu = URL_YIGODATA_REGISTEUSER(_accountTextfield.text, password, _nicknameTextfield.text);
     NSString * soapStr = URL_YIGODATA_IOS(URL_LOGINWEBSERVICE, URL_REGISTERUSER, canshu);
     [network reloadWebServiceNoDataURL:URL_YIGO_IOS andParameters:soapStr andURLName:URL_REGISTERUSER];
     network.successReload = ^(NSDictionary *dict) {
-        
         jxt_showToastMessage(@"注册成功,需要你重新去登录", 0.75);
         //返回上一个页面
         if (self.registeUser) {
@@ -423,6 +415,5 @@
     };
     
 }
-
 
 @end

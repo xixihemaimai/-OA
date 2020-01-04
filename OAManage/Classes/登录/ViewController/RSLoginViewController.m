@@ -130,7 +130,6 @@ typedef void(^Obtain)(BOOL isValue);
     passwordField.layer.cornerRadius = 20;
     passwordField.layer.borderColor = [UIColor colorWithHexColorStr:@"#D3D3D3"].CGColor;
     passwordField.layer.borderWidth = 1;
-    
     passwordField.layer.masksToBounds = YES;
     // [passwordField becomeFirstResponder];
     [loginView addSubview:passwordField];
@@ -149,13 +148,9 @@ typedef void(^Obtain)(BOOL isValue);
     [loginView addSubview:loginBtn];
     [loginBtn addTarget:self action:@selector(LoginAction:) forControlEvents:UIControlEventTouchUpInside];
     loginBtn.enabled = YES;
-    
     _loginBtn = loginBtn;
     
-    
-    
     //没有账号？注册
-    
     //已有账号，登录
     UILabel * ownLabel = [[UILabel alloc]init];
     ownLabel.text = @"没有账号？";
@@ -539,15 +534,8 @@ typedef void(^Obtain)(BOOL isValue);
              jxt_dismissHUD();
             //登录之后要获取用户信息，然后在跳转到下面的界面
             //改变根控制器
-//          RSMyNavigationViewController *navigationController = [[RSMyNavigationViewController alloc] initWithRootViewController:[[RSHomeViewController alloc] init]];
-//          RSMenuViewController *menuController = [[RSMenuViewController alloc] init];
-//          REFrostedViewController *frostedViewController = [[REFrostedViewController alloc] initWithContentViewController:navigationController menuViewController:menuController];
-            //frostedViewController.direction = REFrostedViewControllerDirectionLeft;
-            //frostedViewController.liveBlurBackgroundStyle = REFrostedViewControllerLiveBackgroundStyleLight;
             RSMainViewController * mainVc = [[RSMainViewController alloc]init];
             AppDelegate * appdelegate =(AppDelegate *)[UIApplication sharedApplication].delegate;
-            //appdelegate.frostedViewController = frostedViewController;
-            //appdelegate.window.rootViewController = frostedViewController;
             appdelegate.window.rootViewController = mainVc;
         });
     };

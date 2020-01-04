@@ -1,19 +1,14 @@
 target 'OAManage' do
-
 pod 'AFNetworking'
-pod 'REFrostedViewController'
 pod 'MJRefresh'
 pod 'DZNEmptyDataSet'
 pod 'SDAutoLayout'
 pod 'IQKeyboardManager'
 pod 'SVProgressHUD'
-
 pod 'Masonry'
 pod 'MJExtension'
-
 pod 'UMCCommon'
 pod 'UMCAnalytics'
-
 pod 'SDWebImage'
 pod 'XLPhotoBrowser+CoderXL'
 pod 'JXTAlertManager'

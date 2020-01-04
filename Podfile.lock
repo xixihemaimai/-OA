@@ -23,7 +23,6 @@ PODS:
   - Masonry (1.1.0)
   - MJExtension (3.0.15.1)
   - MJRefresh (3.1.15.3)
-  - REFrostedViewController (2.4.8)
   - SDAutoLayout (2.2.0)
   - SDWebImage (4.0.0):
     - SDWebImage/Core (= 4.0.0)
@@ -45,7 +44,6 @@ DEPENDENCIES:
   - Masonry
   - MJExtension
   - MJRefresh
-  - REFrostedViewController
   - SDAutoLayout
   - SDWebImage
   - SVProgressHUD
@@ -64,7 +62,6 @@ SPEC REPOS:
     - Masonry
     - MJExtension
     - MJRefresh
-    - REFrostedViewController
     - SDAutoLayout
     - SDWebImage
     - SVProgressHUD
@@ -82,7 +79,6 @@ SPEC CHECKSUMS:
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MJExtension: 19bc33ce2eee2d319760f5622562cf581a6ff756
   MJRefresh: b48380ae2b927b46c4ef000de9adb8dc748e1df7
-  REFrostedViewController: a893b4979ba1f200c547aef9ff4c3fd5a18f5923
   SDAutoLayout: c5509e77ae75735d9a39f7bc83dba6d3f75d49d8
   SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
@@ -91,6 +87,6 @@ SPEC CHECKSUMS:
   UMCCommon: 4392868ac47ff1b101663106bb114ba616fabbad
   "XLPhotoBrowser+CoderXL": 2bf4036e2af4611b24bde1681e24c64ed01fbe98
 
-PODFILE CHECKSUM: 04329d14b525a91bbc55ac4eef159e6ff5b29aaf
+PODFILE CHECKSUM: a70970c3896db825be14d8c07a539733bfd0a322
 
 COCOAPODS: 1.5.0
