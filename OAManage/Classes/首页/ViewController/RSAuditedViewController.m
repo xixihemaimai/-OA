@@ -65,10 +65,7 @@
                //menuBtn.contentEdgeInsets = UIEdgeInsetsMake(0, -10, 0, 0);
     UIBarButtonItem * item = [[UIBarButtonItem alloc]initWithCustomView:addBtn];
     self.navigationItem.rightBarButtonItem = item;
-    
-    
-    
-    
+
     self.emptyView.emptyMode = ZZQEmptyViewModeWorkOnly;
     self.emptyView.label.text = @"暂无工作日志，";
     [self.emptyView.button setTitle:@"去新增" forState:UIControlStateNormal];
@@ -79,10 +76,6 @@
     self.emptyView.workType = @"1";
     self.emptyView.delegate = self;
    
-    
-    
-    
-    
 //    if ([self.parentViewController isKindOfClass:[RSShenHeViewController class]]) {
 //        if (IS_IPHONE) {
             // 设置frame
@@ -97,9 +90,7 @@
 //        }
 //    }
 //    self.title = @"待审核";
-    
     self.title = @"工作日志";
-    
     self.pageNum = 1;
     self.tableview.mj_header = [MJChiBaoZiHeader headerWithRefreshingTarget:self refreshingAction:@selector(reloadAuditedNewData)];
     self.tableview.mj_footer = [MJChiBaoZiFooter footerWithRefreshingTarget:self refreshingAction:@selector(reloadAuditedMoreNewData)];

@@ -115,6 +115,7 @@
 		04B3F75723B4C8B900CDD821 /* RSSLPieceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B3F75623B4C8B900CDD821 /* RSSLPieceModel.m */; };
 		04B3F75A23B5D78600CDD821 /* RSWarehouseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B3F75923B5D78600CDD821 /* RSWarehouseModel.m */; };
 		04B3F75D23B5D7BB00CDD821 /* RSStoreAreaModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B3F75C23B5D7BB00CDD821 /* RSStoreAreaModel.m */; };
+		04B4F9F223C3084200853021 /* RSAboutOurViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B4F9F123C3084200853021 /* RSAboutOurViewController.m */; };
 		04BD6B1D23BAF125006693E3 /* RSRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BD6B1C23BAF125006693E3 /* RSRegisterViewController.m */; };
 		04C0474221787B5E0006B8D4 /* UIScrollView+DREmptyDataSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C0473E21787B5E0006B8D4 /* UIScrollView+DREmptyDataSet.m */; };
 		04C0474321787B5E0006B8D4 /* UIScrollView+DRRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C0474121787B5E0006B8D4 /* UIScrollView+DRRefresh.m */; };
@@ -360,6 +361,8 @@
 		04B3F75923B5D78600CDD821 /* RSWarehouseModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSWarehouseModel.m; sourceTree = "<group>"; };
 		04B3F75B23B5D7BB00CDD821 /* RSStoreAreaModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSStoreAreaModel.h; sourceTree = "<group>"; };
 		04B3F75C23B5D7BB00CDD821 /* RSStoreAreaModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSStoreAreaModel.m; sourceTree = "<group>"; };
+		04B4F9F023C3084200853021 /* RSAboutOurViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSAboutOurViewController.h; sourceTree = "<group>"; };
+		04B4F9F123C3084200853021 /* RSAboutOurViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSAboutOurViewController.m; sourceTree = "<group>"; };
 		04BD6B1B23BAF125006693E3 /* RSRegisterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSRegisterViewController.h; sourceTree = "<group>"; };
 		04BD6B1C23BAF125006693E3 /* RSRegisterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSRegisterViewController.m; sourceTree = "<group>"; };
 		04C0473E21787B5E0006B8D4 /* UIScrollView+DREmptyDataSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+DREmptyDataSet.m"; sourceTree = "<group>"; };
@@ -929,6 +932,8 @@
 				04A6F17021957BCB00D15F58 /* RSPasswordModificationViewController.m */,
 				04A6F17221957BE600D15F58 /* RSPersonalInformationViewController.h */,
 				04A6F17321957BE600D15F58 /* RSPersonalInformationViewController.m */,
+				04B4F9F023C3084200853021 /* RSAboutOurViewController.h */,
+				04B4F9F123C3084200853021 /* RSAboutOurViewController.m */,
 			);
 			path = viewController;
 			sourceTree = "<group>";
@@ -1332,6 +1337,7 @@
 				04D6CECC2190254E00B35A51 /* Nonetwork.m in Sources */,
 				04B3F75123B4B89F00CDD821 /* RSBMStockModel.m in Sources */,
 				04A6F1682195684A00D15F58 /* JJOptionView.m in Sources */,
+				04B4F9F223C3084200853021 /* RSAboutOurViewController.m in Sources */,
 				0436F6972178198B00B0D6C8 /* main.m in Sources */,
 				04C1D92621C5E79A00384F98 /* MXActionSheet.m in Sources */,
 				0404773A23AA0E3400B4D528 /* NSDate+Extension.m in Sources */,

@@ -8,53 +8,34 @@
 
 #import "RSLoginViewController.h"
 #import "JJOptionView.h"
-
 #import "RSMenuViewController.h"
 #import "AppDelegate.h"
-
-
-
 //模型
 #import "RSRoleModel.h"
-
-
 #import "FSAES128.h"
-
 #import "RSAEncryptor.h"
-
-
 //新版本首界面
 #import "RSMainViewController.h"
-
 #import "RSWKOAmanagerViewController.h"
-
-
 #import "RSRegisterViewController.h"
-
 
 typedef void(^Obtain)(BOOL isValue);
 
 @interface RSLoginViewController ()<JJOptionViewDelegate,UITextFieldDelegate>
 
 @property (nonatomic,strong)JJOptionView * roleView;
-
 /**账号*/
 @property (nonatomic,strong)UITextField * userNameField;
 /**密码*/
 @property (nonatomic,strong)UITextField * passwordField;
-
 /**这边是保存公钥的一个*/
 @property (nonatomic,strong)NSString * PublickKeyTemp;
-
 /**设备唯一标识号*/
 @property (nonatomic,strong)NSString * udidTemp;
-
 /**保存角色*/
 @property (nonatomic,assign)NSInteger roleInt;
 
-
 @property (nonatomic,strong) UIButton * loginBtn;
-
 
 @end
 
@@ -75,19 +56,14 @@ typedef void(^Obtain)(BOOL isValue);
     self.roleInt = 0;
     self.PublickKeyTemp = @"";
     //logo
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor colorWithHexColorStr:@"#ffffff"];
     self.tableview.hidden = YES;
-    //    [self getPublicKeyobtain:^(BOOL isValue) {
-    //    }];
     
     //这边设置成一个view
     UIView * loginView = [[UIView alloc]init];
     loginView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:loginView];
     loginView.userInteractionEnabled = YES;
-    
- 
-    
     //logo
     UIImageView * LoginImageView = [[UIImageView alloc]init];
     LoginImageView.image =  [UIImage imageNamed:@"logo"];
@@ -167,11 +143,6 @@ typedef void(^Obtain)(BOOL isValue);
     [loginView addSubview:ownBtn];
     [ownBtn addTarget:self action:@selector(registerAction:) forControlEvents:UIControlEventTouchUpInside];
     
-    
-    
-    
-    
-    
     UILabel *label = [[UILabel alloc]init];
     label.text = @"登录即代表阅读并同意";
     CGRect disCountrect = [label.text boundingRectWithSize:CGSizeMake(MAXFLOAT, 20)options:NSStringDrawingUsesLineFragmentOrigin
@@ -180,8 +151,6 @@ typedef void(^Obtain)(BOOL isValue);
     label.textAlignment = NSTextAlignmentLeft;
     label.textColor = [UIColor colorWithHexColorStr:@"#333333"];
     [loginView addSubview:label];
-    
-    
     
     UIButton * userPrivacyBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [userPrivacyBtn setTitle:@"隐私政策指引" forState:UIControlStateNormal];
@@ -193,12 +162,28 @@ typedef void(^Obtain)(BOOL isValue);
     [userPrivacyBtn setTitleColor:[UIColor colorWithHexColorStr:@"#27C79A"] forState:UIControlStateNormal];
     [loginView addSubview:userPrivacyBtn];
     
+    UILabel * andLabel = [[UILabel alloc]init];
+    andLabel.text = @"和";
+    andLabel.textColor = [UIColor colorWithHexColorStr:@"#27C79A"];
+    andLabel.textAlignment = NSTextAlignmentCenter;
+    andLabel.font = [UIFont systemFontOfSize:14];
+    [loginView addSubview:andLabel];
+    
+    UIButton * serviceBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [serviceBtn setTitle:@"用户协议" forState:UIControlStateNormal];
+    serviceBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+    CGRect service = [serviceBtn.currentTitle boundingRectWithSize:CGSizeMake(MAXFLOAT, 20)options:NSStringDrawingUsesLineFragmentOrigin
+                                                        attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]} context:nil];
+    serviceBtn.tag = 2;
+    [serviceBtn addTarget:self action:@selector(jumpInformationAction:) forControlEvents:UIControlEventTouchUpInside];
+    [serviceBtn setTitleColor:[UIColor colorWithHexColorStr:@"#27C79A"] forState:UIControlStateNormal];
+    [loginView addSubview:serviceBtn];
+    
     loginView.sd_layout
     .centerYEqualToView(self.view)
     .centerXEqualToView(self.view)
     .widthRatioToView(self.view, 0.9)
     .bottomSpaceToView(self.view, 10);
-    
     
     LoginImageView.sd_layout
     .centerXEqualToView(loginView)
@@ -206,13 +191,11 @@ typedef void(^Obtain)(BOOL isValue);
     .heightEqualToWidth()
     .topSpaceToView(loginView, 10);
     
-    
     userNameField.sd_layout
     .centerXEqualToView(loginView)
     .topSpaceToView(LoginImageView, 46)
     .widthIs(266)
     .heightIs(39);
-    
     
     passwordField.sd_layout
     .centerXEqualToView(loginView)
@@ -220,7 +203,6 @@ typedef void(^Obtain)(BOOL isValue);
     .leftEqualToView(userNameField)
     .rightEqualToView(userNameField)
     .heightIs(39);
-    
     
     roleView.sd_layout
     .centerXEqualToView(loginView)
@@ -236,14 +218,8 @@ typedef void(^Obtain)(BOOL isValue);
     .rightEqualToView(roleView)
     .heightIs(39);
     
-    
-    
-    
     CGRect ownRect = [ownLabel.text boundingRectWithSize:CGSizeMake(MAXFLOAT, 20)options:NSStringDrawingUsesLineFragmentOrigin
                                               attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12]} context:nil];
-    
-    
-    
     ownLabel.sd_layout
     .centerXIs(SCW/2 - 40)
     .topSpaceToView(loginBtn, 12.5)
@@ -260,12 +236,11 @@ typedef void(^Obtain)(BOOL isValue);
     .widthIs(userRect.size.width);
     
     label.sd_layout
-    .centerXIs(SCW/2 - 60)
+    .centerXIs(SCW/2 - 90)
     //.topSpaceToView(ownLabel, 80)
     .bottomSpaceToView(loginView, 10)
     .widthIs(disCountrect.size.width)
     .heightIs(20);
-    
     
     userPrivacyBtn.sd_layout
     .topEqualToView(label)
@@ -273,14 +248,23 @@ typedef void(^Obtain)(BOOL isValue);
     .leftSpaceToView(label,  0)
     .widthIs(userPrivacy.size.width);
     
+    andLabel.sd_layout
+    .topEqualToView(userPrivacyBtn)
+    .bottomEqualToView(userPrivacyBtn)
+    .leftSpaceToView(userPrivacyBtn, 0)
+    .widthIs(15);
+    
+    serviceBtn.sd_layout
+    .leftSpaceToView(andLabel, 0)
+    .topEqualToView(andLabel)
+    .bottomEqualToView(andLabel)
+    .widthIs(service.size.width);
+    
     loginBtn.layer.cornerRadius = 20;
     loginBtn.layer.masksToBounds = YES;
-    
     //[loginView layoutSubviews];
     //[loginView setupAutoHeightWithBottomView:label bottomMargin:0];
-    
 }
-
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     return YES;
@@ -295,7 +279,7 @@ typedef void(^Obtain)(BOOL isValue);
             //成功了才可以设置值出来
             _roleView.title = @"用户角色";
             [self reloadRole];
-           self.userNameField.text = temp;
+            self.userNameField.text = temp;
         }else{
             _userNameField.text = @"";
             [_userNameField resignFirstResponder];
@@ -322,22 +306,22 @@ typedef void(^Obtain)(BOOL isValue);
     NSString * canshu = URL_YIGODATA_USERCODE(self.userNameField.text);
     NSString * soapStr = URL_YIGODATA_IOS(URL_LOGINWEBSERVICE, URL_FINDROLE, canshu);
     [network reloadWebServiceNoDataURL:URL_YIGO_IOS andParameters:soapStr andURLName:URL_FINDROLE];
-               //NSMutableArray * array = [NSMutableArray arrayWithObjects:@"管理员",@"游客",@"货主",@"超级管理人员",@"服务人员", nil];
-               network.successArrayReload = ^(NSMutableArray *array) {
-                   self.roleView.dataSource = array;
-                   if (self.roleView.dataSource.count > 0) {
-                       RSRoleModel * rolemodel = [self.roleView.dataSource objectAtIndex:0];
-                       self.roleView.title = rolemodel.name;
-                       self.roleInt = rolemodel.roleID;
-                   }else{
-                       self.roleView.title = @"用户角色";
-                       self.roleInt = 0;
-                   }
-               };
-               network.failure = ^(NSDictionary *dict) {
-                   NSMutableArray * array = [NSMutableArray array];
-                   self.roleView.dataSource = array;
-                   self.roleView.title = @"用户角色";
+    //NSMutableArray * array = [NSMutableArray arrayWithObjects:@"管理员",@"游客",@"货主",@"超级管理人员",@"服务人员", nil];
+    network.successArrayReload = ^(NSMutableArray *array) {
+        self.roleView.dataSource = array;
+        if (self.roleView.dataSource.count > 0) {
+            RSRoleModel * rolemodel = [self.roleView.dataSource objectAtIndex:0];
+            self.roleView.title = rolemodel.name;
+            self.roleInt = rolemodel.roleID;
+        }else{
+            self.roleView.title = @"用户角色";
+            self.roleInt = 0;
+        }
+    };
+    network.failure = ^(NSDictionary *dict) {
+        NSMutableArray * array = [NSMutableArray array];
+        self.roleView.dataSource = array;
+        self.roleView.title = @"用户角色";
     };
     
 }
@@ -411,8 +395,8 @@ typedef void(^Obtain)(BOOL isValue);
         [SVProgressHUD showInfoWithStatus:@"请输入正确的用户名，在进行选择角色"];
         return;
     }
-//    if ([self.PublickKeyTemp length] < 1) {
-        //self.isValue = [self getPublicKey];
+    //    if ([self.PublickKeyTemp length] < 1) {
+    //self.isValue = [self getPublicKey];
     [self getPublicKeyobtain:^(BOOL success) {
         if (success) {
             jxt_showLoadingHUDTitleMessage(@"正在执行登录中", nil);
@@ -425,11 +409,11 @@ typedef void(^Obtain)(BOOL isValue);
             [SVProgressHUD showInfoWithStatus:@"手机网络有问题"];
         }
     }];
-//    }else{
-//        //原来就有值的情况
-//        self.loginBtn.enabled = NO;
-//        [self loginUserSopaStr];
-//    }
+    //    }else{
+    //        //原来就有值的情况
+    //        self.loginBtn.enabled = NO;
+    //        [self loginUserSopaStr];
+    //    }
 }
 
 - (void)loginUserSopaStr{
@@ -531,7 +515,7 @@ typedef void(^Obtain)(BOOL isValue);
         [user setObject:data forKey:@"OAUSERMODEL"];
         [user synchronize];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-             jxt_dismissHUD();
+            jxt_dismissHUD();
             //登录之后要获取用户信息，然后在跳转到下面的界面
             //改变根控制器
             RSMainViewController * mainVc = [[RSMainViewController alloc]init];
@@ -555,13 +539,12 @@ typedef void(^Obtain)(BOOL isValue);
 
 //用户协议指引或者隐私政策指引
 - (void)jumpInformationAction:(UIButton *)btn{
-//    if (btn.tag == 0) {
-//       //用户协议指引
-//    }else{
-       //隐私政策指引
-//    }
     RSWKOAmanagerViewController * wkOAstr = [[RSWKOAmanagerViewController alloc]init];
-    wkOAstr.type = @"5";
+    if (btn.tag == 1) {
+        wkOAstr.type = @"5";
+    }else{
+        wkOAstr.type = @"6";
+    }
     [self.navigationController pushViewController:wkOAstr animated:YES];
 }
 

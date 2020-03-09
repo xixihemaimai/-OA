@@ -64,6 +64,8 @@
         
     }else if ([self.type isEqualToString:@"5"]){
         self.title = @"隐私政策";
+    }else if ([self.type isEqualToString:@"6"]){
+        self.title = @"用户协议";
     }
     else{
         //self.title = @"审批";
@@ -101,8 +103,9 @@
     }else if ([self.type isEqualToString:@"3"]){
         stoneUrlStr = self.URL;
     }else if ([self.type isEqualToString:@"5"]){
-        
         stoneUrlStr = @"http://121.204.136.234:48000/Yigo1.6/agreement.html";
+    }else if ([self.type isEqualToString:@"6"]){
+        stoneUrlStr = @"http://121.204.136.234:48000/Yigo1.6/UserAgreement.html";
     }
     else{
         stoneUrlStr =[NSString stringWithFormat:@"%@?billId=%ld&billKey=%@&aesKey=%@&appLoginToken=%@&workItemId=%ld&username=%@&userdepartment=%@&usertime=%@&type=0&version=%lf&isApproval=%@",URL_H5_IOS,(long)self.billId,self.billKey,aes,self.usermodel.appLoginToken,(long)self.workItemId,self.creatorName,self.deptName,self.usertime,self.version,self.isApproval];
@@ -190,6 +193,7 @@
     }
     [self presentViewController:tzimagepicker animated:YES completion:nil];
 }
+
 //选择icloud文件
 - (void)selectFile{
     NSArray *documentTypes = @[@"public.content", @"public.text", @"public.source-code ", @"public.image", @"public.audiovisual-content", @"com.adobe.pdf", @"com.apple.keynote.key", @"com.microsoft.word.doc", @"com.microsoft.excel.xls", @"com.microsoft.powerpoint.ppt"];
@@ -205,7 +209,7 @@
 
 #pragma mark - UIDocumentPickerDelegate
 - (void)documentPicker:(UIDocumentPickerViewController *)controller didPickDocumentAtURL:(NSURL *)url {
-    NSArray *array = [[url absoluteString] componentsSeparatedByString:@"/"];
+    NSArray * array = [[url absoluteString] componentsSeparatedByString:@"/"];
     NSString * fileName = [array lastObject];
     fileName = [fileName stringByRemovingPercentEncoding];
     if ([iCloudManager iCloudEnable]) {

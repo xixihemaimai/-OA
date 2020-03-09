@@ -45,7 +45,6 @@ static NSString * APPROVALHEADERVIEW = @"APPROVALHEADERVIEW";
         [weakSelf reloadApprovalprocessNewData];
         [weakSelf.tableview.mj_header endRefreshing];
     }];
-
 }
 
 - (void)reloadApprovalprocessNewData{

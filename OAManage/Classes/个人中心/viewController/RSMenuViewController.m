@@ -23,6 +23,10 @@
 
 #import "RSTouchViewController.h"
 
+//关于我们
+#import "RSAboutOurViewController.h"
+
+
 @interface RSMenuViewController ()
 
 @property (nonatomic,strong)NSMutableArray * menuArray;
@@ -54,7 +58,7 @@ static NSString * MENUHEADER = @"MENUHEADER";
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < 6; i++) {
         NSString * str = [NSString stringWithFormat:@"%d",i];
         [self.menuArray addObject:str];
     }
@@ -249,11 +253,12 @@ static NSString * MENUHEADER = @"MENUHEADER";
     }else if (indexPath.row == 3){
         cell.menuImageView.image = [UIImage imageNamed:@"图标"];
         cell.menuLabel.text = @"荒料解控";
-        
     }else if (indexPath.row == 4){
         cell.menuImageView.image = [UIImage imageNamed:@"图标复制"];
         cell.menuLabel.text = @"大板解控";
-        
+    }else if (indexPath.row == 5){
+        cell.menuImageView.image = [UIImage imageNamed:@"图标复制备份"];
+         cell.menuLabel.text = @"关于我们";
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
@@ -328,6 +333,10 @@ static NSString * MENUHEADER = @"MENUHEADER";
         touchVc.selectType = @"daban";
            [self.navigationController pushViewController:touchVc animated:YES];
         
+    }else if (indexpath.row == 5){
+        
+        RSAboutOurViewController * abountVc = [[RSAboutOurViewController alloc]init];
+        [self.navigationController pushViewController:abountVc animated:YES];
     }
 }
 
