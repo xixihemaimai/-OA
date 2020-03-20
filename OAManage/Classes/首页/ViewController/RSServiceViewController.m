@@ -27,6 +27,8 @@
 #import "RSSystemViewController.h"
 //更多公告
 #import "RSNoticeMoreViewController.h"
+//线上培训
+#import "RSOnlineTrainingViewController.h"
 
 #import "RSBannerModel.h"
 
@@ -255,46 +257,32 @@ static NSString * SERVICEHEADERVIEWID = @"SERVICEHEADERVIEWID";
     firstBtn.sd_layout
     .leftSpaceToView(headerView, 0)
     .topSpaceToView(newMidView, 0)
-    .widthIs(SCW/2)
-    .heightIs(76);
+    .widthIs(SCW/3)
+    .heightIs(122);
     
     UIImageView * firstImage = [[UIImageView alloc]init];
-    firstImage.image = [UIImage imageNamed:@"画板1"];
+    firstImage.image = [UIImage imageNamed:@"工作日志"];
     [firstBtn addSubview:firstImage];
     
     firstImage.sd_layout
-    .leftSpaceToView(firstBtn, 28.5)
-    .topSpaceToView(firstBtn, 16)
-    .widthIs(36)
-    .heightIs(36);
+    .centerXEqualToView(firstBtn)
+    .centerYEqualToView(firstBtn)
+    .widthIs(67.5)
+    .heightIs(82.5);
     
     UILabel * firstLabel = [[UILabel alloc]init];
     firstLabel.text = @"工作日志";
     firstLabel.textColor = [UIColor colorWithHexColorStr:@"#333333"];
     firstLabel.font = [UIFont systemFontOfSize:16];
-    firstLabel.textAlignment = NSTextAlignmentLeft;
+    firstLabel.textAlignment = NSTextAlignmentCenter;
     [firstBtn addSubview:firstLabel];
     
     firstLabel.sd_layout
-    .leftSpaceToView(firstImage, 9)
-    .topSpaceToView(firstBtn,16)
+    .leftSpaceToView(firstBtn, 0)
+    .topSpaceToView(firstImage, -10)
     .heightIs(22.5)
     .rightSpaceToView(firstBtn, 0);
     
-    
-    UILabel * firstDetailLabel = [[UILabel alloc]init];
-    firstDetailLabel.text = @"填写工作日志";
-    firstDetailLabel.textColor = [UIColor colorWithHexColorStr:@"#999999"];
-    firstDetailLabel.font = [UIFont systemFontOfSize:10];
-    firstDetailLabel.textAlignment = NSTextAlignmentLeft;
-    [firstBtn addSubview:firstDetailLabel];
-    
-    firstDetailLabel.sd_layout
-    .leftEqualToView(firstLabel)
-    .rightEqualToView(firstLabel)
-    .topSpaceToView(firstLabel, 0.5)
-    .heightIs(14);
-
   
     UIButton * secondBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [secondBtn setBackgroundColor:[UIColor colorWithHexColorStr:@"#ffffff"]];
@@ -305,48 +293,77 @@ static NSString * SERVICEHEADERVIEWID = @"SERVICEHEADERVIEWID";
     secondBtn.sd_layout
     .leftSpaceToView(firstBtn, 0)
     .topEqualToView(firstBtn)
-    .rightSpaceToView(headerView, 0)
+    .widthIs(SCW/3)
     .bottomEqualToView(firstBtn);
     
     
     
     UIImageView * secondImage = [[UIImageView alloc]init];
-    secondImage.image = [UIImage imageNamed:@"画板复制10"];
+    secondImage.image = [UIImage imageNamed:@"体系文件"];
     [secondBtn addSubview:secondImage];
     
     secondImage.sd_layout
-    .leftSpaceToView(secondBtn, 30)
-    .topSpaceToView(secondBtn, 16)
-    .widthIs(36)
-    .heightEqualToWidth();
+    .centerYEqualToView(secondBtn)
+    .centerXEqualToView(secondBtn)
+    .widthIs(67.5)
+    .heightIs(82.5);
     
     
     UILabel * secondLabel = [[UILabel alloc]init];
     secondLabel.text = @"体系文件";
     secondLabel.textColor = [UIColor colorWithHexColorStr:@"#333333"];
     secondLabel.font = [UIFont systemFontOfSize:16];
-    secondLabel.textAlignment = NSTextAlignmentLeft;
+    secondLabel.textAlignment = NSTextAlignmentCenter;
     [secondBtn addSubview:secondLabel];
     
     secondLabel.sd_layout
-    .leftSpaceToView(secondImage, 9)
-    .topSpaceToView(secondBtn,16)
+    .leftSpaceToView(secondBtn, 0)
+    .topSpaceToView(secondImage,-10)
     .heightIs(22.5)
     .rightSpaceToView(secondBtn, 0);
     
     
-    UILabel * secondDetailLabel = [[UILabel alloc]init];
-    secondDetailLabel.text = @"查看公司相关文件";
-    secondDetailLabel.textColor = [UIColor colorWithHexColorStr:@"#999999"];
-    secondDetailLabel.font = [UIFont systemFontOfSize:10];
-    secondDetailLabel.textAlignment = NSTextAlignmentLeft;
-    [secondBtn addSubview:secondDetailLabel];
+     UIButton * thirdBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [thirdBtn setBackgroundColor:[UIColor colorWithHexColorStr:@"#ffffff"]];
+        [headerView addSubview:thirdBtn];
+        thirdBtn.tag = 3;
+        [thirdBtn addTarget:self action:@selector(jumpWorkContentAction:) forControlEvents:UIControlEventTouchUpInside];
+        
+        thirdBtn.sd_layout
+        .leftSpaceToView(secondBtn, 0)
+        .topEqualToView(secondBtn)
+        .widthIs(SCW/3)
+        .bottomEqualToView(secondBtn);
+        
+        
+        
+        UIImageView * thirdImage = [[UIImageView alloc]init];
+        thirdImage.image = [UIImage imageNamed:@"线上培训"];
+        [thirdBtn addSubview:thirdImage];
+        
+        thirdImage.sd_layout
+        .centerYEqualToView(thirdBtn)
+        .centerXEqualToView(thirdBtn)
+        .widthIs(67.5)
+        .heightIs(82.5);
+        
+        
+        UILabel * thirdLabel = [[UILabel alloc]init];
+        thirdLabel.text = @"线上培训";
+        thirdLabel.textColor = [UIColor colorWithHexColorStr:@"#333333"];
+        thirdLabel.font = [UIFont systemFontOfSize:16];
+        thirdLabel.textAlignment = NSTextAlignmentCenter;
+        [thirdBtn addSubview:thirdLabel];
+        
+        thirdLabel.sd_layout
+        .leftSpaceToView(thirdBtn, 0)
+        .topSpaceToView(thirdImage,-10)
+        .heightIs(22.5)
+        .rightSpaceToView(thirdBtn, 0);
     
-    secondDetailLabel.sd_layout
-    .leftEqualToView(secondLabel)
-    .rightEqualToView(secondLabel)
-    .topSpaceToView(secondLabel, 0.5)
-    .heightIs(14);
+    
+    
+    
 
     [headerView setupAutoHeightWithBottomView:firstBtn bottomMargin:0];
     [headerView layoutIfNeeded];
@@ -491,13 +508,18 @@ static NSString * SERVICEHEADERVIEWID = @"SERVICEHEADERVIEWID";
 
 - (void)jumpWorkContentAction:(UIButton *)btn{
     if (btn.tag == 1) {
-        NSLog(@"工作日志");
+//        NSLog(@"工作日志");
         RSAuditedViewController * auditedVc = [[RSAuditedViewController alloc]init];
         [self.navigationController pushViewController:auditedVc animated:YES];
-    }else{
-        NSLog(@"体系文件");
+    }else if (btn.tag == 2){
+//        NSLog(@"体系文件");
         RSSystemViewController * systemVc = [[RSSystemViewController alloc]init];
         [self.navigationController pushViewController:systemVc animated:YES];
+    }
+    else{
+//        NSLog(@"线上培训");
+        RSOnlineTrainingViewController * onlineTrainingVc = [[RSOnlineTrainingViewController alloc]init];
+        [self.navigationController pushViewController:onlineTrainingVc animated:YES];
     }
 }
 

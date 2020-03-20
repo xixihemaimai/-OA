@@ -67,6 +67,10 @@
 		0436F6B72178280000B0D6C8 /* RSMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0436F6B62178280000B0D6C8 /* RSMenuViewController.m */; };
 		0436F6BA2178282600B0D6C8 /* RSMyNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0436F6B82178282500B0D6C8 /* RSMyNavigationViewController.m */; };
 		0436F6BD2178298800B0D6C8 /* UIBarButtonItem+Item.m in Sources */ = {isa = PBXBuildFile; fileRef = 0436F6BC2178298800B0D6C8 /* UIBarButtonItem+Item.m */; };
+		044656E324207AC300F1089C /* RSOnlineTrainingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044656E224207AC300F1089C /* RSOnlineTrainingViewController.m */; };
+		044656E62420A43800F1089C /* RSOnlineContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044656E52420A43800F1089C /* RSOnlineContentViewController.m */; };
+		044656E92420A58100F1089C /* RSOnlineContentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 044656E82420A58100F1089C /* RSOnlineContentCell.m */; };
+		044656EC2420B59A00F1089C /* RSOnlineVideoPlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044656EB2420B59900F1089C /* RSOnlineVideoPlayViewController.m */; };
 		045D414721A808CE005F34D2 /* RSInformationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 045D414621A808CE005F34D2 /* RSInformationModel.m */; };
 		045D414A21AB91F3005F34D2 /* RSAuditedModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 045D414921AB91F3005F34D2 /* RSAuditedModel.m */; };
 		04A4F81E21ABF0020052EFC4 /* RSShenHeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A4F81D21ABF0020052EFC4 /* RSShenHeModel.m */; };
@@ -145,6 +149,15 @@
 		04E6A344219189B7007A44F2 /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E6A343219189B7007A44F2 /* UIView+Frame.m */; };
 		04E6A34721927A1A007A44F2 /* RSCustomMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E6A34621927A1A007A44F2 /* RSCustomMenuCell.m */; };
 		04E6A34A2192824F007A44F2 /* RSApprovalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E6A3492192824F007A44F2 /* RSApprovalCell.m */; };
+		04FD4FF72421BDDD004EBA34 /* SelPlaybackControls.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FD4FEC2421BDDD004EBA34 /* SelPlaybackControls.m */; };
+		04FD4FF82421BDDD004EBA34 /* SelVideoPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FD4FED2421BDDD004EBA34 /* SelVideoPlayer.m */; };
+		04FD4FFA2421BDDD004EBA34 /* SelPlayerConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FD4FF42421BDDD004EBA34 /* SelPlayerConfiguration.m */; };
+		04FD4FFB2421BDDD004EBA34 /* SelVideoSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FD4FF62421BDDD004EBA34 /* SelVideoSlider.m */; };
+		04FD4FFE2421C990004EBA34 /* UIViewController+PlayerRotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FD4FFC2421C98F004EBA34 /* UIViewController+PlayerRotation.m */; };
+		04FD50012421CF07004EBA34 /* RSOnlineVideoHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FD50002421CF07004EBA34 /* RSOnlineVideoHeaderView.m */; };
+		04FD500424220066004EBA34 /* RSOnlineModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FD500324220066004EBA34 /* RSOnlineModel.m */; };
+		04FD5007242211F5004EBA34 /* RSOnlineTypeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FD5006242211F5004EBA34 /* RSOnlineTypeModel.m */; };
+		04FD500A24234909004EBA34 /* RSJumpVideoTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FD500924234909004EBA34 /* RSJumpVideoTool.m */; };
 		04FF49CB21A3B38E00C4A2C2 /* FSAES128.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FF49CA21A3B38E00C4A2C2 /* FSAES128.m */; };
 		04FF49DF21A3F04B00C4A2C2 /* RSRoleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FF49DE21A3F04B00C4A2C2 /* RSRoleModel.m */; };
 		04FF49E521A4F21E00C4A2C2 /* RSAEncryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FF49E321A4F21D00C4A2C2 /* RSAEncryptor.m */; };
@@ -267,6 +280,14 @@
 		0436F6B92178282600B0D6C8 /* RSMyNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSMyNavigationViewController.h; sourceTree = "<group>"; };
 		0436F6BB2178298800B0D6C8 /* UIBarButtonItem+Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+Item.h"; sourceTree = "<group>"; };
 		0436F6BC2178298800B0D6C8 /* UIBarButtonItem+Item.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+Item.m"; sourceTree = "<group>"; };
+		044656E124207AC300F1089C /* RSOnlineTrainingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSOnlineTrainingViewController.h; sourceTree = "<group>"; };
+		044656E224207AC300F1089C /* RSOnlineTrainingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSOnlineTrainingViewController.m; sourceTree = "<group>"; };
+		044656E42420A43800F1089C /* RSOnlineContentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSOnlineContentViewController.h; sourceTree = "<group>"; };
+		044656E52420A43800F1089C /* RSOnlineContentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSOnlineContentViewController.m; sourceTree = "<group>"; };
+		044656E72420A58100F1089C /* RSOnlineContentCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSOnlineContentCell.h; sourceTree = "<group>"; };
+		044656E82420A58100F1089C /* RSOnlineContentCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSOnlineContentCell.m; sourceTree = "<group>"; };
+		044656EA2420B59900F1089C /* RSOnlineVideoPlayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSOnlineVideoPlayViewController.h; sourceTree = "<group>"; };
+		044656EB2420B59900F1089C /* RSOnlineVideoPlayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSOnlineVideoPlayViewController.m; sourceTree = "<group>"; };
 		045D414521A808CE005F34D2 /* RSInformationModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSInformationModel.h; sourceTree = "<group>"; };
 		045D414621A808CE005F34D2 /* RSInformationModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSInformationModel.m; sourceTree = "<group>"; };
 		045D414821AB91F3005F34D2 /* RSAuditedModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSAuditedModel.h; sourceTree = "<group>"; };
@@ -415,6 +436,24 @@
 		04E6A34621927A1A007A44F2 /* RSCustomMenuCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSCustomMenuCell.m; sourceTree = "<group>"; };
 		04E6A3482192824F007A44F2 /* RSApprovalCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSApprovalCell.h; sourceTree = "<group>"; };
 		04E6A3492192824F007A44F2 /* RSApprovalCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSApprovalCell.m; sourceTree = "<group>"; };
+		04FD4FEC2421BDDD004EBA34 /* SelPlaybackControls.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelPlaybackControls.m; sourceTree = "<group>"; };
+		04FD4FED2421BDDD004EBA34 /* SelVideoPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelVideoPlayer.m; sourceTree = "<group>"; };
+		04FD4FEE2421BDDD004EBA34 /* SelVideoSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelVideoSlider.h; sourceTree = "<group>"; };
+		04FD4FEF2421BDDD004EBA34 /* SelPlaybackControls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelPlaybackControls.h; sourceTree = "<group>"; };
+		04FD4FF22421BDDD004EBA34 /* SelPlayerConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelPlayerConfiguration.h; sourceTree = "<group>"; };
+		04FD4FF42421BDDD004EBA34 /* SelPlayerConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelPlayerConfiguration.m; sourceTree = "<group>"; };
+		04FD4FF52421BDDD004EBA34 /* SelVideoPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelVideoPlayer.h; sourceTree = "<group>"; };
+		04FD4FF62421BDDD004EBA34 /* SelVideoSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelVideoSlider.m; sourceTree = "<group>"; };
+		04FD4FFC2421C98F004EBA34 /* UIViewController+PlayerRotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+PlayerRotation.m"; sourceTree = "<group>"; };
+		04FD4FFD2421C990004EBA34 /* UIViewController+PlayerRotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+PlayerRotation.h"; sourceTree = "<group>"; };
+		04FD4FFF2421CF07004EBA34 /* RSOnlineVideoHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSOnlineVideoHeaderView.h; sourceTree = "<group>"; };
+		04FD50002421CF07004EBA34 /* RSOnlineVideoHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSOnlineVideoHeaderView.m; sourceTree = "<group>"; };
+		04FD500224220066004EBA34 /* RSOnlineModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSOnlineModel.h; sourceTree = "<group>"; };
+		04FD500324220066004EBA34 /* RSOnlineModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSOnlineModel.m; sourceTree = "<group>"; };
+		04FD5005242211F5004EBA34 /* RSOnlineTypeModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSOnlineTypeModel.h; sourceTree = "<group>"; };
+		04FD5006242211F5004EBA34 /* RSOnlineTypeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSOnlineTypeModel.m; sourceTree = "<group>"; };
+		04FD500824234909004EBA34 /* RSJumpVideoTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSJumpVideoTool.h; sourceTree = "<group>"; };
+		04FD500924234909004EBA34 /* RSJumpVideoTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSJumpVideoTool.m; sourceTree = "<group>"; };
 		04FF49C921A3B38E00C4A2C2 /* FSAES128.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FSAES128.h; sourceTree = "<group>"; };
 		04FF49CA21A3B38E00C4A2C2 /* FSAES128.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FSAES128.m; sourceTree = "<group>"; };
 		04FF49DD21A3F04B00C4A2C2 /* RSRoleModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSRoleModel.h; sourceTree = "<group>"; };
@@ -612,6 +651,7 @@
 		0436F69D2178221700B0D6C8 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				046E9DFF2420603000EF6554 /* 线上培训 */,
 				04B3F70B23B0A43700CDD821 /* 触控 */,
 				04215D96237A8465001EFE11 /* 主框架 */,
 				04215D92237A83BD001EFE11 /* 流程审核 */,
@@ -679,6 +719,7 @@
 		0436F6A22178221700B0D6C8 /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				04FD4FEB2421BDDC004EBA34 /* VideoPlayer */,
 				04B3F74523B497DA00CDD821 /* JHAlertUtil */,
 				0404773023AA0E3400B4D528 /* WSDaePickerView */,
 				041E07492387B38C00766441 /* SHESelectTable */,
@@ -721,6 +762,8 @@
 				040476D423A0D2DA00B4D528 /* iCloudManager.m */,
 				040476D623A0D33800B4D528 /* ZZDocument.h */,
 				040476D723A0D33800B4D528 /* ZZDocument.m */,
+				04FD500824234909004EBA34 /* RSJumpVideoTool.h */,
+				04FD500924234909004EBA34 /* RSJumpVideoTool.m */,
 			);
 			path = "工具类";
 			sourceTree = "<group>";
@@ -876,6 +919,51 @@
 				04C0474B217885FF0006B8D4 /* RSLoginViewController.m */,
 				04BD6B1B23BAF125006693E3 /* RSRegisterViewController.h */,
 				04BD6B1C23BAF125006693E3 /* RSRegisterViewController.m */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		046E9DFF2420603000EF6554 /* 线上培训 */ = {
+			isa = PBXGroup;
+			children = (
+				046E9E002420603000EF6554 /* model */,
+				046E9E012420603000EF6554 /* view */,
+				046E9E022420603000EF6554 /* ViewController */,
+			);
+			path = "线上培训";
+			sourceTree = "<group>";
+		};
+		046E9E002420603000EF6554 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				04FD500224220066004EBA34 /* RSOnlineModel.h */,
+				04FD500324220066004EBA34 /* RSOnlineModel.m */,
+				04FD5005242211F5004EBA34 /* RSOnlineTypeModel.h */,
+				04FD5006242211F5004EBA34 /* RSOnlineTypeModel.m */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		046E9E012420603000EF6554 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				044656E72420A58100F1089C /* RSOnlineContentCell.h */,
+				044656E82420A58100F1089C /* RSOnlineContentCell.m */,
+				04FD4FFF2421CF07004EBA34 /* RSOnlineVideoHeaderView.h */,
+				04FD50002421CF07004EBA34 /* RSOnlineVideoHeaderView.m */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		046E9E022420603000EF6554 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				044656E124207AC300F1089C /* RSOnlineTrainingViewController.h */,
+				044656E224207AC300F1089C /* RSOnlineTrainingViewController.m */,
+				044656E42420A43800F1089C /* RSOnlineContentViewController.h */,
+				044656E52420A43800F1089C /* RSOnlineContentViewController.m */,
+				044656EA2420B59900F1089C /* RSOnlineVideoPlayViewController.h */,
+				044656EB2420B59900F1089C /* RSOnlineVideoPlayViewController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1081,6 +1169,31 @@
 			path = SCNavigationMenuView;
 			sourceTree = "<group>";
 		};
+		04FD4FEB2421BDDC004EBA34 /* VideoPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				04FD4FEF2421BDDD004EBA34 /* SelPlaybackControls.h */,
+				04FD4FEC2421BDDD004EBA34 /* SelPlaybackControls.m */,
+				04FD4FF52421BDDD004EBA34 /* SelVideoPlayer.h */,
+				04FD4FED2421BDDD004EBA34 /* SelVideoPlayer.m */,
+				04FD4FEE2421BDDD004EBA34 /* SelVideoSlider.h */,
+				04FD4FF62421BDDD004EBA34 /* SelVideoSlider.m */,
+				04FD4FF02421BDDD004EBA34 /* Configs */,
+			);
+			path = VideoPlayer;
+			sourceTree = "<group>";
+		};
+		04FD4FF02421BDDD004EBA34 /* Configs */ = {
+			isa = PBXGroup;
+			children = (
+				04FD4FFD2421C990004EBA34 /* UIViewController+PlayerRotation.h */,
+				04FD4FFC2421C98F004EBA34 /* UIViewController+PlayerRotation.m */,
+				04FD4FF22421BDDD004EBA34 /* SelPlayerConfiguration.h */,
+				04FD4FF42421BDDD004EBA34 /* SelPlayerConfiguration.m */,
+			);
+			path = Configs;
+			sourceTree = "<group>";
+		};
 		04FF49E021A4F21D00C4A2C2 /* RSA */ = {
 			isa = PBXGroup;
 			children = (
@@ -1257,6 +1370,7 @@
 				041E072623839D9600766441 /* RSMailDetailViewController.m in Sources */,
 				041E0711237E588800766441 /* RSLaunchCell.m in Sources */,
 				0404775023AB2A7100B4D528 /* RSWorkTypeModel.m in Sources */,
+				04FD500A24234909004EBA34 /* RSJumpVideoTool.m in Sources */,
 				04B3F71A23B0BDDD00CDD821 /* RSBLTouchCell.m in Sources */,
 				0429906D21ACEA14004503A7 /* RSApprovalProcessModel.m in Sources */,
 				0436F6BD2178298800B0D6C8 /* UIBarButtonItem+Item.m in Sources */,
@@ -1275,6 +1389,7 @@
 				04B3F72023B0C77200CDD821 /* RSNameOfCargoCell.m in Sources */,
 				04D6CEE42191754000B35A51 /* SCNavigationMenuView.m in Sources */,
 				041E07382384EEC500766441 /* GYNoticeViewCell.m in Sources */,
+				04FD4FFB2421BDDD004EBA34 /* SelVideoSlider.m in Sources */,
 				04B3F73523B1BF4200CDD821 /* RSSLStockFootView.m in Sources */,
 				04A6F17A2195834600D15F58 /* RSPersonSecondCell.m in Sources */,
 				04B3F72623B0C92E00CDD821 /* RSBLStockCell.m in Sources */,
@@ -1291,12 +1406,16 @@
 				04CA3FBD219AC85C009C2D33 /* RSUserModel.m in Sources */,
 				041E0714237E983700766441 /* RSLaunchReusableView.m in Sources */,
 				040476D523A0D2DA00B4D528 /* iCloudManager.m in Sources */,
+				04FD4FF72421BDDD004EBA34 /* SelPlaybackControls.m in Sources */,
+				044656E92420A58100F1089C /* RSOnlineContentCell.m in Sources */,
 				0436F6892178198300B0D6C8 /* ViewController.m in Sources */,
 				04A8E7BD23B07140004E8013 /* RSToBeInitiatedViewController.m in Sources */,
 				041E07562387CD8E00766441 /* RSNewAuditedCell.m in Sources */,
 				041E071723823E7900766441 /* RSLaunchFootReusableView.m in Sources */,
 				04B3F71723B0B1E000CDD821 /* RSBLTouchViewController.m in Sources */,
+				04FD4FF82421BDDD004EBA34 /* SelVideoPlayer.m in Sources */,
 				041E07392384EEC500766441 /* GYRollingNoticeView.m in Sources */,
+				044656E62420A43800F1089C /* RSOnlineContentViewController.m in Sources */,
 				04A6F156219521D000D15F58 /* RSRedButton.m in Sources */,
 				041E07522387B38C00766441 /* SHESelectTable.m in Sources */,
 				04A6F159219528D800D15F58 /* RSAuditedViewController.m in Sources */,
@@ -1309,6 +1428,7 @@
 				040476D823A0D33900B4D528 /* ZZDocument.m in Sources */,
 				04B3F71123B0A46000CDD821 /* RSTouchViewController.m in Sources */,
 				04E6A34721927A1A007A44F2 /* RSCustomMenuCell.m in Sources */,
+				04FD5007242211F5004EBA34 /* RSOnlineTypeModel.m in Sources */,
 				04B3F74123B2022000CDD821 /* UITextView+ZWPlaceHolder.m in Sources */,
 				04B3F73223B1BDD200CDD821 /* RSSLStockHeaderView.m in Sources */,
 				041E07482387874100766441 /* RSSalertView.m in Sources */,
@@ -1330,6 +1450,7 @@
 				0404772F23AA054000B4D528 /* RSSystemModel.m in Sources */,
 				04B3F71D23B0C2D500CDD821 /* RSNameOfCargoViewController.m in Sources */,
 				041E073F23853EBE00766441 /* RSMailModel.m in Sources */,
+				044656E324207AC300F1089C /* RSOnlineTrainingViewController.m in Sources */,
 				04D6CED621904F5C00B35A51 /* ZZQEmptyView.m in Sources */,
 				04215D9C237A9130001EFE11 /* RSLaunchViewController.m in Sources */,
 				04C0474C217885FF0006B8D4 /* RSLoginViewController.m in Sources */,
@@ -1341,6 +1462,7 @@
 				0436F6972178198B00B0D6C8 /* main.m in Sources */,
 				04C1D92621C5E79A00384F98 /* MXActionSheet.m in Sources */,
 				0404773A23AA0E3400B4D528 /* NSDate+Extension.m in Sources */,
+				04FD500424220066004EBA34 /* RSOnlineModel.m in Sources */,
 				04B3F73823B1BFCE00CDD821 /* RSSLStockCell.m in Sources */,
 				04B3F74423B34D0B00CDD821 /* RSInformationLabel.m in Sources */,
 				040476DF23A726DB00B4D528 /* RSShowImageViewController.m in Sources */,
@@ -1354,20 +1476,24 @@
 				04BD6B1D23BAF125006693E3 /* RSRegisterViewController.m in Sources */,
 				041E073C2385098D00766441 /* RSGyRollingCell.m in Sources */,
 				04A4F82121ABF1990052EFC4 /* RSShenHeFristCell.m in Sources */,
+				04FD50012421CF07004EBA34 /* RSOnlineVideoHeaderView.m in Sources */,
 				0404773E23AA31E500B4D528 /* RSSystemTypeModel.m in Sources */,
 				04B3F72923B1B20B00CDD821 /* RSSLTouchCell.m in Sources */,
+				044656EC2420B59A00F1089C /* RSOnlineVideoPlayViewController.m in Sources */,
 				0436F6862178198300B0D6C8 /* AppDelegate.m in Sources */,
 				04A6F184219911F900D15F58 /* NetworkTool.m in Sources */,
 				041E072023838CF100766441 /* RSMailListViewController.m in Sources */,
 				041930E2238E162700DD2508 /* RSApprovalProcessCell.m in Sources */,
 				0404773B23AA0E3400B4D528 /* UIView+Extension.m in Sources */,
 				04E6A34A2192824F007A44F2 /* RSApprovalCell.m in Sources */,
+				04FD4FFE2421C990004EBA34 /* UIViewController+PlayerRotation.m in Sources */,
 				04B3F72C23B1B4E100CDD821 /* RSSLHeaderView.m in Sources */,
 				04D6CECF219026AA00B35A51 /* NSString+Hash.m in Sources */,
 				04A6F16221955C2300D15F58 /* RSProgressStatusCell.m in Sources */,
 				0412B79121A6840400761547 /* RSMenuHeaderFootView.m in Sources */,
 				041E072C2383E28F00766441 /* RSServiceHeaderView.m in Sources */,
 				0404774123AB156300B4D528 /* RSNewAuditedModel.m in Sources */,
+				04FD4FFA2421BDDD004EBA34 /* SelPlayerConfiguration.m in Sources */,
 				04C0474321787B5E0006B8D4 /* UIScrollView+DRRefresh.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

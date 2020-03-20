@@ -2,7 +2,7 @@
 "MJRefreshHeaderPullingText" = "鬆開立即刷新";
 "MJRefreshHeaderRefreshingText" = "正在刷新數據中...";
 
-"MJRefreshAutoFooterIdleText" = "上拉加載更多";
+"MJRefreshAutoFooterIdleText" = "上拉加载更多";
 "MJRefreshAutoFooterRefreshingText" = "正在加載更多的數據...";
 "MJRefreshAutoFooterNoMoreDataText" = "没有更多数据";
 

@@ -67,6 +67,7 @@
 #import "RSWKOAmanagerViewController.h"
 #import "UITextView+ZWPlaceHolder.h"
 #import "JHSysAlertUtil.h"
+#import "RSJumpVideoTool.h"
 
 
 //第三方框架
@@ -81,6 +82,7 @@
 #import <JXTAlertManager/JXTAlertManagerHeader.h>
 #import <TZImagePickerController/TZImagePickerController.h>
 #import <FMDatabase.h>
+#import <Masonry.h>
 
 
 
@@ -286,5 +288,13 @@ xsi:type=\"q0:Array\">" \
 //修改
 #define URL_DIARY_UPDATE_IOS @""URL_NEWPOST_IOS"/api/diary/update"
 
+//线上培训视频接口视频控制器
+/// api / video / get
+#define URL_VIDEO_IOS @""URL_NEWPOST_IOS"/api/video/get"
+#define URL_NEWVIDEO_IOS(A,B,C,D) [NSString stringWithFormat:@"{pageNum:%ld,pageSize:%d,filter:{videoTypeId:%ld,videoTitle:'%@'}}",A,B,C,D]
+//视频类型接口视频类型控制器
+#define URL_VIDEOTYPE_IOS @""URL_NEWPOST_IOS"/api/video_type/get"
 
-
+//推荐视频 / api / video / get / recommend
+#define URL_VIDEORECOMMEND_IOS @""URL_NEWPOST_IOS"/api/video/get/recommend"
+#define URL_NEWRECOMMEND_IOS(A,B,C,D,E) [NSString stringWithFormat:@"{pageNum:%ld,pageSize:%d,filter:{videoId:%ld,videoTypeId:%ld,videoTitle:'%@'}}",A,B,C,D,E]

@@ -48,6 +48,12 @@
 //库区
 #import "RSStoreAreaModel.h"
 
+//视频的分类
+#import "RSOnlineTypeModel.h"
+
+//视频模型
+#import "RSOnlineModel.h"
+
 
 @interface NetworkTool() <NSXMLParserDelegate>
 
@@ -108,6 +114,7 @@
 - (void)newReloadWebServiceNoDataURL:(NSString *)URLstr andParameters:(NSDictionary *)soapStr andURLName:(NSString *)urlName{
     _tempStr = urlName;
     [self newReloadWebServiceNetDataUrl:URLstr withParameters:soapStr andURLName:urlName withBlock:^(id responseObject, BOOL success) {
+//        NSLog(@"================================%@",responseObject);
         if (success) {
             BOOL isresult = [responseObject[@"success"]boolValue];
             if (isresult) {
@@ -183,16 +190,28 @@
                     if (self.deleteSuccess) {
                       self.deleteSuccess();
                     }
+                }else if ([urlName isEqualToString:URL_VIDEO_IOS]){
+                    //获取视频
+                    NSMutableArray * array = [RSOnlineModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"][@"list"]];
+                    if (self.successArrayReload) {
+                        self.successArrayReload(array);
+                    }
+                }else if ([urlName isEqualToString:URL_VIDEOTYPE_IOS]){
+                    NSMutableArray * array = [RSOnlineTypeModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"][@"list"]];
+                                       if (self.successArrayReload) {
+                                           self.successArrayReload(array);
+                                       }
+                }else if ([urlName isEqualToString:URL_VIDEORECOMMEND_IOS]){
+                    NSMutableArray * array = [RSOnlineModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"][@"list"]];
+                    if (self.successArrayReload) {
+                        self.successArrayReload(array);
+                    }
                 }
                 else{
                    
-
                 }
             }else{
-                
-                
-                
-                if ([urlName isEqualToString:URL_INFORMATION_IOS] || [urlName isEqualToString:URL_SYS_FILES_IOS] || [urlName isEqualToString:URL_DIARY_IOS] || [urlName isEqualToString:URL_DIARY_GET_DTL_IOS] || [urlName isEqualToString:URL_NOTICE_IOS]) {
+                if ([urlName isEqualToString:URL_INFORMATION_IOS] || [urlName isEqualToString:URL_SYS_FILES_IOS] || [urlName isEqualToString:URL_DIARY_IOS] || [urlName isEqualToString:URL_DIARY_GET_DTL_IOS] || [urlName isEqualToString:URL_NOTICE_IOS] || [urlName isEqualToString:URL_VIDEO_IOS] || [urlName isEqualToString:URL_VIDEOTYPE_IOS] || [urlName isEqualToString:URL_VIDEORECOMMEND_IOS]) {
                     NSMutableDictionary * dict = [NSMutableDictionary dictionary];
                     if (self.failure) {
                         self.failure(dict);
@@ -204,7 +223,7 @@
             
             
             
-            if ([urlName isEqualToString:URL_INFORMATION_IOS] || [urlName isEqualToString:URL_SYS_FILES_IOS] || [urlName isEqualToString:URL_DIARY_IOS] || [urlName isEqualToString:URL_DIARY_GET_DTL_IOS] || [urlName isEqualToString:URL_NOTICE_IOS]) {
+            if ([urlName isEqualToString:URL_INFORMATION_IOS] || [urlName isEqualToString:URL_SYS_FILES_IOS] || [urlName isEqualToString:URL_DIARY_IOS] || [urlName isEqualToString:URL_DIARY_GET_DTL_IOS] || [urlName isEqualToString:URL_NOTICE_IOS] || [urlName isEqualToString:URL_VIDEO_IOS] || [urlName isEqualToString:URL_VIDEOTYPE_IOS] || [urlName isEqualToString:URL_VIDEORECOMMEND_IOS]) {
                 NSMutableDictionary * dict = [NSMutableDictionary dictionary];
                 if (self.failure) {
                     self.failure(dict);

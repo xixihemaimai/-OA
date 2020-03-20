@@ -41,14 +41,15 @@
         contentLabel.font = [UIFont systemFontOfSize:12];
         contentLabel.textColor = [UIColor colorWithHexColorStr:@"#333333"];
         contentLabel.textAlignment = NSTextAlignmentLeft;
-        contentLabel.text = @"海西石材城由福建三叶集团重磅打造，地处世界石材加工中心--中国·水头，占地2000亩,海西石材城由福建三叶集团重磅打造，地处世界石材加工中心--中国·水头，占地2000亩,海西石材城由福建三叶集团重磅打造，地处世界石材加工中心--中国·水头，占地2000亩,海西石材城由福建三叶集团重磅打造，地处世界石材加工中心--中国·水头，占地2000亩,海西石材城由福建三叶集团重磅打造，地处世界石材加工中心--中国·水头，占地2000亩,";
+        contentLabel.text = @"海西石材城由福建三叶集团重磅打造，地处世界石材加工中心--中国·水头，占地2000亩,海西石材城由福建三叶集团重磅打造，地处世界石材加工中心--中国·水头，占地2000亩,海西石材城由福建三叶集团重磅打造，地处世界石材加工中心--中国·水头，占地2000亩,海西石材城由福建三叶集团重磅打造，地处世界石材加工中心--中国·水头，占地2000亩,海西石材城由福建三叶集团重磅打造，地处世界石材加工中心--中国·水头，占地2000亩";
         [self.contentView addSubview:contentLabel];
         _contentLabel = contentLabel;
         
         
         UIImageView * contentImage = [[UIImageView alloc]init];
-        contentImage.image = [UIImage imageNamed:@"背景"];
+        //contentImage.image = [UIImage imageNamed:@"背景"];
         [self.contentView addSubview:contentImage];
+        contentImage.contentMode = UIViewContentModeScaleAspectFill;
         _contentImage = contentImage;
         
         

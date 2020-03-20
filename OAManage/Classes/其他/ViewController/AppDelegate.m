@@ -30,6 +30,9 @@
 @implementation AppDelegate
 
 
+
+
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -68,11 +71,9 @@
         RSLoginViewController * loginVc = [[RSLoginViewController alloc]init];
         RSMyNavigationViewController * mayNa = [[RSMyNavigationViewController alloc]initWithRootViewController:loginVc];
         self.window.rootViewController = mayNa;
-
     }else{
     //假的根控制器
     RSShowImageViewController * viewVc= [[RSShowImageViewController alloc]init];
-
     self.window.rootViewController = viewVc;
     NSString * canshu = URL_YIGODATA_APPLOGINTOKEN(usermodel.appLoginToken);
     NSString * soapStr = URL_YIGODATA_IOS(URL_LOGINWEBSERVICE, URL_USERINFO, canshu);
@@ -90,7 +91,6 @@
         usermodel.deptId = [dict[@"deptId"] integerValue];
         usermodel.empId = [dict[@"empId"] integerValue];
         usermodel.empName = dict[@"empName"];
-
         usermodel.AM_Requisition = [dict[@"flowAccess"][@"AM_Requisition"]boolValue];
         usermodel.AM_SetlleIn = [dict[@"flowAccess"][@"AM_SetlleIn"]boolValue];
         usermodel.BL_OutNotice = [dict[@"flowAccess"][@"BL_OutNotice"]boolValue];
