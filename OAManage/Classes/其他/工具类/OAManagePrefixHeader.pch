@@ -10,8 +10,6 @@
 #define iPhone6 SCH == 667
 #define iPhone6p SCH == 736
 #define iphonex SCH == 812
-
-
 #define iPhoneXR SCH == 896
 #define iPhoneXS iphonex
 #define iPhoneXSMax iPhoneXR
@@ -83,7 +81,8 @@
 #import <TZImagePickerController/TZImagePickerController.h>
 #import <FMDatabase.h>
 #import <Masonry.h>
-
+#import <SJVideoPlayer.h>
+#import <KTVHTTPCache/KTVHTTPCache.h>
 
 
 

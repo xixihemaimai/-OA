@@ -82,10 +82,6 @@
     serviceVc.tabBarItem.selectedImage = newImage0;
     RSMyNavigationViewController * myNav0 = [[RSMyNavigationViewController alloc]initWithRootViewController:serviceVc];
        
-    
-    
-    
-    
     //审核
     RSShenHeViewController * shenVc = [[RSShenHeViewController alloc]init];
     shenVc.tabBarItem.tag = 1;

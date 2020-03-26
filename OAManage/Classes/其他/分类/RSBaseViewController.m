@@ -14,6 +14,8 @@
 #import "RSMailDetailViewController.h"
 
 
+#import "RSOnlineVideoPlayViewController.h"
+
 #import "RSSLPieceModel.h"
 
 @interface RSBaseViewController ()
@@ -102,7 +104,7 @@
         [self.view addSubview:self.tableview];
     
     
-    if ([self isKindOfClass:[RSMenuViewController class]] || [self isKindOfClass:[RSMailDetailViewController class]]) {
+    if ([self isKindOfClass:[RSMenuViewController class]] || [self isKindOfClass:[RSMailDetailViewController class]] || [self isKindOfClass:[RSOnlineVideoPlayViewController class]]) {
         self.tableview.sd_layout
         .leftSpaceToView(self.view, 0)
         .rightSpaceToView(self.view, 0)
@@ -117,13 +119,13 @@
         .bottomSpaceToView(self.view, 0);
     }
     [self.view addSubview:self.emptyView];
+    
+    
+    
+    
+    
+    
 }
-
-
-
-
-
-
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
@@ -137,7 +139,6 @@
     static NSString * CELLID = @"CELLID";
     UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:CELLID];
     if (!cell) {
-        
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CELLID];
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -146,12 +147,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [self.tableview deselectRowAtIndexPath:indexPath animated:YES];
-    
 }
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 0;
 }
-
 
 //FIXME:去掉空格
 - (NSString *)delSpaceAndNewline:(NSString *)string{

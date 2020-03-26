@@ -8,12 +8,8 @@
 
 #import "RSOnlineContentViewController.h"
 #import "RSOnlineContentCell.h"
-
 //播放视频
 #import "RSOnlineVideoPlayViewController.h"
-#import "SelVideoPlayer.h"
-#import "SelPlayerConfiguration.h"
-
 #import "RSOnlineModel.h"
 
 @interface RSOnlineContentViewController ()
@@ -52,6 +48,7 @@
     self.tableview.mj_footer = [MJChiBaoZiFooter footerWithRefreshingTarget:self refreshingAction:@selector(reloadVideoListMoreNewData)];
     [self.tableview.mj_header beginRefreshing];
     
+    self.tableview.contentInset = UIEdgeInsetsMake(0, 0, 100, 0);
 }
 
 //下拉
@@ -135,17 +132,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:true];
     RSOnlineModel * onlinemodel = self.workArray[indexPath.row];
-    
-    [RSJumpVideoTool canYouSkipThePlaybackVideoInterfaceMoment:onlinemodel andViewController:self andUserModel:self.usermodel];
-    
-//    RSOnlineVideoPlayViewController * onlineVideoPlayVc = [[RSOnlineVideoPlayViewController alloc]init];
-//   // NSString * URLStr = @"https://dhxy.v.netease.com/2019/0814/5757db881a2aff4543b7d9c846f3f415qt.mp4";
-//    NSString * URLStr = [NSString stringWithFormat:@"%@%@",URL_NEWPOST_IOS,onlinemodel.url];
-//    onlineVideoPlayVc.URLStr = URLStr;
-//    onlineVideoPlayVc.videoDescro = onlinemodel.videoDescribe;
-//    [self.navigationController pushViewController:onlineVideoPlayVc animated:YES];
+    [RSJumpVideoTool canYouSkipThePlaybackVideoInterfaceMoment:onlinemodel andViewController:self];
 }
-
-
 
 @end

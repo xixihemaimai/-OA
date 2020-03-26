@@ -71,54 +71,31 @@ static NSString * SERVICEHEADERVIEWID = @"SERVICEHEADERVIEWID";
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor colorWithHexColorStr:@"#ffffff"];
     self.title = @"首页";
-    
     self.emptyView.hidden = YES;
     self.tableview.contentInset = UIEdgeInsetsMake(0, 0, 60, 0);
-    
-    
-    
+
     UIButton * menuBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
     [menuBtn setImage:[UIImage imageNamed:@"通讯录复制"] forState:UIControlStateNormal];
     [menuBtn addTarget:self action:@selector(showPhoneContentMenu:) forControlEvents:UIControlEventTouchUpInside];
-            //menuBtn.contentEdgeInsets = UIEdgeInsetsMake(0, -10, 0, 0);
-        UIBarButtonItem * item = [[UIBarButtonItem alloc]initWithCustomView:menuBtn];
-        self.navigationItem.leftBarButtonItem = item;
-    
-    
-    
+    //menuBtn.contentEdgeInsets = UIEdgeInsetsMake(0, -10, 0, 0);
+    UIBarButtonItem * item = [[UIBarButtonItem alloc]initWithCustomView:menuBtn];
+    self.navigationItem.leftBarButtonItem = item;
  
-    
-    
-    
-    
-               
     NSMutableDictionary * dict = [NSMutableDictionary dictionary];
     NSMutableArray * array = [NSMutableArray array];
     RSNoticeModel * noticemodel = [[RSNoticeModel alloc]init];
     [array addObject:noticemodel];
     [dict setValue:array forKey:@"arr"];
     [self.contentArray addObject:dict];
-    
-    
-
-    //NSString * day = [self weekDayStr:@"2019-12-16"];
-    
-    //NSLog(@"-------------------%@",day);
 
     [self reloadBannerNewData];
     
     [self reloadNoticeNewData];
     
     [self reloadInformationNewData];
-    
-    
+
     [self showCustomHeaderview];
-    
 }
-
-
-
-
 
 - (void)reloadBannerNewData{
     NetworkTool * network = [[NetworkTool alloc]init];
@@ -166,7 +143,6 @@ static NSString * SERVICEHEADERVIEWID = @"SERVICEHEADERVIEWID";
         self.informationArray = array;
         [self.tableview reloadData];
     };
-   
 }
 
 - (void)showCustomHeaderview{
@@ -179,21 +155,19 @@ static NSString * SERVICEHEADERVIEWID = @"SERVICEHEADERVIEWID";
     //NSMutableArray * array = [NSMutableArray arrayWithObjects:@"背景",@"背景", @"背景",nil];
     //kimageRun.imgArray = array;
     [kimageRun touchImageIndexBlock:^(NSInteger index) {
- 
+        
     }];
     kimageRun.layer.cornerRadius = 4;
     kimageRun.layer.masksToBounds = YES;
     [headerView addSubview:kimageRun];
-     _kimageRun = kimageRun;
+    _kimageRun = kimageRun;
     
     //公告
-    
     UIButton * noticeImage = [[UIButton alloc]init];
     //noticeImage.image = [UIImage imageNamed:@"最新 公告"];
     [noticeImage setImage:[UIImage imageNamed:@"最新 公告"] forState:UIControlStateNormal];
     [noticeImage addTarget:self action:@selector(showMoreNoticeAction:) forControlEvents:UIControlEventTouchUpInside];
     [headerView addSubview:noticeImage];
-    
     noticeImage.sd_layout
     .leftSpaceToView(headerView, 15)
     .topSpaceToView(kimageRun, 10)
@@ -204,15 +178,11 @@ static NSString * SERVICEHEADERVIEWID = @"SERVICEHEADERVIEWID";
     UIView * midView = [[UIView alloc]init];
     midView.backgroundColor = [UIColor colorWithHexColorStr:@"#F2F2F2"];
     [headerView addSubview:midView];
-    
-    
     midView.sd_layout
     .leftSpaceToView(noticeImage, 10)
     .topEqualToView(noticeImage)
     .bottomEqualToView(noticeImage)
     .widthIs(0.5);
-    
-   
     
     //这边是公告
     GYRollingNoticeView * noticeView = [[GYRollingNoticeView alloc]init];
@@ -222,29 +192,22 @@ static NSString * SERVICEHEADERVIEWID = @"SERVICEHEADERVIEWID";
     [noticeView registerClass:[RSGyRollingCell class] forCellReuseIdentifier:@"RSGyRollingCell"];
     [noticeView reloadDataAndStartRoll];
     [headerView addSubview:noticeView];
-    
     noticeView.sd_layout
     .leftSpaceToView(midView, 0)
     .topEqualToView(midView)
     .bottomEqualToView(midView)
     .rightSpaceToView(headerView, 15);
     _noticeView = noticeView;
-    
-    
-    
-    
-    
+
     //下分割线
     UIView * newMidView = [[UIView alloc]init];
     newMidView.backgroundColor = [UIColor colorWithHexColorStr:@"#F2F2F2"];
     [headerView addSubview:newMidView];
-    
     newMidView.sd_layout
     .leftEqualToView(noticeImage)
     .rightSpaceToView(headerView, 15)
     .topSpaceToView(noticeImage, 9.5)
     .heightIs(0.5);
-    
     
     //工作日志和体系文件
     UIButton * firstBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -252,8 +215,6 @@ static NSString * SERVICEHEADERVIEWID = @"SERVICEHEADERVIEWID";
     [headerView addSubview:firstBtn];
     firstBtn.tag = 1;
     [firstBtn addTarget:self action:@selector(jumpWorkContentAction:) forControlEvents:UIControlEventTouchUpInside];
-    
-    
     firstBtn.sd_layout
     .leftSpaceToView(headerView, 0)
     .topSpaceToView(newMidView, 0)
@@ -262,13 +223,13 @@ static NSString * SERVICEHEADERVIEWID = @"SERVICEHEADERVIEWID";
     
     UIImageView * firstImage = [[UIImageView alloc]init];
     firstImage.image = [UIImage imageNamed:@"工作日志"];
+    firstImage.contentMode = UIViewContentModeScaleAspectFill;
     [firstBtn addSubview:firstImage];
-    
     firstImage.sd_layout
     .centerXEqualToView(firstBtn)
     .centerYEqualToView(firstBtn)
     .widthIs(67.5)
-    .heightIs(82.5);
+    .heightEqualToWidth();
     
     UILabel * firstLabel = [[UILabel alloc]init];
     firstLabel.text = @"工作日志";
@@ -276,38 +237,32 @@ static NSString * SERVICEHEADERVIEWID = @"SERVICEHEADERVIEWID";
     firstLabel.font = [UIFont systemFontOfSize:16];
     firstLabel.textAlignment = NSTextAlignmentCenter;
     [firstBtn addSubview:firstLabel];
-    
     firstLabel.sd_layout
     .leftSpaceToView(firstBtn, 0)
-    .topSpaceToView(firstImage, -10)
+    .topSpaceToView(firstImage,0)
     .heightIs(22.5)
     .rightSpaceToView(firstBtn, 0);
     
-  
     UIButton * secondBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [secondBtn setBackgroundColor:[UIColor colorWithHexColorStr:@"#ffffff"]];
     [headerView addSubview:secondBtn];
     secondBtn.tag = 2;
     [secondBtn addTarget:self action:@selector(jumpWorkContentAction:) forControlEvents:UIControlEventTouchUpInside];
-    
     secondBtn.sd_layout
     .leftSpaceToView(firstBtn, 0)
     .topEqualToView(firstBtn)
     .widthIs(SCW/3)
     .bottomEqualToView(firstBtn);
     
-    
-    
     UIImageView * secondImage = [[UIImageView alloc]init];
     secondImage.image = [UIImage imageNamed:@"体系文件"];
+    secondImage.contentMode = UIViewContentModeScaleAspectFill;
     [secondBtn addSubview:secondImage];
-    
     secondImage.sd_layout
     .centerYEqualToView(secondBtn)
     .centerXEqualToView(secondBtn)
     .widthIs(67.5)
-    .heightIs(82.5);
-    
+    .heightEqualToWidth();
     
     UILabel * secondLabel = [[UILabel alloc]init];
     secondLabel.text = @"体系文件";
@@ -315,69 +270,55 @@ static NSString * SERVICEHEADERVIEWID = @"SERVICEHEADERVIEWID";
     secondLabel.font = [UIFont systemFontOfSize:16];
     secondLabel.textAlignment = NSTextAlignmentCenter;
     [secondBtn addSubview:secondLabel];
-    
     secondLabel.sd_layout
     .leftSpaceToView(secondBtn, 0)
-    .topSpaceToView(secondImage,-10)
+    .topSpaceToView(secondImage,0)
     .heightIs(22.5)
     .rightSpaceToView(secondBtn, 0);
     
+    UIButton * thirdBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [thirdBtn setBackgroundColor:[UIColor colorWithHexColorStr:@"#ffffff"]];
+    [headerView addSubview:thirdBtn];
+    thirdBtn.tag = 3;
+    [thirdBtn addTarget:self action:@selector(jumpWorkContentAction:) forControlEvents:UIControlEventTouchUpInside];
+    thirdBtn.sd_layout
+    .leftSpaceToView(secondBtn, 0)
+    .topEqualToView(secondBtn)
+    .widthIs(SCW/3)
+    .bottomEqualToView(secondBtn);
     
-     UIButton * thirdBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [thirdBtn setBackgroundColor:[UIColor colorWithHexColorStr:@"#ffffff"]];
-        [headerView addSubview:thirdBtn];
-        thirdBtn.tag = 3;
-        [thirdBtn addTarget:self action:@selector(jumpWorkContentAction:) forControlEvents:UIControlEventTouchUpInside];
-        
-        thirdBtn.sd_layout
-        .leftSpaceToView(secondBtn, 0)
-        .topEqualToView(secondBtn)
-        .widthIs(SCW/3)
-        .bottomEqualToView(secondBtn);
-        
-        
-        
-        UIImageView * thirdImage = [[UIImageView alloc]init];
-        thirdImage.image = [UIImage imageNamed:@"线上培训"];
-        [thirdBtn addSubview:thirdImage];
-        
-        thirdImage.sd_layout
-        .centerYEqualToView(thirdBtn)
-        .centerXEqualToView(thirdBtn)
-        .widthIs(67.5)
-        .heightIs(82.5);
-        
-        
-        UILabel * thirdLabel = [[UILabel alloc]init];
-        thirdLabel.text = @"线上培训";
-        thirdLabel.textColor = [UIColor colorWithHexColorStr:@"#333333"];
-        thirdLabel.font = [UIFont systemFontOfSize:16];
-        thirdLabel.textAlignment = NSTextAlignmentCenter;
-        [thirdBtn addSubview:thirdLabel];
-        
-        thirdLabel.sd_layout
-        .leftSpaceToView(thirdBtn, 0)
-        .topSpaceToView(thirdImage,-10)
-        .heightIs(22.5)
-        .rightSpaceToView(thirdBtn, 0);
+    UIImageView * thirdImage = [[UIImageView alloc]init];
+    thirdImage.image = [UIImage imageNamed:@"线上培训"];
+    thirdImage.contentMode = UIViewContentModeScaleAspectFill;
+    [thirdBtn addSubview:thirdImage];
+    thirdImage.sd_layout
+    .centerYEqualToView(thirdBtn)
+    .centerXEqualToView(thirdBtn)
+    .widthIs(67.5)
+    .heightEqualToWidth();
     
+    UILabel * thirdLabel = [[UILabel alloc]init];
+    thirdLabel.text = @"线上培训";
+    thirdLabel.textColor = [UIColor colorWithHexColorStr:@"#333333"];
+    thirdLabel.font = [UIFont systemFontOfSize:16];
+    thirdLabel.textAlignment = NSTextAlignmentCenter;
+    [thirdBtn addSubview:thirdLabel];
+    thirdLabel.sd_layout
+    .leftSpaceToView(thirdBtn, 0)
+    .topSpaceToView(thirdImage,0)
+    .heightIs(22.5)
+    .rightSpaceToView(thirdBtn, 0);
     
-    
-    
-
     [headerView setupAutoHeightWithBottomView:firstBtn bottomMargin:0];
     [headerView layoutIfNeeded];
     self.tableview.tableHeaderView = headerView;
 }
-
 
 - (void)showMoreNoticeAction:(UIButton *)noticeBtn{
     RSNoticeMoreViewController * notcieMoreVc = [[RSNoticeMoreViewController alloc]init];
     notcieMoreVc.title = @"最新公告";
     [self.navigationController pushViewController:notcieMoreVc animated:YES];
 }
-
-
 
 //通讯录
 - (void)showPhoneContentMenu:(UIButton *)menuBtn{
@@ -440,7 +381,7 @@ static NSString * SERVICEHEADERVIEWID = @"SERVICEHEADERVIEWID";
             if ([noticemodel.noticeType isEqualToString:@"通告"]) {
                 cell.tagImageView.image = [UIImage imageNamed:@"通告复制"];
             }else if ([noticemodel.noticeType isEqualToString:@"奖惩"]){
-                 cell.tagImageView.image = [UIImage imageNamed:@"奖惩"];
+                cell.tagImageView.image = [UIImage imageNamed:@"奖惩"];
             }else if ([noticemodel.noticeType isEqualToString:@"通知"]){
                 cell.tagImageView.image = [UIImage imageNamed:@"通知"];
             }
@@ -452,7 +393,7 @@ static NSString * SERVICEHEADERVIEWID = @"SERVICEHEADERVIEWID";
             if ([noticemodel.noticeType isEqualToString:@"通告"]) {
                 cell.secondImageView.image = [UIImage imageNamed:@"通告复制"];
             }else if ([noticemodel.noticeType isEqualToString:@"奖惩"]){
-                 cell.secondImageView.image = [UIImage imageNamed:@"奖惩"];
+                cell.secondImageView.image = [UIImage imageNamed:@"奖惩"];
             }else if ([noticemodel.noticeType isEqualToString:@"通知"]){
                 cell.secondImageView.image = [UIImage imageNamed:@"通知"];
             }
@@ -471,27 +412,22 @@ static NSString * SERVICEHEADERVIEWID = @"SERVICEHEADERVIEWID";
     RSNoticeMoreViewController * notcieMoreVc = [[RSNoticeMoreViewController alloc]init];
     notcieMoreVc.title = @"最新公告";
     [self.navigationController pushViewController:notcieMoreVc animated:YES];
-    
-    
-//    NSMutableDictionary * dic = self.contentArray[index];
-//    NSArray * array = [dic objectForKey:@"arr"];
-//    RSNoticeModel * noticemodel = array[row];
-//    RSWKOAmanagerViewController * wkoamanagerVc = [[RSWKOAmanagerViewController alloc]init];
-//    wkoamanagerVc.type = @"3";
-//    wkoamanagerVc.title = noticemodel.title;
-//    wkoamanagerVc.URL = [NSString stringWithFormat:@"%@%@",URL_NEWPOST_IOS,noticemodel.url];
-//    [self.navigationController pushViewController:wkoamanagerVc animated:YES];
-//    NSLog(@"点击的第几组: %lu 第几行:%lu", (unsigned long)index,(unsigned long)row);
+    //    NSMutableDictionary * dic = self.contentArray[index];
+    //    NSArray * array = [dic objectForKey:@"arr"];
+    //    RSNoticeModel * noticemodel = array[row];
+    //    RSWKOAmanagerViewController * wkoamanagerVc = [[RSWKOAmanagerViewController alloc]init];
+    //    wkoamanagerVc.type = @"3";
+    //    wkoamanagerVc.title = noticemodel.title;
+    //    wkoamanagerVc.URL = [NSString stringWithFormat:@"%@%@",URL_NEWPOST_IOS,noticemodel.url];
+    //    [self.navigationController pushViewController:wkoamanagerVc animated:YES];
+    //    NSLog(@"点击的第几组: %lu 第几行:%lu", (unsigned long)index,(unsigned long)row);
 }
-
 
 //FIXME:更多
 - (void)moreNoticeAction:(UIButton *)moreBtn{
     RSNoticeViewController * noticeVc = [[RSNoticeViewController alloc]init];
     [self.navigationController pushViewController:noticeVc animated:YES];
 }
-
-
 
 - (void)viewDidDisappear:(BOOL)animated
 {
@@ -505,25 +441,20 @@ static NSString * SERVICEHEADERVIEWID = @"SERVICEHEADERVIEWID";
     [_noticeView reloadDataAndStartRoll];
 }
 
-
 - (void)jumpWorkContentAction:(UIButton *)btn{
     if (btn.tag == 1) {
-//        NSLog(@"工作日志");
+        //        NSLog(@"工作日志");
         RSAuditedViewController * auditedVc = [[RSAuditedViewController alloc]init];
         [self.navigationController pushViewController:auditedVc animated:YES];
     }else if (btn.tag == 2){
-//        NSLog(@"体系文件");
+        //        NSLog(@"体系文件");
         RSSystemViewController * systemVc = [[RSSystemViewController alloc]init];
         [self.navigationController pushViewController:systemVc animated:YES];
     }
     else{
-//        NSLog(@"线上培训");
+        //        NSLog(@"线上培训");
         RSOnlineTrainingViewController * onlineTrainingVc = [[RSOnlineTrainingViewController alloc]init];
         [self.navigationController pushViewController:onlineTrainingVc animated:YES];
     }
 }
-
-
-
-
 @end

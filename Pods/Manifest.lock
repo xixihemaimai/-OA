@@ -14,19 +14,251 @@ PODS:
   - AFNetworking/Serialization (3.2.1)
   - AFNetworking/UIKit (3.2.1):
     - AFNetworking/NSURLSession
+  - CocoaAsyncSocket (7.6.3)
   - DZNEmptyDataSet (1.8.1)
   - FMDB (2.7.5):
     - FMDB/standard (= 2.7.5)
   - FMDB/standard (2.7.5)
   - IQKeyboardManager (6.2.0)
   - JXTAlertManager (1.0.2)
+  - KTVCocoaHTTPServer (1.0.0):
+    - CocoaAsyncSocket
+  - KTVHTTPCache (1.1.6):
+    - KTVCocoaHTTPServer
   - Masonry (1.1.0)
   - MJExtension (3.0.15.1)
   - MJRefresh (3.1.15.3)
+  - Reachability (3.2)
   - SDAutoLayout (2.2.0)
   - SDWebImage (4.0.0):
     - SDWebImage/Core (= 4.0.0)
   - SDWebImage/Core (4.0.0)
+  - SJAttributesFactory (2.0.4)
+  - SJBaseVideoPlayer (1.6.1.1):
+    - Masonry
+    - Reachability
+    - SJBaseVideoPlayer/Header (= 1.6.1.1)
+    - SJBaseVideoPlayer/Model (= 1.6.1.1)
+    - SJBaseVideoPlayer/SJAVMediaPlaybackController (= 1.6.1.1)
+    - SJBaseVideoPlayer/SJPrompt (= 1.6.1.1)
+    - SJBaseVideoPlayer/SJRotationManager (= 1.6.1.1)
+    - SJBaseVideoPlayer/SJVolBrigControl (= 1.6.1.1)
+    - SJBaseVideoPlayer/Tool (= 1.6.1.1)
+    - SJObserverHelper
+  - SJBaseVideoPlayer/Header (1.6.1.1):
+    - Masonry
+    - Reachability
+    - SJObserverHelper
+  - SJBaseVideoPlayer/Model (1.6.1.1):
+    - Masonry
+    - Reachability
+    - SJBaseVideoPlayer/Header
+    - SJObserverHelper
+  - SJBaseVideoPlayer/SJAVMediaPlaybackController (1.6.1.1):
+    - Masonry
+    - Reachability
+    - SJBaseVideoPlayer/Header
+    - SJBaseVideoPlayer/Model
+    - SJBaseVideoPlayer/SJAVMediaPlaybackController/Core (= 1.6.1.1)
+    - SJBaseVideoPlayer/Tool
+    - SJObserverHelper
+  - SJBaseVideoPlayer/SJAVMediaPlaybackController/Core (1.6.1.1):
+    - Masonry
+    - Reachability
+    - SJBaseVideoPlayer/Header
+    - SJBaseVideoPlayer/Model
+    - SJBaseVideoPlayer/Tool
+    - SJObserverHelper
+  - SJBaseVideoPlayer/SJPrompt (1.6.1.1):
+    - Masonry
+    - Reachability
+    - SJObserverHelper
+  - SJBaseVideoPlayer/SJRotationManager (1.6.1.1):
+    - Masonry
+    - Reachability
+    - SJBaseVideoPlayer/Header
+    - SJObserverHelper
+  - SJBaseVideoPlayer/SJVolBrigControl (1.6.1.1):
+    - Masonry
+    - Reachability
+    - SJBaseVideoPlayer/SJVolBrigControl/Resource (= 1.6.1.1)
+    - SJObserverHelper
+  - SJBaseVideoPlayer/SJVolBrigControl/Resource (1.6.1.1):
+    - Masonry
+    - Reachability
+    - SJObserverHelper
+  - SJBaseVideoPlayer/Tool (1.6.1.1):
+    - Masonry
+    - Reachability
+    - SJObserverHelper
+  - SJObserverHelper (1.0.5.1)
+  - SJUIFactory (0.0.16):
+    - SJUIFactory/Category (= 0.0.16)
+  - SJUIFactory/Category (0.0.16)
+  - SJVideoPlayer (2.2.1.1):
+    - Masonry
+    - SJAttributesFactory
+    - SJBaseVideoPlayer
+    - SJUIFactory
+    - SJVideoPlayer/Adapters (= 2.2.1.1)
+    - SJVideoPlayer/Common (= 2.2.1.1)
+    - SJVideoPlayer/Settings (= 2.2.1.1)
+    - SJVideoPlayer/SJEdgeControlLayer (= 2.2.1.1)
+    - SJVideoPlayer/SJEdgeLightweightControlLayer (= 2.2.1.1)
+    - SJVideoPlayer/SJFilmEditingControlLayer (= 2.2.1.1)
+    - SJVideoPlayer/SJLoadFailedControlLayer (= 2.2.1.1)
+    - SJVideoPlayer/SJLoadingView (= 2.2.1.1)
+    - SJVideoPlayer/SJMoreSettingControlLayer (= 2.2.1.1)
+    - SJVideoPlayer/SJProgressSlider (= 2.2.1.1)
+    - SJVideoPlayer/Switcher (= 2.2.1.1)
+  - SJVideoPlayer/Adapters (2.2.1.1):
+    - Masonry
+    - SJAttributesFactory
+    - SJBaseVideoPlayer
+    - SJUIFactory
+    - SJVideoPlayer/Common
+  - SJVideoPlayer/Common (2.2.1.1):
+    - Masonry
+    - SJAttributesFactory
+    - SJBaseVideoPlayer
+    - SJUIFactory
+  - SJVideoPlayer/Settings (2.2.1.1):
+    - Masonry
+    - SJAttributesFactory
+    - SJBaseVideoPlayer
+    - SJUIFactory
+    - SJVideoPlayer/SJEdgeControlLayer/ResourceLoader
+    - SJVideoPlayer/SJFilmEditingControlLayer/ResourceLoader
+  - SJVideoPlayer/SJEdgeControlLayer (2.2.1.1):
+    - Masonry
+    - SJAttributesFactory
+    - SJBaseVideoPlayer
+    - SJUIFactory
+    - SJVideoPlayer/Adapters
+    - SJVideoPlayer/Common
+    - SJVideoPlayer/SJEdgeControlLayer/ResourceLoader (= 2.2.1.1)
+    - SJVideoPlayer/SJEdgeControlLayer/View (= 2.2.1.1)
+    - SJVideoPlayer/SJLoadingView
+    - SJVideoPlayer/SJProgressSlider
+    - SJVideoPlayer/Switcher
+  - SJVideoPlayer/SJEdgeControlLayer/ResourceLoader (2.2.1.1):
+    - Masonry
+    - SJAttributesFactory
+    - SJBaseVideoPlayer
+    - SJUIFactory
+    - SJVideoPlayer/Adapters
+    - SJVideoPlayer/Common
+    - SJVideoPlayer/SJLoadingView
+    - SJVideoPlayer/SJProgressSlider
+    - SJVideoPlayer/Switcher
+  - SJVideoPlayer/SJEdgeControlLayer/View (2.2.1.1):
+    - Masonry
+    - SJAttributesFactory
+    - SJBaseVideoPlayer
+    - SJUIFactory
+    - SJVideoPlayer/Adapters
+    - SJVideoPlayer/Common
+    - SJVideoPlayer/SJEdgeControlLayer/ResourceLoader
+    - SJVideoPlayer/SJLoadingView
+    - SJVideoPlayer/SJProgressSlider
+    - SJVideoPlayer/Switcher
+  - SJVideoPlayer/SJEdgeLightweightControlLayer (2.2.1.1):
+    - Masonry
+    - SJAttributesFactory
+    - SJBaseVideoPlayer
+    - SJUIFactory
+    - SJVideoPlayer/SJEdgeControlLayer
+    - SJVideoPlayer/SJEdgeLightweightControlLayer/LightweightControlView (= 2.2.1.1)
+  - SJVideoPlayer/SJEdgeLightweightControlLayer/LightweightControlView (2.2.1.1):
+    - Masonry
+    - SJAttributesFactory
+    - SJBaseVideoPlayer
+    - SJUIFactory
+    - SJVideoPlayer/SJEdgeControlLayer
+  - SJVideoPlayer/SJFilmEditingControlLayer (2.2.1.1):
+    - Masonry
+    - SJAttributesFactory
+    - SJBaseVideoPlayer
+    - SJUIFactory
+    - SJVideoPlayer/SJFilmEditingControlLayer/Category (= 2.2.1.1)
+    - SJVideoPlayer/SJFilmEditingControlLayer/Header (= 2.2.1.1)
+    - SJVideoPlayer/SJFilmEditingControlLayer/ResourceLoader (= 2.2.1.1)
+    - SJVideoPlayer/SJFilmEditingControlLayer/Result (= 2.2.1.1)
+    - SJVideoPlayer/SJFilmEditingControlLayer/View (= 2.2.1.1)
+    - SJVideoPlayer/SJProgressSlider
+    - SJVideoPlayer/Switcher
+  - SJVideoPlayer/SJFilmEditingControlLayer/Category (2.2.1.1):
+    - Masonry
+    - SJAttributesFactory
+    - SJBaseVideoPlayer
+    - SJUIFactory
+    - SJVideoPlayer/SJProgressSlider
+    - SJVideoPlayer/Switcher
+  - SJVideoPlayer/SJFilmEditingControlLayer/Header (2.2.1.1):
+    - Masonry
+    - SJAttributesFactory
+    - SJBaseVideoPlayer
+    - SJUIFactory
+    - SJVideoPlayer/SJProgressSlider
+    - SJVideoPlayer/Switcher
+  - SJVideoPlayer/SJFilmEditingControlLayer/ResourceLoader (2.2.1.1):
+    - Masonry
+    - SJAttributesFactory
+    - SJBaseVideoPlayer
+    - SJUIFactory
+    - SJVideoPlayer/SJFilmEditingControlLayer/Header
+    - SJVideoPlayer/SJProgressSlider
+    - SJVideoPlayer/Switcher
+  - SJVideoPlayer/SJFilmEditingControlLayer/Result (2.2.1.1):
+    - Masonry
+    - SJAttributesFactory
+    - SJBaseVideoPlayer
+    - SJUIFactory
+    - SJVideoPlayer/SJFilmEditingControlLayer/Header
+    - SJVideoPlayer/SJProgressSlider
+    - SJVideoPlayer/Switcher
+  - SJVideoPlayer/SJFilmEditingControlLayer/View (2.2.1.1):
+    - Masonry
+    - SJAttributesFactory
+    - SJBaseVideoPlayer
+    - SJUIFactory
+    - SJVideoPlayer/SJFilmEditingControlLayer/Header
+    - SJVideoPlayer/SJProgressSlider
+    - SJVideoPlayer/Switcher
+  - SJVideoPlayer/SJLoadFailedControlLayer (2.2.1.1):
+    - Masonry
+    - SJAttributesFactory
+    - SJBaseVideoPlayer
+    - SJUIFactory
+    - SJVideoPlayer/SJEdgeControlLayer
+  - SJVideoPlayer/SJLoadingView (2.2.1.1):
+    - Masonry
+    - SJAttributesFactory
+    - SJBaseVideoPlayer
+    - SJUIFactory
+  - SJVideoPlayer/SJMoreSettingControlLayer (2.2.1.1):
+    - Masonry
+    - SJAttributesFactory
+    - SJBaseVideoPlayer
+    - SJUIFactory
+    - SJVideoPlayer/SJEdgeControlLayer
+    - SJVideoPlayer/SJMoreSettingControlLayer/Core (= 2.2.1.1)
+  - SJVideoPlayer/SJMoreSettingControlLayer/Core (2.2.1.1):
+    - Masonry
+    - SJAttributesFactory
+    - SJBaseVideoPlayer
+    - SJUIFactory
+    - SJVideoPlayer/SJEdgeControlLayer
+  - SJVideoPlayer/SJProgressSlider (2.2.1.1):
+    - Masonry
+    - SJAttributesFactory
+    - SJBaseVideoPlayer
+    - SJUIFactory
+  - SJVideoPlayer/Switcher (2.2.1.1):
+    - Masonry
+    - SJAttributesFactory
+    - SJBaseVideoPlayer
+    - SJUIFactory
   - SVProgressHUD (2.2.5)
   - TZImagePickerController (3.0.9)
   - UMCAnalytics (5.5.1):
@@ -41,11 +273,13 @@ DEPENDENCIES:
   - FMDB
   - IQKeyboardManager
   - JXTAlertManager
+  - KTVHTTPCache
   - Masonry
   - MJExtension
   - MJRefresh
   - SDAutoLayout
   - SDWebImage
+  - SJVideoPlayer
   - SVProgressHUD
   - TZImagePickerController
   - UMCAnalytics
@@ -55,15 +289,24 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - AFNetworking
+    - CocoaAsyncSocket
     - DZNEmptyDataSet
     - FMDB
     - IQKeyboardManager
     - JXTAlertManager
+    - KTVCocoaHTTPServer
+    - KTVHTTPCache
     - Masonry
     - MJExtension
     - MJRefresh
+    - Reachability
     - SDAutoLayout
     - SDWebImage
+    - SJAttributesFactory
+    - SJBaseVideoPlayer
+    - SJObserverHelper
+    - SJUIFactory
+    - SJVideoPlayer
     - SVProgressHUD
     - TZImagePickerController
     - UMCAnalytics
@@ -72,21 +315,30 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
+  CocoaAsyncSocket: eafaa68a7e0ec99ead0a7b35015e0bf25d2c8987
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   IQKeyboardManager: 6194101620b73af5e67900b8f89707a99de0b804
   JXTAlertManager: 71a89e90ac1a6d72862fbe884eab513cb243a344
+  KTVCocoaHTTPServer: df8d7b861e603ff8037e9b2138aca2563a6b768d
+  KTVHTTPCache: 5d6be51e8f5cad7cb8d79c104adb8469ee1c4e26
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MJExtension: 19bc33ce2eee2d319760f5622562cf581a6ff756
   MJRefresh: b48380ae2b927b46c4ef000de9adb8dc748e1df7
+  Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   SDAutoLayout: c5509e77ae75735d9a39f7bc83dba6d3f75d49d8
   SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
+  SJAttributesFactory: 844e18f8a1a8f974ad32e7d93b5bf3bc064f1bd7
+  SJBaseVideoPlayer: deabed4b1e2d914353f6c0a7c11eca58552169d9
+  SJObserverHelper: b8dcf2653dca2538bb601f558bde72c229e08737
+  SJUIFactory: b3e973c5e2ae08bc5a1bd2c68d94c00f81e01a0b
+  SJVideoPlayer: 9982ea49c4b4a5597113fb9c4c89fc7b2a9315dd
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   TZImagePickerController: ea3e906af8caa7088f612ad673feb73cc6aa6bfc
   UMCAnalytics: 0aff87e39008e2a650e5917430db0da2de2f8495
   UMCCommon: 4392868ac47ff1b101663106bb114ba616fabbad
   "XLPhotoBrowser+CoderXL": 2bf4036e2af4611b24bde1681e24c64ed01fbe98
 
-PODFILE CHECKSUM: a70970c3896db825be14d8c07a539733bfd0a322
+PODFILE CHECKSUM: f6dd25cb394a5d12af65d5a965ab6c1faa3864b2
 
 COCOAPODS: 1.5.0

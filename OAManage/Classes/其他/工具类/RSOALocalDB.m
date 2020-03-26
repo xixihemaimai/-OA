@@ -22,7 +22,7 @@
     if (self = [super init]) {
         _creatList = creatList;
         NSString* dbPath = [RSOACreatFile getPathWithinDocumentDir:creatList];
-         NSLog(@"%@",dbPath);
+//         NSLog(@"%@",dbPath);
         //创建文件管理器
         NSFileManager* fileManager = [NSFileManager defaultManager];
         //判断文件是否存在

@@ -13,17 +13,15 @@
 
 #import "RSOnlineVideoHeaderView.h"
 
-@interface RSOnlineVideoPlayViewController ()<UITableViewDelegate,UITableViewDataSource,SelVideoPlayerDelegate>
-
-@property (nonatomic,strong)UITableView * tableview;
-
-@property (nonatomic, strong)SelVideoPlayer *player;
+@interface RSOnlineVideoPlayViewController ()
 
 @property (nonatomic,strong)UIView *playerSuperview;
 
 @property (nonatomic,assign)NSInteger pageNum;
 
 @property (nonatomic,strong)NSMutableArray * workArray;
+
+@property (nonatomic,strong)SJVideoPlayer * player;
 
 @end
 
@@ -36,52 +34,78 @@
     return _workArray;
 }
 
-
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.hidden = YES;
+    AppDelegate * applegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    applegate.allowRotation = 1;
+}
 
-    
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    self.player.disableAutoRotation = NO;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-   
-    
-    if ([[UIDevice currentDevice].systemVersion floatValue] > 7.0) {
-        self.edgesForExtendedLayout = UIRectEdgeNone;
-    }
-    self.tableview = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCW, SCH) style:UITableViewStylePlain];
-
-    self.tableview.delegate = self;
-    self.tableview.dataSource = self;
-    self.tableview.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [self.view addSubview:self.tableview];
-    
-    
+    self.emptyView.hidden = YES;
     UIView *playerSuperview = [[UIView alloc]init];
     playerSuperview.frame = CGRectMake(0, 0, SCW, 215);
     self.tableview.tableHeaderView = playerSuperview;
-    
-    SelPlayerConfiguration *configuration = [[SelPlayerConfiguration alloc]init];
-    configuration.shouldAutoPlay = YES;
-    configuration.supportedDoubleTap = YES;
-    configuration.shouldAutorotate = YES;
-    configuration.repeatPlay = NO;
-    configuration.statusBarHideState = SelStatusBarHideStateFollowControls;
-    configuration.sourceUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_NEWPOST_IOS,self.onlinemodel.url]];
-    configuration.videoGravity = SelVideoGravityResizeAspect;
-       
-    self.player = [[SelVideoPlayer alloc]initWithFrame:CGRectMake(0, 0, SCW, 215) configuration:configuration];
-    self.player.delegate = self;
-    [playerSuperview addSubview:self.player];
-    
-    
+    //SJVideoPlayerURLAsset *asset =
+    //[[SJVideoPlayerURLAsset alloc] initWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_NEWPOST_IOS,self.onlinemodel.url]]
+//                                            playModel:[SJPlayModel UITableViewHeaderViewPlayModelWithPlayerSuperview:playerSuperview tableView:self.tableview]];
+    // 2. 设置资源标题
+    // asset.title = @"DIY心情转盘 #手工##手工制作#";
+    // 3. 默认情况下, 小屏时不显示标题, 全屏后才会显示, 这里设置一直显示标题
+    //asset.alwaysShowTitle = YES;
+    self.player = [SJVideoPlayer player];
+    [playerSuperview addSubview:self.player.view];
+    //加载的拷贝的地方，又来保存已经加载到什么地方
+    NSError * errer = [[NSError alloc]init];
+    [KTVHTTPCache proxyStart:&errer];
+    NSURL * proxyURL = [KTVHTTPCache proxyURLWithOriginalURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_NEWPOST_IOS,self.onlinemodel.url]]];
+    self.player.URLAsset = [[SJVideoPlayerURLAsset alloc]initWithURL:proxyURL];
+    // 设置资源
+    // self.player.URLAsset = asset;
+    [self.player.view mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.offset(0);
+    }];
+    self.player.placeholder = [UIImage imageNamed:@"默认图"];
+    //是否开启剪辑工具栏
+    self.player.enableFilmEditing = YES;
+    /// URLAsset资源dealloc时的回调
+    /// - 可以在这里做一些记录的工作. 如播放记录.
+    self.player.assetDeallocExeBlock = ^(__kindof SJBaseVideoPlayer * _Nonnull videoPlayer) {
+//        NSLog(@"===================%lf",videoPlayer.currentTime);
+    };
+    //点击返回按钮的回调
+    RSWeakself
+    self.player.clickedBackEvent = ^(SJVideoPlayer * _Nonnull player) {
+        if (!weakSelf.player.isFullScreen) {
+            [weakSelf.navigationController popViewControllerAnimated:YES];
+        }
+    };
+//    UIButton * backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    //backImageBtn.image = [UIImage imageNamed:@"返回"];
+//    //backImageBtn.alpha = 0.5;
+//    [backBtn setBackgroundColor:[UIColor redColor]];
+//    [backBtn setImage:[UIImage imageNamed:@"sj_video_player_back"] forState:UIControlStateNormal];
+//    //backBtn.imageEdgeInsets = UIEdgeInsetsMake(7, 11, 6, 11);
+//    [backBtn addTarget:self action:@selector(upViewController) forControlEvents:UIControlEventTouchUpInside];
+//    [playerSuperview addSubview:backBtn];
+    //        backBtn.sd_layout
+//        .leftSpaceToView(playerSuperview, 10)
+//        .topSpaceToView(playerSuperview, 10)
+//        .widthIs(40)
+//        .heightEqualToWidth();
+//    }
+//    [backBtn bringSubviewToFront:playerSuperview];
     self.pageNum = 1;
     self.tableview.mj_header = [MJChiBaoZiHeader headerWithRefreshingTarget:self refreshingAction:@selector(reloadVideoListNewData)];
     self.tableview.mj_footer = [MJChiBaoZiFooter footerWithRefreshingTarget:self refreshingAction:@selector(reloadVideoListMoreNewData)];
-    [self.tableview.mj_header beginRefreshing];
-    
+    //[self.tableview.mj_header beginRefreshing];
+    [self reloadAuditedData];
 }
 
 //下拉
@@ -118,9 +142,15 @@
       }
     };
     network.failure = ^(NSDictionary *dict) {
-            [self.tableview.mj_header endRefreshing];
-            [self.tableview.mj_footer endRefreshing];
+        [self.tableview.mj_header endRefreshing];
+        [self.tableview.mj_footer endRefreshing];
     };
+}
+
+
+
+- (void)videoPlayer:(__kindof SJBaseVideoPlayer *)videoPlayer prepareToPlay:(SJVideoPlayerURLAsset *)asset{
+//    NSLog(@"------------------------------");
 }
 
 - (BOOL)prefersStatusBarHidden {
@@ -148,7 +178,8 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 117;
+     CGSize size = [self.onlinemodel.videoDescribe boundingRectWithSize:CGSizeMake(SCW - 31, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:15]} context:nil].size;
+    return size.height + 50;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
@@ -172,21 +203,18 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:true];
     RSOnlineModel * onlinemodel = self.workArray[indexPath.row];
-    [RSJumpVideoTool canYouSkipThePlaybackVideoInterfaceMoment:onlinemodel andViewController:self andUserModel:self.usermodel];
+    [RSJumpVideoTool canYouSkipThePlaybackVideoInterfaceMoment:onlinemodel andViewController:self];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
-    [self.player _pauseVideo];
+    self.player.disableAutoRotation = YES;
+    [self.player pause];
 }
 
 - (void)dealloc{
-    [self.player _deallocPlayer];
-}
-
-- (void)upViewController{
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.player stopAndFadeOut];
 }
 
 

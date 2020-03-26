@@ -94,12 +94,18 @@ EOM
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_resource "${PODS_ROOT}/IQKeyboardManager/IQKeyboardManager/Resources/IQKeyboardManager.bundle"
   install_resource "${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle"
+  install_resource "${PODS_ROOT}/SJBaseVideoPlayer/SJBaseVideoPlayer/SJVolBrigControl/Resource/SJVolBrigResource.bundle"
+  install_resource "${PODS_ROOT}/SJVideoPlayer/SJVideoPlayer/SJEdgeControlLayer/ResourceLoader/SJEdgeControlLayer.bundle"
+  install_resource "${PODS_ROOT}/SJVideoPlayer/SJVideoPlayer/SJFilmEditingControlLayer/ResourceLoader/SJFilmEditing.bundle"
   install_resource "${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle"
   install_resource "${PODS_ROOT}/TZImagePickerController/TZImagePickerController/TZImagePickerController/TZImagePickerController.bundle"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "${PODS_ROOT}/IQKeyboardManager/IQKeyboardManager/Resources/IQKeyboardManager.bundle"
   install_resource "${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle"
+  install_resource "${PODS_ROOT}/SJBaseVideoPlayer/SJBaseVideoPlayer/SJVolBrigControl/Resource/SJVolBrigResource.bundle"
+  install_resource "${PODS_ROOT}/SJVideoPlayer/SJVideoPlayer/SJEdgeControlLayer/ResourceLoader/SJEdgeControlLayer.bundle"
+  install_resource "${PODS_ROOT}/SJVideoPlayer/SJVideoPlayer/SJFilmEditingControlLayer/ResourceLoader/SJFilmEditing.bundle"
   install_resource "${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle"
   install_resource "${PODS_ROOT}/TZImagePickerController/TZImagePickerController/TZImagePickerController/TZImagePickerController.bundle"
 fi

@@ -12,7 +12,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface RSJumpVideoTool : NSObject
-+ (void)canYouSkipThePlaybackVideoInterfaceMoment:(RSOnlineModel *)onlinemodel andViewController:(UIViewController *)viewController andUserModel:(RSUserModel *)usermodel;
++ (void)canYouSkipThePlaybackVideoInterfaceMoment:(RSOnlineModel *)onlinemodel andViewController:(UIViewController *)viewController;
 @end
 
 NS_ASSUME_NONNULL_END

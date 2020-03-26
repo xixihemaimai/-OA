@@ -149,11 +149,6 @@
 		04E6A344219189B7007A44F2 /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E6A343219189B7007A44F2 /* UIView+Frame.m */; };
 		04E6A34721927A1A007A44F2 /* RSCustomMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E6A34621927A1A007A44F2 /* RSCustomMenuCell.m */; };
 		04E6A34A2192824F007A44F2 /* RSApprovalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E6A3492192824F007A44F2 /* RSApprovalCell.m */; };
-		04FD4FF72421BDDD004EBA34 /* SelPlaybackControls.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FD4FEC2421BDDD004EBA34 /* SelPlaybackControls.m */; };
-		04FD4FF82421BDDD004EBA34 /* SelVideoPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FD4FED2421BDDD004EBA34 /* SelVideoPlayer.m */; };
-		04FD4FFA2421BDDD004EBA34 /* SelPlayerConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FD4FF42421BDDD004EBA34 /* SelPlayerConfiguration.m */; };
-		04FD4FFB2421BDDD004EBA34 /* SelVideoSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FD4FF62421BDDD004EBA34 /* SelVideoSlider.m */; };
-		04FD4FFE2421C990004EBA34 /* UIViewController+PlayerRotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FD4FFC2421C98F004EBA34 /* UIViewController+PlayerRotation.m */; };
 		04FD50012421CF07004EBA34 /* RSOnlineVideoHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FD50002421CF07004EBA34 /* RSOnlineVideoHeaderView.m */; };
 		04FD500424220066004EBA34 /* RSOnlineModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FD500324220066004EBA34 /* RSOnlineModel.m */; };
 		04FD5007242211F5004EBA34 /* RSOnlineTypeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FD5006242211F5004EBA34 /* RSOnlineTypeModel.m */; };
@@ -436,16 +431,6 @@
 		04E6A34621927A1A007A44F2 /* RSCustomMenuCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSCustomMenuCell.m; sourceTree = "<group>"; };
 		04E6A3482192824F007A44F2 /* RSApprovalCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSApprovalCell.h; sourceTree = "<group>"; };
 		04E6A3492192824F007A44F2 /* RSApprovalCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSApprovalCell.m; sourceTree = "<group>"; };
-		04FD4FEC2421BDDD004EBA34 /* SelPlaybackControls.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelPlaybackControls.m; sourceTree = "<group>"; };
-		04FD4FED2421BDDD004EBA34 /* SelVideoPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelVideoPlayer.m; sourceTree = "<group>"; };
-		04FD4FEE2421BDDD004EBA34 /* SelVideoSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelVideoSlider.h; sourceTree = "<group>"; };
-		04FD4FEF2421BDDD004EBA34 /* SelPlaybackControls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelPlaybackControls.h; sourceTree = "<group>"; };
-		04FD4FF22421BDDD004EBA34 /* SelPlayerConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelPlayerConfiguration.h; sourceTree = "<group>"; };
-		04FD4FF42421BDDD004EBA34 /* SelPlayerConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelPlayerConfiguration.m; sourceTree = "<group>"; };
-		04FD4FF52421BDDD004EBA34 /* SelVideoPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelVideoPlayer.h; sourceTree = "<group>"; };
-		04FD4FF62421BDDD004EBA34 /* SelVideoSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelVideoSlider.m; sourceTree = "<group>"; };
-		04FD4FFC2421C98F004EBA34 /* UIViewController+PlayerRotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+PlayerRotation.m"; sourceTree = "<group>"; };
-		04FD4FFD2421C990004EBA34 /* UIViewController+PlayerRotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+PlayerRotation.h"; sourceTree = "<group>"; };
 		04FD4FFF2421CF07004EBA34 /* RSOnlineVideoHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSOnlineVideoHeaderView.h; sourceTree = "<group>"; };
 		04FD50002421CF07004EBA34 /* RSOnlineVideoHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSOnlineVideoHeaderView.m; sourceTree = "<group>"; };
 		04FD500224220066004EBA34 /* RSOnlineModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSOnlineModel.h; sourceTree = "<group>"; };
@@ -719,7 +704,6 @@
 		0436F6A22178221700B0D6C8 /* Lib */ = {
 			isa = PBXGroup;
 			children = (
-				04FD4FEB2421BDDC004EBA34 /* VideoPlayer */,
 				04B3F74523B497DA00CDD821 /* JHAlertUtil */,
 				0404773023AA0E3400B4D528 /* WSDaePickerView */,
 				041E07492387B38C00766441 /* SHESelectTable */,
@@ -1169,31 +1153,6 @@
 			path = SCNavigationMenuView;
 			sourceTree = "<group>";
 		};
-		04FD4FEB2421BDDC004EBA34 /* VideoPlayer */ = {
-			isa = PBXGroup;
-			children = (
-				04FD4FEF2421BDDD004EBA34 /* SelPlaybackControls.h */,
-				04FD4FEC2421BDDD004EBA34 /* SelPlaybackControls.m */,
-				04FD4FF52421BDDD004EBA34 /* SelVideoPlayer.h */,
-				04FD4FED2421BDDD004EBA34 /* SelVideoPlayer.m */,
-				04FD4FEE2421BDDD004EBA34 /* SelVideoSlider.h */,
-				04FD4FF62421BDDD004EBA34 /* SelVideoSlider.m */,
-				04FD4FF02421BDDD004EBA34 /* Configs */,
-			);
-			path = VideoPlayer;
-			sourceTree = "<group>";
-		};
-		04FD4FF02421BDDD004EBA34 /* Configs */ = {
-			isa = PBXGroup;
-			children = (
-				04FD4FFD2421C990004EBA34 /* UIViewController+PlayerRotation.h */,
-				04FD4FFC2421C98F004EBA34 /* UIViewController+PlayerRotation.m */,
-				04FD4FF22421BDDD004EBA34 /* SelPlayerConfiguration.h */,
-				04FD4FF42421BDDD004EBA34 /* SelPlayerConfiguration.m */,
-			);
-			path = Configs;
-			sourceTree = "<group>";
-		};
 		04FF49E021A4F21D00C4A2C2 /* RSA */ = {
 			isa = PBXGroup;
 			children = (
@@ -1338,6 +1297,9 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-OAManage/Pods-OAManage-resources.sh",
 				"${PODS_ROOT}/IQKeyboardManager/IQKeyboardManager/Resources/IQKeyboardManager.bundle",
 				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
+				"${PODS_ROOT}/SJBaseVideoPlayer/SJBaseVideoPlayer/SJVolBrigControl/Resource/SJVolBrigResource.bundle",
+				"${PODS_ROOT}/SJVideoPlayer/SJVideoPlayer/SJEdgeControlLayer/ResourceLoader/SJEdgeControlLayer.bundle",
+				"${PODS_ROOT}/SJVideoPlayer/SJVideoPlayer/SJFilmEditingControlLayer/ResourceLoader/SJFilmEditing.bundle",
 				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
 				"${PODS_ROOT}/TZImagePickerController/TZImagePickerController/TZImagePickerController/TZImagePickerController.bundle",
 			);
@@ -1345,6 +1307,9 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/IQKeyboardManager.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SJVolBrigResource.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SJEdgeControlLayer.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SJFilmEditing.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SVProgressHUD.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TZImagePickerController.bundle",
 			);
@@ -1389,7 +1354,6 @@
 				04B3F72023B0C77200CDD821 /* RSNameOfCargoCell.m in Sources */,
 				04D6CEE42191754000B35A51 /* SCNavigationMenuView.m in Sources */,
 				041E07382384EEC500766441 /* GYNoticeViewCell.m in Sources */,
-				04FD4FFB2421BDDD004EBA34 /* SelVideoSlider.m in Sources */,
 				04B3F73523B1BF4200CDD821 /* RSSLStockFootView.m in Sources */,
 				04A6F17A2195834600D15F58 /* RSPersonSecondCell.m in Sources */,
 				04B3F72623B0C92E00CDD821 /* RSBLStockCell.m in Sources */,
@@ -1406,14 +1370,12 @@
 				04CA3FBD219AC85C009C2D33 /* RSUserModel.m in Sources */,
 				041E0714237E983700766441 /* RSLaunchReusableView.m in Sources */,
 				040476D523A0D2DA00B4D528 /* iCloudManager.m in Sources */,
-				04FD4FF72421BDDD004EBA34 /* SelPlaybackControls.m in Sources */,
 				044656E92420A58100F1089C /* RSOnlineContentCell.m in Sources */,
 				0436F6892178198300B0D6C8 /* ViewController.m in Sources */,
 				04A8E7BD23B07140004E8013 /* RSToBeInitiatedViewController.m in Sources */,
 				041E07562387CD8E00766441 /* RSNewAuditedCell.m in Sources */,
 				041E071723823E7900766441 /* RSLaunchFootReusableView.m in Sources */,
 				04B3F71723B0B1E000CDD821 /* RSBLTouchViewController.m in Sources */,
-				04FD4FF82421BDDD004EBA34 /* SelVideoPlayer.m in Sources */,
 				041E07392384EEC500766441 /* GYRollingNoticeView.m in Sources */,
 				044656E62420A43800F1089C /* RSOnlineContentViewController.m in Sources */,
 				04A6F156219521D000D15F58 /* RSRedButton.m in Sources */,
@@ -1486,14 +1448,12 @@
 				041930E2238E162700DD2508 /* RSApprovalProcessCell.m in Sources */,
 				0404773B23AA0E3400B4D528 /* UIView+Extension.m in Sources */,
 				04E6A34A2192824F007A44F2 /* RSApprovalCell.m in Sources */,
-				04FD4FFE2421C990004EBA34 /* UIViewController+PlayerRotation.m in Sources */,
 				04B3F72C23B1B4E100CDD821 /* RSSLHeaderView.m in Sources */,
 				04D6CECF219026AA00B35A51 /* NSString+Hash.m in Sources */,
 				04A6F16221955C2300D15F58 /* RSProgressStatusCell.m in Sources */,
 				0412B79121A6840400761547 /* RSMenuHeaderFootView.m in Sources */,
 				041E072C2383E28F00766441 /* RSServiceHeaderView.m in Sources */,
 				0404774123AB156300B4D528 /* RSNewAuditedModel.m in Sources */,
-				04FD4FFA2421BDDD004EBA34 /* SelPlayerConfiguration.m in Sources */,
 				04C0474321787B5E0006B8D4 /* UIScrollView+DRRefresh.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

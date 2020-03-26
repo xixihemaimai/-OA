@@ -28,6 +28,9 @@
 
 @property (nonatomic,strong)NSMutableArray * contentArray;
 
+
+@property (nonatomic,strong)UIView * bottomView;
+
 @end
 
 @implementation RSOnlineTrainingViewController
@@ -195,7 +198,7 @@
     CGFloat btnH = self.titleScrollView.bounds.size.height;
     for (int i = 0; i < count; i++) {
     UIViewController *vc = self.childViewControllers[i];
-    CGSize size = [vc.title boundingRectWithSize:CGSizeMake(MAXFLOAT, btnH) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:18]} context:nil].size;
+    CGSize size = [vc.title boundingRectWithSize:CGSizeMake(MAXFLOAT, btnH) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:16]} context:nil].size;
         btnW += size.width + 10;
     }
     if (btnW > SCW) {
@@ -210,7 +213,7 @@
         //创建标题按钮
         UIButton * btn = [[UIButton alloc] init];
         if (isExceed) {
-              CGSize size = [vc.title boundingRectWithSize:CGSizeMake(MAXFLOAT, btnH) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:18]} context:nil].size;
+              CGSize size = [vc.title boundingRectWithSize:CGSizeMake(MAXFLOAT, btnH) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:16]} context:nil].size;
             btn.frame = CGRectMake(btnW, 0, size.width, btnH);
             btnW += size.width + 10;
         }else{
@@ -226,6 +229,7 @@
         [btn addTarget:self action:@selector(titleBtnClick:) forControlEvents:UIControlEventTouchDown];
         // 给按钮设置tag
         btn.tag = i;
+        btn.titleLabel.font = [UIFont systemFontOfSize:16];
         // 将所有的标题按钮都保存到数组里
         [self.titleBtns addObject:btn];
         // 将标题按钮添加到标题栏里
@@ -362,7 +366,7 @@
 //    contentScrollView.backgroundColor = [UIColor greenColor];
     // 设置内容的frame
     CGFloat x = 0;
-    CGFloat y = CGRectGetMaxY(self.titleScrollView.frame);
+    CGFloat y = CGRectGetMaxY(self.bottomView.frame);
     CGFloat w = SCW;
     CGFloat h = SCH - y;
     contentScrollView.frame = CGRectMake(x, y, w, h);
@@ -401,8 +405,9 @@
     
     UIView * bottomView = [[UIView alloc]init];
     bottomView.backgroundColor = [UIColor colorWithHexColorStr:@"#E6E6E6"];
-    bottomView.frame = CGRectMake(0, titleScrollView.yj_height - 0.5, SCW, 0.5);
-    [titleScrollView addSubview:bottomView];
+    bottomView.frame = CGRectMake(0, CGRectGetMaxY(titleScrollView.frame), SCW, 0.5);
+    [self.view addSubview:bottomView];
+    _bottomView = bottomView;
     
     // 去掉scollView的滚动条
     titleScrollView.showsHorizontalScrollIndicator = NO;

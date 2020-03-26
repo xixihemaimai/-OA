@@ -7,21 +7,14 @@
 //
 
 #import "RSBaseViewController.h"
-#import "SelVideoPlayer.h"
-#import "SelPlayerConfiguration.h"
-#import "RSOnlineModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface RSOnlineVideoPlayViewController : UIViewController
-
-//@property (nonatomic,strong)NSString * URLStr;
-
-//@property (nonatomic,strong)NSString * videoDescro;
+@interface RSOnlineVideoPlayViewController : RSBaseViewController
 
 @property (nonatomic,strong)RSOnlineModel * onlinemodel;
 
-@property (nonatomic,strong)RSUserModel * usermodel;
+
 
 @end
 
