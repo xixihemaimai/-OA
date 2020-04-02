@@ -42,7 +42,8 @@
     [UMConfigure initWithAppkey:@"5dca71324ca357eb33000a23" channel:@"App Store"];
     [MobClick setScenarioType:E_UM_NORMAL];
     
-    
+    //小米推送
+    [MiPushSDK registerMiPush:self type:0 connect:YES];
     //这边要对登录的数据进行判断是否有用户信息保存，有的话，先去重新获取用户信息在跳转页面
     NSUserDefaults * user = [NSUserDefaults standardUserDefaults];
     NSData * data = [user objectForKey:@"OAUSERMODEL"];
@@ -168,8 +169,7 @@
     }
     self.window.backgroundColor = [UIColor colorWithHexColorStr:@"#ffffff"];
     [self.window makeKeyAndVisible];
-    //小米推送
-    [MiPushSDK registerMiPush:self type:0 connect:YES];
+   
     // 点击通知打开app处理逻辑
     NSDictionary* userInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
     if(userInfo){
