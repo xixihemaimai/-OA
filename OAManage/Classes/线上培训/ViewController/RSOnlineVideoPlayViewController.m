@@ -14,6 +14,7 @@
 #import "RSOnlineVideoHeaderView.h"
 
 @interface RSOnlineVideoPlayViewController ()
+//<SJVideoPlayerControlLayerDelegate>
 
 @property (nonatomic,strong)UIView *playerSuperview;
 
@@ -41,8 +42,13 @@
     applegate.allowRotation = 1;
 }
 
+
+
+
+
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
+//    [self.player vc_viewDidAppear];
     self.player.disableAutoRotation = NO;
 }
 
@@ -52,13 +58,6 @@
     UIView *playerSuperview = [[UIView alloc]init];
     playerSuperview.frame = CGRectMake(0, 0, SCW, 215);
     self.tableview.tableHeaderView = playerSuperview;
-    //SJVideoPlayerURLAsset *asset =
-    //[[SJVideoPlayerURLAsset alloc] initWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_NEWPOST_IOS,self.onlinemodel.url]]
-//                                            playModel:[SJPlayModel UITableViewHeaderViewPlayModelWithPlayerSuperview:playerSuperview tableView:self.tableview]];
-    // 2. 设置资源标题
-    // asset.title = @"DIY心情转盘 #手工##手工制作#";
-    // 3. 默认情况下, 小屏时不显示标题, 全屏后才会显示, 这里设置一直显示标题
-    //asset.alwaysShowTitle = YES;
     self.player = [SJVideoPlayer player];
     [playerSuperview addSubview:self.player.view];
     //加载的拷贝的地方，又来保存已经加载到什么地方
@@ -66,14 +65,22 @@
     [KTVHTTPCache proxyStart:&errer];
     NSURL * proxyURL = [KTVHTTPCache proxyURLWithOriginalURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_NEWPOST_IOS,self.onlinemodel.url]]];
     self.player.URLAsset = [[SJVideoPlayerURLAsset alloc]initWithURL:proxyURL];
+    //超时间隔。
+    [KTVHTTPCache downloadSetTimeoutInterval:30];
+    // 2. 设置资源标题
+     self.player.URLAsset.title = self.onlinemodel.videoDescribe;
+      // 3. 默认情况下, 小屏时不显示标题, 全屏后才会显示, 这里设置一直显示标题
+      //asset.alwaysShowTitle = YES;
+//    self.player.URLAsset.alwaysShowTitle = NO;
     // 设置资源
     // self.player.URLAsset = asset;
     [self.player.view mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.offset(0);
     }];
     self.player.placeholder = [UIImage imageNamed:@"默认图"];
+//    self.player.controlLayerDelegate = self;
     //是否开启剪辑工具栏
-    self.player.enableFilmEditing = YES;
+    self.player.enableFilmEditing = NO;
     /// URLAsset资源dealloc时的回调
     /// - 可以在这里做一些记录的工作. 如播放记录.
     self.player.assetDeallocExeBlock = ^(__kindof SJBaseVideoPlayer * _Nonnull videoPlayer) {
@@ -86,26 +93,12 @@
             [weakSelf.navigationController popViewControllerAnimated:YES];
         }
     };
-//    UIButton * backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    //backImageBtn.image = [UIImage imageNamed:@"返回"];
-//    //backImageBtn.alpha = 0.5;
-//    [backBtn setBackgroundColor:[UIColor redColor]];
-//    [backBtn setImage:[UIImage imageNamed:@"sj_video_player_back"] forState:UIControlStateNormal];
-//    //backBtn.imageEdgeInsets = UIEdgeInsetsMake(7, 11, 6, 11);
-//    [backBtn addTarget:self action:@selector(upViewController) forControlEvents:UIControlEventTouchUpInside];
-//    [playerSuperview addSubview:backBtn];
-    //        backBtn.sd_layout
-//        .leftSpaceToView(playerSuperview, 10)
-//        .topSpaceToView(playerSuperview, 10)
-//        .widthIs(40)
-//        .heightEqualToWidth();
-//    }
-//    [backBtn bringSubviewToFront:playerSuperview];
+    [self.player play];
     self.pageNum = 1;
     self.tableview.mj_header = [MJChiBaoZiHeader headerWithRefreshingTarget:self refreshingAction:@selector(reloadVideoListNewData)];
     self.tableview.mj_footer = [MJChiBaoZiFooter footerWithRefreshingTarget:self refreshingAction:@selector(reloadVideoListMoreNewData)];
-    //[self.tableview.mj_header beginRefreshing];
     [self reloadAuditedData];
+    
 }
 
 //下拉
@@ -148,10 +141,10 @@
 }
 
 
-
-- (void)videoPlayer:(__kindof SJBaseVideoPlayer *)videoPlayer prepareToPlay:(SJVideoPlayerURLAsset *)asset{
+//这是准备播放下一条视频
+//- (void)videoPlayer:(__kindof SJBaseVideoPlayer *)videoPlayer prepareToPlay:(SJVideoPlayerURLAsset *)asset{
 //    NSLog(@"------------------------------");
-}
+//}
 
 - (BOOL)prefersStatusBarHidden {
     return YES;
@@ -209,9 +202,18 @@
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
+//    [self.player vc_viewDidDisappear];
     self.player.disableAutoRotation = YES;
     [self.player pause];
 }
+
+
+
+//- (void)viewWillDisappear:(BOOL)animated {
+//    [super viewWillDisappear:animated];
+//    [self.player vc_viewWillDisappear];
+//}
+
 
 - (void)dealloc{
     [self.player stopAndFadeOut];
