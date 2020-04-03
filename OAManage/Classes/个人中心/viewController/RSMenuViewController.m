@@ -316,6 +316,9 @@ static NSString * MENUHEADER = @"MENUHEADER";
                 //[[SDImageCache sharedImageCache] clearMemory];
                 [self deleteFileByPath:path];
             });
+            //这句话是解决，清除缓存之后，在去点击视频，没有办法播放视频的问题
+            [KTVHTTPCache cacheDeleteAllCaches];
+            
         }];
         [alert addAction:actionConfirm];
         if ([UIDevice currentDevice].systemVersion.floatValue >= 13.0) {

@@ -49,6 +49,7 @@
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
 //    [self.player vc_viewDidAppear];
+    NSLog(@"===============================");
     self.player.disableAutoRotation = NO;
 }
 
@@ -60,13 +61,17 @@
     self.tableview.tableHeaderView = playerSuperview;
     self.player = [SJVideoPlayer player];
     [playerSuperview addSubview:self.player.view];
-    //加载的拷贝的地方，又来保存已经加载到什么地方
-    NSError * errer = [[NSError alloc]init];
-    [KTVHTTPCache proxyStart:&errer];
-    NSURL * proxyURL = [KTVHTTPCache proxyURLWithOriginalURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_NEWPOST_IOS,self.onlinemodel.url]]];
-    self.player.URLAsset = [[SJVideoPlayerURLAsset alloc]initWithURL:proxyURL];
+//    self.player.hideBackButtonWhenOrientationIsPortrait = NO;
+   
+//     NSURL * proxyURL = [KTVHTTPCache cacheCompleteFileURLIfExistedWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_NEWPOST_IOS,self.onlinemodel.url]]];
+//    if (proxyURL) {
+//        self.player.URLAsset = [[SJVideoPlayerURLAsset alloc]initWithURL:proxyURL];
+//    }else{
+     NSURL * proxyURL = [KTVHTTPCache proxyURLWithOriginalURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_NEWPOST_IOS,self.onlinemodel.url]]];
+        self.player.URLAsset = [[SJVideoPlayerURLAsset alloc]initWithURL:proxyURL];
+//    }
     //超时间隔。
-    [KTVHTTPCache downloadSetTimeoutInterval:30];
+//    [KTVHTTPCache downloadSetTimeoutInterval:30];
     // 2. 设置资源标题
      self.player.URLAsset.title = self.onlinemodel.videoDescribe;
       // 3. 默认情况下, 小屏时不显示标题, 全屏后才会显示, 这里设置一直显示标题
@@ -80,12 +85,13 @@
     self.player.placeholder = [UIImage imageNamed:@"默认图"];
 //    self.player.controlLayerDelegate = self;
     //是否开启剪辑工具栏
-    self.player.enableFilmEditing = NO;
+    self.player.enableFilmEditing = YES;
     /// URLAsset资源dealloc时的回调
     /// - 可以在这里做一些记录的工作. 如播放记录.
     self.player.assetDeallocExeBlock = ^(__kindof SJBaseVideoPlayer * _Nonnull videoPlayer) {
 //        NSLog(@"===================%lf",videoPlayer.currentTime);
     };
+    [self.player play];
     //点击返回按钮的回调
     RSWeakself
     self.player.clickedBackEvent = ^(SJVideoPlayer * _Nonnull player) {
@@ -93,7 +99,13 @@
             [weakSelf.navigationController popViewControllerAnimated:YES];
         }
     };
-    [self.player play];
+    
+    
+
+    
+
+
+    
     self.pageNum = 1;
     self.tableview.mj_header = [MJChiBaoZiHeader headerWithRefreshingTarget:self refreshingAction:@selector(reloadVideoListNewData)];
     self.tableview.mj_footer = [MJChiBaoZiFooter footerWithRefreshingTarget:self refreshingAction:@selector(reloadVideoListMoreNewData)];
@@ -116,7 +128,7 @@
     NetworkTool * network = [[NetworkTool alloc]init];
     NSMutableDictionary * dict = [NSMutableDictionary dictionary];
     [dict setValue:self.usermodel.appLoginToken forKey:@"loginToken"];
-    [dict setValue:URL_NEWRECOMMEND_IOS((long)self.pageNum,6, self.onlinemodel.onlineId, self.onlinemodel.videoTypeId, self.onlinemodel.videoTitle) forKey:@"data"];
+    [dict setValue:URL_NEWRECOMMEND_IOS((long)self.pageNum,6,(long)self.onlinemodel.onlineId,(long)self.onlinemodel.videoTypeId, self.onlinemodel.videoTitle) forKey:@"data"];
 //    NSLog(@"=========%@",dict);
     [network newReloadWebServiceNoDataURL:URL_VIDEORECOMMEND_IOS andParameters:dict andURLName:URL_VIDEORECOMMEND_IOS];
     network.successArrayReload = ^(NSMutableArray *array) {
@@ -202,17 +214,10 @@
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
-//    [self.player vc_viewDidDisappear];
     self.player.disableAutoRotation = YES;
     [self.player pause];
+    
 }
-
-
-
-//- (void)viewWillDisappear:(BOOL)animated {
-//    [super viewWillDisappear:animated];
-//    [self.player vc_viewWillDisappear];
-//}
 
 
 - (void)dealloc{

@@ -132,7 +132,19 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:true];
     RSOnlineModel * onlinemodel = self.workArray[indexPath.row];
+    NSError * errer = nil;
+    [KTVHTTPCache proxyStart:&errer];
+    if (errer) {
+        NSLog(@"播放失败");
+    }else{
+        NSLog(@"播放成功");
+    }
+    
     [RSJumpVideoTool canYouSkipThePlaybackVideoInterfaceMoment:onlinemodel andViewController:self];
+}
+
+- (void)dealloc{
+    [KTVHTTPCache proxyStop];
 }
 
 @end

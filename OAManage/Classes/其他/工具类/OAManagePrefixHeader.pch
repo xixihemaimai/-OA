@@ -87,10 +87,10 @@
 
 
 //测试
-//#define URL_POST_IOS @"http://117.29.162.206:8089"
+#define URL_POST_IOS @"http://117.29.162.206:8089"
 
 //正式
-#define URL_POST_IOS @"http://121.204.136.234:48000"
+//#define URL_POST_IOS @"http://121.204.136.234:48000"
 
 
 //测试
@@ -116,11 +116,11 @@
 
 
 //新的请求方式
-//#define URL_NEWPOST_IOS @"http://117.29.162.206:8090"
+#define URL_NEWPOST_IOS @"http://117.29.162.206:8090"
 
 
 //新的请求正式方式
-#define URL_NEWPOST_IOS @"http://121.204.136.234:48001"
+//#define URL_NEWPOST_IOS @"http://121.204.136.234:48001"
 
 
 
