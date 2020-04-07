@@ -73,6 +73,7 @@
 		044656EC2420B59A00F1089C /* RSOnlineVideoPlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044656EB2420B59900F1089C /* RSOnlineVideoPlayViewController.m */; };
 		045D414721A808CE005F34D2 /* RSInformationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 045D414621A808CE005F34D2 /* RSInformationModel.m */; };
 		045D414A21AB91F3005F34D2 /* RSAuditedModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 045D414921AB91F3005F34D2 /* RSAuditedModel.m */; };
+		0471B00324373E2B00785F4D /* RSJumpVideoTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 0471B00224373E2B00785F4D /* RSJumpVideoTool.m */; };
 		04A4F81E21ABF0020052EFC4 /* RSShenHeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A4F81D21ABF0020052EFC4 /* RSShenHeModel.m */; };
 		04A4F82121ABF1990052EFC4 /* RSShenHeFristCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A4F82021ABF1990052EFC4 /* RSShenHeFristCell.m */; };
 		04A6F156219521D000D15F58 /* RSRedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A6F154219521CF00D15F58 /* RSRedButton.m */; };
@@ -152,7 +153,6 @@
 		04FD50012421CF07004EBA34 /* RSOnlineVideoHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FD50002421CF07004EBA34 /* RSOnlineVideoHeaderView.m */; };
 		04FD500424220066004EBA34 /* RSOnlineModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FD500324220066004EBA34 /* RSOnlineModel.m */; };
 		04FD5007242211F5004EBA34 /* RSOnlineTypeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FD5006242211F5004EBA34 /* RSOnlineTypeModel.m */; };
-		04FD500A24234909004EBA34 /* RSJumpVideoTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FD500924234909004EBA34 /* RSJumpVideoTool.m */; };
 		04FF49CB21A3B38E00C4A2C2 /* FSAES128.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FF49CA21A3B38E00C4A2C2 /* FSAES128.m */; };
 		04FF49DF21A3F04B00C4A2C2 /* RSRoleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FF49DE21A3F04B00C4A2C2 /* RSRoleModel.m */; };
 		04FF49E521A4F21E00C4A2C2 /* RSAEncryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FF49E321A4F21D00C4A2C2 /* RSAEncryptor.m */; };
@@ -287,6 +287,7 @@
 		045D414621A808CE005F34D2 /* RSInformationModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSInformationModel.m; sourceTree = "<group>"; };
 		045D414821AB91F3005F34D2 /* RSAuditedModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSAuditedModel.h; sourceTree = "<group>"; };
 		045D414921AB91F3005F34D2 /* RSAuditedModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSAuditedModel.m; sourceTree = "<group>"; };
+		0471B00224373E2B00785F4D /* RSJumpVideoTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSJumpVideoTool.m; sourceTree = "<group>"; };
 		04A4F81C21ABF0020052EFC4 /* RSShenHeModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSShenHeModel.h; sourceTree = "<group>"; };
 		04A4F81D21ABF0020052EFC4 /* RSShenHeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSShenHeModel.m; sourceTree = "<group>"; };
 		04A4F81F21ABF1990052EFC4 /* RSShenHeFristCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSShenHeFristCell.h; sourceTree = "<group>"; };
@@ -438,7 +439,6 @@
 		04FD5005242211F5004EBA34 /* RSOnlineTypeModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSOnlineTypeModel.h; sourceTree = "<group>"; };
 		04FD5006242211F5004EBA34 /* RSOnlineTypeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSOnlineTypeModel.m; sourceTree = "<group>"; };
 		04FD500824234909004EBA34 /* RSJumpVideoTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSJumpVideoTool.h; sourceTree = "<group>"; };
-		04FD500924234909004EBA34 /* RSJumpVideoTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSJumpVideoTool.m; sourceTree = "<group>"; };
 		04FF49C921A3B38E00C4A2C2 /* FSAES128.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FSAES128.h; sourceTree = "<group>"; };
 		04FF49CA21A3B38E00C4A2C2 /* FSAES128.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FSAES128.m; sourceTree = "<group>"; };
 		04FF49DD21A3F04B00C4A2C2 /* RSRoleModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSRoleModel.h; sourceTree = "<group>"; };
@@ -747,7 +747,7 @@
 				040476D623A0D33800B4D528 /* ZZDocument.h */,
 				040476D723A0D33800B4D528 /* ZZDocument.m */,
 				04FD500824234909004EBA34 /* RSJumpVideoTool.h */,
-				04FD500924234909004EBA34 /* RSJumpVideoTool.m */,
+				0471B00224373E2B00785F4D /* RSJumpVideoTool.m */,
 			);
 			path = "工具类";
 			sourceTree = "<group>";
@@ -1335,7 +1335,6 @@
 				041E072623839D9600766441 /* RSMailDetailViewController.m in Sources */,
 				041E0711237E588800766441 /* RSLaunchCell.m in Sources */,
 				0404775023AB2A7100B4D528 /* RSWorkTypeModel.m in Sources */,
-				04FD500A24234909004EBA34 /* RSJumpVideoTool.m in Sources */,
 				04B3F71A23B0BDDD00CDD821 /* RSBLTouchCell.m in Sources */,
 				0429906D21ACEA14004503A7 /* RSApprovalProcessModel.m in Sources */,
 				0436F6BD2178298800B0D6C8 /* UIBarButtonItem+Item.m in Sources */,
@@ -1356,6 +1355,7 @@
 				041E07382384EEC500766441 /* GYNoticeViewCell.m in Sources */,
 				04B3F73523B1BF4200CDD821 /* RSSLStockFootView.m in Sources */,
 				04A6F17A2195834600D15F58 /* RSPersonSecondCell.m in Sources */,
+				0471B00324373E2B00785F4D /* RSJumpVideoTool.m in Sources */,
 				04B3F72623B0C92E00CDD821 /* RSBLStockCell.m in Sources */,
 				04B3F75D23B5D7BB00CDD821 /* RSStoreAreaModel.m in Sources */,
 				041E07292383BCED00766441 /* RSMailDetailCell.m in Sources */,

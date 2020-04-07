@@ -52,22 +52,36 @@
 }
 
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [UIApplication sharedApplication].statusBarHidden = NO;
+    self.navigationController.navigationBar.hidden = NO;
+    if (iphonex || iPhoneXR || iPhoneXS || iPhoneXSMax) {
+        self.navigationController.navigationBar.frame = CGRectMake(0, 44, SCW, 44);
+    }else{
+        self.navigationController.navigationBar.frame = CGRectMake(0, 20, SCW, 44);
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+//    self.edgesForExtendedLayout=UIRectEdgeNone;
     self.emptyView.hidden = true;
+    [self.tableview removeFromSuperview];
     
     UIView * searchView = [[UIView alloc]init];
-    searchView.frame = CGRectMake(38.5, 28, SCW - 70, 32);
+    searchView.frame = CGRectMake(0, 0, SCW - 70, 32);
     searchView.backgroundColor = [UIColor colorWithHexColorStr:@"#ffffff"];
-    //添加一个搜索框
-    self.navigationItem.titleView = searchView;
+    
+    
     searchView.layer.cornerRadius = 5.5;
     searchView.layer.borderColor = [UIColor colorWithHexColorStr:@"#E2E2E2"].CGColor;
     searchView.layer.borderWidth = 0.5;
     
     
-    
+    //添加一个搜索框
+    self.navigationItem.titleView = searchView;
     //这边添加一个输入框
     UITextField * searchTextfield = [[UITextField alloc]init];
     searchTextfield.textColor = [UIColor colorWithHexColorStr:@"#333333"];
@@ -96,21 +110,15 @@
     searchTextfield.leftView = leftView;
     searchTextfield.leftViewMode = UITextFieldViewModeAlways;
     
+    
+
+    
     //清除导航栏底下的线
     [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [[UIImage alloc] init];
-    
     self.view.backgroundColor = [UIColor colorWithHexColorStr:@"#ffffff"];
   
-    
-    
-    
-    
-    
-    
     [self reloadAuditedData];
-    
-    
 }
 
 
@@ -160,7 +168,7 @@
     // 强制让系统计算一下titleLabel的size
     [titleBtn.titleLabel sizeToFit];
 //    NSLog(@"titleLabel.frame = %@",NSStringFromCGRect(titleBtn.titleLabel.frame));
-    CGFloat w = titleBtn.titleLabel.bounds.size.width+10;
+    CGFloat w = titleBtn.titleLabel.bounds.size.width + 5;
     lineView.frame = CGRectMake(0, y, w, h);
     [self.titleScrollView addSubview:lineView];
     
@@ -186,6 +194,8 @@
 
 
 
+
+
 // 要添加多少个多少标题按钮？
 // 有多少个子控制器就添加多少个标题按钮
 #pragma mark - 添加标题按钮
@@ -205,8 +215,10 @@
         btnW = 0;
         isExceed = true;
     }else{
-        btnW = SCW/count;
-        isExceed = false;
+        //btnW = SCW/count;
+        //isExceed = false;
+        btnW = 0;
+        isExceed = true;
     }
     for (int i = 0; i < count; i++) {
         UIViewController *vc = self.childViewControllers[i];
@@ -222,6 +234,7 @@
         // 设置按钮的标题
         // 获取按钮对应的子控制器
         [btn setTitle:vc.title forState:UIControlStateNormal];
+//        btn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         // 设置标题按钮的文字颜色
         [btn setTitleColor:[UIColor colorWithHexColorStr:@"#333333"] forState:UIControlStateNormal];
         [btn setTitleColor:[UIColor colorWithHexColorStr:@"#27C79A"] forState:UIControlStateSelected];
@@ -408,7 +421,6 @@
     bottomView.frame = CGRectMake(0, CGRectGetMaxY(titleScrollView.frame), SCW, 0.5);
     [self.view addSubview:bottomView];
     _bottomView = bottomView;
-    
     // 去掉scollView的滚动条
     titleScrollView.showsHorizontalScrollIndicator = NO;
 }
@@ -416,6 +428,12 @@
 #pragma mark - 添加所有子控制器
 - (void)addAllChildVC
 {
+    //自己添加一条数据，为全部的数据
+    RSOnlineTypeModel * onlineTypemodel = [[RSOnlineTypeModel alloc]init];
+    onlineTypemodel.onlineTypeId = 0;
+    onlineTypemodel.name = @"  全部";
+    [self.contentArray insertObject:onlineTypemodel atIndex:0];
+    
     for (int i = 0; i < self.contentArray.count; i++) {
         RSOnlineContentViewController * Vc = [[RSOnlineContentViewController alloc]init];
         RSOnlineTypeModel * onlineTypemodel = self.contentArray[i];
@@ -508,6 +526,20 @@ return YES;
     onlineContent.searchStr = textField.text;
     [onlineContent.tableview.mj_header beginRefreshing];
 }
+
+
+
+//- (BOOL)prefersStatusBarHidden {
+//    return NO;
+//}
+//
+//- (UIStatusBarStyle)preferredStatusBarStyle {
+//    return NO;
+//}
+//
+//- (BOOL)prefersHomeIndicatorAutoHidden {
+//    return NO;
+//}
 
 
 @end

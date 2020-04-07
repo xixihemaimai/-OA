@@ -99,13 +99,6 @@
             [weakSelf.navigationController popViewControllerAnimated:YES];
         }
     };
-    
-    
-
-    
-
-
-    
     self.pageNum = 1;
     self.tableview.mj_header = [MJChiBaoZiHeader headerWithRefreshingTarget:self refreshingAction:@selector(reloadVideoListNewData)];
     self.tableview.mj_footer = [MJChiBaoZiFooter footerWithRefreshingTarget:self refreshingAction:@selector(reloadVideoListMoreNewData)];
