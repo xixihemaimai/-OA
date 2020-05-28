@@ -1602,7 +1602,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.5;
+				CURRENT_PROJECT_VERSION = 1.6;
 				DEVELOPMENT_TEAM = 5CVKEU8NXR;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/OAManage/Classes/其他/工具类/OAManagePrefixHeader.pch";
@@ -1616,7 +1616,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/OAManage/Classes/其他/Lib/SDK",
 				);
-				MARKETING_VERSION = 2.1.0;
+				MARKETING_VERSION = 2.1.1;
 				MiSDKRun = debug;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ruishi.OAManage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1635,7 +1635,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.5;
+				CURRENT_PROJECT_VERSION = 1.6;
 				DEVELOPMENT_TEAM = 5CVKEU8NXR;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/OAManage/Classes/其他/工具类/OAManagePrefixHeader.pch";
@@ -1649,7 +1649,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/OAManage/Classes/其他/Lib/SDK",
 				);
-				MARKETING_VERSION = 2.1.0;
+				MARKETING_VERSION = 2.1.1;
 				MiSDKRun = online;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ruishi.OAManage;

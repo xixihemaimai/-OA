@@ -20,6 +20,7 @@
         //图片
         UIImageView * funtionImage = [[UIImageView alloc]init];
         funtionImage.image = [UIImage imageNamed:@"个人信息"];
+        funtionImage.backgroundColor = [UIColor colorWithHexColorStr:@"#ffffff"];
         [self.contentView addSubview:funtionImage];
         _funtionImage = funtionImage;
         

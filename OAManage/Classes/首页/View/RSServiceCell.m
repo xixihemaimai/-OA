@@ -54,7 +54,7 @@
         
         
         UIView * bottomview = [[UIView alloc]init];
-        bottomview.backgroundColor = [UIColor colorWithHexColorStr:@"#F2F2F2"];
+        bottomview.backgroundColor = [UIColor colorWithHexColorStr:@"#f2f2f2"];
         [self.contentView addSubview:bottomview];
         
         

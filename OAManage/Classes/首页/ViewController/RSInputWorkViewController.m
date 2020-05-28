@@ -145,6 +145,7 @@ static NSString * APPROVALHEADERVIEW = @"APPROVALHEADERVIEW";
     
     UITextView * footTextview = [[UITextView alloc]initWithFrame:CGRectMake(15, 8, SCW - 30, 68)];
     footTextview.backgroundColor = [UIColor colorWithHexColorStr:@"#F5F7FA"];
+    footTextview.textColor = [UIColor colorWithHexColorStr:@"#333333"];
     footTextview.textContainerInset = UIEdgeInsetsMake(5, 10, 0, 0);
     footTextview.returnKeyType = UIReturnKeySend;
     //contentTextview.delegate = self;
@@ -257,9 +258,6 @@ static NSString * APPROVALHEADERVIEW = @"APPROVALHEADERVIEW";
 //    [self.tableview reloadRowsAtIndexPaths:@[indexpath]withRowAnimation:UITableViewRowAnimationNone];
 //
 //    }];
-    
-    
-   
 }
 
 

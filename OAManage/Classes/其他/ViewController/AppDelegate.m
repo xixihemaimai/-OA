@@ -167,7 +167,9 @@
         self.window.rootViewController = mayNa;
      };
     }
+    //
     self.window.backgroundColor = [UIColor colorWithHexColorStr:@"#ffffff"];
+    
     [self.window makeKeyAndVisible];
    
     // 点击通知打开app处理逻辑

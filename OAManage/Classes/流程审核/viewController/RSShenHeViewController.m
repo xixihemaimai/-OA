@@ -81,6 +81,7 @@
     if (!_currentemptyView) {
         _currentemptyView = [[ZZQEmptyView alloc] initWithView:self.view];
         _currentemptyView.emptyMode = ZZQEmptyViewModeNoData;
+        _currentemptyView.backgroundColor = [UIColor colorWithHexColorStr:@"#ffffff"];
         _currentemptyView.label.text = @"暂无任务";
         [_currentemptyView.button setTitle:@"点击重新加载" forState:UIControlStateNormal];
         _currentemptyView.button.hidden = YES;
@@ -108,7 +109,7 @@
         _leftTableview.showsVerticalScrollIndicator = NO;
         _leftTableview.showsHorizontalScrollIndicator = NO;
         _leftTableview.separatorStyle = UITableViewCellSeparatorStyleNone;
-        _leftTableview.backgroundColor = [UIColor colorWithHexColorStr:@"#ffffff"];
+        _leftTableview.backgroundColor =  [UIColor colorWithHexColorStr:@"#ffffff"];
     }
     return _leftTableview;
 }
@@ -157,7 +158,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
+//    self.view.backgroundColor = [UIColor whiteColor];
     self.pageNum = 1;
     self.selectType = @"1";
     self.billKey = @"";
@@ -382,8 +383,8 @@
             cell.shenHeLabel.textColor = [UIColor colorWithHexColorStr:@"#333333"];
             cell.contentView.backgroundColor = [UIColor colorWithHexColorStr:@"#ffffff"];
         }else{
-            cell.shenHeLabel.textColor = [UIColor colorWithHexColorStr:@"#7D7D7D"];
-            cell.contentView.backgroundColor = [UIColor colorWithHexColorStr:@"#F8F8F8"];
+            cell.shenHeLabel.textColor = [UIColor colorWithHexColorStr:@"#7d7d7d"];
+            cell.contentView.backgroundColor = [UIColor colorWithHexColorStr:@"#f8f8f8"];
         }
         return cell;
     }else{
@@ -395,9 +396,9 @@
        // cell.contentView.backgroundColor = [UIColor colorWithHexColorStr:@"#ffffff"];
         cell.auditemodel = self.rightArray[indexPath.row];
         
-        UIColor * color = [UIColor colorWithRed:247/255.0 green:247/255.0 blue:249/255.0 alpha:1.0];//通过RGB来定义自己的颜色
+       // UIColor * color = [UIColor colorWithRed:247/255.0 green:247/255.0 blue:249/255.0 alpha:1.0];//通过RGB来定义自己的颜色
         cell.selectedBackgroundView = [[UIView alloc] initWithFrame:cell.frame];//这句不可省略
-        cell.selectedBackgroundView.backgroundColor = color;
+        cell.selectedBackgroundView.backgroundColor = [UIColor colorWithHexColorStr:@"#f7f7f9"];
         cell.approvalBottomView.sd_layout
         .heightIs(0);
 //        cell.selectedBackgroundView.backgroundColor = [UIColor colorWithRed:247/255.0 green:247/255.0 blue:249/255.0 alpha:1.0];

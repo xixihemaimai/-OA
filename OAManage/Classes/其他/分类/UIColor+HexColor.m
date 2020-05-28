@@ -70,4 +70,21 @@
     return [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:alpha];;
 }
 
+
++ (UIColor *)colorWithDyColorChangObject:(UIView *)object andHexLightColorStr:(NSString *)lightcolorStr andHexDarkColorStr:(NSString *)darkColorStr{
+    if (@available(iOS 13.0, *)) {
+        UIColor * dyColor = [UIColor colorWithDynamicProvider:^UIColor * _Nonnull(UITraitCollection * _Nonnull traitCollection) {
+            if (traitCollection.userInterfaceStyle == UIUserInterfaceStyleLight) {
+              
+                return [self colorWithHexColorStr:lightcolorStr];
+            }else{
+                return [self colorWithHexColorStr:darkColorStr];
+            }
+        }];
+        return dyColor;
+    } else {
+        return [self colorWithHexColorStr:lightcolorStr];
+    }
+}
+
 @end

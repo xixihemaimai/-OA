@@ -68,6 +68,7 @@
 
     self.emptyView.emptyMode = ZZQEmptyViewModeWorkOnly;
     self.emptyView.label.text = @"暂无工作日志，";
+    self.emptyView.backgroundColor = [UIColor colorWithHexColorStr:@"#ffffff"];
     [self.emptyView.button setTitle:@"去新增" forState:UIControlStateNormal];
     [self.emptyView.button setTitleColor:[UIColor colorWithHexColorStr:@"#27C79A"] forState:UIControlStateNormal];
     self.emptyView.label.textColor = [UIColor colorWithHexColorStr:@"#666666"];

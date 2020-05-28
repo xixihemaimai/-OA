@@ -82,6 +82,7 @@
     UITextView * contentTextview = [[UITextView alloc]initWithFrame:CGRectMake(40, CGRectGetMaxY(contentLabel.frame) + 5, self.bounds.size.width - 80, 68)];
     contentTextview.backgroundColor = [UIColor colorWithHexColorStr:@"#F7F7F7"];
     contentTextview.textContainerInset = UIEdgeInsetsMake(5, 10, 0, 0);
+    contentTextview.textColor = [UIColor colorWithHexColorStr:@"#333333"];
     contentTextview.returnKeyType = UIReturnKeySend;
     contentTextview.delegate = self;
     [self addSubview:contentTextview];
@@ -101,6 +102,7 @@
     UITextView * resultTextview = [[UITextView alloc]initWithFrame:CGRectMake(40, CGRectGetMaxY(resultLabel.frame) + 5, self.bounds.size.width - 80, 68)];
     resultTextview.backgroundColor = [UIColor colorWithHexColorStr:@"#F7F7F7"];
     resultTextview.textContainerInset = UIEdgeInsetsMake(5, 10, 0, 0);
+    resultTextview.textColor = [UIColor colorWithHexColorStr:@"#333333"];
     resultTextview.returnKeyType = UIReturnKeySend;
     resultTextview.delegate = self;
     [self addSubview:resultTextview];

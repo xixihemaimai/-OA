@@ -24,9 +24,8 @@
 
 
 
-
-
-
+/**暗黑模式和白天模式要改变的颜色*/
++ (UIColor *)colorWithDyColorChangObject:(UIView *)object andHexLightColorStr:(NSString *)lightcolorStr andHexDarkColorStr:(NSString *)darkColorStr;
 
 
 

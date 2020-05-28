@@ -13,7 +13,7 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         
-       // self.contentView.backgroundColor = [UIColor colorWithHexColorStr:@"#F8F8F8"];
+
         
         
         

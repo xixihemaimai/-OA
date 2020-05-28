@@ -119,12 +119,7 @@
         .bottomSpaceToView(self.view, 0);
     }
     [self.view addSubview:self.emptyView];
-    
-    
-    
-    
-    
-    
+  
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -752,8 +747,6 @@ return encodedImageStr;
     NSDate *datestr = [dateFormatter dateFromString:dateStr];
     return datestr;
 }
-
-
 
 
 

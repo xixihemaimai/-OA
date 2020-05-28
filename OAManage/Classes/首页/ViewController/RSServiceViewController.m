@@ -69,7 +69,9 @@
 static NSString * SERVICEHEADERVIEWID = @"SERVICEHEADERVIEWID";
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     self.view.backgroundColor = [UIColor colorWithHexColorStr:@"#ffffff"];
+    
     self.title = @"首页";
     self.emptyView.hidden = YES;
     self.tableview.contentInset = UIEdgeInsetsMake(0, 0, 60, 0);
@@ -147,6 +149,7 @@ static NSString * SERVICEHEADERVIEWID = @"SERVICEHEADERVIEWID";
 
 - (void)showCustomHeaderview{
     UIView * headerView = [[UIView alloc]init];
+    headerView.backgroundColor = [UIColor colorWithHexColorStr:@"#ffffff"];
     ZKImgRunLoopView * kimageRun = [[ZKImgRunLoopView alloc]initWithFrame:CGRectMake(15, 13, SCW - 30, 160) placeholderImg:[UIImage imageNamed:@"默认图"]];
     kimageRun.pageControl.numberOfPages = 3;
     kimageRun.pageControl.currentPage = 0;
@@ -201,7 +204,7 @@ static NSString * SERVICEHEADERVIEWID = @"SERVICEHEADERVIEWID";
 
     //下分割线
     UIView * newMidView = [[UIView alloc]init];
-    newMidView.backgroundColor = [UIColor colorWithHexColorStr:@"#F2F2F2"];
+    newMidView.backgroundColor = [UIColor colorWithHexColorStr:@"#f2f2f2"];
     [headerView addSubview:newMidView];
     newMidView.sd_layout
     .leftEqualToView(noticeImage)
@@ -210,7 +213,7 @@ static NSString * SERVICEHEADERVIEWID = @"SERVICEHEADERVIEWID";
     .heightIs(0.5);
     
     //工作日志和体系文件
-    UIButton * firstBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIButton * firstBtn = [[UIButton alloc]init];
     [firstBtn setBackgroundColor:[UIColor colorWithHexColorStr:@"#ffffff"]];
     [headerView addSubview:firstBtn];
     firstBtn.tag = 1;
@@ -243,7 +246,7 @@ static NSString * SERVICEHEADERVIEWID = @"SERVICEHEADERVIEWID";
     .heightIs(22.5)
     .rightSpaceToView(firstBtn, 0);
     
-    UIButton * secondBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIButton * secondBtn =  [[UIButton alloc]init];
     [secondBtn setBackgroundColor:[UIColor colorWithHexColorStr:@"#ffffff"]];
     [headerView addSubview:secondBtn];
     secondBtn.tag = 2;
@@ -276,7 +279,7 @@ static NSString * SERVICEHEADERVIEWID = @"SERVICEHEADERVIEWID";
     .heightIs(22.5)
     .rightSpaceToView(secondBtn, 0);
     
-    UIButton * thirdBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIButton * thirdBtn =  [[UIButton alloc]init];
     [thirdBtn setBackgroundColor:[UIColor colorWithHexColorStr:@"#ffffff"]];
     [headerView addSubview:thirdBtn];
     thirdBtn.tag = 3;
@@ -445,15 +448,20 @@ static NSString * SERVICEHEADERVIEWID = @"SERVICEHEADERVIEWID";
     if (btn.tag == 1) {
         //        NSLog(@"工作日志");
         RSAuditedViewController * auditedVc = [[RSAuditedViewController alloc]init];
+        
+
         [self.navigationController pushViewController:auditedVc animated:YES];
+        
     }else if (btn.tag == 2){
         //        NSLog(@"体系文件");
         RSSystemViewController * systemVc = [[RSSystemViewController alloc]init];
+        
         [self.navigationController pushViewController:systemVc animated:YES];
     }
     else{
         //        NSLog(@"线上培训");
         RSOnlineTrainingViewController * onlineTrainingVc = [[RSOnlineTrainingViewController alloc]init];
+        
         [self.navigationController pushViewController:onlineTrainingVc animated:YES];
     }
 }

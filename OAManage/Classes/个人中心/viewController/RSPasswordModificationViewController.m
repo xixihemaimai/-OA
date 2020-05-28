@@ -53,6 +53,7 @@
     NSAttributedString * attri = [[NSAttributedString alloc] initWithString:@"原密码" attributes:@{NSForegroundColorAttributeName:[UIColor colorWithHexColorStr:@"#E0E0E0"],NSFontAttributeName:[UIFont systemFontOfSize:14], NSParagraphStyleAttributeName:style}];
     oldCipherField.secureTextEntry = YES;
     oldCipherField.attributedPlaceholder = attri;
+    oldCipherField.textColor = [UIColor colorWithHexColorStr:@"#333333"];
     oldCipherField.textAlignment = NSTextAlignmentCenter;
     oldCipherField.backgroundColor = [UIColor colorWithHexColorStr:@"#FFFFFF"];
     oldCipherField.layer.cornerRadius = 20;
@@ -71,6 +72,7 @@
     passwordstyle.alignment = NSTextAlignmentCenter;
     NSAttributedString * passwordattri = [[NSAttributedString alloc] initWithString:@"新密码" attributes:@{NSForegroundColorAttributeName:[UIColor colorWithHexColorStr:@"#E0E0E0"],NSFontAttributeName:[UIFont systemFontOfSize:14], NSParagraphStyleAttributeName:passwordstyle}];
     renewCipherField.attributedPlaceholder = passwordattri;
+    renewCipherField.textColor = [UIColor colorWithHexColorStr:@"#333333"];
     renewCipherField.secureTextEntry = YES;
     renewCipherField.backgroundColor = [UIColor colorWithHexColorStr:@"#FFFFFF"];
     renewCipherField.layer.cornerRadius = 20;
@@ -92,6 +94,7 @@
     sureCipherField.layer.cornerRadius = 20;
     sureCipherField.layer.borderColor = [UIColor colorWithHexColorStr:@"#D3D3D3"].CGColor;
     sureCipherField.layer.borderWidth = 1;
+    sureCipherField.textColor = [UIColor colorWithHexColorStr:@"#333333"];
     sureCipherField.secureTextEntry = YES;
     sureCipherField.layer.masksToBounds = YES;
     sureCipherField.textAlignment = NSTextAlignmentCenter;

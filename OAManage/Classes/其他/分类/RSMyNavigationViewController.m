@@ -74,6 +74,12 @@
     [self.navigationBar setShadowImage:[UIImage imageNamed:@"Line Copy 2"]];
     self.navigationBar.barTintColor = [UIColor colorWithHexColorStr:@"#ffffff"];
     
+    UIColor *whiteColor = [UIColor colorWithHexColorStr:@"#333333"];
+    NSDictionary *dic = [NSDictionary dictionaryWithObject:whiteColor forKey:NSForegroundColorAttributeName];
+    [self.navigationBar setTitleTextAttributes:dic];
+    
+
+//    self.navigationBar.translucent = true;
 }
 
 - (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated
@@ -90,7 +96,21 @@
     if (self.childViewControllers.count > 0) { // 非根控制器
         viewController.hidesBottomBarWhenPushed = YES;
         // 设置返回按钮,只有非根控制器
-        viewController.navigationItem.leftBarButtonItem = [UIBarButtonItem backItemWithimage:[UIImage imageNamed:@"system-backnew"] highImage:[UIImage imageNamed:@"system-backnew"]  target:self action:@selector(back) title:nil];
+        
+//         if (@available(iOS 13.0, *)) {
+//
+//             if (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleLight) {
+//
+//                   viewController.navigationItem.leftBarButtonItem = [UIBarButtonItem backItemWithimage:[UIImage imageNamed:@"system-backnew"] highImage:[UIImage imageNamed:@"system-backnew"]  target:self action:@selector(back) title:nil];
+//             }else{
+//
+//                   viewController.navigationItem.leftBarButtonItem = [UIBarButtonItem backItemWithimage:[UIImage imageNamed:@"system-backnew1"] highImage:[UIImage imageNamed:@"system-backnew1"]  target:self action:@selector(back) title:nil];
+//             }
+//         }else{
+              viewController.navigationItem.leftBarButtonItem = [UIBarButtonItem backItemWithimage:[UIImage imageNamed:@"system-backnew"] highImage:[UIImage imageNamed:@"system-backnew"]  target:self action:@selector(back) title:nil];
+//         }
+        
+       
             //  [self createScreenShot];
     }
     // 真正在跳转
@@ -106,6 +126,8 @@
 //    [self.images removeLastObject];
     [self popViewControllerAnimated:YES];
 }
+
+
 
 
 //- (void)showMenu

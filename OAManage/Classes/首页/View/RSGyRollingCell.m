@@ -17,7 +17,7 @@
     self = [super initWithReuseIdentifier:reuseIdentifier];
     if (self) {
         
-        self.contentView.backgroundColor = [UIColor colorWithHexColorStr:@"#ffffff"];
+        self.contentView.backgroundColor =[UIColor colorWithHexColorStr:@"#ffffff"];
         
         UIImageView * tagImageView = [[UIImageView alloc]init];
         tagImageView.backgroundColor = [UIColor colorWithHexColorStr:@"#ffffff"];

@@ -44,7 +44,7 @@
      
         //view
         UIView * showview = [[UIView alloc]init];
-        showview.backgroundColor = [UIColor colorWithHexColorStr:@"#F5F7FA"];
+        showview.backgroundColor = [UIColor colorWithHexColorStr:@"#f5f7fa"];
         [self.contentView addSubview:showview];
         self.showview = showview;
         showview.layer.cornerRadius = 4;

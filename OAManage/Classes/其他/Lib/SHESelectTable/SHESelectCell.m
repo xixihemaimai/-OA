@@ -23,6 +23,7 @@
         
         CGFloat selfWidth=self.frame.size.width - 12;
         _leftLab=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width/3 + 10, self.frame.size.height)];
+        _leftLab.textColor = [UIColor colorWithHexColorStr:@"#333333"];
         _leftLab.textAlignment=NSTextAlignmentRight;
         _leftLab.font=[UIFont systemFontOfSize:14];
         [self addSubview:_leftLab];

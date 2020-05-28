@@ -16,11 +16,11 @@
     if (self = [super initWithReuseIdentifier:reuseIdentifier]) {
         
         
-        self.contentView.backgroundColor = [UIColor colorWithHexColorStr:@"#ffffff"];
+//        self.contentView.backgroundColor = [UIColor colorWithHexColorStr:@"#ffffff"];
         //简介
         UILabel * introductLabel = [[UILabel alloc]init];
         introductLabel.text = @"简介";
-        introductLabel.textColor = [UIColor colorWithHexColorStr:@"#333333"];
+        introductLabel.textColor =[UIColor colorWithHexColorStr:@"#333333"];
         introductLabel.font = [UIFont systemFontOfSize:17];
         introductLabel.textAlignment = NSTextAlignmentLeft;
         [self.contentView addSubview:introductLabel];

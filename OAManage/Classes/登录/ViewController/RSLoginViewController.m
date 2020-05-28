@@ -56,7 +56,7 @@ typedef void(^Obtain)(BOOL isValue);
     self.roleInt = 0;
     self.PublickKeyTemp = @"";
     //logo
-    self.view.backgroundColor = [UIColor colorWithHexColorStr:@"#ffffff"];
+    //self.view.backgroundColor = uic;
     self.tableview.hidden = YES;
     
     //这边设置成一个view
@@ -78,11 +78,19 @@ typedef void(^Obtain)(BOOL isValue);
     UITextField * userNameField = [[UITextField alloc]init];
     NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
     style.alignment = NSTextAlignmentCenter;
+    //[UIColor colorWithHexColorStr:@"#E0E0E0"]
     NSAttributedString *attri = [[NSAttributedString alloc] initWithString:@"用户名" attributes:@{NSForegroundColorAttributeName:[UIColor colorWithHexColorStr:@"#E0E0E0"],NSFontAttributeName:[UIFont systemFontOfSize:14], NSParagraphStyleAttributeName:style}];
     userNameField.attributedPlaceholder = attri;
     userNameField.textAlignment = NSTextAlignmentCenter;
+
     // [userNameField addTarget:self action:@selector(monitoringInputValues:) forControlEvents:UIControlEventEditingChanged];
-    userNameField.backgroundColor = [UIColor colorWithHexColorStr:@"#FFFFFF"];
+    
+    
+    
+    userNameField.backgroundColor = [UIColor colorWithHexColorStr:@"#ffffff"];
+    
+    
+    
     //userNameField.borderStyle = UITextBorderStyleRoundedRect;
     userNameField.layer.cornerRadius = 20;
     userNameField.layer.borderColor = [UIColor colorWithHexColorStr:@"#D3D3D3"].CGColor;
@@ -102,7 +110,12 @@ typedef void(^Obtain)(BOOL isValue);
     NSAttributedString * passwordattri = [[NSAttributedString alloc] initWithString:@"密码" attributes:@{NSForegroundColorAttributeName:[UIColor colorWithHexColorStr:@"#E0E0E0"],NSFontAttributeName:[UIFont systemFontOfSize:14], NSParagraphStyleAttributeName:passwordstyle}];
     passwordField.attributedPlaceholder = passwordattri;
     passwordField.textAlignment = NSTextAlignmentCenter;
-    passwordField.backgroundColor = [UIColor colorWithHexColorStr:@"#FFFFFF"];
+    
+//    passwordField.backgroundColor = [UIColor colorWithHexColorStr:@"#FFFFFF"];
+    
+    passwordField.backgroundColor = [UIColor colorWithHexColorStr:@"#ffffff"];
+    
+    
     passwordField.layer.cornerRadius = 20;
     passwordField.layer.borderColor = [UIColor colorWithHexColorStr:@"#D3D3D3"].CGColor;
     passwordField.layer.borderWidth = 1;

@@ -67,6 +67,9 @@
     [super viewDidLoad];
     
 //    self.edgesForExtendedLayout=UIRectEdgeNone;
+    self.view.backgroundColor = [UIColor colorWithHexColorStr:@"#ffffff"];
+    
+    
     self.emptyView.hidden = true;
     [self.tableview removeFromSuperview];
     
@@ -110,13 +113,11 @@
     searchTextfield.leftView = leftView;
     searchTextfield.leftViewMode = UITextFieldViewModeAlways;
     
-    
-
-    
     //清除导航栏底下的线
     [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [[UIImage alloc] init];
-    self.view.backgroundColor = [UIColor colorWithHexColorStr:@"#ffffff"];
+    
+
   
     [self reloadAuditedData];
 }
@@ -507,8 +508,6 @@
       
       // 设置下划线的centerX
       self.underLineView.yj_centerX = self.preTitleBtn.yj_centerX + ratio * self.preTitleBtn.yj_width;
-      
-    
 }
 
 -(BOOL)textFieldShouldClear:(UITextField *)textField

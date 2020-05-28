@@ -394,8 +394,10 @@
 {
     if (!_titleLabel) {
         _titleLabel = [UILabel new];
-        _titleLabel.textColor = self.navigationTitleColor;
+        //_titleLabel.textColor = self.navigationTitleColor;
+        _titleLabel.textColor = [UIColor colorWithHexColorStr:@"#333333"];
         _titleLabel.font = self.navigationTitleFont;
+//        _titleLabel.backgroundColor =
         _titleLabel.textAlignment = NSTextAlignmentCenter;
         _titleLabel.text = @"";
     }
