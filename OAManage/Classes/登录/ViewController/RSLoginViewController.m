@@ -336,16 +336,11 @@ typedef void(^Obtain)(BOOL isValue);
         self.roleView.dataSource = array;
         self.roleView.title = @"用户角色";
     };
-    
 }
-
-
-
-
 
 - (void)getPublicKeyobtain:(Obtain)obtain{
     //设备的唯一标识号
-    NSString *udid = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+    NSString * udid = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
     _udidTemp = udid;
     NSString * canshu = URL_YIGODATA_PUBLICKKEY(udid);
     NSString * soapStr = URL_YIGODATA_IOS(URL_LOGINWEBSERVICE, URL_GENPUBLICKEY, canshu);

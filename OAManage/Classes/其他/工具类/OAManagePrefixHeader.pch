@@ -66,6 +66,7 @@
 #import "UITextView+ZWPlaceHolder.h"
 #import "JHSysAlertUtil.h"
 #import "RSJumpVideoTool.h"
+#import "UIViewController+YCPopover.h"
 
 
 //第三方框架
@@ -83,6 +84,10 @@
 #import <Masonry.h>
 #import <SJVideoPlayer.h>
 #import <KTVHTTPCache/KTVHTTPCache.h>
+#import <UMCommon/UMCommon.h>
+
+
+#import <UMAnalytics/MobClick.h>
 //#import <UMCommon/UMCommon.h>
 
 //测试

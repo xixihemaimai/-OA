@@ -124,7 +124,7 @@
           [self.tableview reloadData];
           [self.tableview.mj_header endRefreshing];
       }else{
-          NSArray * array1 = array;
+          NSArray * array1 = array;     
           [self.touchArray addObjectsFromArray:array1];
           self.pageNum++;
           [self.tableview reloadData];
@@ -323,25 +323,19 @@
     };
 }
 
-
-
 - (void)beginAction:(UIButton *)beginBtn{
     WSDatePickerView * datepicker = [[WSDatePickerView alloc]initWithDateStyle:DateStyleShowYearMonthDay scrollToDate:[self nsstringConversionNSDate:beginBtn.currentTitle] CompleteBlock:^(NSDate *selectDate) {
-           NSString *date = [selectDate stringWithFormat:@"yyyy-MM-dd"];
+        NSString *date = [selectDate stringWithFormat:@"yyyy-MM-dd"];
         [beginBtn setTitle:date forState:UIControlStateNormal];
-        
-              
     }];
     datepicker.doneButtonColor = [UIColor colorWithHexColorStr:@"#27c79a"];
     [datepicker show];
 }
 
-
 - (void)endAction:(UIButton *)endBtn{
     WSDatePickerView * datepicker = [[WSDatePickerView alloc]initWithDateStyle:DateStyleShowYearMonthDay scrollToDate:[self nsstringConversionNSDate:endBtn.currentTitle] CompleteBlock:^(NSDate *selectDate) {
         NSString *date = [selectDate stringWithFormat:@"yyyy-MM-dd"];
         [endBtn setTitle:date forState:UIControlStateNormal];
-              
     }];
     datepicker.doneButtonColor = [UIColor colorWithHexColorStr:@"#27c79a"];
     [datepicker show];

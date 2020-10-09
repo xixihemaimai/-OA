@@ -110,6 +110,7 @@
 }
 
 
+
 //新的
 - (void)newReloadWebServiceNoDataURL:(NSString *)URLstr andParameters:(NSDictionary *)soapStr andURLName:(NSString *)urlName{
     _tempStr = urlName;
@@ -288,7 +289,6 @@
                 if (self.failure) {
                     self.failure(responseObject);
                 }
-                
             }
             else {
                [SVProgressHUD showErrorWithStatus:@"获取失败"];
@@ -302,6 +302,7 @@
 //开始解析
 - (void)parserDidStartDocument:(NSXMLParser *)parser{
 }
+
 //正在解析
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary<NSString *,NSString *> *)attributeDict{
     if ([elementName isEqualToString:@"unsafeInvokeServiceReturn"]) {
@@ -464,8 +465,7 @@
                 
                 
                 
-                    RSLoginViewController * loginVc = [[RSLoginViewController alloc]init];
-                
+                RSLoginViewController * loginVc = [[RSLoginViewController alloc]init];
                 RSMyNavigationViewController * mayNa = [[RSMyNavigationViewController alloc]initWithRootViewController:loginVc];
                     appdelegate.window.rootViewController = mayNa;
             }else if ([_tempStr isEqualToString:URL_LOADMAILLIST]){
@@ -636,11 +636,8 @@
                      RSLoginViewController * loginVc = [[RSLoginViewController alloc]init];
         
                RSMyNavigationViewController * mayNa = [[RSMyNavigationViewController alloc]initWithRootViewController:loginVc];
-               
-        
-                           
                            appdelegate.window.rootViewController = mayNa;
-                       }];
+                }];
 }
 
 //字符串转字典

@@ -11,8 +11,8 @@
 #import "RSLoginViewController.h"
 #import "NetworkTool.h"
 #import "FSAES128.h"
-#import <UMCommon/UMCommon.h>
-#import <UMAnalytics/MobClick.h>
+//#import <UMCommon/UMCommon.h>
+//#import <UMAnalytics/MobClick.h>
 
 //首页
 #import "RSShowImageViewController.h"

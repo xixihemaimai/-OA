@@ -46,7 +46,6 @@
     .widthRatioToView(self.view, 0.9)
     .autoHeightRatio(0);
    
- 
     UITextField * oldCipherField = [[UITextField alloc]init];
     NSMutableParagraphStyle * style = [[NSMutableParagraphStyle alloc] init];
     style.alignment = NSTextAlignmentCenter;
@@ -60,12 +59,9 @@
     oldCipherField.layer.borderColor = [UIColor colorWithHexColorStr:@"#D3D3D3"].CGColor;
     oldCipherField.layer.borderWidth = 1;
     oldCipherField.layer.masksToBounds = YES;
-    
     [rePasswordView addSubview:oldCipherField];
     [_oldCipherField addTarget:self action:@selector(changeTextfieldContent:) forControlEvents:UIControlEventEditingChanged];
     _oldCipherField = oldCipherField;
-    
-   
     
     UITextField * renewCipherField = [[UITextField alloc]init];
     NSMutableParagraphStyle *passwordstyle = [[NSMutableParagraphStyle alloc] init];
@@ -81,9 +77,8 @@
     renewCipherField.layer.masksToBounds = YES;
     renewCipherField.textAlignment = NSTextAlignmentCenter;
     [rePasswordView addSubview:renewCipherField];
-    
     _renewCipherField = renewCipherField;
-       [_renewCipherField addTarget:self action:@selector(changeTextfieldContent:) forControlEvents:UIControlEventEditingChanged];
+    [_renewCipherField addTarget:self action:@selector(changeTextfieldContent:) forControlEvents:UIControlEventEditingChanged];
     
     UITextField * sureCipherField = [[UITextField alloc]init];
     NSMutableParagraphStyle *surepasswordstyle = [[NSMutableParagraphStyle alloc] init];
@@ -100,7 +95,7 @@
     sureCipherField.textAlignment = NSTextAlignmentCenter;
     [rePasswordView addSubview:sureCipherField];
     _sureCipherField = sureCipherField;
-     [_sureCipherField addTarget:self action:@selector(changeTextfieldContent:) forControlEvents:UIControlEventEditingChanged];
+    [_sureCipherField addTarget:self action:@selector(changeTextfieldContent:) forControlEvents:UIControlEventEditingChanged];
     
     UIButton * sureBtn = [[UIButton alloc]init];
     [sureBtn setTitle:@"确定" forState:UIControlStateNormal];
@@ -109,23 +104,12 @@
     sureBtn.titleLabel.font = [UIFont systemFontOfSize:Textadaptation(16)];
     [rePasswordView addSubview:sureBtn];
     [sureBtn addTarget:self action:@selector(sureAction:) forControlEvents:UIControlEventTouchUpInside];
-    
-  
-    
-    
-    
-    
     if (IS_IPHONE) {
-        
-        
-       
-        
         oldCipherField.sd_layout
         .centerXEqualToView(rePasswordView)
         .topSpaceToView(rePasswordView, 18)
         .widthIs(266)
         .heightIs(39);
-        
         
         renewCipherField.sd_layout
         .centerXEqualToView(rePasswordView)
@@ -147,20 +131,17 @@
         .leftEqualToView(sureCipherField)
         .rightEqualToView(sureCipherField)
         .heightIs(39);
-        
-        
+
     }else{
-        
         if (DEVICES_IS_PRO_12_9) {
-        
+
             oldCipherField.sd_layout
             .centerXEqualToView(rePasswordView)
             .topSpaceToView(rePasswordView, 18)
             .leftSpaceToView(rePasswordView, 54)
             .rightSpaceToView(rePasswordView, 54)
             .heightIs(60 * SCALE_TO_PRO);
-            
-            
+                        
             renewCipherField.sd_layout
             .centerXEqualToView(rePasswordView)
             .topSpaceToView(oldCipherField, 18)
@@ -182,20 +163,15 @@
             .rightEqualToView(sureCipherField)
             .heightIs(60 * SCALE_TO_PRO);
             
-            
-            
-            
         }else{
 
-            
             oldCipherField.sd_layout
             .centerXEqualToView(rePasswordView)
             .topSpaceToView(rePasswordView, 18)
             .leftSpaceToView(rePasswordView, 54)
             .rightSpaceToView(rePasswordView, 54)
             .heightIs((60 / SCW) * SCW);
-            
-            
+                        
             renewCipherField.sd_layout
             .centerXEqualToView(rePasswordView)
             .topSpaceToView(oldCipherField, 18)

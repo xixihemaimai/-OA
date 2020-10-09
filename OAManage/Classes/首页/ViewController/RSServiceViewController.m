@@ -33,9 +33,8 @@
 #import "RSBannerModel.h"
 
 #import "RSNoticeModel.h"
-
-
-
+//市场模块
+#import "RSMarketModuleViewController.h"
 
 @interface RSServiceViewController ()<GYRollingNoticeViewDelegate,GYRollingNoticeViewDataSource>
 
@@ -158,7 +157,6 @@ static NSString * SERVICEHEADERVIEWID = @"SERVICEHEADERVIEWID";
     //NSMutableArray * array = [NSMutableArray arrayWithObjects:@"背景",@"背景", @"背景",nil];
     //kimageRun.imgArray = array;
     [kimageRun touchImageIndexBlock:^(NSInteger index) {
-        
     }];
     kimageRun.layer.cornerRadius = 4;
     kimageRun.layer.masksToBounds = YES;
@@ -167,7 +165,6 @@ static NSString * SERVICEHEADERVIEWID = @"SERVICEHEADERVIEWID";
     
     //公告
     UIButton * noticeImage = [[UIButton alloc]init];
-    //noticeImage.image = [UIImage imageNamed:@"最新 公告"];
     [noticeImage setImage:[UIImage imageNamed:@"最新 公告"] forState:UIControlStateNormal];
     [noticeImage addTarget:self action:@selector(showMoreNoticeAction:) forControlEvents:UIControlEventTouchUpInside];
     [headerView addSubview:noticeImage];
@@ -221,7 +218,7 @@ static NSString * SERVICEHEADERVIEWID = @"SERVICEHEADERVIEWID";
     firstBtn.sd_layout
     .leftSpaceToView(headerView, 0)
     .topSpaceToView(newMidView, 0)
-    .widthIs(SCW/3)
+    .widthIs(SCW/4)
     .heightIs(122);
     
     UIImageView * firstImage = [[UIImageView alloc]init];
@@ -246,16 +243,53 @@ static NSString * SERVICEHEADERVIEWID = @"SERVICEHEADERVIEWID";
     .heightIs(22.5)
     .rightSpaceToView(firstBtn, 0);
     
+    
+    UIButton * fourBtn =  [[UIButton alloc]init];
+    [fourBtn setBackgroundColor:[UIColor colorWithHexColorStr:@"#ffffff"]];
+    [headerView addSubview:fourBtn];
+    fourBtn.tag = 2;
+    [fourBtn addTarget:self action:@selector(jumpWorkContentAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+    fourBtn.sd_layout
+    .leftSpaceToView(firstBtn, 0)
+    .topEqualToView(firstBtn)
+    .widthIs(SCW/4)
+    .bottomEqualToView(firstBtn);
+    
+    UIImageView * fourImage = [[UIImageView alloc]init];
+    fourImage.image = [UIImage imageNamed:@"市场模块"];
+    fourImage.contentMode = UIViewContentModeScaleAspectFill;
+    [fourBtn addSubview:fourImage];
+    fourImage.sd_layout
+    .centerYEqualToView(fourBtn)
+    .centerXEqualToView(fourBtn)
+    .widthIs(67.5)
+    .heightEqualToWidth();
+    
+    UILabel * fourLabel = [[UILabel alloc]init];
+    fourLabel.text = @"市场模块";
+    fourLabel.textColor = [UIColor colorWithHexColorStr:@"#333333"];
+    fourLabel.font = [UIFont systemFontOfSize:16];
+    fourLabel.textAlignment = NSTextAlignmentCenter;
+    [fourBtn addSubview:fourLabel];
+    fourLabel.sd_layout
+    .leftSpaceToView(fourBtn, 0)
+    .topSpaceToView(fourImage,0)
+    .heightIs(22.5)
+    .rightSpaceToView(fourBtn, 0);
+    
+    
+    
     UIButton * secondBtn =  [[UIButton alloc]init];
     [secondBtn setBackgroundColor:[UIColor colorWithHexColorStr:@"#ffffff"]];
     [headerView addSubview:secondBtn];
-    secondBtn.tag = 2;
+    secondBtn.tag = 3;
     [secondBtn addTarget:self action:@selector(jumpWorkContentAction:) forControlEvents:UIControlEventTouchUpInside];
     secondBtn.sd_layout
-    .leftSpaceToView(firstBtn, 0)
-    .topEqualToView(firstBtn)
-    .widthIs(SCW/3)
-    .bottomEqualToView(firstBtn);
+    .leftSpaceToView(fourBtn, 0)
+    .topEqualToView(fourBtn)
+    .widthIs(SCW/4)
+    .bottomEqualToView(fourBtn);
     
     UIImageView * secondImage = [[UIImageView alloc]init];
     secondImage.image = [UIImage imageNamed:@"体系文件"];
@@ -282,12 +316,12 @@ static NSString * SERVICEHEADERVIEWID = @"SERVICEHEADERVIEWID";
     UIButton * thirdBtn =  [[UIButton alloc]init];
     [thirdBtn setBackgroundColor:[UIColor colorWithHexColorStr:@"#ffffff"]];
     [headerView addSubview:thirdBtn];
-    thirdBtn.tag = 3;
+    thirdBtn.tag = 4;
     [thirdBtn addTarget:self action:@selector(jumpWorkContentAction:) forControlEvents:UIControlEventTouchUpInside];
     thirdBtn.sd_layout
     .leftSpaceToView(secondBtn, 0)
     .topEqualToView(secondBtn)
-    .widthIs(SCW/3)
+    .widthIs(SCW/4)
     .bottomEqualToView(secondBtn);
     
     UIImageView * thirdImage = [[UIImageView alloc]init];
@@ -322,7 +356,6 @@ static NSString * SERVICEHEADERVIEWID = @"SERVICEHEADERVIEWID";
     notcieMoreVc.title = @"最新公告";
     [self.navigationController pushViewController:notcieMoreVc animated:YES];
 }
-
 //通讯录
 - (void)showPhoneContentMenu:(UIButton *)menuBtn{
     RSMailListViewController * mailVc = [[RSMailListViewController alloc]init];
@@ -387,8 +420,7 @@ static NSString * SERVICEHEADERVIEWID = @"SERVICEHEADERVIEWID";
                 cell.tagImageView.image = [UIImage imageNamed:@"奖惩"];
             }else if ([noticemodel.noticeType isEqualToString:@"通知"]){
                 cell.tagImageView.image = [UIImage imageNamed:@"通知"];
-            }
-            else{
+            }else{
                 cell.tagImageView.image = [UIImage imageNamed:@"其他"];
             }
             cell.titelLabel.text = noticemodel.title;
@@ -399,8 +431,7 @@ static NSString * SERVICEHEADERVIEWID = @"SERVICEHEADERVIEWID";
                 cell.secondImageView.image = [UIImage imageNamed:@"奖惩"];
             }else if ([noticemodel.noticeType isEqualToString:@"通知"]){
                 cell.secondImageView.image = [UIImage imageNamed:@"通知"];
-            }
-            else{
+            }else{
                 cell.secondImageView.image = [UIImage imageNamed:@"其他"];
             }
             cell.secondtitelLabel.text = noticemodel.title;
@@ -411,7 +442,6 @@ static NSString * SERVICEHEADERVIEWID = @"SERVICEHEADERVIEWID";
 
 - (void)didClickRollingNoticeView:(GYRollingNoticeView *)rollingView forIndex:(NSUInteger)index andRow:(NSInteger)row
 {
-    
     RSNoticeMoreViewController * notcieMoreVc = [[RSNoticeMoreViewController alloc]init];
     notcieMoreVc.title = @"最新公告";
     [self.navigationController pushViewController:notcieMoreVc animated:YES];
@@ -425,7 +455,6 @@ static NSString * SERVICEHEADERVIEWID = @"SERVICEHEADERVIEWID";
     //    [self.navigationController pushViewController:wkoamanagerVc animated:YES];
     //    NSLog(@"点击的第几组: %lu 第几行:%lu", (unsigned long)index,(unsigned long)row);
 }
-
 //FIXME:更多
 - (void)moreNoticeAction:(UIButton *)moreBtn{
     RSNoticeViewController * noticeVc = [[RSNoticeViewController alloc]init];
@@ -446,23 +475,24 @@ static NSString * SERVICEHEADERVIEWID = @"SERVICEHEADERVIEWID";
 
 - (void)jumpWorkContentAction:(UIButton *)btn{
     if (btn.tag == 1) {
-        //        NSLog(@"工作日志");
+        //NSLog(@"工作日志");
         RSAuditedViewController * auditedVc = [[RSAuditedViewController alloc]init];
-        
-
         [self.navigationController pushViewController:auditedVc animated:YES];
-        
     }else if (btn.tag == 2){
-        //        NSLog(@"体系文件");
+//        NSLog(@"市场模块");
+        RSMarketModuleViewController * marketModuleVc = [[RSMarketModuleViewController alloc]init];
+        [self.navigationController pushViewController:marketModuleVc animated:YES];
+    }
+    else if (btn.tag == 3){
+        //NSLog(@"体系文件");
         RSSystemViewController * systemVc = [[RSSystemViewController alloc]init];
-        
         [self.navigationController pushViewController:systemVc animated:YES];
     }
     else{
-        //        NSLog(@"线上培训");
+        //NSLog(@"线上培训");
         RSOnlineTrainingViewController * onlineTrainingVc = [[RSOnlineTrainingViewController alloc]init];
-        
         [self.navigationController pushViewController:onlineTrainingVc animated:YES];
     }
 }
+
 @end

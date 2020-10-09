@@ -36,7 +36,7 @@
 
 @end
 
-static NSString * MENUHEADER = @"MENUHEADER";
+
 @implementation RSMenuViewController
 
 - (NSMutableArray *)menuArray{
@@ -54,7 +54,7 @@ static NSString * MENUHEADER = @"MENUHEADER";
 }
 
 
-
+static NSString * MENUHEADER = @"MENUHEADER";
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];

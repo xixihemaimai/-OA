@@ -28,8 +28,6 @@
     return _noticeArray;
 }
 
-
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"最新公告";
@@ -38,11 +36,8 @@
     self.emptyView.hidden = NO;
     self.tableview.contentInset = UIEdgeInsetsMake(0, 0, 60, 0);
     self.tableview.mj_header = [MJChiBaoZiHeader headerWithRefreshingTarget:self refreshingAction:@selector(reloadNoticeData)];
-       self.tableview.mj_footer = [MJChiBaoZiFooter footerWithRefreshingTarget:self refreshingAction:@selector(reloadNoticMoreNewData)];
-       [self.tableview.mj_header beginRefreshing];
-    
-    
-    
+    self.tableview.mj_footer = [MJChiBaoZiFooter footerWithRefreshingTarget:self refreshingAction:@selector(reloadNoticMoreNewData)];
+    [self.tableview.mj_header beginRefreshing];
 }
 
 - (void)reloadNoticeData{
@@ -53,8 +48,6 @@
 - (void)reloadNoticMoreNewData{
     [self reloadNoticeNewData];
 }
-
-
 
 - (void)reloadNoticeNewData{
     NetworkTool * network = [[NetworkTool alloc]init];
@@ -93,18 +86,9 @@
         };
 }
 
-
-
-
-
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.noticeArray.count;
 }
-
-
-
-
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 40;
@@ -116,8 +100,6 @@
     if (!cell) {
         cell = [[RSXNoticeCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:ROLLCELLID];
     }
-    
-    
     cell.noticemodel = self.noticeArray[indexPath.row];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;

@@ -89,11 +89,8 @@ static NSString * APPROVALHEADERVIEW = @"APPROVALHEADERVIEW";
     [addBtn addTarget:self action:@selector(addTimeAction:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem * item = [[UIBarButtonItem alloc]initWithCustomView:addBtn];
     self.navigationItem.rightBarButtonItem = item;
-    
     [self reloadOnlyAndAddWorkNewData];
-    
 }
-
 
 - (void)setSaveBtnCustomView{
     UIButton * saveBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -103,7 +100,6 @@ static NSString * APPROVALHEADERVIEW = @"APPROVALHEADERVIEW";
     saveBtn.titleLabel.font = [UIFont systemFontOfSize:16];
     [self.view addSubview:saveBtn];
     [saveBtn bringSubviewToFront:self.view];
-    
     saveBtn.layer.backgroundColor = [UIColor colorWithHexColorStr:@"#ffffff"].CGColor;
     saveBtn.layer.shadowColor = [UIColor colorWithHexColorStr:@"#E5E5E5"].CGColor;
     saveBtn.layer.shadowOffset = CGSizeMake(0,-1.5);
@@ -111,10 +107,6 @@ static NSString * APPROVALHEADERVIEW = @"APPROVALHEADERVIEW";
     saveBtn.layer.shadowRadius = 5;
     [saveBtn addTarget:self action:@selector(saveAndUpdateAction:) forControlEvents:UIControlEventTouchUpInside];
 }
-
-
-
-
 
 - (void)reloadOnlyAndAddWorkNewData{
     if ([self.showType isEqualToString:@"update"]) {
@@ -131,12 +123,6 @@ static NSString * APPROVALHEADERVIEW = @"APPROVALHEADERVIEW";
         };
     }
 }
-
-
-
-
-
-
 
 - (void)setCustomTableViewFootView{
     

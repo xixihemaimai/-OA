@@ -52,8 +52,6 @@
     attrNormal[NSFontAttributeName] = [UIFont systemFontOfSize:10];
     // 设置按钮文字的大小属性
     [item setTitleTextAttributes:attrNormal forState:UIControlStateNormal];
-    
-    
 }
 
 
@@ -70,10 +68,9 @@
 
 
 - (void)addSubCtrls {
+    
+    self.tabBar.tintColor = [UIColor colorWithHexColorStr:@"#27C79A"];
     //首页
-    
-    
-    
     RSServiceViewController * serviceVc = [[RSServiceViewController alloc]init];
     serviceVc.tabBarItem.tag = 0;
     serviceVc.tabBarItem.title = @"首页";

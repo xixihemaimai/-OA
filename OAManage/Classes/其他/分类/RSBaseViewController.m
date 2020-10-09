@@ -672,12 +672,10 @@ NSString *encodedImageStr = [data base64EncodedStringWithOptions:NSDataBase64Enc
 return encodedImageStr;
 }
 
-
 - (NSString *)fileToToBase64Data:(NSData *)data{
     NSString *encodedImageStr = [data base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithCarriageReturn];
     return encodedImageStr;
 }
-
 
 - (NSString *)typeForImageData:(NSData *)data {
     uint8_t c;
