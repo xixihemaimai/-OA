@@ -12,6 +12,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface RSContractCell : UITableViewCell
 
+
+@property (nonatomic,strong)UIImageView * statusImage;
+
+@property (nonatomic,strong)UILabel * statusLabel;
+
 @end
 
 NS_ASSUME_NONNULL_END

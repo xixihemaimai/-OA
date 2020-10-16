@@ -44,16 +44,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     if ([[[UIDevice currentDevice]systemVersion]intValue ] >= 9.0) {
-        NSArray * types =@[WKWebsiteDataTypeMemoryCache,WKWebsiteDataTypeDiskCache]; // 9.0之后才有的
-        NSSet *websiteDataTypes = [NSSet setWithArray:types];
-        NSDate *dateFrom = [NSDate dateWithTimeIntervalSince1970:0];
+        NSArray * types = @[WKWebsiteDataTypeMemoryCache,WKWebsiteDataTypeDiskCache]; // 9.0之后才有的
+        NSSet * websiteDataTypes = [NSSet setWithArray:types];
+        NSDate * dateFrom = [NSDate dateWithTimeIntervalSince1970:0];
         [[WKWebsiteDataStore defaultDataStore] removeDataOfTypes:websiteDataTypes modifiedSince:dateFrom completionHandler:^{
         }];
     }else{
-        NSString *libraryPath = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory,NSUserDomainMask,YES) objectAtIndex:0];
-        NSString *cookiesFolderPath = [libraryPath stringByAppendingString:@"/Cookies"];
+        NSString * libraryPath = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory,NSUserDomainMask,YES) objectAtIndex:0];
+        NSString * cookiesFolderPath = [libraryPath stringByAppendingString:@"/Cookies"];
 //        NSLog(@"%@", cookiesFolderPath);
-        NSError *errors;
+        NSError * errors;
         [[NSFileManager defaultManager] removeItemAtPath:cookiesFolderPath error:&errors];
     }
     self.tableview.hidden = YES;
@@ -61,7 +61,6 @@
     if ([self.type isEqualToString:@"0"]) {
         self.title = self.Currenttitle;
     }else if ([self.type isEqualToString:@"2"]){
-        
     }else if ([self.type isEqualToString:@"5"]){
         self.title = @"隐私政策";
     }else if ([self.type isEqualToString:@"6"]){
@@ -103,9 +102,14 @@
     }else if ([self.type isEqualToString:@"3"]){
         stoneUrlStr = self.URL;
     }else if ([self.type isEqualToString:@"5"]){
+        //用户隐私
         stoneUrlStr = @"http://121.204.136.234:48000/Yigo1.6/agreement.html";
     }else if ([self.type isEqualToString:@"6"]){
+        //用户协议
         stoneUrlStr = @"http://121.204.136.234:48000/Yigo1.6/UserAgreement.html";
+    }else if ([self.type isEqualToString:@"7"]){
+        //市场合同
+        stoneUrlStr =[NSString stringWithFormat:@"%@?billId=%ld&billKey=%@&aesKey=%@&appLoginToken=%@&username=%@&userdepartment=%@&usertime=%@&type=0&version=%lf",URL_H5_CONTRACT_IOS,(long)self.billId,self.billKey,aes,self.usermodel.appLoginToken,self.creatorName,self.deptName,self.usertime,self.version];
     }
     else{
         stoneUrlStr =[NSString stringWithFormat:@"%@?billId=%ld&billKey=%@&aesKey=%@&appLoginToken=%@&workItemId=%ld&username=%@&userdepartment=%@&usertime=%@&type=0&version=%lf&isApproval=%@",URL_H5_IOS,(long)self.billId,self.billKey,aes,self.usermodel.appLoginToken,(long)self.workItemId,self.creatorName,self.deptName,self.usertime,self.version,self.isApproval];
@@ -200,7 +204,6 @@
     UIDocumentPickerViewController *documentPickerViewController = [[UIDocumentPickerViewController alloc] initWithDocumentTypes:documentTypes
                                                                                                                           inMode:UIDocumentPickerModeOpen];
     documentPickerViewController.delegate = self;
-    
     if ([UIDevice currentDevice].systemVersion.floatValue >= 13.0) {
         documentPickerViewController.modalPresentationStyle = UIModalPresentationFullScreen;
     }
@@ -262,20 +265,14 @@
     }];
 }
 
-
 - (void)jumpEnclosureTempStr:(NSString *)tempStr{
     QLPreviewController *previewController =[[QLPreviewController alloc]init];
-    
     NSRange rage = [tempStr rangeOfString:@"/" options:NSBackwardsSearch];// NSBackwardsSearch 表示最后的一个 // 去掉options表示从第一个开始
-           if (rage.location != NSNotFound) {
-               //NSLog(@"%ld",rage.location);
-               self.fileNewName = [tempStr substringFromIndex:rage.location+1];
-               //NSLog(@"%@",tempStr);
-           }
-    
-    
-    
-    
+    if (rage.location != NSNotFound) {
+        //NSLog(@"%ld",rage.location);
+        self.fileNewName = [tempStr substringFromIndex:rage.location+1];
+        //NSLog(@"%@",tempStr);
+    }
     previewController.delegate=self;
     previewController.dataSource=self;
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
@@ -328,21 +325,11 @@
 //QuickLook代理
 -(id<QLPreviewItem>)previewController:(QLPreviewController *)controller previewItemAtIndex:(NSInteger)index{
     //return self.fileURL;
-    
     QLPreviewItemCustom * previewItem = [QLPreviewItemCustom new];
-    
-//    RSSystemModel * systemmodel = self.systemArray[index];
-//
-//
-//
+    //RSSystemModel * systemmodel = self.systemArray[index];
     previewItem.previewItemTitle = self.fileNewName;
-    
-    
-    
     previewItem.previewItemURL = self.fileURL;
     return previewItem;
-    
-    
 }
 
 //- (void)previewControllerDidDismiss:(QLPreviewController *)controller{

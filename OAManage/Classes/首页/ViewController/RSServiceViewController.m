@@ -228,7 +228,7 @@ static NSString * SERVICEHEADERVIEWID = @"SERVICEHEADERVIEWID";
     firstImage.sd_layout
     .centerXEqualToView(firstBtn)
     .centerYEqualToView(firstBtn)
-    .widthIs(67.5)
+    .widthIs(48)
     .heightEqualToWidth();
     
     UILabel * firstLabel = [[UILabel alloc]init];
@@ -263,7 +263,7 @@ static NSString * SERVICEHEADERVIEWID = @"SERVICEHEADERVIEWID";
     fourImage.sd_layout
     .centerYEqualToView(fourBtn)
     .centerXEqualToView(fourBtn)
-    .widthIs(67.5)
+    .widthIs(48)
     .heightEqualToWidth();
     
     UILabel * fourLabel = [[UILabel alloc]init];
@@ -298,7 +298,7 @@ static NSString * SERVICEHEADERVIEWID = @"SERVICEHEADERVIEWID";
     secondImage.sd_layout
     .centerYEqualToView(secondBtn)
     .centerXEqualToView(secondBtn)
-    .widthIs(67.5)
+    .widthIs(48)
     .heightEqualToWidth();
     
     UILabel * secondLabel = [[UILabel alloc]init];
@@ -331,7 +331,7 @@ static NSString * SERVICEHEADERVIEWID = @"SERVICEHEADERVIEWID";
     thirdImage.sd_layout
     .centerYEqualToView(thirdBtn)
     .centerXEqualToView(thirdBtn)
-    .widthIs(67.5)
+    .widthIs(48)
     .heightEqualToWidth();
     
     UILabel * thirdLabel = [[UILabel alloc]init];

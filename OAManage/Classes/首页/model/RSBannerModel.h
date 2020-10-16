@@ -32,14 +32,6 @@ NS_ASSUME_NONNULL_BEGIN
 //网址
 @property (nonatomic,strong)NSString * url;
 
-
-
-
-
-
-
-
-
 @end
 
 NS_ASSUME_NONNULL_END

@@ -118,6 +118,15 @@
 //#define URL_H5FQ_IOS @""URL_POST_IOS"/Yigo1.6/Application.html"
 
 
+//H5测试
+#define URL_H5_CONTRACT_IOS @""URL_POST_IOS"/Yigo1.6/ContractDetails.html"
+
+
+
+
+
+
+
 //新的测试请求方式
 #define URL_NEWPOST_IOS @"http://117.29.162.206:8090"
 

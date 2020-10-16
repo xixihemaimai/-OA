@@ -13,6 +13,11 @@
 
 @interface RSColumnarViewController ()
 
+@property (nonatomic,strong) UIView * headerView;
+
+@property (nonatomic,strong) UIView * choiceTime;
+
+@property (nonatomic,strong) UIView * excelView;
 
 @property (nonatomic,strong) UIButton * totalBtn;
 
@@ -36,11 +41,7 @@
     
     self.title = @"荒料出入库数据总结";
     
-    //[self showExcelView];
     
-    //[self showDoubleColumnarView];
-    
-    //[self showSingerColumnarView];
 }
 
 
@@ -63,10 +64,12 @@
     
     UIView * headerView = [[UIView alloc]init];
     headerView.backgroundColor = [UIColor colorWithHexColorStr:@"#F5F5F5"];
-
+    _headerView = headerView;
+    
     UIView * choiceTime = [[UIView alloc]init];
     choiceTime.backgroundColor = [UIColor colorWithHexColorStr:@"#ffffff"];
     [headerView addSubview:choiceTime];
+    _choiceTime = choiceTime;
     //统计年份
     UILabel * totalYearLabel = [[UILabel alloc]init];
     totalYearLabel.text = @"统计年份";
@@ -242,11 +245,22 @@
     beginBtn.layer.cornerRadius = 13.5;
     endBtn.layer.cornerRadius = 13.5;
     
+    [self showEexcelView];
+    
+    [self showColumnChartView];
+    
+}
+
+
+
+- (void)showEexcelView{
+    
     UIView * excelView = [[UIView alloc]init];
     excelView.backgroundColor = [UIColor colorWithHexColorStr:@"#ffffff"];
-    excelView.frame = CGRectMake(12, CGRectGetMaxY(choiceTime.frame) + 20, SCW - 24, 293);
+    excelView.frame = CGRectMake(12, CGRectGetMaxY(self.choiceTime.frame) + 20, SCW - 24, 293);
     excelView.layer.cornerRadius = 6;
-    [headerView addSubview:excelView];
+    [self.headerView addSubview:excelView];
+    _excelView = excelView;
        
     UIView * leftView = [[UIView alloc]init];
     leftView.backgroundColor = [UIColor colorWithHexColorStr:@"#27C79A"];
@@ -333,9 +347,12 @@
            dataView.frame = CGRectMake(12, i * 44 + CGRectGetMaxY(titleLabel.frame) + 18 , SCW - 48,  44);
            [excelView addSubview:dataView];
        }
+}
+
+- (void)showColumnChartView{
     
-    ColumnChartView * columnChartView2 = [[ColumnChartView alloc] initWithFrame:CGRectMake(12, CGRectGetMaxY(excelView.frame) + 12, SCW - 24, 317)];
-       [headerView addSubview:columnChartView2];
+    ColumnChartView * columnChartView2 = [[ColumnChartView alloc] initWithFrame:CGRectMake(12, CGRectGetMaxY(self.excelView.frame) + 12, SCW - 24, 317)];
+    [self.headerView addSubview:columnChartView2];
     columnChartView2.backgroundColor = [UIColor whiteColor];
     columnChartView2.isSingleColumn = NO;
     columnChartView2.scrollEnabled = YES;
@@ -363,29 +380,16 @@
     columnChartView.backgroundColor = [UIColor whiteColor];
     columnChartView.isColumnGradientColor = YES;
     columnChartView.columnGradientColorArray = @[@"#27C79A",@"#FCC828"];
-    [headerView addSubview:columnChartView];
+    [self.headerView addSubview:columnChartView];
     columnChartView.showDataLabel = YES;
     columnChartView.layer.cornerRadius = 6;
     columnChartView.showDataHorizontalLine = YES;
     [columnChartView resetData];
     
-    [headerView setupAutoHeightWithBottomView:columnChartView bottomMargin:20];
-    [headerView layoutIfNeeded];
-    self.tableview.tableHeaderView = headerView;
+    [self.headerView setupAutoHeightWithBottomView:columnChartView bottomMargin:20];
+    [self.headerView layoutIfNeeded];
+    self.tableview.tableHeaderView = self.headerView;
 }
-
-//表格
-//- (void)showExcelView{
-//    NSLog(@"-----------------表格");
-//}
-//柱状图--双柱
-//- (void)showDoubleColumnarView{
-//    NSLog(@"-----------------柱状图--双柱");
-//}
-//单柱图
-//- (void)showSingerColumnarView{
-//    NSLog(@"-----------------单柱图");
-//}
 
 //选择时间
 - (void)choiceTimeAction:(UIButton *)choiceTimeBtn{

@@ -20,12 +20,9 @@
 
 @property (nonatomic,strong)UIButton * endBtn;
 
-
 @property(nonatomic,strong) DIYSystemDatePickerView *datePickerView;
 
 @end
-
-
 
 @implementation RSBalanceViewController
 
@@ -40,12 +37,10 @@
     [self setCustomHeaderView];
 }
 
-
 - (void)setCustomHeaderView{
     
     UIView * headerView = [[UIView alloc]init];
     headerView.backgroundColor = [UIColor colorWithHexColorStr:@"#ffffff"];
-    
     
     UIView * contractView = [[UIView alloc]init];
     [headerView addSubview:contractView];
@@ -63,7 +58,6 @@
     .rightSpaceToView(headerView, 12)
     .heightIs(133);
     
-    
     //合同标题
     UILabel * titleLabel = [[UILabel alloc]init];
     titleLabel.text = @"结算对象";
@@ -71,13 +65,11 @@
     titleLabel.font = [UIFont systemFontOfSize:14];
     [contractView addSubview:titleLabel];
     
-    
     titleLabel.sd_layout
     .leftSpaceToView(contractView, 22.5)
     .widthIs(60)
     .topSpaceToView(contractView, 21)
     .heightIs(20);
-    
     
     //合同标题的标签
     UITextField * titleField = [[UITextField alloc]init];
@@ -123,14 +115,12 @@
     beginBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     _beginBtn = beginBtn;
     
-    
     beginBtn.sd_layout
     .leftEqualToView(timeLabel)
     .topSpaceToView(timeLabel, 0)
     .rightEqualToView(timeLabel)
     .heightIs(24);
-//    .widthIs(120);
-    
+    //.widthIs(120);
     
     //会计结束时间
     UILabel * timeEndLabel = [[UILabel alloc]init];
@@ -210,7 +200,7 @@
         [dic addObject:ddd];
     }
     RSWeakself
-    MyTableListView * tablelist = [[MyTableListView alloc] initWithFrame:CGRectMake(13, CGRectGetMaxY(contractView.frame) + 20 , SCW - 13, SCH - CGRectGetMaxY(contractView.frame) - 20 ) andContentDicArray:dic];
+    MyTableListView * tablelist = [[MyTableListView alloc] initWithFrame:CGRectMake(13, CGRectGetMaxY(contractView.frame) + 30 , SCW - 13, SCH - CGRectGetMaxY(contractView.frame) - 20 ) andContentDicArray:dic];
     //tablelist.delegate=self;
     [headerView addSubview:tablelist];
     //设置代理作用:选中某一个 可自行修改

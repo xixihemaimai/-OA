@@ -68,8 +68,6 @@ static NSString * APPROVALHEADERVIEW = @"APPROVALHEADERVIEW";
         }
         [self.tableview reloadData];
     };
-
-
     network.successReload = ^(NSDictionary *dict) {
         NSInteger type = [dict[@"billstatus"] integerValue];
         //0 开始 1进行 2结束

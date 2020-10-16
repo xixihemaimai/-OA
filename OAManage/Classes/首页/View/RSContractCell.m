@@ -21,7 +21,7 @@
         UIImageView * statusImage = [[UIImageView alloc]init];
         statusImage.image = [UIImage imageNamed:@"编组2"];
         [statusView addSubview:statusImage];
-        
+        _statusImage = statusImage;
         
         UILabel * numberLabel = [[UILabel alloc]init];
         numberLabel.text = @"合同编号:CGRK201901070001";
@@ -53,7 +53,7 @@
         statusLabel.textColor = [UIColor colorWithHexColorStr:@"#FDAD32"];
         statusLabel.textAlignment = NSTextAlignmentRight;
         [statusView addSubview:statusLabel];
-        
+        _statusLabel = statusLabel;
         
         statusView.sd_layout
         .leftSpaceToView(self.contentView, 12)
