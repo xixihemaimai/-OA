@@ -14,10 +14,9 @@
 @property(strong,nonatomic)NSString *attributeSecond;
 @property(strong,nonatomic)NSString *attributeThird;
 @property(strong,nonatomic)NSString *attributeFourth;
-@property(strong,nonatomic)NSString *attributeFifth;
-@property(strong,nonatomic)NSString *attributeSixth;
-@property(strong,nonatomic)NSString *attributeSeventh;
-@property(strong,nonatomic)NSString *attributeEighth;
+
+
+
 -(NSArray *)getAttributeNameArray;
 -(NSArray *)getAttributeArray;
 -(NSDictionary *)getDicOfOB;

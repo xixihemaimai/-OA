@@ -5,9 +5,9 @@
 //  Created by WF on 2017/1/14.
 //  Copyright © 2017年 WF. All rights reserved.
 //
-#define FIRSTCELLWIDTH 100 //第一个cell的宽度
+#define FIRSTCELLWIDTH 57.5 //第一个cell的宽度
 
-#define OTHERCELLWIDTH 80  //其他cell的宽度
+#define OTHERCELLWIDTH 100  //其他cell的宽度
 
 #define ALLCELLHIGH 34  //所有cell的高度
 
@@ -22,11 +22,14 @@
 @property(strong,nonatomic)UITableView*table;
 
 
+@property(strong,nonatomic)NSArray * arrayAttributeName;//属性名字
+@property(strong,nonatomic)NSArray * arrayAttribute;//属性
 
-@property(strong,nonatomic)NSArray*arrayAttributeName;//属性名字
-@property(strong,nonatomic)NSArray*arrayAttribute;//属性
 
-@property(strong,nonatomic)NSMutableArray*arrayContent;//内容列表
+@property(strong,nonatomic)NSMutableArray * arrayContent;//内容列表
+
+@property (nonatomic,assign)NSInteger marketpee;
+
 @end
 @implementation MyTableListView
 
@@ -34,26 +37,33 @@ static NSString *const cellId = @"cellId";
 static NSString *const headerId = @"headerId";
 static NSString *const footerId = @"footerId";
 
--(void)addOneOb:(BCContentOB *)oneOb{
-    [_arrayContent insertObject:oneOb atIndex:0];
+-(void)addOneOb:(RSColumnarModel *)columnarmodel{
+//    [_arrayContent insertObject:columnarmodel atIndex:0];
+    [_arrayContent addObject:columnarmodel];
     [_table reloadData];
     [_collectionView reloadData];
 }
 
--(instancetype)initWithFrame:(CGRect)frame andContentDicArray:(NSMutableArray *)contentDicArray{
+-(instancetype)initWithFrame:(CGRect)frame andContentDicArray:(NSMutableArray *)contentDicArray andAttributeName:(NSArray *)attributeName andAttribute:(NSArray *)attribute andMarketPee:(NSInteger)marketpee{
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
         self.frame=frame;
         self.arrayContent=contentDicArray;
+        self.arrayAttributeName = attributeName;
+        self.arrayAttribute = attribute;
         [self creatTableListViewUI];
-
+        self.marketpee = marketpee;
     }
     return self;
 }
 -(void)creatTableListViewUI{
-    self.arrayAttribute=[[BCContentOB new] getAttributeArray];
-    self.arrayAttributeName=[[BCContentOB new] getAttributeNameArray];
+    
+//    self.arrayAttribute= [[BCContentOB new] getAttributeArray];
+//    self.arrayAttributeName= [[BCContentOB new] getAttributeNameArray];
+    
+    
+    
     
     //整体布局 右 除了第一列以外的底层布局
     _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(FIRSTCELLWIDTH, 0 , self.frame.size.width-FIRSTCELLWIDTH, self.frame.size.height)];
@@ -64,7 +74,7 @@ static NSString *const footerId = @"footerId";
     [self addSubview:_scrollView];
 
     //上层布局 左
-    UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, FIRSTCELLWIDTH, ALLCELLHIGH)];
+    UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, FIRSTCELLWIDTH, 44)];
     label.layer.borderColor = [UIColor colorWithHexColorStr:@"#E1E1E1"].CGColor;
     label.layer.borderWidth = 0.5f;
     label.textColor = [UIColor colorWithHexColorStr:@"#333333"];
@@ -75,7 +85,7 @@ static NSString *const footerId = @"footerId";
     [self addSubview:label];
     
     //最左一列 name
-    _table = [[UITableView alloc] initWithFrame:CGRectMake(0, ALLCELLHIGH, FIRSTCELLWIDTH, self.frame.size.height - ALLCELLHIGH) style:UITableViewStylePlain];
+    _table = [[UITableView alloc] initWithFrame:CGRectMake(0, ALLCELLHIGH + 10, FIRSTCELLWIDTH, self.frame.size.height - ALLCELLHIGH - 10) style:UITableViewStylePlain];
     _table.dataSource = self;
     _table.delegate = self;
     _table.tag = 200;
@@ -86,7 +96,10 @@ static NSString *const footerId = @"footerId";
     
     //上层布局 右
     for (int i = 0; i<_arrayAttributeName.count-1; i++) {
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(i*OTHERCELLWIDTH, 0, OTHERCELLWIDTH, ALLCELLHIGH)];
+        UILabel *label = [[UILabel alloc] init];
+//      if (i == 1) {
+//      }
+        label.frame = CGRectMake( i * OTHERCELLWIDTH, 0, OTHERCELLWIDTH, 44);
         label.layer.borderColor =[UIColor colorWithHexColorStr:@"#E1E1E1"].CGColor;
         label.layer.borderWidth = 0.5f;
         label.backgroundColor = [UIColor colorWithHexColorStr:@"#F8F8FA"];
@@ -96,7 +109,6 @@ static NSString *const footerId = @"footerId";
         label.text = [_arrayAttributeName objectAtIndex:i+1];
         [_scrollView addSubview:label];
     }
-    
     //左下布局
     _customLayout = [[UICollectionViewFlowLayout alloc] init]; // 自定义的布局对象
     // 定义大小
@@ -107,18 +119,13 @@ static NSString *const footerId = @"footerId";
     _customLayout.minimumInteritemSpacing = 0;
     // 设置滚动方向（默认垂直滚动）
     _customLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
-    
-    
-    
-    _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, ALLCELLHIGH, OTHERCELLWIDTH*(_arrayAttributeName.count - 1), self.frame.size.height-ALLCELLHIGH) collectionViewLayout:_customLayout];
+    _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, ALLCELLHIGH + 10, OTHERCELLWIDTH*(_arrayAttributeName.count - 1), self.frame.size.height-ALLCELLHIGH - 10) collectionViewLayout:_customLayout];
     _collectionView.backgroundColor = [UIColor whiteColor];
     _collectionView.dataSource = self;
     _collectionView.delegate = self;
     _collectionView.contentInset = UIEdgeInsetsMake(0, 0, 100, 0);
     _collectionView.tag = 100;
     [_scrollView addSubview:_collectionView];
-    
-    
     // 注册cell、sectionHeader、sectionFooter
     [_collectionView registerClass:[BCMyCollectionViewCell class] forCellWithReuseIdentifier:cellId];
     [_collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerId];
@@ -132,41 +139,107 @@ static NSString *const footerId = @"footerId";
         _collectionView.contentOffset = scrollView.contentOffset;
     }
 }
-
-
 #pragma mark ---- UICollectionViewDataSource
-
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return _arrayContent.count;
 }
 
-
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return _arrayAttributeName.count-1;
 }
+
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     BCMyCollectionViewCell *cell = (BCMyCollectionViewCell *)[_collectionView dequeueReusableCellWithReuseIdentifier:cellId forIndexPath:indexPath];
-    NSDictionary *oneOB = [(BCContentOB *)[_arrayContent objectAtIndex:indexPath.section] getDicOfOB];
-
-    cell.label.text = oneOB[[_arrayAttribute objectAtIndex:indexPath.row+1]];
+    if (self.marketpee == 1) {
+        NSDictionary * oneOB = [(RSColumnarModel *)[_arrayContent objectAtIndex:indexPath.section] getParkDicOfOB];
+//        if (indexPath.row == 0) {
+//            cell.label.text = [NSString stringWithFormat:@"%@",[oneOB objectForKey:@"feeId"]];
+//        }else
+        if (indexPath.row == 0){
+            cell.label.text = [oneOB objectForKey:@"feeName"];
+        }else if (indexPath.row == 1){
+            cell.label.text = [oneOB objectForKey:@"moneyBegin"];
+        }else if (indexPath.row == 2){
+            cell.label.text = [oneOB objectForKey:@"moneyIn"];
+        }else if (indexPath.row == 3){
+            cell.label.text = [oneOB objectForKey:@"moneyOut"];
+        }else{
+            cell.label.text = [oneOB objectForKey:@"moneyEnd"];
+        }
+    }else if (self.marketpee == 2){
+        NSDictionary * oneOB = [(RSColumnarModel *)[_arrayContent objectAtIndex:indexPath.section] getDicOfOB];
+//        if (indexPath.row == 0) {
+//            cell.label.text = [NSString stringWithFormat:@"%@",[oneOB objectForKey:@"dealerId"]];
+//        }else
+        if (indexPath.row == 0){
+            cell.label.text = [oneOB objectForKey:@"dealerName"];
+        }else if (indexPath.row == 1){
+            cell.label.text = [oneOB objectForKey:@"moneyBegin"];
+        }else if (indexPath.row == 2){
+            cell.label.text = [oneOB objectForKey:@"moneyIn"];
+        }else if (indexPath.row == 3){
+            cell.label.text = [oneOB objectForKey:@"moneyOut"];
+        }else{
+            cell.label.text = [oneOB objectForKey:@"moneyEnd"];
+        }
+    }else if (self.marketpee == 4){
+        
+        NSDictionary * oneOB = [(RSColumnarModel *)[_arrayContent objectAtIndex:indexPath.section] getParkDicOfDetailedOB];
+//        if (indexPath.row == 0) {
+//            cell.label.text = [NSString stringWithFormat:@"%@",[oneOB objectForKey:@"dealerId"]];
+//        }else
+        if (indexPath.row == 0){
+            cell.label.text = [oneOB objectForKey:@"dealerName"];
+        }
+//        else if (indexPath.row == 2){
+//            cell.label.text = [NSString stringWithFormat:@"%ld",[[oneOB objectForKey:@"feeId"] integerValue]];
+//        }
+        else if (indexPath.row == 1){
+            cell.label.text = [oneOB objectForKey:@"feeName"];
+        }else if (indexPath.row == 2){
+            cell.label.text = [oneOB objectForKey:@"money"];
+        }else if (indexPath.row == 3){
+            cell.label.text = [oneOB objectForKey:@"month"];
+        }else if (indexPath.row == 4){
+            cell.label.text = [oneOB objectForKey:@"notes"];
+        }
+        else{
+            cell.label.text = [oneOB objectForKey:@"payType"];
+        }
+    }else if (self.marketpee == 5){
+        NSDictionary * oneOB = [(RSColumnarModel *)[_arrayContent objectAtIndex:indexPath.section] getParkDicOfReceivableOB];
+//        if (indexPath.row == 0) {
+//            cell.label.text = [NSString stringWithFormat:@"%@",[oneOB objectForKey:@"dealerId"]];
+//        }else
+        if (indexPath.row == 0){
+            cell.label.text = [oneOB objectForKey:@"dealerName"];
+        }
+//        else if (indexPath.row == 2){
+//            cell.label.text = [oneOB objectForKey:@"feeId"];
+//        }
+        else if (indexPath.row == 1){
+            cell.label.text = [oneOB objectForKey:@"feeName"];
+        }else if (indexPath.row == 2){
+            cell.label.text = [oneOB objectForKey:@"money"];
+        }else if (indexPath.row == 3){
+            cell.label.text = [oneOB objectForKey:@"month"];
+        }
+    }
     if (indexPath.section % 2 == 0) {
         cell.label.backgroundColor = [UIColor colorWithHexColorStr:@"#ffffff"];
     }else{
         cell.label.backgroundColor = [UIColor colorWithHexColorStr:@"#F8F8FA"];
     }
-    
     return cell;
 }
 // 和UITableView类似，UICollectionView也可设置段头段尾
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
-    
     if([kind isEqualToString:UICollectionElementKindSectionHeader]) {
         UICollectionReusableView *headerView = [_collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:headerId forIndexPath:indexPath];
         if(headerView == nil) {
             headerView = [[UICollectionReusableView alloc] init];
         }
         headerView.backgroundColor = [UIColor grayColor];
-        
         return headerView;
     }else if([kind isEqualToString:UICollectionElementKindSectionFooter]){
         UICollectionReusableView *footerView = [_collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:footerId forIndexPath:indexPath];
@@ -174,31 +247,31 @@ static NSString *const footerId = @"footerId";
             footerView = [[UICollectionReusableView alloc] init];
         }
         footerView.backgroundColor = [UIColor lightGrayColor];
-        
         return footerView;
     }
-    
     return nil;
 }
+
 - (BOOL)collectionView:(UICollectionView *)collectionView canMoveItemAtIndexPath:(NSIndexPath *)indexPath{
     return YES;
 }
 
-
 - (void)collectionView:(UICollectionView *)collectionView moveItemAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath*)destinationIndexPath{
-    
 }
 #pragma mark ---- UICollectionViewDelegateFlowLayout
-
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    return (CGSize){OTHERCELLWIDTH,ALLCELLHIGH};//方块大小
+//    if (indexPath.section == 0) {
+//        if (indexPath.row == 1) {
+//             return (CGSize){96,ALLCELLHIGH};//方块大小
+//        }
+//    }
+       return (CGSize){OTHERCELLWIDTH,ALLCELLHIGH};//方块大小
+//    }
 }
-
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
     return UIEdgeInsetsMake(0, 0, 0, 0);//前面2个数字是整个控件前的间隔
 }
-
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section{
     return 0;
@@ -246,12 +319,22 @@ static NSString *const footerId = @"footerId";
         cell = [[BCMyTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:strCell];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
-    NSDictionary *oneOB = [(BCContentOB *)[_arrayContent objectAtIndex:indexPath.section] getDicOfOB];
-    cell.label.text = [oneOB objectForKey:[_arrayAttribute objectAtIndex:0]];
+    
+//    NSDictionary * oneOB = [(BCContentOB *)[_arrayContent objectAtIndex:indexPath.section] getDicOfOB];
+//    cell.label.text = [oneOB objectForKey:[_arrayAttribute objectAtIndex:0]];
+    
+    
+    cell.label.text = [NSString stringWithFormat:@"%ld",indexPath.section + 1 ];
+    
     if (indexPath.section % 2 == 0) {
         cell.label.backgroundColor = [UIColor colorWithHexColorStr:@"#ffffff"];
     }else{
         cell.label.backgroundColor = [UIColor colorWithHexColorStr:@"#F8F8FA"];
+    }
+    if (self.marketpee == 2) {
+        cell.detailedBtn.hidden = NO;
+    }else{
+        cell.detailedBtn.hidden = YES;
     }
     cell.detailedBtn.tag = indexPath.section;
     [cell.detailedBtn addTarget:self action:@selector(joinDetailAction:) forControlEvents:UIControlEventTouchUpInside];

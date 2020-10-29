@@ -522,13 +522,12 @@ static NSString * SLSTOCKFOOTVIEWID = @"SLSTOCKFOOTVIEWID";
                jxt_showToastMessage(@"请选择需要的内容", 0.75);
                return;
            }
-            if ([self.delegate respondsToSelector:@selector(dabanChoosingContentArray:andCancelArray:)]) {
-                      [self.delegate dabanChoosingContentArray:self.selectdeContentArray andCancelArray:self.cancelArray];
-            }
+           if ([self.delegate respondsToSelector:@selector(dabanChoosingContentArray:andCancelArray:)]) {
+              [self.delegate dabanChoosingContentArray:self.selectdeContentArray andCancelArray:self.cancelArray];
+           }
     }
     [self.navigationController popViewControllerAnimated:YES];
 }
-
 //荒料cell的选择
 - (void)huangliaoSelectAction:(UIButton *)selectBtn{
     selectBtn.selected = !selectBtn.selected;
@@ -546,8 +545,6 @@ static NSString * SLSTOCKFOOTVIEWID = @"SLSTOCKFOOTVIEWID";
          }
       }
 }
-
-
 //大板Cell的选择
 - (void)dabanShowAndHideSelectContentAction:(UIButton *)selectBtn{
     UIView *v = [selectBtn superview];//获取父类view
@@ -574,9 +571,6 @@ static NSString * SLSTOCKFOOTVIEWID = @"SLSTOCKFOOTVIEWID";
        //[self.tableview reloadSections:[NSIndexSet indexSetWithIndex:cell.tag] withRowAnimation:UITableViewRowAnimationNone];
      [self.contentTableview reloadSections:[NSIndexSet indexSetWithIndex:cell.tag] withRowAnimation:UITableViewRowAnimationNone];
 }
-
-
-
 //大板的头部视图selectBtn的方法
 - (void)dabanHeaderButtonOnClickAction:(UIButton *)selectBtn{
     RSSlStockModel * slstockmodel = self.choosingArray[selectBtn.tag];
@@ -613,7 +607,6 @@ static NSString * SLSTOCKFOOTVIEWID = @"SLSTOCKFOOTVIEWID";
     //[self.tableview reloadData];
     [self.contentTableview reloadData];
 }
-
 //大板头部视图的的选择
 - (void)dabanHeaderTapAction:(UITapGestureRecognizer *)tap{
     RSSLStockHeaderView * slstockHeaderview = (RSSLStockHeaderView *)tap.view;
@@ -637,7 +630,6 @@ static NSString * SLSTOCKFOOTVIEWID = @"SLSTOCKFOOTVIEWID";
     self.blockNo = blockName;
     self.pageNum = 1;
     [self reloadStockData];
-
 }
 
 @end

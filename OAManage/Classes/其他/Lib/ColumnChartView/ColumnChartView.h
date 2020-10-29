@@ -113,6 +113,13 @@ typedef NS_ENUM(NSInteger, LegendPosition) {
  是否显示数据水平虚线
  */
 @property (nonatomic,assign) BOOL showHorizontalDashLine;
+/**
+ contentTitle 显示是什么情况的状态图
+  */
+@property (nonatomic,strong)NSString * contentTitle;
+
+
+
 
 /**
  初始化一个单柱柱状图

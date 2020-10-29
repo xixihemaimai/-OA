@@ -67,7 +67,7 @@
 #import "JHSysAlertUtil.h"
 #import "RSJumpVideoTool.h"
 #import "UIViewController+YCPopover.h"
-
+#import "HQPickerView.h"
 
 //第三方框架
 #import <AFNetworking.h>
@@ -273,6 +273,8 @@ xsi:type=\"q0:Array\">" \
 
 #define URL_YIGODATA_DICTIONSTOREAREAARY(A) [NSString stringWithFormat:@"{storeArea:%@}",A]
 
+#define URL_YIGODATA_FEE(A) [NSString stringWithFormat:@"{fee:%@}",A]
+
 //第12种参数解控单库存引入
 #define URL_YIGODATA_STOCK(A,B,C,D,E,F) [NSString stringWithFormat:@"{pageNum:'%@',pageSize:'%@',mtlName:'%@', blockNo:'%@',deaId:'%@',type:'%@'}",A,B,C,D,E,F]
 
@@ -314,3 +316,26 @@ xsi:type=\"q0:Array\">" \
 //推荐视频 / api / video / get / recommend
 #define URL_VIDEORECOMMEND_IOS @""URL_NEWPOST_IOS"/api/video/get/recommend"
 #define URL_NEWRECOMMEND_IOS(A,B,C,D,E) [NSString stringWithFormat:@"{pageNum:%ld,pageSize:%d,filter:{videoId:%ld,videoTypeId:%ld,videoTitle:'%@'}}",A,B,C,D,E]
+
+//获取合同预警信息
+#define URL_WARN_IOS @""URL_NEWPOST_IOS"/api/contract/warn"
+//获取合同列表
+#define URL_CONTRACT_LIST_IOS @""URL_NEWPOST_IOS"/api/contract/list"
+//获取荒料出入库信息
+#define URL_BMSTOCK_IOS @""URL_NEWPOST_IOS"/api/report/bmstock"
+//获取大板出入库信息
+#define URL_SLSTOCK_IOS @""URL_NEWPOST_IOS"/api/report/slstock"
+//获取招商总账信息
+#define URL_LEDGER_IOS @""URL_NEWPOST_IOS"/api/report/ledger"
+//获取招商租赁情况
+#define URL_LEASE_IOS @""URL_NEWPOST_IOS"/api/report/lease"
+//获取园区费用应收余额列表
+#define URL_MARKET_FEE_IOS @""URL_NEWPOST_IOS"/api/bill/market_fee"
+//获取商户费用应收余额列表
+#define URL_DEALER_FEE_IOS @""URL_NEWPOST_IOS"/api/bill/dealer_fee"
+//获取商户费用应收明细
+#define URL_DEALER_DTL_IOS @""URL_NEWPOST_IOS"/api/bill/dealer_fee_dtl"
+//获取园区收款明细列表
+#define URL_PAY_MARKET_IOS @""URL_NEWPOST_IOS"/api/bill/pay_market_fee"
+//获取园区应收明细列表
+#define URL_MARKET_DTL_IOS @""URL_NEWPOST_IOS"/api/bill/market_fee_dtl"

@@ -54,21 +54,14 @@
     [item setTitleTextAttributes:attrNormal forState:UIControlStateNormal];
 }
 
-
-
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.tabBar setTintColor:[UIColor colorWithHexColorStr:@"#27C79A"]];
     
     [self addSubCtrls];
-    
-    
 }
 
-
 - (void)addSubCtrls {
-    
     self.tabBar.tintColor = [UIColor colorWithHexColorStr:@"#27C79A"];
     //首页
     RSServiceViewController * serviceVc = [[RSServiceViewController alloc]init];
@@ -78,9 +71,7 @@
     UIImage * image0 = [UIImage imageNamed:@"画板复制 4"];
     UIImage * newImage0 = [image0 imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     serviceVc.tabBarItem.selectedImage = newImage0;
-    
     RSMyNavigationViewController * myNav0 = [[RSMyNavigationViewController alloc]initWithRootViewController:serviceVc];
-       
     //审核
     RSShenHeViewController * shenVc = [[RSShenHeViewController alloc]init];
     shenVc.tabBarItem.tag = 1;
@@ -89,11 +80,7 @@
     UIImage * image1 = [UIImage imageNamed:@"画板复制 5"];
     UIImage * newImage1 = [image1 imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     shenVc.tabBarItem.selectedImage = newImage1;
-
-    
     RSMyNavigationViewController * myNav1 = [[RSMyNavigationViewController alloc]initWithRootViewController:shenVc];
-    
-  
     //发起
     RSLaunchViewController * launchVc = [[RSLaunchViewController alloc]init];
     launchVc.tabBarItem.tag = 2;
@@ -102,14 +89,7 @@
     UIImage * image2 = [UIImage imageNamed:@"画板复制 6"];
     UIImage * newImage2 = [image2 imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     launchVc.tabBarItem.selectedImage = newImage2;
-    
     RSMyNavigationViewController * myNav2 = [[RSMyNavigationViewController alloc]initWithRootViewController:launchVc];
-     
-     
-    
-    
-    
-    
     //我的
     RSMenuViewController * menuVc = [[RSMenuViewController alloc]init];
     menuVc.tabBarItem.tag = 3;
@@ -118,18 +98,7 @@
     UIImage * image3 = [UIImage imageNamed:@"画板复制 7"];
     UIImage * newImage3 = [image3 imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     menuVc.tabBarItem.selectedImage = newImage3;
- 
     RSMyNavigationViewController * myNav3 = [[RSMyNavigationViewController alloc]initWithRootViewController:menuVc];
-    
-    
-    
-    
     self.viewControllers = @[myNav0,myNav1,myNav2,myNav3];
-    
-    
 }
-
-
-
-
 @end

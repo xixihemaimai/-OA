@@ -20,6 +20,7 @@
         _label.layer.borderWidth = 0.5f;
         _label.textColor = [UIColor colorWithHexColorStr:@"#666666"];
         _label.textAlignment = NSTextAlignmentCenter;
+        _label.numberOfLines = 0;
         _label.font = [UIFont systemFontOfSize:13.f];
         _label.text=_labelText;
         [self addSubview:_label];

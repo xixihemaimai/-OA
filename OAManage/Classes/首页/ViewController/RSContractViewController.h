@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface RSContractViewController : RSBaseViewController
 
+@property (nonatomic,assign)NSInteger warningType;
+
 @end
 
 NS_ASSUME_NONNULL_END

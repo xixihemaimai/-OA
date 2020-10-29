@@ -14,72 +14,194 @@
 
 #import "RSPopViewController.h"
 
+//#import "RSOALocalDB.h"
+#import "RSShipperMode.h"
+#import "RSNameOfCargoViewController.h"
+
 @interface RSBalanceViewController ()
 
 @property (nonatomic,strong)UIButton * beginBtn;
 
 @property (nonatomic,strong)UIButton * endBtn;
 
-@property(nonatomic,strong) DIYSystemDatePickerView *datePickerView;
+@property (nonatomic,strong) DIYSystemDatePickerView *datePickerView;
+
+@property (nonatomic,strong)UIView * contractView;
+
+@property (nonatomic,assign)NSInteger pageNum;
+
+//中间值，用来保存选择结算对象的ID
+@property (nonatomic,assign)NSInteger tempID;
+
+@property (nonatomic,strong)NSMutableArray * balanceArray;
+
+@property (nonatomic,strong)MyTableListView * tablelist;
+
 
 @end
 
 @implementation RSBalanceViewController
+- (NSMutableArray *)balanceArray{
+    if (!_balanceArray) {
+        _balanceArray = [NSMutableArray array];
+    }
+    return _balanceArray;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = @"余额表详情";
+    
+    self.pageNum = 1;
+    self.tempID = 0;
     self.emptyView.hidden = YES;
     
-    self.tableview.scrollEnabled = NO;
-    self.tableview.contentInset = UIEdgeInsetsMake(0, 0, 100, 0);
+    
+    self.view.backgroundColor = [UIColor colorWithHexColorStr:@"#ffffff"];
+    
+    
+//    self.tableview.scrollEnabled = NO;
+//    self.tableview.contentInset = UIEdgeInsetsMake(0, 0, 100, 0);
     [self setCustomHeaderView];
+    
+    
+    
+    self.tableview.mj_header = [MJChiBaoZiHeader headerWithRefreshingTarget:self refreshingAction:@selector(reloadReportList)];
+    MJChiBaoZiFooter * foot = [MJChiBaoZiFooter footerWithRefreshingTarget:self refreshingAction:@selector(reloadReportListMore)];
+    foot.refreshingTitleHidden = YES;
+    self.tableview.mj_footer = foot;
+    
 }
+
+
+- (void)reloadReportList{
+    self.pageNum = 1;
+    [self reloadBalanceNewData];
+}
+
+- (void)reloadReportListMore{
+    [self reloadBalanceNewData];
+}
+
+
+- (void)reloadBalanceNewData{
+    
+    NetworkTool * network = [[NetworkTool alloc]init];
+    NSString * url = [NSString string];
+    NSString * filter = [NSString string];
+    if (self.marketpee == market_fee) {
+        url = URL_MARKET_FEE_IOS;
+        filter = [NSString stringWithFormat:@"{monthFrom:'%@',monthTo:'%@',typeId:'%ld'}",_beginBtn.currentTitle,_endBtn.currentTitle,self.tempID];
+    }else if (self.marketpee == dealer_fee){
+        url = URL_DEALER_FEE_IOS;
+        filter = [NSString stringWithFormat:@"{monthFrom:'%@',monthTo:'%@',typeId:'%ld'}",_beginBtn.currentTitle,_endBtn.currentTitle,self.tempID];
+    }else if (self.marketpee == pay_market_fee){
+        url = URL_PAY_MARKET_IOS;
+        filter = [NSString stringWithFormat:@"{monthFrom:'%@',monthTo:'%@',typeId:'%ld'}",[_beginBtn.currentTitle substringToIndex:7],[_endBtn.currentTitle substringToIndex:7],self.tempID];
+    }else if (self.marketpee == market_fee_dtl){
+        url = URL_MARKET_DTL_IOS;
+        filter = [NSString stringWithFormat:@"{monthFrom:'%@',monthTo:'%@',typeId:'%ld'}",[_beginBtn.currentTitle substringToIndex:7],[_endBtn.currentTitle substringToIndex:7],self.tempID];
+    }
+    //    else{
+    //        url = URL_DEALER_DTL_IOS;
+    //    }
+    NSString * data = [NSString stringWithFormat:@"{pageNum:'%@',pageSize:'%d',filter:%@}",[NSNumber numberWithInteger:self.pageNum],100,filter];
+    NSDictionary * dict = @{@"loginToken":self.usermodel.appLoginToken,@"data":data};
+    RSWeakself
+    [network newReloadWebServiceNoDataURL:url andParameters:dict andURLName:url];
+    network.successArrayReload = ^(NSMutableArray *array) {
+        if (weakSelf.pageNum == 1) {
+            [weakSelf.balanceArray removeAllObjects];
+            if (array.count > 0) {
+                [weakSelf.balanceArray addObjectsFromArray:array];
+                weakSelf.pageNum = 2;
+            }
+//            [weakSelf.tableview reloadData];
+            [weakSelf.tableview.mj_header endRefreshing];
+            
+             [weakSelf showExcelView];
+            
+        }else{
+//            [weakSelf.balanceArray addObjectsFromArray:array];
+            
+            for (RSColumnarModel * columnarmodel in array) {
+                [weakSelf.tablelist addOneOb:columnarmodel];
+            }
+            weakSelf.pageNum++;
+            [weakSelf.tableview.mj_footer endRefreshing];
+        }
+       
+    };
+    
+    network.failure = ^(NSDictionary *dict) {
+        [weakSelf.tableview.mj_header endRefreshing];
+        [weakSelf.tableview.mj_footer endRefreshing];
+    };
+}
+
+
+
+
+
+- (void)reloadMerchantsReceivableNewDataTypeId:(NSInteger)typeId andBlock:(void(^)(NSDictionary * valueDict))block{
+    NetworkTool * network = [[NetworkTool alloc]init];
+    NSString * filter = [NSString stringWithFormat:@"{monthFrom:'%@',monthTo:'%@',typeId:'%ld'}",_beginBtn.currentTitle,_endBtn.currentTitle,typeId];
+    NSString * data = [NSString stringWithFormat:@"{pageNum:'%@',pageSize:'%d',filter:%@}",[NSNumber numberWithInteger:self.pageNum],100,filter];
+    NSDictionary * dic = @{@"loginToken":self.usermodel.appLoginToken,@"data":data};
+    //    RSWeakself
+    [network newReloadWebServiceNoDataURL:URL_DEALER_DTL_IOS andParameters:dic andURLName:URL_DEALER_DTL_IOS];
+    network.successReload = ^(NSDictionary * dict) {
+        if (block) {
+            block(dict);
+        }
+    };
+}
+
+
+
+
 
 - (void)setCustomHeaderView{
     
-    UIView * headerView = [[UIView alloc]init];
-    headerView.backgroundColor = [UIColor colorWithHexColorStr:@"#ffffff"];
-    
     UIView * contractView = [[UIView alloc]init];
-    [headerView addSubview:contractView];
-
+    [self.view addSubview:contractView];
     contractView.layer.backgroundColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0].CGColor;
     contractView.layer.cornerRadius = 6;
     contractView.layer.shadowColor = [UIColor colorWithRed:213/255.0 green:211/255.0 blue:211/255.0 alpha:0.5].CGColor;
     contractView.layer.shadowOffset = CGSizeMake(0,0);
     contractView.layer.shadowOpacity = 1;
     contractView.layer.shadowRadius = 5;
+    _contractView = contractView;
     
     contractView.sd_layout
-    .leftSpaceToView(headerView, 12)
-    .topSpaceToView(headerView, 12)
-    .rightSpaceToView(headerView, 12)
+    .leftSpaceToView(self.view, 12)
+    .topSpaceToView(self.navigationController.navigationBar,13)
+    .rightSpaceToView(self.view, 12)
     .heightIs(133);
     
-    //合同标题
-    UILabel * titleLabel = [[UILabel alloc]init];
-    titleLabel.text = @"结算对象";
-    titleLabel.textColor = [UIColor colorWithHexColorStr:@"#D5D5D5"];
-    titleLabel.font = [UIFont systemFontOfSize:14];
-    [contractView addSubview:titleLabel];
+    RSWeakself
     
-    titleLabel.sd_layout
+    //合同标题
+    UIButton * objectBtn = [[UIButton alloc]init];
+    if (self.marketpee == market_fee) {
+        [objectBtn setTitle:@"费用类型" forState:UIControlStateNormal];
+    }else{
+        [objectBtn setTitle:@"结算对象" forState:UIControlStateNormal];
+    }
+    
+    [objectBtn setTitleColor:[UIColor colorWithHexColorStr:@"#D5D5D5"] forState:UIControlStateNormal];
+    objectBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+    [objectBtn addTarget:self action:@selector(choiceObjectAction:) forControlEvents:UIControlEventTouchUpInside];
+    [contractView addSubview:objectBtn];
+    
+    objectBtn.sd_layout
     .leftSpaceToView(contractView, 22.5)
-    .widthIs(60)
+    .rightSpaceToView(contractView, 22.5)
     .topSpaceToView(contractView, 21)
     .heightIs(20);
     
-    //合同标题的标签
-    UITextField * titleField = [[UITextField alloc]init];
-    [contractView addSubview:titleField];
-    
-    titleField.sd_layout
-    .leftSpaceToView(titleLabel, 5)
-    .rightSpaceToView(contractView, 22.5)
-    .heightIs(20)
-    .topEqualToView(titleLabel);
+    objectBtn.titleLabel.sd_layout
+    .leftSpaceToView(objectBtn, 5);
     
     //分隔线
     UIView * contractTitleView = [[UIView alloc]init];
@@ -87,10 +209,10 @@
     [contractView addSubview:contractTitleView];
     
     contractTitleView.sd_layout
-    .leftEqualToView(titleLabel)
-    .rightEqualToView(titleField)
+    .leftEqualToView(objectBtn)
+    .rightEqualToView(objectBtn)
     .heightIs(0.5)
-    .topSpaceToView(titleLabel, 6);
+    .topSpaceToView(objectBtn, 6);
     
     //会计起始时间
     UILabel * timeLabel = [[UILabel alloc]init];
@@ -150,7 +272,7 @@
     .topSpaceToView(timeEndLabel, 0)
     .heightIs(24)
     .leftEqualToView(timeEndLabel);
-
+    
     //分隔线
     UIView * contractTimeView = [[UIView alloc]init];
     contractTimeView.backgroundColor = [UIColor colorWithHexColorStr:@"#F2F2F2"];
@@ -167,6 +289,7 @@
     [searchBtn setTitle:@"搜索" forState:UIControlStateNormal];
     [searchBtn setTitleColor:[UIColor colorWithHexColorStr:@"#FFFFFF"] forState:UIControlStateNormal];
     searchBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+    [searchBtn addTarget:self action:@selector(seacrhBeginAction:) forControlEvents:UIControlEventTouchUpInside];
     [searchBtn setBackgroundColor:[UIColor colorWithHexColorStr:@"#27C79A"]];
     [contractView addSubview:searchBtn];
     
@@ -179,70 +302,138 @@
     searchBtn.layer.cornerRadius = 2.5;
     searchBtn.layer.masksToBounds = YES;
     
-    NSMutableArray *dic=[[NSMutableArray alloc] init];
+    //    NSMutableArray *dic=[[NSMutableArray alloc] init];
     //修改表格显示内容标题 只需要在BCContentOB文件中修改属性以及其他
     //调整第一列的宽度 可在MyTableListView.m中最上面修改 FIRSTCELLWIDTH
     //调整每一行的高度 可在MyTableListView.m中最上面修改 ALLCELLHIGH
     //调整第一列后的宽度 可在MyTableListView.m中最上面修改 OTHERCELLWIDTH
     //点击下面按钮 可增加一行显示在最上面 如有需要可自行 调整更新以及添加代理等
     //若有其他调整 可自调
-    for (int i = 0; i < 15; i++) {
-        BCContentOB *ddd=[[BCContentOB alloc] init];
-        ddd.name=[NSString stringWithFormat:@"%d",i];
-        ddd.attributeFirst=@"1";
-        ddd.attributeSecond=@"2";
-        ddd.attributeThird=@"3";
-        ddd.attributeFourth=@"4";
-        ddd.attributeFifth=@"5";
-        ddd.attributeSixth=@"6";
-        ddd.attributeSeventh=@"7";
-        ddd.attributeEighth=@"8";
-        [dic addObject:ddd];
+    //    for (int i = 0; i < 8; i++) {
+    //        BCContentOB *ddd=[[BCContentOB alloc] init];
+    //        ddd.name=[NSString stringWithFormat:@"%d",i+1];
+    //        ddd.attributeFirst=[NSString stringWithFormat:@"%d",i];
+    //        ddd.attributeSecond=@"3283928398293829";
+    //        ddd.attributeThird=[NSString stringWithFormat:@"%d",i];
+    //        ddd.attributeFourth=[NSString stringWithFormat:@"%d",i];
+    //        [dic addObject:ddd];
+    //    }
+    
+    self.tableview.sd_layout
+    .topSpaceToView(contractView, 20);
+
+    self.tableview.estimatedRowHeight =0;
+
+    self.tableview.estimatedSectionHeaderHeight =0;
+
+    self.tableview.estimatedSectionFooterHeight =0;
+    
+    _datePickerView = [[DIYSystemDatePickerView alloc]initWithType:DIYSystemDatePickerENUM0
+                                                getSelectBeginTime:^(NSString *beginTimeStr) {
+        [weakSelf.beginBtn setTitle:beginTimeStr forState:(UIControlStateNormal)];
+    } getSelectEndTime:^(NSString *endTimeStr) {
+        [weakSelf.endBtn setTitle:endTimeStr forState:(UIControlStateNormal)];
+    }];
+    [self.view addSubview:_datePickerView];
+}
+
+
+
+- (void)showExcelView{
+    NSArray * array = [NSArray array];
+    NSArray * buteArray = [NSArray array];
+    if (self.marketpee == market_fee) {
+        array = @[@"序号",@"费用类型",@"上期总应收",@"本期应收",@"总收款",@"本期结存"];
+        buteArray = @[@"feeName",@"moneyBegin",@"moneyIn",@"moneyOut",@"moneyEnd"];
+    }else if (self.marketpee == dealer_fee){
+        array = @[@"序号",@"结算对象",@"上期总应收",@"本期应收",@"总收款",@"本期结存"];
+        buteArray = @[@"dealerName",@"moneyBegin",@"moneyIn",@"moneyOut",@"moneyEnd"];
+    }else if (self.marketpee == pay_market_fee){
+        array = @[@"序号",@"结算对象",@"费用类型",@"金额",@"会计期",@"摘要",@"收款类型"];
+        buteArray = @[@"dealerName",@"feeName",@"money",@"month",@"notes"];
+    }else if (self.marketpee == market_fee_dtl){
+        array = @[@"序号",@"结算对象",@"费用类型",@"金额",@"会计期"];
+        buteArray = @[@"dealerName",@"feeName",@"money",@"month"];
     }
+    UIView * headerView = [[UIView alloc]init];
+    headerView.backgroundColor = [UIColor colorWithHexColorStr:@"#ffffff"];
     RSWeakself
-    MyTableListView * tablelist = [[MyTableListView alloc] initWithFrame:CGRectMake(13, CGRectGetMaxY(contractView.frame) + 30 , SCW - 13, SCH - CGRectGetMaxY(contractView.frame) - 20 ) andContentDicArray:dic];
-    //tablelist.delegate=self;
+    //SCH - CGRectGetMaxY(self.contractView.frame) - 80)
+    MyTableListView * tablelist = [[MyTableListView alloc] initWithFrame:CGRectMake(13, 0, SCW - 13,self.tableview.yj_height - 40) andContentDicArray:self.balanceArray andAttributeName:array andAttribute:buteArray andMarketPee:self.marketpee];
+    _tablelist = tablelist;
+    //    //tablelist.delegate=self;
     [headerView addSubview:tablelist];
     //设置代理作用:选中某一个 可自行修改
     tablelist.detailBlock = ^(NSInteger index) {
         NSLog(@"=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-%ld",index);
-        RSPopViewController * popVc = [[RSPopViewController alloc]init];
-        [weakSelf yc_bottomPresentController:popVc presentedHeight:234 completeHandle:^(BOOL presented) {
+        RSColumnarModel * columnarmodel = weakSelf.balanceArray[index];
+        [weakSelf reloadMerchantsReceivableNewDataTypeId:columnarmodel.dealerId andBlock:^(NSDictionary *valueDict) {
+//            NSLog(@"-------------------------------------%f",[[valueDict objectForKey:@"totalFee"] doubleValue]);
+            NSArray * array = [valueDict objectForKey:@"fee"];
+            NSMutableArray * payServiceArray = [NSMutableArray array];
+            NSMutableArray * payNumberArray = [NSMutableArray array];
+            for (int i = 0; i < array.count; i++) {
+                RSColumnarModel * columnarPaymodel = array[i];
+//                NSLog(@"-------------------------------------%@",columnarPaymodel.feeName);
+                [payServiceArray addObject:columnarPaymodel.feeName];
+                [payNumberArray addObject:columnarPaymodel.value];
+            }
+            RSPopViewController * popVc = [[RSPopViewController alloc]initwithContentObjectLabel:[NSString stringWithFormat:@"结算对象%@总欠费",columnarmodel.dealerName] andNumberLabel:[NSString stringWithFormat:@"%f",[[valueDict objectForKey:@"totalFee"] doubleValue]] andPayServiceArray:payServiceArray andPayNumberArray:payNumberArray];
+            [weakSelf yc_bottomPresentController:popVc presentedHeight:234 completeHandle:^(BOOL presented) {
+                
+            }];
         }];
+        
     };
     [headerView setupAutoHeightWithBottomView:tablelist bottomMargin:50];
     [headerView layoutIfNeeded];
     self.tableview.tableHeaderView = headerView;
-    _datePickerView = [[DIYSystemDatePickerView alloc]initWithType:DIYSystemDatePickerENUM0
-                                                   getSelectBeginTime:^(NSString *beginTimeStr) {
-        [weakSelf.beginBtn setTitle:beginTimeStr forState:(UIControlStateNormal)];
-                                                   } getSelectEndTime:^(NSString *endTimeStr) {
-        [weakSelf.endBtn setTitle:endTimeStr forState:(UIControlStateNormal)];
-                                                   }];
-   [self.view addSubview:_datePickerView];
+}
+
+//选择结算对象
+- (void)choiceObjectAction:(UIButton *)objectBtn{
+    RSNameOfCargoViewController * nameOfCargoVc = [[RSNameOfCargoViewController alloc]init];
+    if (self.marketpee == market_fee) {
+        nameOfCargoVc.title = @"费用类型";
+        nameOfCargoVc.type = @"fee";
+        [self.navigationController pushViewController:nameOfCargoVc animated:YES];
+        nameOfCargoVc.feeblock = ^(RSFeeModel * _Nonnull feemodel, NSString * _Nonnull type) {
+            [objectBtn setTitle:feemodel.name forState:UIControlStateNormal];
+            self.tempID = feemodel.feeId;
+            [objectBtn setTitleColor:[UIColor colorWithHexColorStr:@"#333333"] forState:UIControlStateNormal];
+        };
+    }else{
+        nameOfCargoVc.title = @"货主名称";
+        nameOfCargoVc.type = @"dealer";
+        [self.navigationController pushViewController:nameOfCargoVc animated:YES];
+        nameOfCargoVc.feeblock = ^(RSFeeModel * _Nonnull feemodel, NSString * _Nonnull type) {
+            [objectBtn setTitle:feemodel.name forState:UIControlStateNormal];
+            self.tempID = feemodel.feeId;
+            [objectBtn setTitleColor:[UIColor colorWithHexColorStr:@"#333333"] forState:UIControlStateNormal];
+        };
+    }
 }
 
 - (void)choiceAction:(UIButton *)btn{
     if (btn.tag == 0) {
-      //开始时间
-      [_datePickerView showBeginTimePicker];
+        //开始时间
+        [_datePickerView showBeginTimePicker];
     }else{
-      //结束时间
-      [_datePickerView showEndTimePicker];
+        //结束时间
+        [_datePickerView showEndTimePicker];
     }
 }
 
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 1;
+    return 0;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-//    if ([self.title isEqualToString:@"报表管理"]) {
-//        return 5;
-//    }else{
-        return 4;
-//    }
+    //    if ([self.title isEqualToString:@"报表管理"]) {
+    //        return 5;
+    //    }else{
+    return 0;
+    //    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -258,6 +449,12 @@
     return cell;
 }
 
+
+- (void)seacrhBeginAction:(UIButton *)searchBtn{
+    [self.tableview.tableHeaderView removeFromSuperview];
+    [self.tableview.mj_header beginRefreshing];
+//    [self reloadBalanceNewData];
+}
 
 
 @end

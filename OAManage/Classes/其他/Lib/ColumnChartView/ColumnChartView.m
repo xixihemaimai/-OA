@@ -130,24 +130,24 @@
       
         UIView * view = [[UIView alloc]init];
         view.backgroundColor = [UIColor colorWithHexColorStr:@"#27C79A"];
-        view.frame = CGRectMake(0, 14, 4, 20);
+        view.frame = CGRectMake(0, 6, 4, 20);
         [self.legendBgView addSubview:view];
         
         
         
         UILabel * contentTitle = [[UILabel alloc]init];
-        contentTitle.text = @" 1月-8月的收入情况";
+        contentTitle.text = self.contentTitle;
         contentTitle.font = [UIFont fontWithName:@"PingFangSC" size: 16];
         contentTitle.textColor = [UIColor colorWithHexColorStr:@"#333333"];
         contentTitle.textAlignment = NSTextAlignmentLeft;
         [self.legendBgView addSubview:contentTitle];
-        contentTitle.frame = CGRectMake(CGRectGetMaxX(view.frame) + 12, 14, 160, 20);
+        contentTitle.frame = CGRectMake(CGRectGetMaxX(view.frame) + 12, 7, SCW/2 + 60, 15);
         
         
         for (int i = 0; i < self.legendNameArray.count; i++) {
             UIView *colorPoint = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 10)];
 //            colorPoint.center = CGPointMake(8 + (5 + 50 + 10) * i, 14);
-            colorPoint.center = CGPointMake(SCW - 150 + (5 + 50 + 10) * i, 24);
+            colorPoint.center = CGPointMake(SCW - 150 + (5 + 50 + 10) * i, 13);
 //            colorPoint.layer.cornerRadius = 5;
 //            colorPoint.layer.masksToBounds = YES;
             [self.legendBgView addSubview:colorPoint];
@@ -174,7 +174,7 @@
                 colorPoint.backgroundColor = [self colorWithHexString:self.colorArray[i]];
             }
             
-            UILabel *legendTitle = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(colorPoint.frame) + 2, 14, 50, 20)];
+            UILabel *legendTitle = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(colorPoint.frame) + 2, 8, 50, 10)];
             legendTitle.text = self.legendNameArray[i];
             legendTitle.textColor = [UIColor blackColor];
             legendTitle.font = [UIFont systemFontOfSize:12];
@@ -340,6 +340,9 @@
         
         NSString *num = self.dataArray[i];
         CGFloat columnHeight = (self.yAxisView.bounds.size.height - 20) * [num intValue] / maxNum;
+        if (isnan(columnHeight)) {
+            columnHeight = 0;
+        }
         UIBezierPath *columnPath = [UIBezierPath bezierPath];
         [columnPath moveToPoint:CGPointMake(dataView.bounds.size.width / 2, dataView.bounds.size.height)];
         [columnPath addLineToPoint:CGPointMake(dataView.bounds.size.width / 2, dataView.bounds.size.height - columnHeight)];
@@ -373,9 +376,10 @@
         // 显示数据具体值
         if (self.showDataLabel) {
             
-            UILabel *dataLable = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, dataView.bounds.size.width, 16)];
+            UILabel *dataLable = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, dataView.bounds.size.width, 36)];
             dataLable.center = CGPointMake(dataLable.bounds.size.width / 2, dataView.bounds.size.height - columnHeight - 8);
             dataLable.font = [UIFont systemFontOfSize:10];
+            dataLable.numberOfLines = 0;
             dataLable.textColor = [self colorWithHexString:@"#666666"];
             dataLable.textAlignment = NSTextAlignmentCenter;
             dataLable.text = self.dataArray[i];
@@ -416,7 +420,8 @@
             break;
         case LegendPositionTop:
             self.yAxisView.frame = CGRectMake(0, 40, 56, self.bounds.size.height - 40);
-            self.scrollView.frame = CGRectMake(56, 20, self.bounds.size.width - 68, self.bounds.size.height - 20);
+            //self.bounds.size.width - 68
+            self.scrollView.frame = CGRectMake(56, 20, SCW - 80, self.bounds.size.height - 20);
             break;
         case LegendPositionBottom:
             self.yAxisView.frame = CGRectMake(0, 20, 30, self.bounds.size.height - 40);
@@ -512,6 +517,7 @@
         self.scrollView.contentSize = CGSizeMake(self.scrollView.bounds.size.width, self.scrollView.bounds.size.width);
         self.xAxisView.frame = CGRectMake(0, self.scrollView.bounds.size.height - 20, self.scrollView.bounds.size.width, 20);
     } else {
+        NSLog(@"+++++++++++++++++++++++++++++++");
         CGFloat groupWidth = self.scrollView.bounds.size.width / 2;
         self.scrollView.contentSize = CGSizeMake(groupWidth * self.dataArray.count, self.scrollView.bounds.size.height);
         self.xAxisView.frame = CGRectMake(0, self.scrollView.bounds.size.height - 20, groupWidth * self.dataArray.count, 20);
@@ -549,8 +555,12 @@
             [dashlineView.layer addSublayer:lineLayer];
         }
     }
-    
-    CGFloat groupWidth = self.scrollView.bounds.size.width / 2;
+    CGFloat groupWidth = 0.0;
+    if (self.dataArray.count < 3) {
+       groupWidth = self.scrollView.bounds.size.width / 2;
+    }else{
+       groupWidth = self.scrollView.bounds.size.width / 3;
+    }
     for (int i = 0; i < self.dataArray.count; i++) {
         UILabel *lblGroupTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, groupWidth, 21)];
         lblGroupTitle.center = CGPointMake(groupWidth * i + groupWidth / 2 + 8 * i, 10);
@@ -585,8 +595,16 @@
             NSString *num = arr[j];
             
             CGFloat columnHeight = (self.yAxisView.bounds.size.height - 20) * [num intValue] / maxNum;
+            if (isnan(columnHeight)) {
+                columnHeight = 0;
+            }
             UIBezierPath *columnPath = [UIBezierPath bezierPath];
-            CGFloat margin = 21.5;
+            CGFloat margin = 0.0;
+            if (self.dataArray.count < 3) {
+                margin = 20.5;
+            }else{
+                margin = 12;
+            }
             
             CGFloat columnLeft = groupWidth / 2 - [self.columnWidth intValue] / 2 - (margin / 2) * (numInEachGroup - 1) + ([self.columnWidth intValue] / numInEachGroup + margin) * j;
             
@@ -624,9 +642,10 @@
             
             // 显示数据具体值
             if (self.showDataLabel) {
-                UILabel *dataLable = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 16)];
+                UILabel *dataLable = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 36)];
                 dataLable.center = CGPointMake(columnLeft + [self.columnWidth intValue] / numInEachGroup / 2, dataView.bounds.size.height - columnHeight - 8);
                 dataLable.font = [UIFont systemFontOfSize:10];
+                dataLable.numberOfLines = 0;
                 dataLable.textColor = [self colorWithHexString:@"#666666"];
                 dataLable.textAlignment = NSTextAlignmentCenter;
                 dataLable.text = self.dataArray[i][j];

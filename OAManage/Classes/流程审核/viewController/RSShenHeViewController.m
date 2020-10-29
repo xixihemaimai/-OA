@@ -430,7 +430,7 @@
         wkOaVc.workItemId = auditedmodel.workItemId;
         wkOaVc.billKey = auditedmodel.billKey;
         wkOaVc.usertime = auditedmodel.createtime;
-        wkOaVc.creatorName = auditedmodel.creatorName;
+        wkOaVc.creatorName = auditedmodel.creatorName;  
         wkOaVc.deptName = auditedmodel.deptName;
         if ([self.selectType isEqualToString:@"1"]) {
             wkOaVc.isApproval = @"1";

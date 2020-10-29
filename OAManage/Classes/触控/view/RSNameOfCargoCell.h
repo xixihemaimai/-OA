@@ -10,6 +10,7 @@
 #import "RSShipperMode.h"
 #import "RSWarehouseModel.h"
 #import "RSStoreAreaModel.h"
+#import "RSFeeModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface RSNameOfCargoCell : UITableViewCell
@@ -20,6 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong)RSStoreAreaModel * storeAreamodel;
 
+@property (nonatomic,strong)RSFeeModel * feemodel;
 @end
 
 NS_ASSUME_NONNULL_END

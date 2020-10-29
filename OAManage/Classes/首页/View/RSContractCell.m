@@ -8,6 +8,21 @@
 
 #import "RSContractCell.h"
 
+@interface RSContractCell ()
+
+@property (nonatomic,strong)UIImageView * statusImage;
+
+@property (nonatomic,strong)UILabel * numberLabel;
+
+@property (nonatomic,strong)UILabel * titleLabel;
+
+@property (nonatomic,strong)UILabel * timeLabel;
+
+@property (nonatomic,strong)UILabel * statusLabel;
+
+@end
+
+
 @implementation RSContractCell
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
@@ -29,7 +44,7 @@
         numberLabel.font = [UIFont systemFontOfSize:16];
         numberLabel.textColor = [UIColor colorWithHexColorStr:@"#333333"];
         [statusView addSubview:numberLabel];
-        
+        _numberLabel = numberLabel;
         
         UILabel * titleLabel = [[UILabel alloc]init];
         titleLabel.text = @"合同标题:厦门开尔新有限公司地摊";
@@ -37,7 +52,7 @@
         titleLabel.font = [UIFont systemFontOfSize:15];
         titleLabel.textColor = [UIColor colorWithHexColorStr:@"#999999"];
         [statusView addSubview:titleLabel];
-        
+        _titleLabel = titleLabel;
         
         UILabel * timeLabel = [[UILabel alloc]init];
         timeLabel.text = @"合同日期:2019-09-18";
@@ -45,7 +60,7 @@
         timeLabel.font = [UIFont systemFontOfSize:15];
         timeLabel.textColor = [UIColor colorWithHexColorStr:@"#999999"];
         [statusView addSubview:timeLabel];
-        
+        _timeLabel = timeLabel;
         
         UILabel * statusLabel = [[UILabel alloc]init];
         statusLabel.text = @"审核中";
@@ -97,6 +112,32 @@
     }
     return self;
 }
+
+- (void)setColumnarmodel:(RSColumnarModel *)columnarmodel{
+    _columnarmodel = columnarmodel;
+    //0 未提交  2 审核中  10 已生效  12 已过期）
+    
+    if (_columnarmodel.status == 2) {
+        _statusImage.image = [UIImage imageNamed:@"编组2"];
+        _statusLabel.text = @"审核中";
+        _statusLabel.textColor = [UIColor colorWithHexColorStr:@"#FDAD32"];
+    }else if (_columnarmodel.status == 10){
+        _statusImage.image = [UIImage imageNamed:@"已入库"];
+        _statusLabel.text = @"已生效";
+        _statusLabel.textColor = [UIColor colorWithHexColorStr:@"#27C79A"];
+        
+    }else if (_columnarmodel.status == 12){
+        _statusImage.image = [UIImage imageNamed:@"已过期"];
+        _statusLabel.text = @"已过期";
+        _statusLabel.textColor = [UIColor colorWithHexColorStr:@"#F15244"];
+        
+    }
+    
+    _numberLabel.text = [NSString stringWithFormat:@"合同编号:%@",_columnarmodel.no];
+    _titleLabel.text = [NSString stringWithFormat:@"合同标题:%@",_columnarmodel.billTitle];
+    _timeLabel.text = [NSString stringWithFormat:@"合同日期:%@",_columnarmodel.billDate];
+}
+
 
 
 - (void)awakeFromNib {

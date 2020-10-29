@@ -85,10 +85,34 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if ([self.title isEqualToString:@"报表管理"]) {
         RSColumnarViewController * columnarVc = [[RSColumnarViewController alloc]init];
+        if (indexPath.row == 0) {
+            columnarVc.joinType = bmstock;
+        }else if ( indexPath.row == 1){
+            columnarVc.joinType = slstock;
+        }else if (indexPath.row == 3){
+            columnarVc.joinType = ledger;
+        }else if (indexPath.row == 2){
+            columnarVc.joinType = lease;
+        }else if (indexPath.row == 4){
+            columnarVc.joinType = totalLedger;
+        }
+        RSManageCell * cell = (RSManageCell *)[tableView cellForRowAtIndexPath:indexPath];
+        columnarVc.title = cell.manageLabel.text;
         [self.navigationController pushViewController:columnarVc animated:YES];
     }else{
         RSBalanceViewController * balanceVc = [[RSBalanceViewController alloc]init];
-           [self.navigationController pushViewController:balanceVc animated:YES];
+        if (indexPath.row == 0) {
+          balanceVc.marketpee = market_fee;
+        }else if ( indexPath.row == 1){
+          balanceVc.marketpee = dealer_fee;
+        }else if (indexPath.row == 2){
+          balanceVc.marketpee = pay_market_fee;
+        }else if (indexPath.row == 3){
+          balanceVc.marketpee = market_fee_dtl;
+        }
+        RSManageCell * cell = (RSManageCell *)[tableView cellForRowAtIndexPath:indexPath];
+        balanceVc.title = cell.manageLabel.text;
+        [self.navigationController pushViewController:balanceVc animated:YES];
     }
 }
 

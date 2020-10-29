@@ -10,18 +10,111 @@
 #import "RSContractCell.h"
 @interface RSContractViewController ()
 
+
+@property (nonatomic,strong)UITextField * titleField;
+
+@property (nonatomic,strong)UITextField * timeField;
+
+@property (nonatomic,assign)NSInteger pageNum;
+
+@property (nonatomic,strong)NSMutableArray * contractArray;
+
+@property (nonatomic,strong)UIButton * choiceStatusBtn;
+
+@property (nonatomic,assign)NSInteger status;
+
+
 @end
 
 @implementation RSContractViewController
+-(NSMutableArray *)contractArray{
+    if (!_contractArray) {
+        _contractArray = [NSMutableArray array];
+    }
+    return _contractArray;
+}
+
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"合同管理";
+//    self.title = @"合同管理";
+    
+    self.pageNum = 1;
     
     self.emptyView.hidden = YES;
     
     [self customHeaderView];
+    
+    self.tableview.mj_header = [MJChiBaoZiHeader headerWithRefreshingTarget:self refreshingAction:@selector(reloadReportList)];
+    MJChiBaoZiFooter * foot = [MJChiBaoZiFooter footerWithRefreshingTarget:self refreshingAction:@selector(reloadReportListMore)];
+    foot.refreshingTitleHidden = YES;
+    self.tableview.mj_footer = foot;
+    [self.tableview.mj_header beginRefreshing];
 }
+
+
+- (void)reloadReportList{
+    self.pageNum = 1;
+    [self reloadReportListNew];
+}
+
+
+- (void)reloadReportListMore{
+    [self reloadReportListNew];
+}
+
+
+- (void)reloadReportListNew{
+//
+//    if (self.warningType == 1) {
+//        self.status = 10;
+//    }else if (self.warningType == 2){
+//        self.status = 2;
+//    }else{
+     self.status = 10;
+//    }
+    
+    
+    if ([_choiceStatusBtn.currentTitle isEqualToString:@"未提交"]) {
+        self.status = 0;
+    }else if ([_choiceStatusBtn.currentTitle isEqualToString:@"审核中"]){
+        self.status = 2;
+    }else if ([_choiceStatusBtn.currentTitle isEqualToString:@"已生效"]){
+        self.status = 10;
+    }else if ([_choiceStatusBtn.currentTitle isEqualToString:@"已过期"]){
+        self.status = 12;
+    }
+    NetworkTool * network = [[NetworkTool alloc]init];
+    NSString * filter = [NSString stringWithFormat:@"{status:'%ld',billTitle:'%@',billDate:'%@',warningType:'%ld'}",self.status,_titleField.text,_timeField.text,self.warningType];
+    NSString * data = [NSString stringWithFormat:@"{pageNum:'%@',pageSize:'%d',filter:%@}",[NSNumber numberWithInteger:self.pageNum],10,filter];
+    NSDictionary * dict = @{@"loginToken":self.usermodel.appLoginToken,@"data":data};
+    RSWeakself
+    [network newReloadWebServiceNoDataURL:URL_CONTRACT_LIST_IOS andParameters:dict andURLName:URL_CONTRACT_LIST_IOS];
+    network.successArrayReload = ^(NSMutableArray *array) {
+        if (weakSelf.pageNum == 1) {
+            [weakSelf.contractArray removeAllObjects];
+            if (array.count > 0) {
+                [weakSelf.contractArray addObjectsFromArray:array];
+                weakSelf.pageNum = 2;
+            }
+            [weakSelf.tableview reloadData];
+            [weakSelf.tableview.mj_header endRefreshing];
+        }else{
+            [self.contractArray addObjectsFromArray:array];
+            self.pageNum++;
+            [self.tableview reloadData];
+            [weakSelf.tableview.mj_footer endRefreshing];
+        }
+    };
+    
+    network.failure = ^(NSDictionary *dict) {
+      [self.tableview.mj_header endRefreshing];
+      [self.tableview.mj_footer endRefreshing];
+    };
+    
+}
+
 
 
 - (void)customHeaderView{
@@ -60,13 +153,34 @@
     //合同标题的标签
     UITextField * titleField = [[UITextField alloc]init];
     [contractView addSubview:titleField];
+    _titleField = titleField;
     
     titleField.sd_layout
     .leftSpaceToView(titleLabel, 5)
-    .rightSpaceToView(contractView, 22.5)
+    .rightSpaceToView(contractView, 87.5)
     .heightIs(20)
     .topEqualToView(titleLabel);
     
+    
+    
+    UIButton * choiceStatusBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    
+//    if (self.warningType == 1) {
+//        [choiceStatusBtn setTitle:@"已生效" forState:UIControlStateNormal];
+//    }else if (self.warningType == 2){
+//        [choiceStatusBtn setTitle:@"审核中" forState:UIControlStateNormal];
+//    }else{
+        [choiceStatusBtn setTitle:@"已生效" forState:UIControlStateNormal];
+//    }
+    
+    
+    [choiceStatusBtn setImage:[UIImage imageNamed:@"system-pull-down"] forState:UIControlStateNormal];
+    choiceStatusBtn.titleLabel.font = [UIFont systemFontOfSize:13];
+    [choiceStatusBtn addTarget:self action:@selector(choiceStatusAction:) forControlEvents:UIControlEventTouchUpInside];
+    [choiceStatusBtn setTitleColor:[UIColor colorWithHexColorStr:@"#333333"] forState:UIControlStateNormal];
+    [contractView addSubview:choiceStatusBtn];
+    _choiceStatusBtn = choiceStatusBtn;
+ 
     //分隔线
     UIView * contractTitleView = [[UIView alloc]init];
     contractTitleView.backgroundColor = [UIColor colorWithHexColorStr:@"#F2F2F2"];
@@ -93,6 +207,8 @@
     
     UITextField * timeField = [[UITextField alloc]init];
     [contractView addSubview:timeField];
+//    _timeField.text = @"2020-1-1";
+    _timeField = timeField;
     
     timeField.sd_layout
     .leftSpaceToView(timeLabel, 5)
@@ -115,6 +231,7 @@
     [searchBtn setTitle:@"搜索" forState:UIControlStateNormal];
     [searchBtn setTitleColor:[UIColor colorWithHexColorStr:@"#FFFFFF"] forState:UIControlStateNormal];
     searchBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+    [searchBtn addTarget:self action:@selector(searchAction:) forControlEvents:UIControlEventTouchUpInside];
     [searchBtn setBackgroundColor:[UIColor colorWithHexColorStr:@"#27C79A"]];
     [contractView addSubview:searchBtn];
     
@@ -128,11 +245,41 @@
     searchBtn.layer.cornerRadius = 2.5;
     searchBtn.layer.masksToBounds = YES;
     
+    
+        choiceStatusBtn.sd_layout
+        .leftSpaceToView(titleField, 0)
+        .topSpaceToView(contractView, 21)
+        .rightEqualToView(searchBtn)
+        .heightIs(23);
+        
+        choiceStatusBtn.titleLabel.sd_layout
+        .leftSpaceToView(choiceStatusBtn, 8)
+        .centerYEqualToView(choiceStatusBtn)
+        .widthIs(40);
+        
+        choiceStatusBtn.imageView.sd_layout
+        .leftSpaceToView(choiceStatusBtn.titleLabel, 0)
+        .centerYEqualToView(choiceStatusBtn)
+        .widthIs(10)
+        .heightIs(5.5);
+        
+        choiceStatusBtn.layer.borderColor = [UIColor colorWithHexColorStr:@"#333333"].CGColor;
+        choiceStatusBtn.layer.borderWidth = 0.5;
+        choiceStatusBtn.layer.cornerRadius = 2.5;
+    
+    
+    
     [headerView setupAutoHeightWithBottomView:contractView bottomMargin:20];
     [headerView layoutIfNeeded];
     self.tableview.tableHeaderView = headerView;
     
 }
+
+- (void)searchAction:(UIButton *)searchBtn{
+    self.pageNum = 1;
+    [self.tableview.mj_header beginRefreshing];
+}
+
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
@@ -142,7 +289,7 @@
 //    if ([self.title isEqualToString:@"报表管理"]) {
 //        return 5;
 //    }else{
-        return 4;
+    return self.contractArray.count;
 //    }
 }
 
@@ -156,11 +303,39 @@
     if (!cell) {
         cell = [[RSContractCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CONTRACTCELLID];
     }
+    cell.columnarmodel = self.contractArray[indexPath.row];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    NSLog(@"==============%ld",indexPath.row);
+    //这边是跳H5
+    RSColumnarModel * columnarmodel = self.contractArray[indexPath.row];
+    RSWKOAmanagerViewController * wkVc = [[RSWKOAmanagerViewController alloc]init];
+    wkVc.type = @"7";
+//    wkVc.billId = columnarmodel.billId;
+    
+    
+    
+    [self.navigationController pushViewController:wkVc animated:YES];
+    
+}
 
+
+
+//选择状态
+- (void)choiceStatusAction:(UIButton *)choiceStatusBtn{
+    HQPickerView *picker = [[HQPickerView alloc]initWithFrame:CGRectMake(0, 0, SCW, 300)];
+    NSArray * array = @[@"未提交",@"审核中",@"已生效",@"已过期"];
+    picker.customArr = (NSMutableArray *)array;
+    [[UIApplication sharedApplication].keyWindow addSubview:picker];
+    picker.pickBlock = ^(UIPickerView *pickerView, NSString *text) {
+        [choiceStatusBtn setTitle:text forState:UIControlStateNormal];
+    };
+}
 
 
 

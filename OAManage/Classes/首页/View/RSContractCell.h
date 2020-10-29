@@ -7,15 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RSColumnarModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface RSContractCell : UITableViewCell
 
+@property (nonatomic,strong)RSColumnarModel * columnarmodel;
 
-@property (nonatomic,strong)UIImageView * statusImage;
+//@property (nonatomic,strong)UIImageView * statusImage;
 
-@property (nonatomic,strong)UILabel * statusLabel;
+//@property (nonatomic,strong)UILabel * statusLabel;
 
 @end
 

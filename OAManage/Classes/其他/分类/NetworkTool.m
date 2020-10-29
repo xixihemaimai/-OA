@@ -47,12 +47,16 @@
 #import "RSWarehouseModel.h"
 //库区
 #import "RSStoreAreaModel.h"
+//费用
+#import "RSFeeModel.h"
 
 //视频的分类
 #import "RSOnlineTypeModel.h"
 
 //视频模型
 #import "RSOnlineModel.h"
+
+#import "RSColumnarModel.h"
 
 
 @interface NetworkTool() <NSXMLParserDelegate>
@@ -115,7 +119,9 @@
 - (void)newReloadWebServiceNoDataURL:(NSString *)URLstr andParameters:(NSDictionary *)soapStr andURLName:(NSString *)urlName{
     _tempStr = urlName;
     [self newReloadWebServiceNetDataUrl:URLstr withParameters:soapStr andURLName:urlName withBlock:^(id responseObject, BOOL success) {
-//        NSLog(@"================================%@",responseObject);
+        NSLog(@"===================%@",soapStr);
+//        NSLog(@"=======1111111=========================%@",responseObject);
+//        NSLog(@"=======1111111=========================%@",responseObject[@"msg"]);
         if (success) {
             BOOL isresult = [responseObject[@"success"]boolValue];
             if (isresult) {
@@ -207,12 +213,218 @@
                     if (self.successArrayReload) {
                         self.successArrayReload(array);
                     }
+                }else if ([urlName isEqualToString:URL_WARN_IOS]){
+                    NSDictionary * dict = responseObject[@"data"];
+                    NSLog(@"======88888888888888=====3333=============%@",dict);
+                    if (self.successReload) {
+                        self.successReload(dict);
+                    }
+                }else if ([urlName isEqualToString:URL_CONTRACT_LIST_IOS]){
+                    
+                    NSLog(@"======55555555555555=====3333=============%@",responseObject);
+                    
+                    
+                    NSMutableArray * array = [RSColumnarModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
+                    if (self.successArrayReload) {
+                        self.successArrayReload(array);
+                    }
+                }else if ([urlName isEqualToString:URL_BMSTOCK_IOS]){
+                    
+                    NSLog(@"======77777777777777=====3333=============%@",responseObject);
+                    
+                    NSMutableArray * array = [NSMutableArray array];
+                    //这边是countYear
+                    RSColumnarModel * columnarCountmodel = [[RSColumnarModel alloc]init];
+                    columnarCountmodel.bmSpaceRent = responseObject[@"data"][@"countYear"][@"bmSpaceRent"];
+                    columnarCountmodel.bmStorageFee = responseObject[@"data"][@"countYear"][@"bmStorageFee"];
+                    columnarCountmodel.volumeIn = responseObject[@"data"][@"countYear"][@"volumeIn"];
+                    columnarCountmodel.volumeOut = responseObject[@"data"][@"countYear"][@"volumeOut"];
+                    [array addObject:columnarCountmodel];
+                    
+                    //这边是compareYear对比年限
+                    RSColumnarModel * columnarmodel = [[RSColumnarModel alloc]init];
+                    columnarmodel.bmSpaceRent = responseObject[@"data"][@"compareYear"][@"bmSpaceRent"];
+                    columnarmodel.bmStorageFee = responseObject[@"data"][@"compareYear"][@"bmStorageFee"];
+                    columnarmodel.volumeIn = responseObject[@"data"][@"compareYear"][@"volumeIn"];
+                    columnarmodel.volumeOut = responseObject[@"data"][@"compareYear"][@"volumeOut"];
+                    [array addObject:columnarmodel];
+                    
+                    //差异比
+                    RSColumnarModel * columnarDifmodel = [[RSColumnarModel alloc]init];
+                    columnarDifmodel.bmSpaceRent = responseObject[@"data"][@"difRate"][@"bmSpaceRent"];
+                    columnarDifmodel.bmStorageFee = responseObject[@"data"][@"difRate"][@"bmStorageFee"];
+                    columnarDifmodel.volumeIn = responseObject[@"data"][@"difRate"][@"volumeIn"];
+                    columnarDifmodel.volumeOut = responseObject[@"data"][@"difRate"][@"volumeOut"];
+                    [array addObject:columnarDifmodel];
+                    
+                    if (self.successArrayReload) {
+                        self.successArrayReload(array);
+                    }
+                    
+                }else if ([urlName isEqualToString:URL_SLSTOCK_IOS]){
+                    
+                    NSMutableArray * array = [NSMutableArray array];
+                    
+                      NSLog(@"======77777777777777=====3333=============%@",responseObject);
+                    
+                 
+                    
+                    RSColumnarModel * columnarCountmodel = [[RSColumnarModel alloc]init];
+                    columnarCountmodel.areaIn = responseObject[@"data"][@"countYear"][@"areaIn"];
+                    columnarCountmodel.areaOut = responseObject[@"data"][@"countYear"][@"areaOut"];
+                    [array addObject:columnarCountmodel];
+                                    
+                   //这边是compareYear对比年限
+                   RSColumnarModel * columnarmodel = [[RSColumnarModel alloc]init];
+                   columnarmodel.areaIn = responseObject[@"data"][@"compareYear"][@"areaIn"];
+                   columnarmodel.areaOut = responseObject[@"data"][@"compareYear"][@"areaOut"];
+                   [array addObject:columnarmodel];
+                    
+                    
+                    //差异比
+                    RSColumnarModel * columnarDifmodel = [[RSColumnarModel alloc]init];
+                    columnarDifmodel.areaIn = responseObject[@"data"][@"difRate"][@"areaIn"];
+                    columnarDifmodel.areaOut = responseObject[@"data"][@"difRate"][@"areaOut"];
+                    [array addObject:columnarDifmodel];
+                    
+                    
+                    if (self.successArrayReload) {
+                        self.successArrayReload(array);
+                    }
+                }else if ([urlName isEqualToString:URL_LEDGER_IOS]){
+                    
+                    NSMutableArray * array = [NSMutableArray array];
+                    
+                      NSLog(@"======77777777777777=====3333=============%@",responseObject);
+                    
+                    
+                    
+                    RSColumnarModel * columnarCountmodel = [[RSColumnarModel alloc]init];
+                    columnarCountmodel.slAmount = responseObject[@"data"][@"countYear"][@"slAmount"];
+                    columnarCountmodel.smAmount = responseObject[@"data"][@"countYear"][@"smAmount"];
+                    columnarCountmodel.pmAmount = responseObject[@"data"][@"countYear"][@"pmAmount"];
+                    [array addObject:columnarCountmodel];
+                                    
+                   
+                    //这边是compareYear对比年限
+                    RSColumnarModel * columnarmodel = [[RSColumnarModel alloc]init];
+                    columnarmodel.slAmount = responseObject[@"data"][@"compareYear"][@"slAmount"];
+                    columnarmodel.smAmount = responseObject[@"data"][@"compareYear"][@"smAmount"];
+                    columnarmodel.pmAmount = responseObject[@"data"][@"compareYear"][@"pmAmount"];
+                    [array addObject:columnarmodel];
+                    
+                    //差异比
+                    RSColumnarModel * columnarDifmodel = [[RSColumnarModel alloc]init];
+                    columnarDifmodel.slAmount = responseObject[@"data"][@"difRate"][@"slAmount"];
+                    columnarDifmodel.smAmount = responseObject[@"data"][@"difRate"][@"smAmount"];
+                    columnarDifmodel.pmAmount = responseObject[@"data"][@"difRate"][@"pmAmount"];
+                    [array addObject:columnarDifmodel];
+                       
+                    if (self.successArrayReload) {
+                        self.successArrayReload(array);
+                    }
+                }else if ([urlName isEqualToString:URL_LEASE_IOS]){
+                    
+                    NSMutableArray * array = [NSMutableArray array];
+                    
+                      NSLog(@"======77777777777777=====3333=============%@",responseObject);
+                    
+                    RSColumnarModel * columnarCountmodel = [[RSColumnarModel alloc]init];
+                    columnarCountmodel.feeCode = responseObject[@"data"][@"location"][@"feeCode"];
+                    columnarCountmodel.feeName = responseObject[@"data"][@"location"][@"feeName"];
+                    columnarCountmodel.maxQty = [responseObject[@"data"][@"location"][@"maxQty"] integerValue];
+                    columnarCountmodel.newDealerCount = [responseObject[@"data"][@"location"][@"newDealerCount"] integerValue];
+                    columnarCountmodel.newQty = [responseObject[@"data"][@"location"][@"newQty"] integerValue];
+                    columnarCountmodel.notRentedQty = [responseObject[@"data"][@"location"][@"notRentedQty"] integerValue];
+                    
+                    columnarCountmodel.rate = responseObject[@"data"][@"location"][@"rate"];
+                    columnarCountmodel.rebackDealerCount = [responseObject[@"data"][@"location"][@"rebackDealerCount"] integerValue];
+                    
+                    columnarCountmodel.rebackQtyCount = [responseObject[@"data"][@"location"][@"rebackQtyCount"] integerValue];
+                    columnarCountmodel.renewalDealerCount = [responseObject[@"data"][@"location"][@"renewalDealerCount"] integerValue];
+                    columnarCountmodel.renewalQty = [responseObject[@"data"][@"location"][@"renewalQty"] integerValue];
+                    columnarCountmodel.rentedQty = [responseObject[@"data"][@"location"][@"rentedQty"] integerValue];
+                    [array addObject:columnarCountmodel];
+                                    
+                    //这边是compareYear对比年限
+                    RSColumnarModel * columnarmodel = [[RSColumnarModel alloc]init];
+                    columnarmodel.feeCode = responseObject[@"data"][@"slate"][@"feeCode"];
+                    columnarmodel.feeName = responseObject[@"data"][@"slate"][@"feeName"];
+                    columnarmodel.maxQty = [responseObject[@"data"][@"slate"][@"maxQty"] integerValue];
+                    columnarmodel.newDealerCount = [responseObject[@"data"][@"slate"][@"newDealerCount"] integerValue];
+                    columnarmodel.newQty = [responseObject[@"data"][@"slate"][@"newQty"] integerValue];
+                    columnarmodel.notRentedQty = [responseObject[@"data"][@"slate"][@"notRentedQty"] integerValue];
+                    
+                    columnarmodel.rate = responseObject[@"data"][@"slate"][@"rate"];
+                    columnarmodel.rebackDealerCount = [responseObject[@"data"][@"slate"][@"rebackDealerCount"] integerValue];
+                    
+                    columnarmodel.rebackQtyCount = [responseObject[@"data"][@"slate"][@"rebackQtyCount"] integerValue];
+                    columnarmodel.renewalDealerCount = [responseObject[@"data"][@"slate"][@"renewalDealerCount"] integerValue];
+                    columnarmodel.renewalQty = [responseObject[@"data"][@"slate"][@"renewalQty"] integerValue];
+                    columnarmodel.rentedQty = [responseObject[@"data"][@"slate"][@"rentedQty"] integerValue];
+                    [array addObject:columnarmodel];
+                    
+                    
+                    //差异比
+                    RSColumnarModel * columnarDifmodel = [[RSColumnarModel alloc]init];
+                    columnarDifmodel.feeCode = responseObject[@"data"][@"stoneBar"][@"feeCode"];
+                    columnarDifmodel.feeName = responseObject[@"data"][@"stoneBar"][@"feeName"];
+                    columnarDifmodel.maxQty = [responseObject[@"data"][@"stoneBar"][@"maxQty"] integerValue];
+                    columnarDifmodel.newDealerCount = [responseObject[@"data"][@"stoneBar"][@"newDealerCount"] integerValue];
+                    columnarDifmodel.newQty = [responseObject[@"data"][@"stoneBar"][@"newQty"] integerValue];
+                    columnarDifmodel.notRentedQty = [responseObject[@"data"][@"stoneBar"][@"notRentedQty"] integerValue];
+                    
+                    columnarDifmodel.rate = responseObject[@"data"][@"stoneBar"][@"rate"];
+                    columnarDifmodel.rebackDealerCount = [responseObject[@"data"][@"stoneBar"][@"rebackDealerCount"] integerValue];
+                    
+                    columnarDifmodel.rebackQtyCount = [responseObject[@"data"][@"stoneBar"][@"rebackQtyCount"] integerValue];
+                    columnarDifmodel.renewalDealerCount = [responseObject[@"data"][@"stoneBar"][@"renewalDealerCount"] integerValue];
+                    columnarDifmodel.renewalQty = [responseObject[@"data"][@"stoneBar"][@"renewalQty"] integerValue];
+                    columnarDifmodel.rentedQty = [responseObject[@"data"][@"stoneBar"][@"rentedQty"] integerValue];
+                    [array addObject:columnarDifmodel];
+                    if (self.successArrayReload) {
+                        self.successArrayReload(array);
+                    }
+                }else if ([urlName isEqualToString:URL_MARKET_FEE_IOS]){
+                    NSLog(@"======77777777777777=====3333=============%@",responseObject);
+                    NSMutableArray * array = [RSColumnarModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
+                    if (self.successArrayReload) {
+                        self.successArrayReload(array);
+                    }
+                }else if ([urlName isEqualToString:URL_DEALER_FEE_IOS]){
+                    NSLog(@"======77777777777777=====3333=============%@",responseObject);
+                    NSMutableArray * array = [RSColumnarModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
+                    if (self.successArrayReload) {
+                        self.successArrayReload(array);
+                    }
+                }else if ([urlName isEqualToString:URL_PAY_MARKET_IOS]){
+//                    NSLog(@"======77777777777777=====3333=============%@",responseObject);
+                    NSMutableArray * array = [RSColumnarModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
+                    if (self.successArrayReload) {
+                        self.successArrayReload(array);
+                    }
+                }else if ([urlName isEqualToString:URL_MARKET_DTL_IOS]){
+                    NSMutableArray * array = [RSColumnarModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
+                    if (self.successArrayReload) {
+                        self.successArrayReload(array);
+                    }
+                }else if ([urlName isEqualToString:URL_DEALER_DTL_IOS]){
+                    
+                    NSLog(@"======77777777777777=====3333=============%@",responseObject);
+                    NSMutableDictionary * dict = [NSMutableDictionary dictionary];
+                    [dict setValue:[NSNumber numberWithDouble:[responseObject[@"data"][@"totalFee"] doubleValue]] forKey:@"totalFee"];
+                    [dict setValue:responseObject[@"data"][@"dealerName"] forKey:@"dealerName"];
+                    NSMutableArray * feeArray = [RSColumnarModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"][@"feeList"]];
+                    [dict setValue:feeArray forKey:@"fee"];
+                    if (self.successReload) {
+                        self.successReload(dict);
+                    }
                 }
                 else{
                    
                 }
             }else{
-                if ([urlName isEqualToString:URL_INFORMATION_IOS] || [urlName isEqualToString:URL_SYS_FILES_IOS] || [urlName isEqualToString:URL_DIARY_IOS] || [urlName isEqualToString:URL_DIARY_GET_DTL_IOS] || [urlName isEqualToString:URL_NOTICE_IOS] || [urlName isEqualToString:URL_VIDEO_IOS] || [urlName isEqualToString:URL_VIDEOTYPE_IOS] || [urlName isEqualToString:URL_VIDEORECOMMEND_IOS]) {
+                if ([urlName isEqualToString:URL_INFORMATION_IOS] || [urlName isEqualToString:URL_SYS_FILES_IOS] || [urlName isEqualToString:URL_DIARY_IOS] || [urlName isEqualToString:URL_DIARY_GET_DTL_IOS] || [urlName isEqualToString:URL_NOTICE_IOS] || [urlName isEqualToString:URL_VIDEO_IOS] || [urlName isEqualToString:URL_VIDEOTYPE_IOS] || [urlName isEqualToString:URL_VIDEORECOMMEND_IOS] || [urlName isEqualToString:URL_CONTRACT_LIST_IOS] || [urlName isEqualToString:URL_MARKET_FEE_IOS] || [urlName isEqualToString:URL_DEALER_FEE_IOS] || [urlName isEqualToString:URL_PAY_MARKET_IOS] || [urlName isEqualToString:URL_MARKET_DTL_IOS]) {
                     NSMutableDictionary * dict = [NSMutableDictionary dictionary];
                     if (self.failure) {
                         self.failure(dict);
@@ -262,6 +474,7 @@
     URLstr =  [URLstr stringByReplacingOccurrencesOfString:@"%20" withString:@""];
     [self reloadWebServiceNetDataUrl:URLstr andParameters:soapStr withBlock:^(id responseObject, BOOL success) {
         if (success) {
+            NSLog(@"=++++++++++++++++++++++++++++++++++++++++++%@",soapStr);
             NSXMLParser * parser = [[NSXMLParser alloc]initWithData:responseObject];
             parser.delegate = self;
             [parser parse];
@@ -306,7 +519,10 @@
 //正在解析
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary<NSString *,NSString *> *)attributeDict{
     if ([elementName isEqualToString:@"unsafeInvokeServiceReturn"]) {
+//        NSLog(@"--------------------------------------------------");
         storingFlag = true;
+    }else{
+//        NSLog(@"==================================================");
     }
 }
 
@@ -322,14 +538,17 @@
 }
 //解析完成
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName{
+//    NSLog(@"+++++++++++++++++++++++++++++++++++++++++++++++++++++++++%@",parser);
     //在子线程要回主线程去刷新界面
     if (storingFlag) {
         NSString *trimmedString = [currentElementValue stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
          storingFlag = false;
         //字符串转字典
        NSDictionary * dict = [self dictionaryWithJsonString:trimmedString];
+//       NSLog(@"=+++++++++++=2=============323232323==================%@",dict);
        BOOL issuccess = [dict[@"result"] boolValue];
         if (issuccess) {
+//            NSLog(@"=+++++++++++=2===============================");
             if ([_tempStr isEqualToString:URL_GENPUBLICKEY]){
                 if (self.successReload) {
                     self.successReload(dict);
@@ -384,22 +603,14 @@
                 }
             }else if ([_tempStr isEqualToString:URL_LIFTDELETE]){
                 NSDictionary * dic = [self decryptMethodWithDictionary:dict];
-                
                 if (self.successReload) {
                     self.successReload(dic);
                 }
-                
-                
             }else if ([_tempStr isEqualToString:URL_LIFTUPDATE]){
-                
                 NSDictionary * dic = [self decryptMethodWithDictionary:dict];
-                
                 if (self.successReload) {
                     self.successReload(dic);
                 }
-                
-                
-                
             }else if ([_tempStr isEqualToString:URL_LIFTSTATE]){
                 
                 NSDictionary * dic = [self decryptMethodWithDictionary:dict];
@@ -475,10 +686,12 @@
                     self.successArrayReload(array);
                 }
             }else{
-                
+                  
                 //if ([_tempStr isEqualToString:URL_LOADDICTIONNARY])
                 NSDictionary * dic = [self decryptMethodWithDictionary:dict];
+                NSLog(@"=========================3=============================%@",dic);
                 if ([_tempStr isEqualToString:@"dealer"]) {
+                  
                     NSMutableArray * array = [RSShipperMode mj_objectArrayWithKeyValuesArray:dic[@"dealer"]];
                     if (self.successArrayReload) {
                         self.successArrayReload(array);
@@ -499,7 +712,12 @@
                      }
                  }
                 
-                
+                if ([_tempStr isEqualToString:@"fee"]) {
+                    NSMutableArray * array2 = [RSFeeModel mj_objectArrayWithKeyValuesArray:dic[@"fee"]];
+                    if (self.successArrayReload) {
+                        self.successArrayReload(array2);
+                    }
+                }
             }
         }else {
             //|| [_tempStr isEqualToString:URL_NOTICE] || [_tempStr isEqualToString:URL_TOBEAUDIT]

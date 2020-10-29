@@ -16,7 +16,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
     
-        _label = [[RSMyLabel alloc] initWithFrame:CGRectMake(0, 0, 100, 34)];
+        _label = [[RSMyLabel alloc] initWithFrame:CGRectMake(0, 0, 57.5, 34)];
         _label.layer.borderColor = [UIColor colorWithHexColorStr:@"#E1E1E1"].CGColor;
         _label.layer.borderWidth = 0.5f;
         _label.textAlignment = NSTextAlignmentLeft;
@@ -27,9 +27,14 @@
         _label.userInteractionEnabled = YES;
         
         UIButton * detailedBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        detailedBtn.frame = CGRectMake(50, 0, 50, 40);
-        [detailedBtn setTitle:@"明细" forState:UIControlStateNormal];
-        [detailedBtn setTitleColor:[UIColor colorWithHexColorStr:@"#27C79A"] forState:UIControlStateNormal];
+        detailedBtn.frame = CGRectMake(_label.yj_width - 35, 7.5, 35, 18.5);
+        //[detailedBtn setTitle:@"明细" forState:UIControlStateNormal];
+        NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:@"明细"];
+        NSRange strRange = {0,[str length]};
+        [str addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:strRange];
+        [str addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexColorStr:@"#27C79A"] range:NSMakeRange(0, 2)];
+        [detailedBtn setAttributedTitle:str forState:UIControlStateNormal];
+//        [detailedBtn setTitleColor:[UIColor colorWithHexColorStr:@"#27C79A"] forState:UIControlStateNormal];
         detailedBtn.titleLabel.font = [UIFont systemFontOfSize:13];
         [_label addSubview:detailedBtn];
         _detailedBtn = detailedBtn;

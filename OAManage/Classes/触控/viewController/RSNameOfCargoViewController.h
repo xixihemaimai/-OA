@@ -10,6 +10,7 @@
 #import "RSShipperMode.h"
 #import "RSWarehouseModel.h"
 #import "RSStoreAreaModel.h"
+#import "RSFeeModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 
@@ -18,6 +19,8 @@ typedef void(^Block)(RSShipperMode * shippermodel,NSString * type);
 typedef void(^WarehouseBlock)(RSWarehouseModel * warehousemodel,NSString * type);
 
 typedef void(^StoreAreaBlock)(RSStoreAreaModel * storeAreamodel,NSString * type);
+
+typedef void(^FeeBlock)(RSFeeModel * feemodel,NSString * type);
 
 @interface RSNameOfCargoViewController : RSBaseViewController
 
@@ -34,7 +37,9 @@ typedef void(^StoreAreaBlock)(RSStoreAreaModel * storeAreamodel,NSString * type)
 
 @property (nonatomic,strong)RSWarehouseModel * warehousemodel;
 
-//dealer货主  warehouse仓库 storeArea 库存
+@property (nonatomic,strong)FeeBlock feeblock;
+
+//dealer货主  warehouse仓库 storeArea 库存 fee 费用
 @property (nonatomic,strong)NSString * type;
 
 

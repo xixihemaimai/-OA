@@ -59,14 +59,18 @@
 
 - (void)setWarehousemodel:(RSWarehouseModel *)warehousemodel{
     _warehousemodel = warehousemodel;
-       _nameLabel.text = _warehousemodel.name;
+    _nameLabel.text = _warehousemodel.name;
     
 }
 
 - (void)setStoreAreamodel:(RSStoreAreaModel *)storeAreamodel{
     _storeAreamodel = storeAreamodel;
-       _nameLabel.text = _storeAreamodel.name;
-    
+    _nameLabel.text = _storeAreamodel.name;
+}
+
+- (void)setFeemodel:(RSFeeModel *)feemodel{
+    _feemodel = feemodel;
+    _nameLabel.text = _feemodel.name;
 }
 
 

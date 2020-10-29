@@ -10,9 +10,14 @@
 #import "RSMarketModuleCell.h"
 
 #import "RSManageViewController.h"
+
 #import "RSContractViewController.h"
 
 @interface RSMarketModuleViewController ()
+
+@property (nonatomic,strong)UILabel * expireNumberLabel;
+
+@property (nonatomic,strong)UILabel * todayNumberLabel;
 
 @end
 
@@ -22,8 +27,29 @@
     [super viewDidLoad];
     self.title = @"市场模块";
     self.emptyView.hidden = YES;
+    
+    [self reloadReportNumber];
     [self customHeaderView];
 }
+
+
+- (void)reloadReportNumber{
+    //URL_WARN_IOS
+    NetworkTool * network = [[NetworkTool alloc]init];
+    NSDictionary * dict = @{@"loginToken":self.usermodel.appLoginToken};
+    [network newReloadWebServiceNoDataURL:URL_WARN_IOS andParameters:dict andURLName:URL_WARN_IOS];
+    RSWeakself
+    network.successReload = ^(NSDictionary *dict) {
+        weakSelf.expireNumberLabel.text = [NSString stringWithFormat:@"%ld",[dict[@"dueSoonContract"] integerValue]];
+        weakSelf.todayNumberLabel.text = [NSString stringWithFormat:@"%ld",[dict[@"dueTodayContract"] integerValue]];
+    };
+}
+
+
+
+
+
+
 
 - (void)customHeaderView{
     UIView * headerView = [[UIView alloc]init];
@@ -40,6 +66,8 @@
     expireView.layer.backgroundColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0].CGColor;
     expireView.layer.shadowColor = [UIColor colorWithRed:213/255.0 green:211/255.0 blue:211/255.0 alpha:0.5].CGColor;
     expireView.layer.shadowOffset = CGSizeMake(0,0);
+    expireView.tag = 0;
+    [expireView addTarget:self action:@selector(jumpModuleAction:) forControlEvents:UIControlEventTouchUpInside];
     expireView.layer.shadowOpacity = 1;
     expireView.layer.shadowRadius = 5;
     
@@ -56,6 +84,7 @@
     expireNumberLabel.font = [UIFont systemFontOfSize:24];
     expireNumberLabel.textAlignment = NSTextAlignmentLeft;
     [expireView addSubview:expireNumberLabel];
+    _expireNumberLabel = expireNumberLabel;
     
     UILabel * numberLabel = [[UILabel alloc]init];
     numberLabel.text = @"个";
@@ -106,6 +135,8 @@
     todayView.layer.shadowColor = [UIColor colorWithRed:213/255.0 green:211/255.0 blue:211/255.0 alpha:0.5].CGColor;
     todayView.layer.shadowOffset = CGSizeMake(0,0);
     todayView.layer.shadowOpacity = 1;
+    todayView.tag = 1;
+    [todayView addTarget:self action:@selector(jumpModuleAction:) forControlEvents:UIControlEventTouchUpInside];
     todayView.layer.shadowRadius = 5;
     
     UILabel * todayLabel = [[UILabel alloc]init];
@@ -122,6 +153,7 @@
     todayNumberLabel.font = [UIFont systemFontOfSize:24];
     todayNumberLabel.textAlignment = NSTextAlignmentLeft;
     [todayView addSubview:todayNumberLabel];
+    _todayNumberLabel = todayNumberLabel;
     
     
     UILabel * numbertodayLabel = [[UILabel alloc]init];
@@ -198,10 +230,12 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [tableView deselectRowAtIndexPath:indexPath animated:false];
     if (indexPath.row == 0) {
        //合同管理
         RSContractViewController * contractVc = [[RSContractViewController alloc]init];
+        contractVc.title = @"合同管理";
+        contractVc.warningType = 0;
         [self.navigationController pushViewController:contractVc animated:YES];
     }else if (indexPath.row == 1) {
         //账单管理
@@ -214,6 +248,22 @@
         manage1Vc.title = @"报表管理";
         [self.navigationController pushViewController:manage1Vc animated:YES];
     }   
+}
+
+- (void)jumpModuleAction:(UIButton *)jumpBtn{
+    if (jumpBtn.tag == 0) {
+     //即将到期
+        RSContractViewController * contractVc = [[RSContractViewController alloc]init];
+        contractVc.title = @"即将到期";
+        contractVc.warningType = 1;
+        [self.navigationController pushViewController:contractVc animated:YES];
+    }else{
+     //今日到期
+        RSContractViewController * contractVc = [[RSContractViewController alloc]init];
+        contractVc.title = @"今日到期";
+        contractVc.warningType = 2;
+        [self.navigationController pushViewController:contractVc animated:YES];
+    }
 }
 
 @end

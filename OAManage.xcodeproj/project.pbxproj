@@ -73,6 +73,8 @@
 		044656EC2420B59A00F1089C /* RSOnlineVideoPlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044656EB2420B59900F1089C /* RSOnlineVideoPlayViewController.m */; };
 		045D414721A808CE005F34D2 /* RSInformationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 045D414621A808CE005F34D2 /* RSInformationModel.m */; };
 		045D414A21AB91F3005F34D2 /* RSAuditedModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 045D414921AB91F3005F34D2 /* RSAuditedModel.m */; };
+		046AF2D72546657E0069591B /* RSColumnarModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 046AF2D62546657E0069591B /* RSColumnarModel.m */; };
+		046AF2DA25490B600069591B /* RSFeeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 046AF2D925490B600069591B /* RSFeeModel.m */; };
 		0471B00324373E2B00785F4D /* RSJumpVideoTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 0471B00224373E2B00785F4D /* RSJumpVideoTool.m */; };
 		04A40AD5251840CD0082DFD3 /* RSMarketModuleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A40AD4251840CD0082DFD3 /* RSMarketModuleViewController.m */; };
 		04A40AD8251854E30082DFD3 /* RSMarketModuleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A40AD7251854E30082DFD3 /* RSMarketModuleCell.m */; };
@@ -307,6 +309,10 @@
 		045D414621A808CE005F34D2 /* RSInformationModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSInformationModel.m; sourceTree = "<group>"; };
 		045D414821AB91F3005F34D2 /* RSAuditedModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSAuditedModel.h; sourceTree = "<group>"; };
 		045D414921AB91F3005F34D2 /* RSAuditedModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSAuditedModel.m; sourceTree = "<group>"; };
+		046AF2D52546657E0069591B /* RSColumnarModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSColumnarModel.h; sourceTree = "<group>"; };
+		046AF2D62546657E0069591B /* RSColumnarModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSColumnarModel.m; sourceTree = "<group>"; };
+		046AF2D825490B600069591B /* RSFeeModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSFeeModel.h; sourceTree = "<group>"; };
+		046AF2D925490B600069591B /* RSFeeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSFeeModel.m; sourceTree = "<group>"; };
 		0471B00224373E2B00785F4D /* RSJumpVideoTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSJumpVideoTool.m; sourceTree = "<group>"; };
 		04A40AD3251840CD0082DFD3 /* RSMarketModuleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSMarketModuleViewController.h; sourceTree = "<group>"; };
 		04A40AD4251840CD0082DFD3 /* RSMarketModuleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSMarketModuleViewController.m; sourceTree = "<group>"; };
@@ -864,6 +870,8 @@
 				0404774323AB220000B4D528 /* RSWorkContentModel.m */,
 				0404774E23AB2A7100B4D528 /* RSWorkTypeModel.h */,
 				0404774F23AB2A7100B4D528 /* RSWorkTypeModel.m */,
+				046AF2D52546657E0069591B /* RSColumnarModel.h */,
+				046AF2D62546657E0069591B /* RSColumnarModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -1188,6 +1196,8 @@
 				04B3F75923B5D78600CDD821 /* RSWarehouseModel.m */,
 				04B3F75B23B5D7BB00CDD821 /* RSStoreAreaModel.h */,
 				04B3F75C23B5D7BB00CDD821 /* RSStoreAreaModel.m */,
+				046AF2D825490B600069591B /* RSFeeModel.h */,
+				046AF2D925490B600069591B /* RSFeeModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -1488,6 +1498,7 @@
 				04FF49CB21A3B38E00C4A2C2 /* FSAES128.m in Sources */,
 				04D6CEDC21914B2100B35A51 /* MJChiBaoZiFooter.m in Sources */,
 				04B3F74823B497DA00CDD821 /* JHSysAlertUtil.m in Sources */,
+				046AF2DA25490B600069591B /* RSFeeModel.m in Sources */,
 				040476E223A75C5500B4D528 /* RSInputWorkViewController.m in Sources */,
 				04B3F74B23B4A71A00CDD821 /* RSTouchModel.m in Sources */,
 				04B3F73E23B1FF0000CDD821 /* RSTouchAlertView.m in Sources */,
@@ -1590,6 +1601,7 @@
 				04A4F81E21ABF0020052EFC4 /* RSShenHeModel.m in Sources */,
 				04215D99237A84F4001EFE11 /* RSMainViewController.m in Sources */,
 				041E07532387B38C00766441 /* SHESelectCell.m in Sources */,
+				046AF2D72546657E0069591B /* RSColumnarModel.m in Sources */,
 				04A8E7B423B065DC004E8013 /* QLPreviewItemCustom.m in Sources */,
 				0404774423AB220000B4D528 /* RSWorkContentModel.m in Sources */,
 				04BD6B1D23BAF125006693E3 /* RSRegisterViewController.m in Sources */,

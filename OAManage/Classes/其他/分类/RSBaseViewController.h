@@ -100,6 +100,9 @@
 //获取时间
 -(NSDate *)nsstringConversionNSDate:(NSString *)dateStr;
 
+//字符串截取保留小数点后三位
+-(NSString *)getTheCorrectNum:(NSString*)tempString;
+
 @end
 
 

@@ -7,7 +7,25 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "BCContentOB.h"
+//#import "BCContentOB.h"
+
+#import "RSColumnarModel.h"
+
+//typedef enum{
+//    //获取园区费用应收余额列表
+//    market_fee = 1,
+//    //获取商户费用应收余额列表
+//    dealer_fee = 2,
+//    //获取商户费用应收明细
+//    dealer_fee_dtl = 3,
+//    //获取园区收款明细列表
+//    pay_market_fee = 4,
+//    //获取园区应收明细列表
+//    market_fee_dtl = 5
+//
+//}MarketPee;
+//
+
 
 typedef void(^DetailBlock)(NSInteger index);
 
@@ -17,11 +35,22 @@ typedef void(^DetailBlock)(NSInteger index);
 
 @end
 @interface MyTableListView : UIView
+
+
+
+
 @property(strong,nonatomic)NSDictionary* upOnedic;
 @property(weak,nonatomic)id<MyTableListViewDelegate>delegate;
 
 @property (nonatomic,strong)DetailBlock detailBlock;
 
--(instancetype)initWithFrame:(CGRect)frame andContentDicArray:(NSMutableArray *)contentDicArray;
--(void)addOneOb:(BCContentOB *)oneOb;
+
+
+
+-(instancetype)initWithFrame:(CGRect)frame andContentDicArray:(NSMutableArray *)contentDicArray andAttributeName:(NSArray *)attributeName andAttribute:(NSArray *)attribute andMarketPee:(NSInteger)marketpee;
+
+-(void)addOneOb:(RSColumnarModel *)columnarmodel;
+
+
+
 @end
