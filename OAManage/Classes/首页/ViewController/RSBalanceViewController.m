@@ -37,6 +37,10 @@
 
 @property (nonatomic,strong)MyTableListView * tablelist;
 
+@property (nonatomic,strong)UIButton * deleteBtn;
+
+@property (nonatomic,strong)UIButton * objectBtn;
+
 
 @end
 
@@ -165,7 +169,7 @@
     objectBtn.titleLabel.font = [UIFont systemFontOfSize:14];
     [objectBtn addTarget:self action:@selector(choiceObjectAction:) forControlEvents:UIControlEventTouchUpInside];
     [contractView addSubview:objectBtn];
-    
+    _objectBtn = objectBtn;
     objectBtn.sd_layout
     .leftSpaceToView(contractView, 22.5)
     .rightSpaceToView(contractView, 22.5)
@@ -257,6 +261,14 @@
     .heightIs(0.5);
     
     
+      UIButton * deleteBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+      [deleteBtn setImage:[UIImage imageNamed:@"删除"] forState:UIControlStateNormal];
+      [deleteBtn addTarget:self action:@selector(deleteAction:) forControlEvents:UIControlEventTouchUpInside];
+      [contractView addSubview:deleteBtn];
+    deleteBtn.hidden = YES;
+    _deleteBtn = deleteBtn;
+    
+    
     UIButton * searchBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [searchBtn setTitle:@"搜索" forState:UIControlStateNormal];
     [searchBtn setTitleColor:[UIColor colorWithHexColorStr:@"#FFFFFF"] forState:UIControlStateNormal];
@@ -273,6 +285,13 @@
     
     searchBtn.layer.cornerRadius = 2.5;
     searchBtn.layer.masksToBounds = YES;
+    
+    deleteBtn.sd_layout
+    .topEqualToView(objectBtn)
+    .widthIs(25)
+    .rightSpaceToView(contractView, 22.5)
+    .heightIs(25);
+    
     
     //NSMutableArray *dic=[[NSMutableArray alloc] init];
     //修改表格显示内容标题 只需要在BCContentOB文件中修改属性以及其他
@@ -306,13 +325,8 @@
         }else{
              [weakSelf.beginBtn setTitle:beginTimeStr forState:(UIControlStateNormal)];
         }
-        
-       
-        
     } getSelectEndTime:^(NSString *endTimeStr) {
-        
 //        [weakSelf.endBtn setTitle:endTimeStr forState:(UIControlStateNormal)];
-        
         if (weakSelf.marketpee == pay_market_fee || weakSelf.marketpee == market_fee_dtl) {
              [weakSelf.endBtn setTitle:[endTimeStr substringToIndex:7] forState:(UIControlStateNormal)];
         }else{
@@ -363,8 +377,8 @@
                 [payServiceArray addObject:columnarPaymodel.feeName];
                 [payNumberArray addObject:columnarPaymodel.value];
             }
-            RSPopViewController * popVc = [[RSPopViewController alloc]initwithContentObjectLabel:[NSString stringWithFormat:@"%@总欠费",columnarmodel.dealerName] andNumberLabel:[NSString stringWithFormat:@"%f",[[valueDict objectForKey:@"totalFee"] doubleValue]] andPayServiceArray:payServiceArray andPayNumberArray:payNumberArray];
-            [weakSelf yc_bottomPresentController:popVc presentedHeight:234 completeHandle:^(BOOL presented) {
+            RSPopViewController * popVc = [[RSPopViewController alloc]initwithContentObjectLabel:[NSString stringWithFormat:@"%@总欠费",columnarmodel.dealerName] andNumberLabel:[NSString stringWithFormat:@"%0.3f",[[valueDict objectForKey:@"totalFee"] doubleValue]] andPayServiceArray:payServiceArray andPayNumberArray:payNumberArray];
+            [weakSelf yc_bottomPresentController:popVc presentedHeight:((array.count * 48) + 100) completeHandle:^(BOOL presented) {
             }];
         }];
     };
@@ -384,15 +398,17 @@
             [objectBtn setTitle:feemodel.name forState:UIControlStateNormal];
             self.tempID = feemodel.feeId;
             [objectBtn setTitleColor:[UIColor colorWithHexColorStr:@"#333333"] forState:UIControlStateNormal];
+            self.deleteBtn.hidden = NO;
         };
     }else{
         nameOfCargoVc.title = @"货主名称";
         nameOfCargoVc.type = @"dealer";
         [self.navigationController pushViewController:nameOfCargoVc animated:YES];
-        nameOfCargoVc.feeblock = ^(RSFeeModel * _Nonnull feemodel, NSString * _Nonnull type) {
-            [objectBtn setTitle:feemodel.name forState:UIControlStateNormal];
-            self.tempID = feemodel.feeId;
+        nameOfCargoVc.block = ^(RSShipperMode * _Nonnull shippermodel, NSString * _Nonnull type) {
+            [objectBtn setTitle:shippermodel.name forState:UIControlStateNormal];
+            self.tempID = shippermodel.shipperId;
             [objectBtn setTitleColor:[UIColor colorWithHexColorStr:@"#333333"] forState:UIControlStateNormal];
+            self.deleteBtn.hidden = NO;
         };
     }
 }
@@ -447,9 +463,20 @@
     [self.tablelist.arrayContent removeAllObjects];
     [self.tablelist.table reloadData];
     [self.tablelist.collectionView reloadData];
-    
+    [self.tablelist.rightTable reloadData];
 //    [self.tableview.tableHeaderView removeFromSuperview];
     [self.tablelist.collectionView.mj_header beginRefreshing];
+}
+
+- (void)deleteAction:(UIButton *)deleteBtn{
+    deleteBtn.hidden = YES;
+    self.tempID = 0;
+    if (self.marketpee == market_fee) {
+        [self.objectBtn setTitle:@"费用类型" forState:UIControlStateNormal];
+    }else{
+        [self.objectBtn setTitle:@"结算对象" forState:UIControlStateNormal];
+    }
+    [self.objectBtn setTitleColor:[UIColor colorWithHexColorStr:@"#D5D5D5"] forState:UIControlStateNormal];
 }
 
 

@@ -40,6 +40,8 @@ typedef void(^DetailBlock)(NSInteger index);
 
 @property(strong,nonatomic)UITableView * table;
 
+@property(strong,nonatomic)UITableView * rightTable;
+
 @property(strong,nonatomic)NSDictionary* upOnedic;
 @property(weak,nonatomic)id<MyTableListViewDelegate>delegate;
 

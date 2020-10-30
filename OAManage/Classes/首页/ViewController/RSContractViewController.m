@@ -13,7 +13,7 @@
 
 @property (nonatomic,strong)UITextField * titleField;
 
-@property (nonatomic,strong)UITextField * timeField;
+@property (nonatomic,strong)UIButton * beginBtn;
 
 @property (nonatomic,assign)NSInteger pageNum;
 
@@ -23,7 +23,7 @@
 
 @property (nonatomic,assign)NSInteger status;
 
-
+@property (nonatomic,strong)UIButton * deleteBtn;
 @end
 
 @implementation RSContractViewController
@@ -77,7 +77,13 @@
         self.status = 12;
     }
     NetworkTool * network = [[NetworkTool alloc]init];
-    NSString * filter = [NSString stringWithFormat:@"{status:'%ld',billTitle:'%@',billDate:'%@',warningType:'%ld'}",self.status,_titleField.text,_timeField.text,self.warningType];
+    NSString * time = [NSString string];
+    if ([_beginBtn.currentTitle isEqualToString:@"合同日期"]) {
+        time = @"";
+    }else{
+        time = _beginBtn.currentTitle;
+    }
+    NSString * filter = [NSString stringWithFormat:@"{status:'%ld',billTitle:'%@',billDate:'%@',warningType:'%ld'}",self.status,_titleField.text,time,self.warningType];
     NSString * data = [NSString stringWithFormat:@"{pageNum:'%@',pageSize:'%d',filter:%@}",[NSNumber numberWithInteger:self.pageNum],10,filter];
     NSDictionary * dict = @{@"loginToken":self.usermodel.appLoginToken,@"data":data};
     RSWeakself
@@ -155,14 +161,7 @@
     
     
     UIButton * choiceStatusBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    
-//    if (self.warningType == 1) {
-//        [choiceStatusBtn setTitle:@"已生效" forState:UIControlStateNormal];
-//    }else if (self.warningType == 2){
-//        [choiceStatusBtn setTitle:@"审核中" forState:UIControlStateNormal];
-//    }else{
     [choiceStatusBtn setTitle:@"已生效" forState:UIControlStateNormal];
-//    }
     
     
     [choiceStatusBtn setImage:[UIImage imageNamed:@"system-pull-down"] forState:UIControlStateNormal];
@@ -184,28 +183,51 @@
     .topSpaceToView(titleLabel, 6);
     
     //合同日期
-    UILabel * timeLabel = [[UILabel alloc]init];
-    timeLabel.text = @"合同日期";
-    timeLabel.textColor = [UIColor colorWithHexColorStr:@"#D5D5D5"];
-    timeLabel.font = [UIFont systemFontOfSize:14];
-    [contractView addSubview:timeLabel];
     
-    timeLabel.sd_layout
+    
+    UIButton * beginBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [beginBtn setTitleColor:[UIColor colorWithHexColorStr:@"#D5D5D5"] forState:UIControlStateNormal];
+    beginBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+    [beginBtn setTitle:@"合同日期" forState:UIControlStateNormal];
+    [beginBtn addTarget:self action:@selector(beginAction:) forControlEvents:UIControlEventTouchUpInside];
+    [contractView addSubview:beginBtn];
+    
+    beginBtn.titleLabel.sd_layout
+    .leftSpaceToView(beginBtn, 0);
+    _beginBtn = beginBtn;
+    
+    
+    UIButton * deleteBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [deleteBtn setImage:[UIImage imageNamed:@"删除"] forState:UIControlStateNormal];
+    [deleteBtn addTarget:self action:@selector(deleteAction:) forControlEvents:UIControlEventTouchUpInside];
+    [contractView addSubview:deleteBtn];
+    deleteBtn.hidden = YES;
+    _deleteBtn = deleteBtn;
+    
+//
+//    UILabel * timeLabel = [[UILabel alloc]init];
+//    timeLabel.text = @"合同日期";
+//    timeLabel.textColor = [UIColor colorWithHexColorStr:@"#D5D5D5"];
+//    timeLabel.font = [UIFont systemFontOfSize:14];
+//    [contractView addSubview:timeLabel];
+//
+//    timeLabel.sd_layout
+//    .topSpaceToView(contractTitleView, 19.5)
+//    .heightIs(20)
+//    .widthIs(60)
+//    .leftEqualToView(contractTitleView);
+    
+//    UITextField * timeField = [[UITextField alloc]init];
+//    [contractView addSubview:timeField];
+//    _timeField = timeField;
+    
+    beginBtn.sd_layout
+    .leftEqualToView(contractTitleView)
     .topSpaceToView(contractTitleView, 19.5)
     .heightIs(20)
-    .widthIs(60)
-    .leftEqualToView(contractTitleView);
-    
-    UITextField * timeField = [[UITextField alloc]init];
-    [contractView addSubview:timeField];
-//    _timeField.text = @"2020-1-1";
-    _timeField = timeField;
-    
-    timeField.sd_layout
-    .leftSpaceToView(timeLabel, 5)
-    .topEqualToView(timeLabel)
-    .heightIs(20)
     .rightSpaceToView(contractView, 66.5);
+    
+    
     
     //分隔线
     UIView * contractTimeView = [[UIView alloc]init];
@@ -213,9 +235,9 @@
     [contractView addSubview:contractTimeView];
     
     contractTimeView.sd_layout
-    .leftEqualToView(timeLabel)
-    .rightEqualToView(timeField)
-    .topSpaceToView(timeLabel, 5)
+    .leftEqualToView(beginBtn)
+    .rightEqualToView(beginBtn)
+    .topSpaceToView(beginBtn, 5)
     .heightIs(0.5);
     
     UIButton * searchBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -229,12 +251,19 @@
     searchBtn.sd_layout
     .leftSpaceToView(contractTimeView, 0)
     .rightSpaceToView(contractView, 22.5)
-    .topEqualToView(timeLabel)
+    .topEqualToView(beginBtn)
     .heightIs(23)
     .widthIs(45);
     
     searchBtn.layer.cornerRadius = 2.5;
     searchBtn.layer.masksToBounds = YES;
+    
+    deleteBtn.sd_layout
+    .topEqualToView(beginBtn)
+    .rightSpaceToView(searchBtn, 12)
+    .bottomEqualToView(contractTimeView)
+    .widthIs(25);
+    
     
     choiceStatusBtn.sd_layout
     .leftSpaceToView(titleField, 0)
@@ -316,5 +345,20 @@
 }
 
 
+- (void)beginAction:(UIButton *)beginBtn{
+    WSDatePickerView * datepicker = [[WSDatePickerView alloc]initWithDateStyle:DateStyleShowYearMonthDay scrollToDate:[self nsstringConversionNSDate:beginBtn.currentTitle] CompleteBlock:^(NSDate *selectDate) {
+        NSString *date = [selectDate stringWithFormat:@"yyyy-MM-dd"];
+        [beginBtn setTitle:date forState:UIControlStateNormal];
+        self.deleteBtn.hidden = NO;
+    }];
+    datepicker.doneButtonColor = [UIColor colorWithHexColorStr:@"#27c79a"];
+    [datepicker show];
+}
+
+
+- (void)deleteAction:(UIButton *)deleteBtn{
+    [_beginBtn setTitle:@"合同日期" forState:UIControlStateNormal];
+    deleteBtn.hidden = YES;
+}
 
 @end

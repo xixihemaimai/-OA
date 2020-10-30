@@ -130,9 +130,11 @@
         _statusImage.image = [UIImage imageNamed:@"已过期"];
         _statusLabel.text = @"已过期";
         _statusLabel.textColor = [UIColor colorWithHexColorStr:@"#F15244"];
-        
+    }else{
+        _statusImage.image = [UIImage imageNamed:@"编组2"];
+        _statusLabel.text = @"未提交";
+        _statusLabel.textColor = [UIColor colorWithHexColorStr:@"#FDAD32"];
     }
-    
     _numberLabel.text = [NSString stringWithFormat:@"合同编号:%@",_columnarmodel.no];
     _titleLabel.text = [NSString stringWithFormat:@"合同标题:%@",_columnarmodel.billTitle];
     _timeLabel.text = [NSString stringWithFormat:@"合同日期:%@",_columnarmodel.billDate];

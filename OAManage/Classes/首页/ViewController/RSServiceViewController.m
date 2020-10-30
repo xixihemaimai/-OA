@@ -267,7 +267,7 @@ static NSString * SERVICEHEADERVIEWID = @"SERVICEHEADERVIEWID";
     .heightEqualToWidth();
     
     UILabel * fourLabel = [[UILabel alloc]init];
-    fourLabel.text = @"市场模块";
+    fourLabel.text = @"智能园区";
     fourLabel.textColor = [UIColor colorWithHexColorStr:@"#333333"];
     fourLabel.font = [UIFont systemFontOfSize:16];
     fourLabel.textAlignment = NSTextAlignmentCenter;

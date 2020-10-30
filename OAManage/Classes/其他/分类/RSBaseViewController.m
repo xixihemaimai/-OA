@@ -755,35 +755,53 @@ return encodedImageStr;
 {
     
     tempString = [NSString stringWithFormat:@"%@",tempString];
-    //计算截取的长度
-    NSUInteger endLength = tempString.length;
-    //判断字符串是否包含 .
+    
+//    //计算截取的长度
+//    NSUInteger endLength = tempString.length;
+//    //判断字符串是否包含 .
     if ([tempString containsString:@"."]) {
-        //取得 . 的位置
         NSRange pointRange = [tempString rangeOfString:@"."];
-        NSLog(@"%lu",pointRange.location);
-        //判断 . 后面有几位
         NSUInteger f = tempString.length - 1 - pointRange.location;
-        //如果大于2位就截取字符串保留两位,如果小于两位,直接截取
-        if (f > 3) {
-            endLength = pointRange.location + 3;
+        CGFloat floatValues = [tempString floatValue];
+        if (f == 0) {
+            tempString = [NSString stringWithFormat:@"%f",floatValues];
+        }else if (f == 1){
+            tempString = [NSString stringWithFormat:@"%.1f",floatValues];
+        }else if (f == 2){
+            tempString = [NSString stringWithFormat:@"%.2f",floatValues];
+        }else{
+            tempString = [NSString stringWithFormat:@"%.3f",floatValues];
         }
+        return tempString;
+    }else{
+        return tempString;
     }
-    //先将tempString转换成char型数组
-    NSUInteger start = 0;
-    const char *tempChar = [tempString UTF8String];
-    //遍历,去除取得第一位不是0的位置
-    for (int i = 0; i < tempString.length; i++) {
-        if (tempChar[i] == '0') {
-            start++;
-        }else {
-            break;
-        }
-    }
-    //根据最终的开始位置,计算长度,并截取
-    NSRange range = {start,endLength-start};
-    tempString = [tempString substringWithRange:range];
-    return tempString;
+//    if ([tempString containsString:@"."]) {
+//        //取得 . 的位置
+//        NSRange pointRange = [tempString rangeOfString:@"."];
+//        NSLog(@"%lu",pointRange.location);
+//        //判断 . 后面有几位
+//        NSUInteger f = tempString.length - 1 - pointRange.location;
+//        //如果大于3位就截取字符串保留两位,如果小于3位,直接截取
+//        if (f > 3) {
+//            endLength = pointRange.location + 3;
+//        }
+//
+//    }
+//    //先将tempString转换成char型数组
+//     NSUInteger start = 0;
+//     const char *tempChar = [tempString UTF8String];
+//     //遍历,去除取得第一位不是0的位置
+//     for (int i = 0; i < tempString.length; i++) {
+//        if (tempChar[i] == '0') {
+//            start++;
+//        }else {
+//            break;
+//        }
+//     }
+//     //根据最终的开始位置,计算长度,并截取
+//     NSRange range = {start,endLength-start};
+//     tempString = [tempString substringWithRange:range];
 }
 
 

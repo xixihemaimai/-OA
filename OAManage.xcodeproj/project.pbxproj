@@ -75,6 +75,7 @@
 		045D414A21AB91F3005F34D2 /* RSAuditedModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 045D414921AB91F3005F34D2 /* RSAuditedModel.m */; };
 		046AF2D72546657E0069591B /* RSColumnarModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 046AF2D62546657E0069591B /* RSColumnarModel.m */; };
 		046AF2DA25490B600069591B /* RSFeeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 046AF2D925490B600069591B /* RSFeeModel.m */; };
+		046AF2DD254C52F50069591B /* RSFeeNameCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 046AF2DC254C52F50069591B /* RSFeeNameCell.m */; };
 		0471B00324373E2B00785F4D /* RSJumpVideoTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 0471B00224373E2B00785F4D /* RSJumpVideoTool.m */; };
 		04A40AD5251840CD0082DFD3 /* RSMarketModuleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A40AD4251840CD0082DFD3 /* RSMarketModuleViewController.m */; };
 		04A40AD8251854E30082DFD3 /* RSMarketModuleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A40AD7251854E30082DFD3 /* RSMarketModuleCell.m */; };
@@ -313,6 +314,8 @@
 		046AF2D62546657E0069591B /* RSColumnarModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSColumnarModel.m; sourceTree = "<group>"; };
 		046AF2D825490B600069591B /* RSFeeModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSFeeModel.h; sourceTree = "<group>"; };
 		046AF2D925490B600069591B /* RSFeeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSFeeModel.m; sourceTree = "<group>"; };
+		046AF2DB254C52F50069591B /* RSFeeNameCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSFeeNameCell.h; sourceTree = "<group>"; };
+		046AF2DC254C52F50069591B /* RSFeeNameCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSFeeNameCell.m; sourceTree = "<group>"; };
 		0471B00224373E2B00785F4D /* RSJumpVideoTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSJumpVideoTool.m; sourceTree = "<group>"; };
 		04A40AD3251840CD0082DFD3 /* RSMarketModuleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSMarketModuleViewController.h; sourceTree = "<group>"; };
 		04A40AD4251840CD0082DFD3 /* RSMarketModuleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSMarketModuleViewController.m; sourceTree = "<group>"; };
@@ -1057,6 +1060,8 @@
 				04A40AFE2519D2520082DFD3 /* BCMyCollectionViewCell.m */,
 				04A40AFF2519D2520082DFD3 /* BCMyTableViewCell.m */,
 				04A40B002519D2520082DFD3 /* MyTableListView.m */,
+				046AF2DB254C52F50069591B /* RSFeeNameCell.h */,
+				046AF2DC254C52F50069591B /* RSFeeNameCell.m */,
 			);
 			path = WFTable;
 			sourceTree = "<group>";
@@ -1612,6 +1617,7 @@
 				04A40B182519EB280082DFD3 /* YCPopoverAnimator.m in Sources */,
 				04B3F72923B1B20B00CDD821 /* RSSLTouchCell.m in Sources */,
 				044656EC2420B59A00F1089C /* RSOnlineVideoPlayViewController.m in Sources */,
+				046AF2DD254C52F50069591B /* RSFeeNameCell.m in Sources */,
 				0436F6862178198300B0D6C8 /* AppDelegate.m in Sources */,
 				04A40ADE25185CA40082DFD3 /* RSManageCell.m in Sources */,
 				04A40B012519D2530082DFD3 /* BCContentOB.m in Sources */,
