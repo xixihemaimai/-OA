@@ -100,6 +100,18 @@ sex 性别
  
  "SC_PayIn"         收款单            财务流程
  
+ 
+ OA_Market_Home     市场模块首页
+OA_BM_IO            荒料出入库情况
+OA_SL_IO            大板出入库情况
+OA_Lease            招商业务租赁情况
+OA_Ledger           招商总账单
+OA_Ledger_Dtl      招商商户账单明细
+OA_Market_Fee      园区费用应收余额表
+OA_Market_Dealer_Fee      园区商户费用应收
+OA_Market_Pay_In   园区收款明细表
+OA_Market_Settle_In  园区应收明细表
+ 
 
 */
 @property (nonatomic,assign)NSInteger userId;
@@ -193,6 +205,21 @@ sex 性别
 @property (nonatomic,assign)BOOL  FG_ProcessProtocol;
 @property (nonatomic,assign)BOOL  FG_ProfitQuote;
 
+
+
+@property (nonatomic,assign)BOOL  OA_Market_Home;
+@property (nonatomic,assign)BOOL  OA_BM_IO;
+@property (nonatomic,assign)BOOL  OA_SL_IO;
+@property (nonatomic,assign)BOOL  OA_Lease;
+@property (nonatomic,assign)BOOL  OA_Ledger;
+
+
+@property (nonatomic,assign)BOOL  OA_Ledger_Dtl;
+@property (nonatomic,assign)BOOL  OA_Market_Fee;
+
+@property (nonatomic,assign)BOOL  OA_Market_Dealer_Fee;
+@property (nonatomic,assign)BOOL  OA_Market_Pay_In;
+@property (nonatomic,assign)BOOL  OA_Market_Settle_In;
 
 @end
 

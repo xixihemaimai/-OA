@@ -5,9 +5,9 @@
 //  Created by WF on 2017/1/14.
 //  Copyright © 2017年 WF. All rights reserved.
 //
-#define FIRSTCELLWIDTH 57.5 //第一个cell的宽度
+#define FIRSTCELLWIDTH 70 //第一个cell的宽度
 
-#define OTHERCELLWIDTH 100  //其他cell的宽度
+#define OTHERCELLWIDTH 120  //其他cell的宽度
 
 #define ALLCELLHIGH 34  //所有cell的高度
 
@@ -16,33 +16,44 @@
 #import "BCMyTableViewCell.h"
 @interface MyTableListView()<UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UICollectionViewDelegate,UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource>
 @property(strong,nonatomic)UICollectionViewFlowLayout*customLayout;
-@property(strong,nonatomic)UICollectionView*collectionView;
 
-@property(strong,nonatomic)UIScrollView*scrollView;
-@property(strong,nonatomic)UITableView*table;
+
+
+@property(strong,nonatomic)UIScrollView * scrollView;
+
+
 
 
 @property(strong,nonatomic)NSArray * arrayAttributeName;//属性名字
 @property(strong,nonatomic)NSArray * arrayAttribute;//属性
 
 
-@property(strong,nonatomic)NSMutableArray * arrayContent;//内容列表
+
 
 @property (nonatomic,assign)NSInteger marketpee;
 
 @end
 @implementation MyTableListView
+- (NSMutableArray *)arrayContent{
+    if (!_arrayContent) {
+        _arrayContent = [NSMutableArray array];
+    }
+    return _arrayContent;
+}
 
 static NSString *const cellId = @"cellId";
 static NSString *const headerId = @"headerId";
 static NSString *const footerId = @"footerId";
 
--(void)addOneOb:(RSColumnarModel *)columnarmodel{
-//    [_arrayContent insertObject:columnarmodel atIndex:0];
-    [_arrayContent addObject:columnarmodel];
+
+
+
+-(void)addColumnarContentArray:(NSMutableArray *)array{
+    [self.arrayContent addObjectsFromArray:array];
     [_table reloadData];
     [_collectionView reloadData];
 }
+
 
 -(instancetype)initWithFrame:(CGRect)frame andContentDicArray:(NSMutableArray *)contentDicArray andAttributeName:(NSArray *)attributeName andAttribute:(NSArray *)attribute andMarketPee:(NSInteger)marketpee{
     self = [super initWithFrame:frame];
@@ -58,13 +69,6 @@ static NSString *const footerId = @"footerId";
     return self;
 }
 -(void)creatTableListViewUI{
-    
-//    self.arrayAttribute= [[BCContentOB new] getAttributeArray];
-//    self.arrayAttributeName= [[BCContentOB new] getAttributeNameArray];
-    
-    
-    
-    
     //整体布局 右 除了第一列以外的底层布局
     _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(FIRSTCELLWIDTH, 0 , self.frame.size.width-FIRSTCELLWIDTH, self.frame.size.height)];
     if (OTHERCELLWIDTH*(self.arrayAttributeName.count-1)>CGRectGetWidth(_scrollView.frame)) {
@@ -88,6 +92,9 @@ static NSString *const footerId = @"footerId";
     _table = [[UITableView alloc] initWithFrame:CGRectMake(0, ALLCELLHIGH + 10, FIRSTCELLWIDTH, self.frame.size.height - ALLCELLHIGH - 10) style:UITableViewStylePlain];
     _table.dataSource = self;
     _table.delegate = self;
+    _table.estimatedRowHeight = 0;
+    _table.estimatedSectionFooterHeight = 0;
+    _table.estimatedSectionHeaderHeight = 0;
     _table.tag = 200;
     _table.showsVerticalScrollIndicator = NO;
     _table.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -123,7 +130,7 @@ static NSString *const footerId = @"footerId";
     _collectionView.backgroundColor = [UIColor whiteColor];
     _collectionView.dataSource = self;
     _collectionView.delegate = self;
-    _collectionView.contentInset = UIEdgeInsetsMake(0, 0, 100, 0);
+    
     _collectionView.tag = 100;
     [_scrollView addSubview:_collectionView];
     // 注册cell、sectionHeader、sectionFooter

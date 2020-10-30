@@ -16,7 +16,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
     
-        _label = [[RSMyLabel alloc] initWithFrame:CGRectMake(0, 0, 57.5, 34)];
+        _label = [[RSMyLabel alloc] initWithFrame:CGRectMake(0, 0, 70, 34)];
         _label.layer.borderColor = [UIColor colorWithHexColorStr:@"#E1E1E1"].CGColor;
         _label.layer.borderWidth = 0.5f;
         _label.textAlignment = NSTextAlignmentLeft;

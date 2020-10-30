@@ -27,11 +27,9 @@
     [super viewDidLoad];
     self.title = @"市场模块";
     self.emptyView.hidden = YES;
-    
     [self reloadReportNumber];
     [self customHeaderView];
 }
-
 
 - (void)reloadReportNumber{
     //URL_WARN_IOS
@@ -44,12 +42,6 @@
         weakSelf.todayNumberLabel.text = [NSString stringWithFormat:@"%ld",[dict[@"dueTodayContract"] integerValue]];
     };
 }
-
-
-
-
-
-
 
 - (void)customHeaderView{
     UIView * headerView = [[UIView alloc]init];
@@ -146,7 +138,6 @@
     todayLabel.textAlignment = NSTextAlignmentLeft;
     [todayView addSubview:todayLabel];
     
-    
     UILabel * todayNumberLabel = [[UILabel alloc]init];
     todayNumberLabel.text = @"10";
     todayNumberLabel.textColor = [UIColor colorWithHexColorStr:@"#27C79A"];
@@ -154,7 +145,6 @@
     todayNumberLabel.textAlignment = NSTextAlignmentLeft;
     [todayView addSubview:todayNumberLabel];
     _todayNumberLabel = todayNumberLabel;
-    
     
     UILabel * numbertodayLabel = [[UILabel alloc]init];
     numbertodayLabel.text = @"个";
@@ -252,13 +242,13 @@
 
 - (void)jumpModuleAction:(UIButton *)jumpBtn{
     if (jumpBtn.tag == 0) {
-     //即将到期
+        //即将到期
         RSContractViewController * contractVc = [[RSContractViewController alloc]init];
         contractVc.title = @"即将到期";
         contractVc.warningType = 1;
         [self.navigationController pushViewController:contractVc animated:YES];
     }else{
-     //今日到期
+        //今日到期
         RSContractViewController * contractVc = [[RSContractViewController alloc]init];
         contractVc.title = @"今日到期";
         contractVc.warningType = 2;

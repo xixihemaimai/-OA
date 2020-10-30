@@ -109,7 +109,10 @@
         stoneUrlStr = @"http://121.204.136.234:48000/Yigo1.6/UserAgreement.html";
     }else if ([self.type isEqualToString:@"7"]){
         //市场合同
-        stoneUrlStr =[NSString stringWithFormat:@"%@?billId=%ld&billKey=%@&aesKey=%@&appLoginToken=%@&username=%@&userdepartment=%@&usertime=%@&type=0&version=%lf",URL_H5_CONTRACT_IOS,(long)self.billId,self.billKey,aes,self.usermodel.appLoginToken,self.creatorName,self.deptName,self.usertime,self.version];
+        stoneUrlStr =[NSString stringWithFormat:@"%@?billId=%ld&billKey=%@&aesKey=%@&appLoginToken=%@&username=%@&userdepartment=%@&usertime=%@&type=0&version=%lf",URL_H5_CONTRACT_IOS,(long)self.billId,@"Flow_InvestContract",aes,self.usermodel.appLoginToken,self.creatorName,@"",@"",0.0];
+        
+        NSLog(@"=================================%@",stoneUrlStr);
+        
     }
     else{
         stoneUrlStr =[NSString stringWithFormat:@"%@?billId=%ld&billKey=%@&aesKey=%@&appLoginToken=%@&workItemId=%ld&username=%@&userdepartment=%@&usertime=%@&type=0&version=%lf&isApproval=%@",URL_H5_IOS,(long)self.billId,self.billKey,aes,self.usermodel.appLoginToken,(long)self.workItemId,self.creatorName,self.deptName,self.usertime,self.version,self.isApproval];

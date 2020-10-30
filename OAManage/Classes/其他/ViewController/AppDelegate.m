@@ -143,6 +143,19 @@
         usermodel.SM_SendNotice = [dict[@"flowAccess"][@"SM_SendNotice"]boolValue];
         usermodel.SM_Transfer = [dict[@"flowAccess"][@"SM_Transfer"]boolValue];
         usermodel.UseCar = [dict[@"flowAccess"][@"UseCar"]boolValue];
+        
+        usermodel.OA_Market_Home = [dict[@"flowAccess"][@"OA_Market_Home"]boolValue];
+        usermodel.OA_BM_IO = [dict[@"flowAccess"][@"OA_BM_IO"]boolValue];
+        usermodel.OA_SL_IO = [dict[@"flowAccess"][@"OA_SL_IO"]boolValue];
+        usermodel.OA_Lease = [dict[@"flowAccess"][@"OA_Lease"]boolValue];
+        usermodel.OA_Ledger  = [dict[@"flowAccess"][@"OA_Ledger"]boolValue];
+        usermodel.OA_Ledger_Dtl = [dict[@"flowAccess"][@"OA_Ledger_Dtl"]boolValue];
+        
+        usermodel.OA_Market_Fee = [dict[@"flowAccess"][@"OA_Market_Fee"]boolValue];
+               usermodel.OA_Market_Dealer_Fee  = [dict[@"flowAccess"][@"OA_Market_Dealer_Fee"]boolValue];
+               usermodel.OA_Market_Pay_In  = [dict[@"flowAccess"][@"OA_Market_Pay_In"]boolValue];
+        
+        usermodel.OA_Market_Settle_In  = [dict[@"flowAccess"][@"OA_Market_Settle_In"]boolValue];
 
         [MiPushSDK setAccount:[NSString stringWithFormat:@"%ld",(long)usermodel.userId]];
         [user removeObjectForKey:@"OAUSERMODEL"];

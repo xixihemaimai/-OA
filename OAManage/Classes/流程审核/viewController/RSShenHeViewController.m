@@ -438,6 +438,7 @@
             wkOaVc.isApproval = @"0";
         }
         wkOaVc.type = @"1";
+        wkOaVc.title = auditedmodel.billName;
         wkOaVc.version = [[[UIDevice currentDevice] systemVersion] floatValue];
         [self.navigationController pushViewController:wkOaVc animated:YES];
     }

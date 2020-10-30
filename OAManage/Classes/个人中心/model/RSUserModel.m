@@ -179,6 +179,22 @@
     [aCoder encodeBool:self.FG_ProfitQuote forKey:@"FG_ProfitQuote"];
     
     
+    
+    
+    [aCoder encodeBool:self.OA_Market_Home forKey:@"OA_Market_Home"];
+    [aCoder encodeBool:self.OA_BM_IO forKey:@"OA_BM_IO"];
+    [aCoder encodeBool:self.OA_SL_IO forKey:@"OA_SL_IO"];
+    [aCoder encodeBool:self.OA_Lease forKey:@"OA_Lease"];
+    [aCoder encodeBool:self.OA_Ledger forKey:@"OA_Ledger"];
+    
+    [aCoder encodeBool:self.OA_Ledger_Dtl forKey:@"OA_Ledger_Dtl"];
+    [aCoder encodeBool:self.OA_Market_Fee  forKey:@"OA_Market_Fee"];
+    [aCoder encodeBool:self.OA_Market_Dealer_Fee forKey:@"OA_Market_Dealer_Fee"];
+    
+    [aCoder encodeBool:self.OA_Market_Pay_In  forKey:@"OA_Market_Pay_In"];
+       [aCoder encodeBool:self.OA_Market_Settle_In forKey:@"OA_Market_Settle_In"];
+    
+    
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder{
@@ -264,6 +280,25 @@
         self.FG_ProfitQuote = [aDecoder decodeBoolForKey:@"FG_ProfitQuote"];
         
         
+        
+        self.OA_Market_Home = [aDecoder decodeBoolForKey:@"OA_Market_Home"];
+        self.OA_BM_IO = [aDecoder decodeBoolForKey:@"OA_BM_IO"];
+        self.OA_SL_IO = [aDecoder decodeBoolForKey:@"OA_SL_IO"];
+        self.OA_Lease = [aDecoder decodeBoolForKey:@"OA_Lease"];
+        self.OA_Ledger = [aDecoder decodeBoolForKey:@"OA_Ledger"];
+        
+        self.OA_Ledger_Dtl = [aDecoder decodeBoolForKey:@"OA_Ledger_Dtl"];
+        self.OA_Market_Fee = [aDecoder decodeBoolForKey:@"OA_Market_Fee"];
+        self.OA_Market_Dealer_Fee = [aDecoder decodeBoolForKey:@"OA_Market_Dealer_Fee"];
+        
+        self.OA_Market_Pay_In = [aDecoder decodeBoolForKey:@"OA_Market_Pay_In"];
+               self.OA_Market_Settle_In = [aDecoder decodeBoolForKey:@"OA_Market_Settle_In"];
+        
+      
+        
+        
+        
+        
     }
     return self;
 }
@@ -345,7 +380,21 @@
     usermodel.FG_ProcessProduct = self.FG_ProcessProduct;
     usermodel.FG_ProfitQuote = self.FG_ProfitQuote;
     
+    usermodel.OA_Market_Home = self.OA_Market_Home;
+     usermodel.OA_BM_IO = self.OA_BM_IO;
+     usermodel.OA_SL_IO = self.OA_SL_IO;
+     usermodel.OA_Lease = self.OA_Lease;
+     usermodel.OA_Ledger = self.OA_Ledger;
     
+    usermodel.OA_Ledger_Dtl = self.OA_Ledger_Dtl;
+        usermodel.OA_Market_Fee = self.OA_Market_Fee;
+        usermodel.OA_Market_Dealer_Fee = self.OA_Market_Dealer_Fee;
+    
+    
+    usermodel.OA_Market_Pay_In = self.OA_Market_Pay_In;
+          usermodel.OA_Market_Settle_In = self.OA_Market_Settle_In;
+    
+   
     
     return usermodel;
 }

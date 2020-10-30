@@ -36,21 +36,22 @@ typedef void(^DetailBlock)(NSInteger index);
 @end
 @interface MyTableListView : UIView
 
+@property(strong,nonatomic)UICollectionView * collectionView;
 
-
+@property(strong,nonatomic)UITableView * table;
 
 @property(strong,nonatomic)NSDictionary* upOnedic;
 @property(weak,nonatomic)id<MyTableListViewDelegate>delegate;
 
 @property (nonatomic,strong)DetailBlock detailBlock;
 
-
+@property(strong,nonatomic)NSMutableArray * arrayContent;//内容列表
 
 
 -(instancetype)initWithFrame:(CGRect)frame andContentDicArray:(NSMutableArray *)contentDicArray andAttributeName:(NSArray *)attributeName andAttribute:(NSArray *)attribute andMarketPee:(NSInteger)marketpee;
 
--(void)addOneOb:(RSColumnarModel *)columnarmodel;
 
+-(void)addColumnarContentArray:(NSMutableArray *)array;
 
 
 @end

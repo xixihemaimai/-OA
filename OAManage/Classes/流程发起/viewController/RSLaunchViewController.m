@@ -483,10 +483,10 @@ static NSString * LAUNCHREUSABFOOTCELLID = @"LAUNCHREUSABFOOTCELLID";
     //招商合同审批表 合同审批表 印章外接使用申请 公章使用申请 文件编制修订废止 海西股份刻章申请 销售合同审批表
     //发起流程复制 19 发起流程复制 18 发起流程复制 21 发起流程复制 20 发起流程复制 23 发起流程复制 22 发起流程复制 24
 
-    if (self.usermodel.Flow_InvestContract == true) {
-        NSDictionary * dict = @{@"img":@"发起流程复制 19",@"title":@"招商合同审批表",@"key":@"Flow_InvestContract"};
-        [array3 addObject:dict];
-    }
+//    if (self.usermodel.Flow_InvestContract == true) {
+//        NSDictionary * dict = @{@"img":@"发起流程复制 19",@"title":@"招商合同审批表",@"key":@"Flow_InvestContract"};
+//        [array3 addObject:dict];
+//    }
     if (self.usermodel.Flow_Contract == true) {
         NSDictionary * dict = @{@"img":@"发起流程复制 18",@"title":@"合同审批表",@"key":@"Flow_Contract"};
         [array3 addObject:dict];

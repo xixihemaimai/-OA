@@ -66,16 +66,7 @@
 
 
 - (void)reloadReportListNew{
-//
-//    if (self.warningType == 1) {
-//        self.status = 10;
-//    }else if (self.warningType == 2){
-//        self.status = 2;
-//    }else{
      self.status = 10;
-//    }
-    
-    
     if ([_choiceStatusBtn.currentTitle isEqualToString:@"未提交"]) {
         self.status = 0;
     }else if ([_choiceStatusBtn.currentTitle isEqualToString:@"审核中"]){
@@ -170,7 +161,7 @@
 //    }else if (self.warningType == 2){
 //        [choiceStatusBtn setTitle:@"审核中" forState:UIControlStateNormal];
 //    }else{
-        [choiceStatusBtn setTitle:@"已生效" forState:UIControlStateNormal];
+    [choiceStatusBtn setTitle:@"已生效" forState:UIControlStateNormal];
 //    }
     
     
@@ -245,29 +236,26 @@
     searchBtn.layer.cornerRadius = 2.5;
     searchBtn.layer.masksToBounds = YES;
     
-    
-        choiceStatusBtn.sd_layout
-        .leftSpaceToView(titleField, 0)
-        .topSpaceToView(contractView, 21)
-        .rightEqualToView(searchBtn)
-        .heightIs(23);
+    choiceStatusBtn.sd_layout
+    .leftSpaceToView(titleField, 0)
+    .topSpaceToView(contractView, 21)
+    .rightEqualToView(searchBtn)
+    .heightIs(23);
         
-        choiceStatusBtn.titleLabel.sd_layout
-        .leftSpaceToView(choiceStatusBtn, 8)
-        .centerYEqualToView(choiceStatusBtn)
-        .widthIs(40);
+    choiceStatusBtn.titleLabel.sd_layout
+    .leftSpaceToView(choiceStatusBtn, 8)
+    .centerYEqualToView(choiceStatusBtn)
+    .widthIs(40);
         
-        choiceStatusBtn.imageView.sd_layout
-        .leftSpaceToView(choiceStatusBtn.titleLabel, 0)
-        .centerYEqualToView(choiceStatusBtn)
-        .widthIs(10)
-        .heightIs(5.5);
+    choiceStatusBtn.imageView.sd_layout
+    .leftSpaceToView(choiceStatusBtn.titleLabel, 0)
+    .centerYEqualToView(choiceStatusBtn)
+    .widthIs(10)
+    .heightIs(5.5);
         
-        choiceStatusBtn.layer.borderColor = [UIColor colorWithHexColorStr:@"#333333"].CGColor;
-        choiceStatusBtn.layer.borderWidth = 0.5;
-        choiceStatusBtn.layer.cornerRadius = 2.5;
-    
-    
+    choiceStatusBtn.layer.borderColor = [UIColor colorWithHexColorStr:@"#333333"].CGColor;
+    choiceStatusBtn.layer.borderWidth = 0.5;
+    choiceStatusBtn.layer.cornerRadius = 2.5;
     
     [headerView setupAutoHeightWithBottomView:contractView bottomMargin:20];
     [headerView layoutIfNeeded];
@@ -286,11 +274,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-//    if ([self.title isEqualToString:@"报表管理"]) {
-//        return 5;
-//    }else{
     return self.contractArray.count;
-//    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -308,23 +292,17 @@
     return cell;
 }
 
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    NSLog(@"==============%ld",indexPath.row);
     //这边是跳H5
     RSColumnarModel * columnarmodel = self.contractArray[indexPath.row];
     RSWKOAmanagerViewController * wkVc = [[RSWKOAmanagerViewController alloc]init];
     wkVc.type = @"7";
-//    wkVc.billId = columnarmodel.billId;
-    
-    
-    
+    wkVc.billId = [columnarmodel.billId integerValue];
+    wkVc.title = @"查看合同";
+    wkVc.creatorName = columnarmodel.billTitle;
     [self.navigationController pushViewController:wkVc animated:YES];
-    
 }
-
-
 
 //选择状态
 - (void)choiceStatusAction:(UIButton *)choiceStatusBtn{

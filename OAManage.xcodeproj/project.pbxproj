@@ -1780,6 +1780,34 @@
 				DEVELOPMENT_TEAM = 5CVKEU8NXR;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/OAManage/Classes/其他/工具类/OAManagePrefixHeader.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/AFNetworking\"",
+					"\"${PODS_ROOT}/Headers/Public/CocoaAsyncSocket\"",
+					"\"${PODS_ROOT}/Headers/Public/DZNEmptyDataSet\"",
+					"\"${PODS_ROOT}/Headers/Public/FMDB\"",
+					"\"${PODS_ROOT}/Headers/Public/IQKeyboardManager\"",
+					"\"${PODS_ROOT}/Headers/Public/JXTAlertManager\"",
+					"\"${PODS_ROOT}/Headers/Public/KTVCocoaHTTPServer\"",
+					"\"${PODS_ROOT}/Headers/Public/KTVHTTPCache\"",
+					"\"${PODS_ROOT}/Headers/Public/MJExtension\"",
+					"\"${PODS_ROOT}/Headers/Public/MJRefresh\"",
+					"\"${PODS_ROOT}/Headers/Public/Masonry\"",
+					"\"${PODS_ROOT}/Headers/Public/Reachability\"",
+					"\"${PODS_ROOT}/Headers/Public/SDAutoLayout\"",
+					"\"${PODS_ROOT}/Headers/Public/SDWebImage\"",
+					"\"${PODS_ROOT}/Headers/Public/SJAttributesFactory\"",
+					"\"${PODS_ROOT}/Headers/Public/SJBaseVideoPlayer\"",
+					"\"${PODS_ROOT}/Headers/Public/SJObserverHelper\"",
+					"\"${PODS_ROOT}/Headers/Public/SJUIFactory\"",
+					"\"${PODS_ROOT}/Headers/Public/SJVideoPlayer\"",
+					"\"${PODS_ROOT}/Headers/Public/SVProgressHUD\"",
+					"\"${PODS_ROOT}/Headers/Public/TZImagePickerController\"",
+					"\"${PODS_ROOT}/Headers/Public/UMCAnalytics\"",
+					"\"${PODS_ROOT}/Headers/Public/UMCCommon\"",
+					"\"${PODS_ROOT}/Headers/Public/XLPhotoBrowser+CoderXL\"",
+				);
 				INFOPLIST_FILE = OAManage/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1813,6 +1841,34 @@
 				DEVELOPMENT_TEAM = 5CVKEU8NXR;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/OAManage/Classes/其他/工具类/OAManagePrefixHeader.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/AFNetworking\"",
+					"\"${PODS_ROOT}/Headers/Public/CocoaAsyncSocket\"",
+					"\"${PODS_ROOT}/Headers/Public/DZNEmptyDataSet\"",
+					"\"${PODS_ROOT}/Headers/Public/FMDB\"",
+					"\"${PODS_ROOT}/Headers/Public/IQKeyboardManager\"",
+					"\"${PODS_ROOT}/Headers/Public/JXTAlertManager\"",
+					"\"${PODS_ROOT}/Headers/Public/KTVCocoaHTTPServer\"",
+					"\"${PODS_ROOT}/Headers/Public/KTVHTTPCache\"",
+					"\"${PODS_ROOT}/Headers/Public/MJExtension\"",
+					"\"${PODS_ROOT}/Headers/Public/MJRefresh\"",
+					"\"${PODS_ROOT}/Headers/Public/Masonry\"",
+					"\"${PODS_ROOT}/Headers/Public/Reachability\"",
+					"\"${PODS_ROOT}/Headers/Public/SDAutoLayout\"",
+					"\"${PODS_ROOT}/Headers/Public/SDWebImage\"",
+					"\"${PODS_ROOT}/Headers/Public/SJAttributesFactory\"",
+					"\"${PODS_ROOT}/Headers/Public/SJBaseVideoPlayer\"",
+					"\"${PODS_ROOT}/Headers/Public/SJObserverHelper\"",
+					"\"${PODS_ROOT}/Headers/Public/SJUIFactory\"",
+					"\"${PODS_ROOT}/Headers/Public/SJVideoPlayer\"",
+					"\"${PODS_ROOT}/Headers/Public/SVProgressHUD\"",
+					"\"${PODS_ROOT}/Headers/Public/TZImagePickerController\"",
+					"\"${PODS_ROOT}/Headers/Public/UMCAnalytics\"",
+					"\"${PODS_ROOT}/Headers/Public/UMCCommon\"",
+					"\"${PODS_ROOT}/Headers/Public/XLPhotoBrowser+CoderXL\"",
+				);
 				INFOPLIST_FILE = OAManage/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (

@@ -144,8 +144,10 @@
     totalYearLabel.font = [UIFont systemFontOfSize:15];
     [choiceTime addSubview:totalYearLabel];
     
+    NSString * time = [self acquisitionTimeType:0];
+    
     UIButton * totalBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [totalBtn setTitle:@"2019" forState:UIControlStateNormal];
+    [totalBtn setTitle:[time substringToIndex:4] forState:UIControlStateNormal];
     [totalBtn setImage:[UIImage imageNamed:@"向下"] forState:UIControlStateNormal];
     totalBtn.titleLabel.font = [UIFont systemFontOfSize:15];
     [totalBtn setTitleColor:[UIColor colorWithHexColorStr:@"#ffffff"] forState:UIControlStateNormal];
@@ -162,11 +164,11 @@
     contrast.font = [UIFont systemFontOfSize:15];
     [choiceTime addSubview:contrast];
     
-    NSString * time = [self acquisitionTimeType:0];
+    
     //    NSLog(@"======================%@",time);
     
     UIButton * contraseBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [contraseBtn setTitle:[time substringToIndex:4] forState:UIControlStateNormal];
+    [contraseBtn setTitle:@"2019" forState:UIControlStateNormal];
     [contraseBtn setImage:[UIImage imageNamed:@"向下"] forState:UIControlStateNormal];
     contraseBtn.titleLabel.font = [UIFont systemFontOfSize:15];
     contraseBtn.tag = 2;
@@ -685,7 +687,7 @@
                               dataLabel.text = [NSString stringWithFormat:@"%ld",columnarmodel.notRentedQty];
                           }else if (j == 4){
                               RSColumnarModel * columnarmodel = self.columnarArray[0];
-                              dataLabel.text = [NSString stringWithFormat:@"%@",columnarmodel.rate];
+                              dataLabel.text = [NSString stringWithFormat:@"%@%%",columnarmodel.rate];
                           }
                       }else if (i == 2){
                           dataLabel.font = [UIFont systemFontOfSize:13];
@@ -703,7 +705,7 @@
                               dataLabel.text = [NSString stringWithFormat:@"%ld",columnarmodel.notRentedQty];
                           }else if (j == 4){
                               RSColumnarModel * columnarmodel = self.columnarArray[1];
-                              dataLabel.text = [NSString stringWithFormat:@"%@",columnarmodel.rate];
+                              dataLabel.text = [NSString stringWithFormat:@"%@%%",columnarmodel.rate];
                           }
                       }
                       else if (i == 3){
@@ -722,7 +724,7 @@
                               dataLabel.text = [NSString stringWithFormat:@"%ld",columnarmodel.notRentedQty];
                           }else if (j == 4){
                               RSColumnarModel * columnarmodel = self.columnarArray[2];
-                              dataLabel.text = [NSString stringWithFormat:@"%@",columnarmodel.rate];
+                              dataLabel.text = [NSString stringWithFormat:@"%@%%",columnarmodel.rate];
                           }
                       }
                       dataLabel.frame = CGRectMake(j * (SCW - 48)/5, 0, (SCW - 48)/5, 44);
@@ -806,11 +808,11 @@
                     }else if (j == 3){
                         RSColumnarModel * columnarmodel = self.columnarArray[2];
                         if (self.joinType == bmstock) {
-                            dataLabel.text = [NSString stringWithFormat:@"%@",columnarmodel.volumeIn];
+                            dataLabel.text = [NSString stringWithFormat:@"%@%%",columnarmodel.volumeIn];
                         }else if (self.joinType == slstock){
-                            dataLabel.text = [NSString stringWithFormat:@"%@",columnarmodel.areaIn];
+                            dataLabel.text = [NSString stringWithFormat:@"%@%%",columnarmodel.areaIn];
                         }else if (self.joinType == ledger || self.joinType == totalLedger){
-                            dataLabel.text = [NSString stringWithFormat:@"%@",columnarmodel.slAmount];
+                            dataLabel.text = [NSString stringWithFormat:@"%@%%",columnarmodel.slAmount];
                         }
                     }
                 }else if (i == 2){
@@ -845,11 +847,11 @@
                     }else if (j == 3){
                         RSColumnarModel * columnarmodel = self.columnarArray[2];
                         if (self.joinType == bmstock) {
-                            dataLabel.text = [NSString stringWithFormat:@"%@",columnarmodel.volumeOut];
+                            dataLabel.text = [NSString stringWithFormat:@"%@%%",columnarmodel.volumeOut];
                         }else if (self.joinType == slstock){
-                            dataLabel.text = [NSString stringWithFormat:@"%@",columnarmodel.areaOut];
+                            dataLabel.text = [NSString stringWithFormat:@"%@%%",columnarmodel.areaOut];
                         }else if (self.joinType == ledger || self.joinType == totalLedger){
-                            dataLabel.text = [NSString stringWithFormat:@"%@",columnarmodel.smAmount];
+                            dataLabel.text = [NSString stringWithFormat:@"%@%%",columnarmodel.smAmount];
                         }
                     }
                 }else if (i == 3){
@@ -884,11 +886,11 @@
                     }else if (j == 3){
                         RSColumnarModel * columnarmodel = self.columnarArray[2];
                         if (self.joinType == bmstock) {
-                            dataLabel.text = [NSString stringWithFormat:@"%@",columnarmodel.bmStorageFee];
+                            dataLabel.text = [NSString stringWithFormat:@"%@%%",columnarmodel.bmStorageFee];
                         }else if (self.joinType == slstock){
                             dataLabel.text = @"入库(平方)";
                         }else if (self.joinType == ledger || self.joinType == totalLedger){
-                            dataLabel.text =[NSString stringWithFormat:@"%@",columnarmodel.pmAmount];
+                            dataLabel.text =[NSString stringWithFormat:@"%@%%",columnarmodel.pmAmount];
                         }
                     }
                 }else if (i == 4){
@@ -994,9 +996,9 @@
         columnChartView2.columnWidth = @"50";
     columnChartView2.legendNameArray = @[_contraseBtn.currentTitle,_totalBtn.currentTitle];
     }else if (self.joinType == ledger || self.joinType == totalLedger){
-        type = [NSString stringWithFormat:@"%@-%@招商总账单情况,单位(元)",_beginBtn.currentTitle,_endBtn.currentTitle];
+        type = [NSString stringWithFormat:@"%@-%@招商总账单情况",_beginBtn.currentTitle,_endBtn.currentTitle];
         
-        columnChartView2.dataNameArray = @[@"大板收款",@"条板收款",@"业务楼收款"];
+        columnChartView2.dataNameArray = @[@"大板收款(元)",@"条板收款(元)",@"业务楼收款(元)"];
         NSMutableArray * array = [NSMutableArray array];
         RSColumnarModel * columnarmodel = self.columnarArray[1];
         RSColumnarModel * columnarOutModel = self.columnarArray[0];
@@ -1012,6 +1014,7 @@
         columnChartView2.dataArray = array;
         columnChartView2.numberOfColumn = 3;
         columnChartView2.columnWidth = @"40";
+        columnChartView2.legendNameArray = @[_contraseBtn.currentTitle,_totalBtn.currentTitle];
 //        columnChartView2.legendNameArray = @[@"1",@"2"];
     }
     
@@ -1035,7 +1038,6 @@
     if (self.joinType == bmstock) {
         signerType = [NSString stringWithFormat:@"%@-%@荒料收款",_beginBtn.currentTitle,_endBtn.currentTitle];
         //       columnChartView2.dataNameArray = @[_totalBtn.currentTitle,_contraseBtn.currentTitle];
-        
         RSColumnarModel * columnarmodel = self.columnarArray[1];
         RSColumnarModel * columnarOutModel = self.columnarArray[0];
         dataInArray = @[[NSString stringWithFormat:@"%@",columnarmodel.bmStorageFee],[NSString stringWithFormat:@"%@",columnarOutModel.bmStorageFee]];
@@ -1044,7 +1046,6 @@
     }else if (self.joinType == ledger || self.joinType == totalLedger){
         signerType = [NSString stringWithFormat:@"%@-%@招商总账单情况",_beginBtn.currentTitle,_endBtn.currentTitle];
     }
-    
     
     ColumnChartView * columnChartView = [[ColumnChartView alloc] initWithFrame:CGRectMake(12, CGRectGetMaxY(columnChartView2.frame) + 10, SCW - 24, 272) andDataNameArray:@[_contraseBtn.currentTitle,_totalBtn.currentTitle] andDataArray:dataInArray andColumnColor:@"#fbca58"];
     columnChartView.isSingleColumn = YES;
@@ -1122,14 +1123,20 @@
             }
         }else{
             //这边是年
-            NSString * temp = choiceTimeBtn.currentTitle;
-            //text
-            [choiceTimeBtn setTitle:text forState:UIControlStateNormal];
-            if ([self.totalBtn.currentTitle isEqualToString:self.contraseBtn.currentTitle]) {
-                jxt_showToastTitle(@"统计和对比不能相同", 0.75);
-              [choiceTimeBtn setTitle:temp forState:UIControlStateNormal];
+            if (self.joinType == lease) {
+                
+                 [choiceTimeBtn setTitle:text forState:UIControlStateNormal];
+                
             }else{
-               [choiceTimeBtn setTitle:text forState:UIControlStateNormal];
+                NSString * temp = choiceTimeBtn.currentTitle;
+                //text
+                [choiceTimeBtn setTitle:text forState:UIControlStateNormal];
+                if ([self.totalBtn.currentTitle isEqualToString:self.contraseBtn.currentTitle]) {
+                    jxt_showToastTitle(@"统计和对比不能相同", 0.75);
+                  [choiceTimeBtn setTitle:temp forState:UIControlStateNormal];
+                }else{
+                   [choiceTimeBtn setTitle:text forState:UIControlStateNormal];
+                }
             }
         }
     };

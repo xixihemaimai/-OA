@@ -480,8 +480,15 @@ static NSString * SERVICEHEADERVIEWID = @"SERVICEHEADERVIEWID";
         [self.navigationController pushViewController:auditedVc animated:YES];
     }else if (btn.tag == 2){
 //        NSLog(@"市场模块");
-        RSMarketModuleViewController * marketModuleVc = [[RSMarketModuleViewController alloc]init];
-        [self.navigationController pushViewController:marketModuleVc animated:YES];
+        
+        if (self.usermodel.OA_Market_Home == true) {
+            RSMarketModuleViewController * marketModuleVc = [[RSMarketModuleViewController alloc]init];
+            [self.navigationController pushViewController:marketModuleVc animated:YES];
+        }else{
+            jxt_showToastTitle(@"您没有这个权限进入",0.75);
+        }
+        
+       
     }
     else if (btn.tag == 3){
         //NSLog(@"体系文件");

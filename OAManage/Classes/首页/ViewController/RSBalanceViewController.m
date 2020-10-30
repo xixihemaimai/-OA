@@ -51,26 +51,21 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
     self.pageNum = 1;
     self.tempID = 0;
     self.emptyView.hidden = YES;
     
-    
     self.view.backgroundColor = [UIColor colorWithHexColorStr:@"#ffffff"];
-    
-    
-//    self.tableview.scrollEnabled = NO;
-//    self.tableview.contentInset = UIEdgeInsetsMake(0, 0, 100, 0);
     [self setCustomHeaderView];
+    [self.tableview removeFromSuperview];
+    [self showExcelView];
     
     
+    self.tablelist.collectionView.mj_header = [MJChiBaoZiHeader headerWithRefreshingTarget:self refreshingAction:@selector(reloadReportList)];
+    self.tablelist.collectionView.mj_footer = [MJChiBaoZiFooter footerWithRefreshingTarget:self refreshingAction:@selector(reloadReportListMore)];
     
-    self.tableview.mj_header = [MJChiBaoZiHeader headerWithRefreshingTarget:self refreshingAction:@selector(reloadReportList)];
-    MJChiBaoZiFooter * foot = [MJChiBaoZiFooter footerWithRefreshingTarget:self refreshingAction:@selector(reloadReportListMore)];
-    foot.refreshingTitleHidden = YES;
-    self.tableview.mj_footer = foot;
     
+    [self setTimePickerView];
 }
 
 
@@ -85,7 +80,6 @@
 
 
 - (void)reloadBalanceNewData{
-    
     NetworkTool * network = [[NetworkTool alloc]init];
     NSString * url = [NSString string];
     NSString * filter = [NSString string];
@@ -97,58 +91,41 @@
         filter = [NSString stringWithFormat:@"{monthFrom:'%@',monthTo:'%@',typeId:'%ld'}",_beginBtn.currentTitle,_endBtn.currentTitle,self.tempID];
     }else if (self.marketpee == pay_market_fee){
         url = URL_PAY_MARKET_IOS;
-        filter = [NSString stringWithFormat:@"{monthFrom:'%@',monthTo:'%@',typeId:'%ld'}",[_beginBtn.currentTitle substringToIndex:7],[_endBtn.currentTitle substringToIndex:7],self.tempID];
+        filter = [NSString stringWithFormat:@"{monthFrom:'%@',monthTo:'%@',typeId:'%ld'}",_beginBtn.currentTitle,_endBtn.currentTitle,self.tempID];
     }else if (self.marketpee == market_fee_dtl){
         url = URL_MARKET_DTL_IOS;
-        filter = [NSString stringWithFormat:@"{monthFrom:'%@',monthTo:'%@',typeId:'%ld'}",[_beginBtn.currentTitle substringToIndex:7],[_endBtn.currentTitle substringToIndex:7],self.tempID];
+        filter = [NSString stringWithFormat:@"{monthFrom:'%@',monthTo:'%@',typeId:'%ld'}",_beginBtn.currentTitle,_endBtn.currentTitle,self.tempID];
     }
-    //    else{
-    //        url = URL_DEALER_DTL_IOS;
-    //    }
-    NSString * data = [NSString stringWithFormat:@"{pageNum:'%@',pageSize:'%d',filter:%@}",[NSNumber numberWithInteger:self.pageNum],100,filter];
+    NSString * data = [NSString stringWithFormat:@"{pageNum:'%@',pageSize:'%d',filter:%@}",[NSNumber numberWithInteger:self.pageNum],10,filter];
     NSDictionary * dict = @{@"loginToken":self.usermodel.appLoginToken,@"data":data};
     RSWeakself
     [network newReloadWebServiceNoDataURL:url andParameters:dict andURLName:url];
     network.successArrayReload = ^(NSMutableArray *array) {
         if (weakSelf.pageNum == 1) {
             [weakSelf.balanceArray removeAllObjects];
-            if (array.count > 0) {
-                [weakSelf.balanceArray addObjectsFromArray:array];
-                weakSelf.pageNum = 2;
-            }
-//            [weakSelf.tableview reloadData];
-            [weakSelf.tableview.mj_header endRefreshing];
-            
-             [weakSelf showExcelView];
-            
+            [weakSelf.balanceArray addObjectsFromArray:array];
+            [weakSelf.tablelist addColumnarContentArray:weakSelf.balanceArray];
+            weakSelf.pageNum = 2;
+            [weakSelf.tablelist.collectionView.mj_header endRefreshing];
         }else{
-//            [weakSelf.balanceArray addObjectsFromArray:array];
-            
-            for (RSColumnarModel * columnarmodel in array) {
-                [weakSelf.tablelist addOneOb:columnarmodel];
-            }
+            [weakSelf.balanceArray addObjectsFromArray:array];
+            [weakSelf.tablelist addColumnarContentArray:array];
             weakSelf.pageNum++;
-            [weakSelf.tableview.mj_footer endRefreshing];
+            [weakSelf.tablelist.collectionView.mj_footer endRefreshing];
         }
-       
     };
-    
     network.failure = ^(NSDictionary *dict) {
-        [weakSelf.tableview.mj_header endRefreshing];
-        [weakSelf.tableview.mj_footer endRefreshing];
+        [weakSelf.tablelist.collectionView.mj_header endRefreshing];
+        [weakSelf.tablelist.collectionView.mj_footer endRefreshing];
     };
 }
 
-
-
-
-
 - (void)reloadMerchantsReceivableNewDataTypeId:(NSInteger)typeId andBlock:(void(^)(NSDictionary * valueDict))block{
     NetworkTool * network = [[NetworkTool alloc]init];
-    NSString * filter = [NSString stringWithFormat:@"{monthFrom:'%@',monthTo:'%@',typeId:'%ld'}",_beginBtn.currentTitle,_endBtn.currentTitle,typeId];
-    NSString * data = [NSString stringWithFormat:@"{pageNum:'%@',pageSize:'%d',filter:%@}",[NSNumber numberWithInteger:self.pageNum],100,filter];
+    NSString * data = [NSString stringWithFormat:@"{monthFrom:'%@',monthTo:'%@',typeId:'%ld'}",_beginBtn.currentTitle,_endBtn.currentTitle,typeId];
+   // NSString * data = [NSString stringWithFormat:@"{pageNum:'%@',pageSize:'%d',filter:%@}",[NSNumber numberWithInteger:self.pageNum],100,filter];
     NSDictionary * dic = @{@"loginToken":self.usermodel.appLoginToken,@"data":data};
-    //    RSWeakself
+    //RSWeakself
     [network newReloadWebServiceNoDataURL:URL_DEALER_DTL_IOS andParameters:dic andURLName:URL_DEALER_DTL_IOS];
     network.successReload = ^(NSDictionary * dict) {
         if (block) {
@@ -156,10 +133,6 @@
         }
     };
 }
-
-
-
-
 
 - (void)setCustomHeaderView{
     
@@ -179,7 +152,6 @@
     .rightSpaceToView(self.view, 12)
     .heightIs(133);
     
-    RSWeakself
     
     //合同标题
     UIButton * objectBtn = [[UIButton alloc]init];
@@ -302,7 +274,7 @@
     searchBtn.layer.cornerRadius = 2.5;
     searchBtn.layer.masksToBounds = YES;
     
-    //    NSMutableArray *dic=[[NSMutableArray alloc] init];
+    //NSMutableArray *dic=[[NSMutableArray alloc] init];
     //修改表格显示内容标题 只需要在BCContentOB文件中修改属性以及其他
     //调整第一列的宽度 可在MyTableListView.m中最上面修改 FIRSTCELLWIDTH
     //调整每一行的高度 可在MyTableListView.m中最上面修改 ALLCELLHIGH
@@ -318,21 +290,34 @@
     //        ddd.attributeFourth=[NSString stringWithFormat:@"%d",i];
     //        [dic addObject:ddd];
     //    }
+//    self.tableview.sd_layout
+//    .topSpaceToView(contractView, 20);
     
-    self.tableview.sd_layout
-    .topSpaceToView(contractView, 20);
+}
 
-    self.tableview.estimatedRowHeight =0;
 
-    self.tableview.estimatedSectionHeaderHeight =0;
-
-    self.tableview.estimatedSectionFooterHeight =0;
-    
+- (void)setTimePickerView{
+    RSWeakself
     _datePickerView = [[DIYSystemDatePickerView alloc]initWithType:DIYSystemDatePickerENUM0
                                                 getSelectBeginTime:^(NSString *beginTimeStr) {
-        [weakSelf.beginBtn setTitle:beginTimeStr forState:(UIControlStateNormal)];
+        
+        if (weakSelf.marketpee == pay_market_fee || weakSelf.marketpee == market_fee_dtl) {
+             [weakSelf.beginBtn setTitle:[beginTimeStr substringToIndex:7] forState:(UIControlStateNormal)];
+        }else{
+             [weakSelf.beginBtn setTitle:beginTimeStr forState:(UIControlStateNormal)];
+        }
+        
+       
+        
     } getSelectEndTime:^(NSString *endTimeStr) {
-        [weakSelf.endBtn setTitle:endTimeStr forState:(UIControlStateNormal)];
+        
+//        [weakSelf.endBtn setTitle:endTimeStr forState:(UIControlStateNormal)];
+        
+        if (weakSelf.marketpee == pay_market_fee || weakSelf.marketpee == market_fee_dtl) {
+             [weakSelf.endBtn setTitle:[endTimeStr substringToIndex:7] forState:(UIControlStateNormal)];
+        }else{
+             [weakSelf.endBtn setTitle:endTimeStr forState:(UIControlStateNormal)];
+        }
     }];
     [self.view addSubview:_datePickerView];
 }
@@ -355,14 +340,14 @@
         array = @[@"序号",@"结算对象",@"费用类型",@"金额",@"会计期"];
         buteArray = @[@"dealerName",@"feeName",@"money",@"month"];
     }
-    UIView * headerView = [[UIView alloc]init];
-    headerView.backgroundColor = [UIColor colorWithHexColorStr:@"#ffffff"];
+//    UIView * headerView = [[UIView alloc]init];
+//    headerView.backgroundColor = [UIColor colorWithHexColorStr:@"#ffffff"];
     RSWeakself
     //SCH - CGRectGetMaxY(self.contractView.frame) - 80)
-    MyTableListView * tablelist = [[MyTableListView alloc] initWithFrame:CGRectMake(13, 0, SCW - 13,self.tableview.yj_height - 40) andContentDicArray:self.balanceArray andAttributeName:array andAttribute:buteArray andMarketPee:self.marketpee];
+    MyTableListView * tablelist = [[MyTableListView alloc] initWithFrame:CGRectMake(13, CGRectGetMaxY(_contractView.frame) + _contractView.yj_height - 30, SCW - 13,SCH - CGRectGetMaxY(_contractView.frame) - _contractView.yj_height + 30) andContentDicArray:nil andAttributeName:array andAttribute:buteArray andMarketPee:self.marketpee];
     _tablelist = tablelist;
-    //    //tablelist.delegate=self;
-    [headerView addSubview:tablelist];
+//    [headerView addSubview:tablelist];
+    [self.view addSubview:tablelist];
     //设置代理作用:选中某一个 可自行修改
     tablelist.detailBlock = ^(NSInteger index) {
         NSLog(@"=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-%ld",index);
@@ -378,16 +363,14 @@
                 [payServiceArray addObject:columnarPaymodel.feeName];
                 [payNumberArray addObject:columnarPaymodel.value];
             }
-            RSPopViewController * popVc = [[RSPopViewController alloc]initwithContentObjectLabel:[NSString stringWithFormat:@"结算对象%@总欠费",columnarmodel.dealerName] andNumberLabel:[NSString stringWithFormat:@"%f",[[valueDict objectForKey:@"totalFee"] doubleValue]] andPayServiceArray:payServiceArray andPayNumberArray:payNumberArray];
+            RSPopViewController * popVc = [[RSPopViewController alloc]initwithContentObjectLabel:[NSString stringWithFormat:@"%@总欠费",columnarmodel.dealerName] andNumberLabel:[NSString stringWithFormat:@"%f",[[valueDict objectForKey:@"totalFee"] doubleValue]] andPayServiceArray:payServiceArray andPayNumberArray:payNumberArray];
             [weakSelf yc_bottomPresentController:popVc presentedHeight:234 completeHandle:^(BOOL presented) {
-                
             }];
         }];
-        
     };
-    [headerView setupAutoHeightWithBottomView:tablelist bottomMargin:50];
-    [headerView layoutIfNeeded];
-    self.tableview.tableHeaderView = headerView;
+//    [headerView setupAutoHeightWithBottomView:tablelist bottomMargin:0];
+//    [headerView layoutIfNeeded];
+//    self.tableview.tableHeaderView = headerView;
 }
 
 //选择结算对象
@@ -424,36 +407,49 @@
     }
 }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 0;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    //    if ([self.title isEqualToString:@"报表管理"]) {
-    //        return 5;
-    //    }else{
-    return 0;
-    //    }
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 107;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString * BALANCECELLID = @"BALANCECELLID";
-    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:BALANCECELLID];
-    if (!cell) {
-        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:BALANCECELLID];
-    }
-    return cell;
-}
+//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+//    return 0;
+//}
+//
+//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+//    //    if ([self.title isEqualToString:@"报表管理"]) {
+//    //        return 5;
+//    //    }else{
+//    return 0;
+//    //    }
+//}
+//
+//
+//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+//  return nil;
+//}
+//
+//- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+//  return nil;
+//}
+//
+//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+//    return 0;
+//}
+//
+//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+//    static NSString * BALANCECELLID = @"BALANCECELLID";
+//    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:BALANCECELLID];
+//    if (!cell) {
+//        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:BALANCECELLID];
+//    }
+//    return cell;
+//}
 
 
 - (void)seacrhBeginAction:(UIButton *)searchBtn{
-    [self.tableview.tableHeaderView removeFromSuperview];
-    [self.tableview.mj_header beginRefreshing];
-//    [self reloadBalanceNewData];
+    
+    [self.tablelist.arrayContent removeAllObjects];
+    [self.tablelist.table reloadData];
+    [self.tablelist.collectionView reloadData];
+    
+//    [self.tableview.tableHeaderView removeFromSuperview];
+    [self.tablelist.collectionView.mj_header beginRefreshing];
 }
 
 
