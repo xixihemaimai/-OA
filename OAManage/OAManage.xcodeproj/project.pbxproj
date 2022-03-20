@@ -1,0 +1,1947 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		040476D523A0D2DA00B4D528 /* iCloudManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 040476D423A0D2DA00B4D528 /* iCloudManager.m */; };
+		040476D823A0D33900B4D528 /* ZZDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 040476D723A0D33800B4D528 /* ZZDocument.m */; };
+		040476DF23A726DB00B4D528 /* RSShowImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 040476DE23A726DB00B4D528 /* RSShowImageViewController.m */; };
+		040476E223A75C5500B4D528 /* RSInputWorkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 040476E123A75C5500B4D528 /* RSInputWorkViewController.m */; };
+		040476E523A7981800B4D528 /* RSBannerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 040476E423A7981800B4D528 /* RSBannerModel.m */; };
+		0404772923A8BC6C00B4D528 /* RSNoticeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0404772823A8BC6C00B4D528 /* RSNoticeModel.m */; };
+		0404772C23A9DAF800B4D528 /* RSSystemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0404772B23A9DAF800B4D528 /* RSSystemViewController.m */; };
+		0404772F23AA054000B4D528 /* RSSystemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0404772E23AA054000B4D528 /* RSSystemModel.m */; };
+		0404773823AA0E3400B4D528 /* WSDatePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0404773423AA0E3400B4D528 /* WSDatePickerView.xib */; };
+		0404773923AA0E3400B4D528 /* WSDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0404773523AA0E3400B4D528 /* WSDatePickerView.m */; };
+		0404773A23AA0E3400B4D528 /* NSDate+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 0404773623AA0E3400B4D528 /* NSDate+Extension.m */; };
+		0404773B23AA0E3400B4D528 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 0404773723AA0E3400B4D528 /* UIView+Extension.m */; };
+		0404773E23AA31E500B4D528 /* RSSystemTypeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0404773D23AA31E500B4D528 /* RSSystemTypeModel.m */; };
+		0404774123AB156300B4D528 /* RSNewAuditedModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0404774023AB156300B4D528 /* RSNewAuditedModel.m */; };
+		0404774423AB220000B4D528 /* RSWorkContentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0404774323AB220000B4D528 /* RSWorkContentModel.m */; };
+		0404775023AB2A7100B4D528 /* RSWorkTypeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0404774F23AB2A7100B4D528 /* RSWorkTypeModel.m */; };
+		0404775323AB7E7300B4D528 /* RSSystemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0404775223AB7E7300B4D528 /* RSSystemCell.m */; };
+		0412B79121A6840400761547 /* RSMenuHeaderFootView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0412B79021A6840300761547 /* RSMenuHeaderFootView.m */; };
+		041930E2238E162700DD2508 /* RSApprovalProcessCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 041930E1238E162700DD2508 /* RSApprovalProcessCell.m */; };
+		041E070E237D2B9D00766441 /* 欢迎页.png in Resources */ = {isa = PBXBuildFile; fileRef = 041E070D237D2B9D00766441 /* 欢迎页.png */; };
+		041E0711237E588800766441 /* RSLaunchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 041E0710237E588800766441 /* RSLaunchCell.m */; };
+		041E0714237E983700766441 /* RSLaunchReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 041E0713237E983700766441 /* RSLaunchReusableView.m */; };
+		041E071723823E7900766441 /* RSLaunchFootReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 041E071623823E7900766441 /* RSLaunchFootReusableView.m */; };
+		041E071C238280CD00766441 /* JhPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 041E0718238280CB00766441 /* JhPageControl.m */; };
+		041E071D238280CD00766441 /* ZKImgRunLoopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 041E0719238280CC00766441 /* ZKImgRunLoopView.m */; };
+		041E072023838CF100766441 /* RSMailListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 041E071F23838CF100766441 /* RSMailListViewController.m */; };
+		041E07232383983E00766441 /* RSMailListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 041E07222383983E00766441 /* RSMailListCell.m */; };
+		041E072623839D9600766441 /* RSMailDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 041E072523839D9600766441 /* RSMailDetailViewController.m */; };
+		041E07292383BCED00766441 /* RSMailDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 041E07282383BCED00766441 /* RSMailDetailCell.m */; };
+		041E072C2383E28F00766441 /* RSServiceHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 041E072B2383E28F00766441 /* RSServiceHeaderView.m */; };
+		041E072F2384DF3800766441 /* RSServiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 041E072E2384DF3800766441 /* RSServiceCell.m */; };
+		041E07382384EEC500766441 /* GYNoticeViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 041E07342384EEC400766441 /* GYNoticeViewCell.m */; };
+		041E07392384EEC500766441 /* GYRollingNoticeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 041E07352384EEC400766441 /* GYRollingNoticeView.m */; };
+		041E073C2385098D00766441 /* RSGyRollingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 041E073B2385098D00766441 /* RSGyRollingCell.m */; };
+		041E073F23853EBE00766441 /* RSMailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 041E073E23853EBE00766441 /* RSMailModel.m */; };
+		041E07422386247F00766441 /* RSOALocalDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 041E07412386247F00766441 /* RSOALocalDB.m */; };
+		041E0745238625B600766441 /* RSOACreatFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 041E0744238625B600766441 /* RSOACreatFile.m */; };
+		041E07482387874100766441 /* RSSalertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 041E07472387874100766441 /* RSSalertView.m */; };
+		041E07502387B38C00766441 /* select_right@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 041E074C2387B38C00766441 /* select_right@2x.png */; };
+		041E07512387B38C00766441 /* select_right@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 041E074D2387B38C00766441 /* select_right@3x.png */; };
+		041E07522387B38C00766441 /* SHESelectTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 041E074E2387B38C00766441 /* SHESelectTable.m */; };
+		041E07532387B38C00766441 /* SHESelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 041E074F2387B38C00766441 /* SHESelectCell.m */; };
+		041E07562387CD8E00766441 /* RSNewAuditedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 041E07552387CD8E00766441 /* RSNewAuditedCell.m */; };
+		041E07592387D45F00766441 /* RSApprovalHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 041E07582387D45F00766441 /* RSApprovalHeaderView.m */; };
+		04215D99237A84F4001EFE11 /* RSMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04215D98237A84F4001EFE11 /* RSMainViewController.m */; };
+		04215D9C237A9130001EFE11 /* RSLaunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04215D9B237A9130001EFE11 /* RSLaunchViewController.m */; };
+		04215D9F237A91CA001EFE11 /* RSServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04215D9E237A91CA001EFE11 /* RSServiceViewController.m */; };
+		04215DA1237AAA8D001EFE11 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 04215DA0237AAA7C001EFE11 /* libsqlite3.tbd */; };
+		0429906D21ACEA14004503A7 /* RSApprovalProcessModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0429906C21ACEA14004503A7 /* RSApprovalProcessModel.m */; };
+		0429907021AD175C004503A7 /* RSWKOAmanagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0429906F21AD175C004503A7 /* RSWKOAmanagerViewController.m */; };
+		0436F6862178198300B0D6C8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0436F6852178198300B0D6C8 /* AppDelegate.m */; };
+		0436F6892178198300B0D6C8 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0436F6882178198300B0D6C8 /* ViewController.m */; };
+		0436F68C2178198300B0D6C8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0436F68A2178198300B0D6C8 /* Main.storyboard */; };
+		0436F68F2178198300B0D6C8 /* OAManage.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0436F68D2178198300B0D6C8 /* OAManage.xcdatamodeld */; };
+		0436F6912178198B00B0D6C8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0436F6902178198B00B0D6C8 /* Assets.xcassets */; };
+		0436F6942178198B00B0D6C8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0436F6922178198B00B0D6C8 /* LaunchScreen.storyboard */; };
+		0436F6972178198B00B0D6C8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0436F6962178198B00B0D6C8 /* main.m */; };
+		0436F6B72178280000B0D6C8 /* RSMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0436F6B62178280000B0D6C8 /* RSMenuViewController.m */; };
+		0436F6BA2178282600B0D6C8 /* RSMyNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0436F6B82178282500B0D6C8 /* RSMyNavigationViewController.m */; };
+		0436F6BD2178298800B0D6C8 /* UIBarButtonItem+Item.m in Sources */ = {isa = PBXBuildFile; fileRef = 0436F6BC2178298800B0D6C8 /* UIBarButtonItem+Item.m */; };
+		044656E324207AC300F1089C /* RSOnlineTrainingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044656E224207AC300F1089C /* RSOnlineTrainingViewController.m */; };
+		044656E62420A43800F1089C /* RSOnlineContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044656E52420A43800F1089C /* RSOnlineContentViewController.m */; };
+		044656E92420A58100F1089C /* RSOnlineContentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 044656E82420A58100F1089C /* RSOnlineContentCell.m */; };
+		044656EC2420B59A00F1089C /* RSOnlineVideoPlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044656EB2420B59900F1089C /* RSOnlineVideoPlayViewController.m */; };
+		04469EAE27E711C6003831A9 /* libMiPushSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04469EAA27E711C5003831A9 /* libMiPushSDK.a */; };
+		04469EAF27E711C6003831A9 /* libMiPushApnsAckSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04469EAB27E711C5003831A9 /* libMiPushApnsAckSDK.a */; };
+		045D414721A808CE005F34D2 /* RSInformationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 045D414621A808CE005F34D2 /* RSInformationModel.m */; };
+		045D414A21AB91F3005F34D2 /* RSAuditedModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 045D414921AB91F3005F34D2 /* RSAuditedModel.m */; };
+		0462F18E2608228500DBB3AA /* RSBalanCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0462F18D2608228300DBB3AA /* RSBalanCell.m */; };
+		046AF2D72546657E0069591B /* RSColumnarModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 046AF2D62546657E0069591B /* RSColumnarModel.m */; };
+		046AF2DA25490B600069591B /* RSFeeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 046AF2D925490B600069591B /* RSFeeModel.m */; };
+		046AF2DD254C52F50069591B /* RSFeeNameCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 046AF2DC254C52F50069591B /* RSFeeNameCell.m */; };
+		0471B00324373E2B00785F4D /* RSJumpVideoTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 0471B00224373E2B00785F4D /* RSJumpVideoTool.m */; };
+		04A40AD5251840CD0082DFD3 /* RSMarketModuleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A40AD4251840CD0082DFD3 /* RSMarketModuleViewController.m */; };
+		04A40AD8251854E30082DFD3 /* RSMarketModuleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A40AD7251854E30082DFD3 /* RSMarketModuleCell.m */; };
+		04A40ADB25185B970082DFD3 /* RSManageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A40ADA25185B970082DFD3 /* RSManageViewController.m */; };
+		04A40ADE25185CA40082DFD3 /* RSManageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A40ADD25185CA40082DFD3 /* RSManageCell.m */; };
+		04A40AE125187E140082DFD3 /* RSContractViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A40AE025187E140082DFD3 /* RSContractViewController.m */; };
+		04A40AE4251886AF0082DFD3 /* RSContractCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A40AE3251886AF0082DFD3 /* RSContractCell.m */; };
+		04A40AE7251994610082DFD3 /* RSBalanceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A40AE6251994610082DFD3 /* RSBalanceViewController.m */; };
+		04A40B012519D2530082DFD3 /* BCContentOB.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A40AFD2519D2520082DFD3 /* BCContentOB.m */; };
+		04A40B022519D2530082DFD3 /* BCMyCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A40AFE2519D2520082DFD3 /* BCMyCollectionViewCell.m */; };
+		04A40B032519D2530082DFD3 /* BCMyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A40AFF2519D2520082DFD3 /* BCMyTableViewCell.m */; };
+		04A40B042519D2530082DFD3 /* MyTableListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A40B002519D2520082DFD3 /* MyTableListView.m */; };
+		04A40B0A2519DE790082DFD3 /* RSMyLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A40B092519DE790082DFD3 /* RSMyLabel.m */; };
+		04A40B0E2519E65C0082DFD3 /* DIYSystemDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A40B0D2519E65C0082DFD3 /* DIYSystemDatePickerView.m */; };
+		04A40B172519EB280082DFD3 /* YCPresentationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A40B102519EB280082DFD3 /* YCPresentationController.m */; };
+		04A40B182519EB280082DFD3 /* YCPopoverAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A40B152519EB280082DFD3 /* YCPopoverAnimator.m */; };
+		04A40B192519EB280082DFD3 /* UIViewController+YCPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A40B162519EB280082DFD3 /* UIViewController+YCPopover.m */; };
+		04A40B1C2519EBC30082DFD3 /* RSPopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A40B1B2519EBC30082DFD3 /* RSPopViewController.m */; };
+		04A40B1F251AE6150082DFD3 /* RSColumnarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A40B1E251AE6150082DFD3 /* RSColumnarViewController.m */; };
+		04A40B23251B39360082DFD3 /* ColumnChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A40B21251B39360082DFD3 /* ColumnChartView.m */; };
+		04A40B27251C8A6F0082DFD3 /* HQPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A40B26251C8A6F0082DFD3 /* HQPickerView.m */; };
+		04A496462553AB1A00345FCF /* UIControl+QiEventInterval.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A496452553AB1A00345FCF /* UIControl+QiEventInterval.m */; };
+		04A4F81E21ABF0020052EFC4 /* RSShenHeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A4F81D21ABF0020052EFC4 /* RSShenHeModel.m */; };
+		04A4F82121ABF1990052EFC4 /* RSShenHeFristCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A4F82021ABF1990052EFC4 /* RSShenHeFristCell.m */; };
+		04A6F156219521D000D15F58 /* RSRedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A6F154219521CF00D15F58 /* RSRedButton.m */; };
+		04A6F159219528D800D15F58 /* RSAuditedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A6F158219528D800D15F58 /* RSAuditedViewController.m */; };
+		04A6F15C219538F100D15F58 /* RSApprovalProcessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A6F15B219538F100D15F58 /* RSApprovalProcessViewController.m */; };
+		04A6F15F21953A8B00D15F58 /* RSProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A6F15E21953A8B00D15F58 /* RSProgressView.m */; };
+		04A6F16221955C2300D15F58 /* RSProgressStatusCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A6F16121955C2300D15F58 /* RSProgressStatusCell.m */; };
+		04A6F1682195684A00D15F58 /* JJOptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A6F1652195684A00D15F58 /* JJOptionView.m */; };
+		04A6F1692195684A00D15F58 /* list_icon_drfault@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04A6F1662195684A00D15F58 /* list_icon_drfault@3x.png */; };
+		04A6F16A2195684A00D15F58 /* list_icon_drfault@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04A6F1672195684A00D15F58 /* list_icon_drfault@2x.png */; };
+		04A6F17121957BCB00D15F58 /* RSPasswordModificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A6F17021957BCB00D15F58 /* RSPasswordModificationViewController.m */; };
+		04A6F17421957BE600D15F58 /* RSPersonalInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A6F17321957BE600D15F58 /* RSPersonalInformationViewController.m */; };
+		04A6F1792195834600D15F58 /* RSPersonFirstCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A6F1752195834500D15F58 /* RSPersonFirstCell.m */; };
+		04A6F17A2195834600D15F58 /* RSPersonSecondCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A6F1762195834500D15F58 /* RSPersonSecondCell.m */; };
+		04A6F17E219592D900D15F58 /* MyMD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A6F17C219592D900D15F58 /* MyMD5.m */; };
+		04A6F184219911F900D15F58 /* NetworkTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A6F182219911F800D15F58 /* NetworkTool.m */; };
+		04A6F187219980B900D15F58 /* RSViewProgressLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A6F186219980B900D15F58 /* RSViewProgressLine.m */; };
+		04A8E7B423B065DC004E8013 /* QLPreviewItemCustom.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A8E7B323B065DB004E8013 /* QLPreviewItemCustom.m */; };
+		04A8E7B723B066FD004E8013 /* RSNoticeMoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A8E7B623B066FC004E8013 /* RSNoticeMoreViewController.m */; };
+		04A8E7BA23B0680D004E8013 /* RSXNoticeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A8E7B923B0680D004E8013 /* RSXNoticeCell.m */; };
+		04A8E7BD23B07140004E8013 /* RSToBeInitiatedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A8E7BC23B07140004E8013 /* RSToBeInitiatedViewController.m */; };
+		04B3F71123B0A46000CDD821 /* RSTouchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B3F71023B0A46000CDD821 /* RSTouchViewController.m */; };
+		04B3F71423B0ABBA00CDD821 /* RSTouchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B3F71323B0ABBA00CDD821 /* RSTouchCell.m */; };
+		04B3F71723B0B1E000CDD821 /* RSBLTouchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B3F71623B0B1E000CDD821 /* RSBLTouchViewController.m */; };
+		04B3F71A23B0BDDD00CDD821 /* RSBLTouchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B3F71923B0BDDD00CDD821 /* RSBLTouchCell.m */; };
+		04B3F71D23B0C2D500CDD821 /* RSNameOfCargoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B3F71C23B0C2D500CDD821 /* RSNameOfCargoViewController.m */; };
+		04B3F72023B0C77200CDD821 /* RSNameOfCargoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B3F71F23B0C77200CDD821 /* RSNameOfCargoCell.m */; };
+		04B3F72323B0C89800CDD821 /* RSStockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B3F72223B0C89800CDD821 /* RSStockViewController.m */; };
+		04B3F72623B0C92E00CDD821 /* RSBLStockCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B3F72523B0C92E00CDD821 /* RSBLStockCell.m */; };
+		04B3F72923B1B20B00CDD821 /* RSSLTouchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B3F72823B1B20B00CDD821 /* RSSLTouchCell.m */; };
+		04B3F72C23B1B4E100CDD821 /* RSSLHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B3F72B23B1B4E100CDD821 /* RSSLHeaderView.m */; };
+		04B3F72F23B1B5DB00CDD821 /* RSSLFootView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B3F72E23B1B5DB00CDD821 /* RSSLFootView.m */; };
+		04B3F73223B1BDD200CDD821 /* RSSLStockHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B3F73123B1BDD200CDD821 /* RSSLStockHeaderView.m */; };
+		04B3F73523B1BF4200CDD821 /* RSSLStockFootView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B3F73423B1BF4200CDD821 /* RSSLStockFootView.m */; };
+		04B3F73823B1BFCE00CDD821 /* RSSLStockCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B3F73723B1BFCE00CDD821 /* RSSLStockCell.m */; };
+		04B3F73E23B1FF0000CDD821 /* RSTouchAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B3F73D23B1FF0000CDD821 /* RSTouchAlertView.m */; };
+		04B3F74123B2022000CDD821 /* UITextView+ZWPlaceHolder.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B3F74023B2022000CDD821 /* UITextView+ZWPlaceHolder.m */; };
+		04B3F74423B34D0B00CDD821 /* RSInformationLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B3F74323B34D0B00CDD821 /* RSInformationLabel.m */; };
+		04B3F74823B497DA00CDD821 /* JHSysAlertUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B3F74723B497DA00CDD821 /* JHSysAlertUtil.m */; };
+		04B3F74B23B4A71A00CDD821 /* RSTouchModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B3F74A23B4A71A00CDD821 /* RSTouchModel.m */; };
+		04B3F74E23B4B31800CDD821 /* RSShipperMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B3F74D23B4B31800CDD821 /* RSShipperMode.m */; };
+		04B3F75123B4B89F00CDD821 /* RSBMStockModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B3F75023B4B89F00CDD821 /* RSBMStockModel.m */; };
+		04B3F75423B4C7F600CDD821 /* RSSlStockModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B3F75323B4C7F600CDD821 /* RSSlStockModel.m */; };
+		04B3F75723B4C8B900CDD821 /* RSSLPieceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B3F75623B4C8B900CDD821 /* RSSLPieceModel.m */; };
+		04B3F75A23B5D78600CDD821 /* RSWarehouseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B3F75923B5D78600CDD821 /* RSWarehouseModel.m */; };
+		04B3F75D23B5D7BB00CDD821 /* RSStoreAreaModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B3F75C23B5D7BB00CDD821 /* RSStoreAreaModel.m */; };
+		04B4F9F223C3084200853021 /* RSAboutOurViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B4F9F123C3084200853021 /* RSAboutOurViewController.m */; };
+		04BD6B1D23BAF125006693E3 /* RSRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BD6B1C23BAF125006693E3 /* RSRegisterViewController.m */; };
+		04C0474221787B5E0006B8D4 /* UIScrollView+DREmptyDataSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C0473E21787B5E0006B8D4 /* UIScrollView+DREmptyDataSet.m */; };
+		04C0474321787B5E0006B8D4 /* UIScrollView+DRRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C0474121787B5E0006B8D4 /* UIScrollView+DRRefresh.m */; };
+		04C0474621787DA00006B8D4 /* RSShenHeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C0474521787DA00006B8D4 /* RSShenHeViewController.m */; };
+		04C0474C217885FF0006B8D4 /* RSLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C0474B217885FF0006B8D4 /* RSLoginViewController.m */; };
+		04C1D92621C5E79A00384F98 /* MXActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C1D92521C5E79A00384F98 /* MXActionSheet.m */; };
+		04C1D92C21C63F7400384F98 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04C1D92B21C63F7400384F98 /* UserNotifications.framework */; };
+		04C1D92E21C63F8C00384F98 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 04C1D92D21C63F8C00384F98 /* libresolv.tbd */; };
+		04C1D93021C63F9E00384F98 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 04C1D92F21C63F9E00384F98 /* libxml2.tbd */; };
+		04C1D93221C63FAE00384F98 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 04C1D93121C63FAD00384F98 /* libz.tbd */; };
+		04C1D93421C63FBB00384F98 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04C1D93321C63FBB00384F98 /* SystemConfiguration.framework */; };
+		04C1D93621C63FC700384F98 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04C1D93521C63FC700384F98 /* MobileCoreServices.framework */; };
+		04C1D93821C63FD600384F98 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04C1D93721C63FD600384F98 /* CFNetwork.framework */; };
+		04CA3FBD219AC85C009C2D33 /* RSUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CA3FBC219AC85C009C2D33 /* RSUserModel.m */; };
+		04D09F3221B6678B0078D7DA /* RSNoticeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D09F3121B6678B0078D7DA /* RSNoticeViewController.m */; };
+		04D6CECB2190254E00B35A51 /* UIColor+HexColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D6CEC82190254E00B35A51 /* UIColor+HexColor.m */; };
+		04D6CECC2190254E00B35A51 /* Nonetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D6CECA2190254E00B35A51 /* Nonetwork.m */; };
+		04D6CECF219026AA00B35A51 /* NSString+Hash.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D6CECE219026AA00B35A51 /* NSString+Hash.m */; };
+		04D6CED22190329100B35A51 /* RSBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D6CED12190329000B35A51 /* RSBaseViewController.m */; };
+		04D6CED621904F5C00B35A51 /* ZZQEmptyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D6CED521904F5C00B35A51 /* ZZQEmptyView.m */; };
+		04D6CEDB21914B2100B35A51 /* MJChiBaoZiHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D6CED721914B2000B35A51 /* MJChiBaoZiHeader.m */; };
+		04D6CEDC21914B2100B35A51 /* MJChiBaoZiFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D6CEDA21914B2100B35A51 /* MJChiBaoZiFooter.m */; };
+		04D6CEE32191754000B35A51 /* SCNavigationMenuTitleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D6CEDF2191754000B35A51 /* SCNavigationMenuTitleCell.m */; };
+		04D6CEE42191754000B35A51 /* SCNavigationMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D6CEE22191754000B35A51 /* SCNavigationMenuView.m */; };
+		04DE278F262672AB00172706 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04C1D93921C63FE500384F98 /* CoreTelephony.framework */; };
+		04E6A344219189B7007A44F2 /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E6A343219189B7007A44F2 /* UIView+Frame.m */; };
+		04E6A34721927A1A007A44F2 /* RSCustomMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E6A34621927A1A007A44F2 /* RSCustomMenuCell.m */; };
+		04E6A34A2192824F007A44F2 /* RSApprovalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E6A3492192824F007A44F2 /* RSApprovalCell.m */; };
+		04FD50012421CF07004EBA34 /* RSOnlineVideoHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FD50002421CF07004EBA34 /* RSOnlineVideoHeaderView.m */; };
+		04FD500424220066004EBA34 /* RSOnlineModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FD500324220066004EBA34 /* RSOnlineModel.m */; };
+		04FD5007242211F5004EBA34 /* RSOnlineTypeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FD5006242211F5004EBA34 /* RSOnlineTypeModel.m */; };
+		04FF49CB21A3B38E00C4A2C2 /* FSAES128.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FF49CA21A3B38E00C4A2C2 /* FSAES128.m */; };
+		04FF49DF21A3F04B00C4A2C2 /* RSRoleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FF49DE21A3F04B00C4A2C2 /* RSRoleModel.m */; };
+		04FF49E521A4F21E00C4A2C2 /* RSAEncryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FF49E321A4F21D00C4A2C2 /* RSAEncryptor.m */; };
+		3E37A3CC73786F01A8AEED07 /* libPods-OAManage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 425A1ECECB928E2700E33380 /* libPods-OAManage.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		040476D323A0D2DA00B4D528 /* iCloudManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iCloudManager.h; sourceTree = "<group>"; };
+		040476D423A0D2DA00B4D528 /* iCloudManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iCloudManager.m; sourceTree = "<group>"; };
+		040476D623A0D33800B4D528 /* ZZDocument.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZZDocument.h; sourceTree = "<group>"; };
+		040476D723A0D33800B4D528 /* ZZDocument.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZZDocument.m; sourceTree = "<group>"; };
+		040476D923A1291300B4D528 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
+		040476DB23A12BB300B4D528 /* libiconv.2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.2.tbd; path = usr/lib/libiconv.2.tbd; sourceTree = SDKROOT; };
+		040476DD23A726DB00B4D528 /* RSShowImageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSShowImageViewController.h; sourceTree = "<group>"; };
+		040476DE23A726DB00B4D528 /* RSShowImageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSShowImageViewController.m; sourceTree = "<group>"; };
+		040476E023A75C5500B4D528 /* RSInputWorkViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSInputWorkViewController.h; sourceTree = "<group>"; };
+		040476E123A75C5500B4D528 /* RSInputWorkViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSInputWorkViewController.m; sourceTree = "<group>"; };
+		040476E323A7981800B4D528 /* RSBannerModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSBannerModel.h; sourceTree = "<group>"; };
+		040476E423A7981800B4D528 /* RSBannerModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSBannerModel.m; sourceTree = "<group>"; };
+		0404772723A8BC6C00B4D528 /* RSNoticeModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSNoticeModel.h; sourceTree = "<group>"; };
+		0404772823A8BC6C00B4D528 /* RSNoticeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSNoticeModel.m; sourceTree = "<group>"; };
+		0404772A23A9DAF800B4D528 /* RSSystemViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSSystemViewController.h; sourceTree = "<group>"; };
+		0404772B23A9DAF800B4D528 /* RSSystemViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSSystemViewController.m; sourceTree = "<group>"; };
+		0404772D23AA054000B4D528 /* RSSystemModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSSystemModel.h; sourceTree = "<group>"; };
+		0404772E23AA054000B4D528 /* RSSystemModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSSystemModel.m; sourceTree = "<group>"; };
+		0404773123AA0E3400B4D528 /* NSDate+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Extension.h"; sourceTree = "<group>"; };
+		0404773223AA0E3400B4D528 /* WSDatePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WSDatePickerView.h; sourceTree = "<group>"; };
+		0404773323AA0E3400B4D528 /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
+		0404773423AA0E3400B4D528 /* WSDatePickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WSDatePickerView.xib; sourceTree = "<group>"; };
+		0404773523AA0E3400B4D528 /* WSDatePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WSDatePickerView.m; sourceTree = "<group>"; };
+		0404773623AA0E3400B4D528 /* NSDate+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Extension.m"; sourceTree = "<group>"; };
+		0404773723AA0E3400B4D528 /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
+		0404773C23AA31E500B4D528 /* RSSystemTypeModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSSystemTypeModel.h; sourceTree = "<group>"; };
+		0404773D23AA31E500B4D528 /* RSSystemTypeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSSystemTypeModel.m; sourceTree = "<group>"; };
+		0404773F23AB156300B4D528 /* RSNewAuditedModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSNewAuditedModel.h; sourceTree = "<group>"; };
+		0404774023AB156300B4D528 /* RSNewAuditedModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSNewAuditedModel.m; sourceTree = "<group>"; };
+		0404774223AB220000B4D528 /* RSWorkContentModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSWorkContentModel.h; sourceTree = "<group>"; };
+		0404774323AB220000B4D528 /* RSWorkContentModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSWorkContentModel.m; sourceTree = "<group>"; };
+		0404774E23AB2A7100B4D528 /* RSWorkTypeModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSWorkTypeModel.h; sourceTree = "<group>"; };
+		0404774F23AB2A7100B4D528 /* RSWorkTypeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSWorkTypeModel.m; sourceTree = "<group>"; };
+		0404775123AB7E7300B4D528 /* RSSystemCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSSystemCell.h; sourceTree = "<group>"; };
+		0404775223AB7E7300B4D528 /* RSSystemCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSSystemCell.m; sourceTree = "<group>"; };
+		0412B78F21A6840300761547 /* RSMenuHeaderFootView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSMenuHeaderFootView.h; sourceTree = "<group>"; };
+		0412B79021A6840300761547 /* RSMenuHeaderFootView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSMenuHeaderFootView.m; sourceTree = "<group>"; };
+		041930E0238E162700DD2508 /* RSApprovalProcessCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSApprovalProcessCell.h; sourceTree = "<group>"; };
+		041930E1238E162700DD2508 /* RSApprovalProcessCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSApprovalProcessCell.m; sourceTree = "<group>"; };
+		041E070D237D2B9D00766441 /* 欢迎页.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "欢迎页.png"; sourceTree = "<group>"; };
+		041E070F237E588800766441 /* RSLaunchCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSLaunchCell.h; sourceTree = "<group>"; };
+		041E0710237E588800766441 /* RSLaunchCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSLaunchCell.m; sourceTree = "<group>"; };
+		041E0712237E983700766441 /* RSLaunchReusableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSLaunchReusableView.h; sourceTree = "<group>"; };
+		041E0713237E983700766441 /* RSLaunchReusableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSLaunchReusableView.m; sourceTree = "<group>"; };
+		041E071523823E7900766441 /* RSLaunchFootReusableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSLaunchFootReusableView.h; sourceTree = "<group>"; };
+		041E071623823E7900766441 /* RSLaunchFootReusableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSLaunchFootReusableView.m; sourceTree = "<group>"; };
+		041E0718238280CB00766441 /* JhPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JhPageControl.m; sourceTree = "<group>"; };
+		041E0719238280CC00766441 /* ZKImgRunLoopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKImgRunLoopView.m; sourceTree = "<group>"; };
+		041E071A238280CD00766441 /* JhPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JhPageControl.h; sourceTree = "<group>"; };
+		041E071B238280CD00766441 /* ZKImgRunLoopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKImgRunLoopView.h; sourceTree = "<group>"; };
+		041E071E23838CF100766441 /* RSMailListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSMailListViewController.h; sourceTree = "<group>"; };
+		041E071F23838CF100766441 /* RSMailListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSMailListViewController.m; sourceTree = "<group>"; };
+		041E07212383983E00766441 /* RSMailListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSMailListCell.h; sourceTree = "<group>"; };
+		041E07222383983E00766441 /* RSMailListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSMailListCell.m; sourceTree = "<group>"; };
+		041E072423839D9600766441 /* RSMailDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSMailDetailViewController.h; sourceTree = "<group>"; };
+		041E072523839D9600766441 /* RSMailDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSMailDetailViewController.m; sourceTree = "<group>"; };
+		041E07272383BCED00766441 /* RSMailDetailCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSMailDetailCell.h; sourceTree = "<group>"; };
+		041E07282383BCED00766441 /* RSMailDetailCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSMailDetailCell.m; sourceTree = "<group>"; };
+		041E072A2383E28F00766441 /* RSServiceHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSServiceHeaderView.h; sourceTree = "<group>"; };
+		041E072B2383E28F00766441 /* RSServiceHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSServiceHeaderView.m; sourceTree = "<group>"; };
+		041E072D2384DF3800766441 /* RSServiceCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSServiceCell.h; sourceTree = "<group>"; };
+		041E072E2384DF3800766441 /* RSServiceCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSServiceCell.m; sourceTree = "<group>"; };
+		041E07342384EEC400766441 /* GYNoticeViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GYNoticeViewCell.m; sourceTree = "<group>"; };
+		041E07352384EEC400766441 /* GYRollingNoticeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GYRollingNoticeView.m; sourceTree = "<group>"; };
+		041E07362384EEC400766441 /* GYRollingNoticeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GYRollingNoticeView.h; sourceTree = "<group>"; };
+		041E07372384EEC400766441 /* GYNoticeViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GYNoticeViewCell.h; sourceTree = "<group>"; };
+		041E073A2385098D00766441 /* RSGyRollingCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSGyRollingCell.h; sourceTree = "<group>"; };
+		041E073B2385098D00766441 /* RSGyRollingCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSGyRollingCell.m; sourceTree = "<group>"; };
+		041E073D23853EBE00766441 /* RSMailModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSMailModel.h; sourceTree = "<group>"; };
+		041E073E23853EBE00766441 /* RSMailModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSMailModel.m; sourceTree = "<group>"; };
+		041E07402386247F00766441 /* RSOALocalDB.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSOALocalDB.h; sourceTree = "<group>"; };
+		041E07412386247F00766441 /* RSOALocalDB.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSOALocalDB.m; sourceTree = "<group>"; };
+		041E0743238625B600766441 /* RSOACreatFile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSOACreatFile.h; sourceTree = "<group>"; };
+		041E0744238625B600766441 /* RSOACreatFile.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSOACreatFile.m; sourceTree = "<group>"; };
+		041E07462387874100766441 /* RSSalertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSSalertView.h; sourceTree = "<group>"; };
+		041E07472387874100766441 /* RSSalertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSSalertView.m; sourceTree = "<group>"; };
+		041E074A2387B38C00766441 /* SHESelectTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHESelectTable.h; sourceTree = "<group>"; };
+		041E074B2387B38C00766441 /* SHESelectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHESelectCell.h; sourceTree = "<group>"; };
+		041E074C2387B38C00766441 /* select_right@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "select_right@2x.png"; sourceTree = "<group>"; };
+		041E074D2387B38C00766441 /* select_right@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "select_right@3x.png"; sourceTree = "<group>"; };
+		041E074E2387B38C00766441 /* SHESelectTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHESelectTable.m; sourceTree = "<group>"; };
+		041E074F2387B38C00766441 /* SHESelectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHESelectCell.m; sourceTree = "<group>"; };
+		041E07542387CD8E00766441 /* RSNewAuditedCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSNewAuditedCell.h; sourceTree = "<group>"; };
+		041E07552387CD8E00766441 /* RSNewAuditedCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSNewAuditedCell.m; sourceTree = "<group>"; };
+		041E07572387D45F00766441 /* RSApprovalHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSApprovalHeaderView.h; sourceTree = "<group>"; };
+		041E07582387D45F00766441 /* RSApprovalHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSApprovalHeaderView.m; sourceTree = "<group>"; };
+		04215D97237A84F4001EFE11 /* RSMainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSMainViewController.h; sourceTree = "<group>"; };
+		04215D98237A84F4001EFE11 /* RSMainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSMainViewController.m; sourceTree = "<group>"; };
+		04215D9A237A9130001EFE11 /* RSLaunchViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSLaunchViewController.h; sourceTree = "<group>"; };
+		04215D9B237A9130001EFE11 /* RSLaunchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSLaunchViewController.m; sourceTree = "<group>"; };
+		04215D9D237A91CA001EFE11 /* RSServiceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSServiceViewController.h; sourceTree = "<group>"; };
+		04215D9E237A91CA001EFE11 /* RSServiceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSServiceViewController.m; sourceTree = "<group>"; };
+		04215DA0237AAA7C001EFE11 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		0429906B21ACEA14004503A7 /* RSApprovalProcessModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSApprovalProcessModel.h; sourceTree = "<group>"; };
+		0429906C21ACEA14004503A7 /* RSApprovalProcessModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSApprovalProcessModel.m; sourceTree = "<group>"; };
+		0429906E21AD175C004503A7 /* RSWKOAmanagerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSWKOAmanagerViewController.h; sourceTree = "<group>"; };
+		0429906F21AD175C004503A7 /* RSWKOAmanagerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSWKOAmanagerViewController.m; sourceTree = "<group>"; };
+		0436F6812178198300B0D6C8 /* OAManage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OAManage.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0436F6842178198300B0D6C8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		0436F6852178198300B0D6C8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		0436F6872178198300B0D6C8 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		0436F6882178198300B0D6C8 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		0436F68B2178198300B0D6C8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		0436F68E2178198300B0D6C8 /* OAManage.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = OAManage.xcdatamodel; sourceTree = "<group>"; };
+		0436F6902178198B00B0D6C8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		0436F6932178198B00B0D6C8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		0436F6952178198B00B0D6C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0436F6962178198B00B0D6C8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		0436F6B12178245F00B0D6C8 /* OAManagePrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OAManagePrefixHeader.pch; sourceTree = "<group>"; };
+		0436F6B52178280000B0D6C8 /* RSMenuViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSMenuViewController.h; sourceTree = "<group>"; };
+		0436F6B62178280000B0D6C8 /* RSMenuViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSMenuViewController.m; sourceTree = "<group>"; };
+		0436F6B82178282500B0D6C8 /* RSMyNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSMyNavigationViewController.m; sourceTree = "<group>"; };
+		0436F6B92178282600B0D6C8 /* RSMyNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSMyNavigationViewController.h; sourceTree = "<group>"; };
+		0436F6BB2178298800B0D6C8 /* UIBarButtonItem+Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+Item.h"; sourceTree = "<group>"; };
+		0436F6BC2178298800B0D6C8 /* UIBarButtonItem+Item.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+Item.m"; sourceTree = "<group>"; };
+		044656E124207AC300F1089C /* RSOnlineTrainingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSOnlineTrainingViewController.h; sourceTree = "<group>"; };
+		044656E224207AC300F1089C /* RSOnlineTrainingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSOnlineTrainingViewController.m; sourceTree = "<group>"; };
+		044656E42420A43800F1089C /* RSOnlineContentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSOnlineContentViewController.h; sourceTree = "<group>"; };
+		044656E52420A43800F1089C /* RSOnlineContentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSOnlineContentViewController.m; sourceTree = "<group>"; };
+		044656E72420A58100F1089C /* RSOnlineContentCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSOnlineContentCell.h; sourceTree = "<group>"; };
+		044656E82420A58100F1089C /* RSOnlineContentCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSOnlineContentCell.m; sourceTree = "<group>"; };
+		044656EA2420B59900F1089C /* RSOnlineVideoPlayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSOnlineVideoPlayViewController.h; sourceTree = "<group>"; };
+		044656EB2420B59900F1089C /* RSOnlineVideoPlayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSOnlineVideoPlayViewController.m; sourceTree = "<group>"; };
+		04469EAA27E711C5003831A9 /* libMiPushSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMiPushSDK.a; sourceTree = "<group>"; };
+		04469EAB27E711C5003831A9 /* libMiPushApnsAckSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMiPushApnsAckSDK.a; sourceTree = "<group>"; };
+		04469EAC27E711C5003831A9 /* MiPushApnsAckSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MiPushApnsAckSDK.h; sourceTree = "<group>"; };
+		04469EAD27E711C5003831A9 /* MiPushSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MiPushSDK.h; sourceTree = "<group>"; };
+		045D414521A808CE005F34D2 /* RSInformationModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSInformationModel.h; sourceTree = "<group>"; };
+		045D414621A808CE005F34D2 /* RSInformationModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSInformationModel.m; sourceTree = "<group>"; };
+		045D414821AB91F3005F34D2 /* RSAuditedModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSAuditedModel.h; sourceTree = "<group>"; };
+		045D414921AB91F3005F34D2 /* RSAuditedModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSAuditedModel.m; sourceTree = "<group>"; };
+		0462F18C2608228300DBB3AA /* RSBalanCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSBalanCell.h; sourceTree = "<group>"; };
+		0462F18D2608228300DBB3AA /* RSBalanCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSBalanCell.m; sourceTree = "<group>"; };
+		0462F1AE260CCD8D00DBB3AA /* libMiPushSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libMiPushSDK.a; path = "OAManage/Classes/其他/Lib/libMiPushSDK/libMiPushSDK.a"; sourceTree = "<group>"; };
+		046AF2D52546657E0069591B /* RSColumnarModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSColumnarModel.h; sourceTree = "<group>"; };
+		046AF2D62546657E0069591B /* RSColumnarModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSColumnarModel.m; sourceTree = "<group>"; };
+		046AF2D825490B600069591B /* RSFeeModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSFeeModel.h; sourceTree = "<group>"; };
+		046AF2D925490B600069591B /* RSFeeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSFeeModel.m; sourceTree = "<group>"; };
+		046AF2DB254C52F50069591B /* RSFeeNameCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSFeeNameCell.h; sourceTree = "<group>"; };
+		046AF2DC254C52F50069591B /* RSFeeNameCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSFeeNameCell.m; sourceTree = "<group>"; };
+		0471B00224373E2B00785F4D /* RSJumpVideoTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSJumpVideoTool.m; sourceTree = "<group>"; };
+		04A40AD3251840CD0082DFD3 /* RSMarketModuleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSMarketModuleViewController.h; sourceTree = "<group>"; };
+		04A40AD4251840CD0082DFD3 /* RSMarketModuleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSMarketModuleViewController.m; sourceTree = "<group>"; };
+		04A40AD6251854E30082DFD3 /* RSMarketModuleCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSMarketModuleCell.h; sourceTree = "<group>"; };
+		04A40AD7251854E30082DFD3 /* RSMarketModuleCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSMarketModuleCell.m; sourceTree = "<group>"; };
+		04A40AD925185B970082DFD3 /* RSManageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSManageViewController.h; sourceTree = "<group>"; };
+		04A40ADA25185B970082DFD3 /* RSManageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSManageViewController.m; sourceTree = "<group>"; };
+		04A40ADC25185CA40082DFD3 /* RSManageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSManageCell.h; sourceTree = "<group>"; };
+		04A40ADD25185CA40082DFD3 /* RSManageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSManageCell.m; sourceTree = "<group>"; };
+		04A40ADF25187E140082DFD3 /* RSContractViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSContractViewController.h; sourceTree = "<group>"; };
+		04A40AE025187E140082DFD3 /* RSContractViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSContractViewController.m; sourceTree = "<group>"; };
+		04A40AE2251886AF0082DFD3 /* RSContractCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSContractCell.h; sourceTree = "<group>"; };
+		04A40AE3251886AF0082DFD3 /* RSContractCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSContractCell.m; sourceTree = "<group>"; };
+		04A40AE5251994610082DFD3 /* RSBalanceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSBalanceViewController.h; sourceTree = "<group>"; };
+		04A40AE6251994610082DFD3 /* RSBalanceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSBalanceViewController.m; sourceTree = "<group>"; };
+		04A40AF92519D2520082DFD3 /* BCContentOB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCContentOB.h; sourceTree = "<group>"; };
+		04A40AFA2519D2520082DFD3 /* BCMyCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCMyCollectionViewCell.h; sourceTree = "<group>"; };
+		04A40AFB2519D2520082DFD3 /* MyTableListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTableListView.h; sourceTree = "<group>"; };
+		04A40AFC2519D2520082DFD3 /* BCMyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCMyTableViewCell.h; sourceTree = "<group>"; };
+		04A40AFD2519D2520082DFD3 /* BCContentOB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCContentOB.m; sourceTree = "<group>"; };
+		04A40AFE2519D2520082DFD3 /* BCMyCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCMyCollectionViewCell.m; sourceTree = "<group>"; };
+		04A40AFF2519D2520082DFD3 /* BCMyTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCMyTableViewCell.m; sourceTree = "<group>"; };
+		04A40B002519D2520082DFD3 /* MyTableListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTableListView.m; sourceTree = "<group>"; };
+		04A40B082519DE790082DFD3 /* RSMyLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSMyLabel.h; sourceTree = "<group>"; };
+		04A40B092519DE790082DFD3 /* RSMyLabel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSMyLabel.m; sourceTree = "<group>"; };
+		04A40B0C2519E65C0082DFD3 /* DIYSystemDatePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DIYSystemDatePickerView.h; sourceTree = "<group>"; };
+		04A40B0D2519E65C0082DFD3 /* DIYSystemDatePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DIYSystemDatePickerView.m; sourceTree = "<group>"; };
+		04A40B102519EB280082DFD3 /* YCPresentationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YCPresentationController.m; sourceTree = "<group>"; };
+		04A40B112519EB280082DFD3 /* YCPopoverAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YCPopoverAnimator.h; sourceTree = "<group>"; };
+		04A40B122519EB280082DFD3 /* UIViewController+YCPopover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+YCPopover.h"; sourceTree = "<group>"; };
+		04A40B132519EB280082DFD3 /* YCPresentationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YCPresentationController.h; sourceTree = "<group>"; };
+		04A40B142519EB280082DFD3 /* YCPopoverMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YCPopoverMacro.h; sourceTree = "<group>"; };
+		04A40B152519EB280082DFD3 /* YCPopoverAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YCPopoverAnimator.m; sourceTree = "<group>"; };
+		04A40B162519EB280082DFD3 /* UIViewController+YCPopover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+YCPopover.m"; sourceTree = "<group>"; };
+		04A40B1A2519EBC30082DFD3 /* RSPopViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSPopViewController.h; sourceTree = "<group>"; };
+		04A40B1B2519EBC30082DFD3 /* RSPopViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSPopViewController.m; sourceTree = "<group>"; };
+		04A40B1D251AE6150082DFD3 /* RSColumnarViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSColumnarViewController.h; sourceTree = "<group>"; };
+		04A40B1E251AE6150082DFD3 /* RSColumnarViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSColumnarViewController.m; sourceTree = "<group>"; };
+		04A40B21251B39360082DFD3 /* ColumnChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColumnChartView.m; sourceTree = "<group>"; };
+		04A40B22251B39360082DFD3 /* ColumnChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColumnChartView.h; sourceTree = "<group>"; };
+		04A40B25251C8A6F0082DFD3 /* HQPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HQPickerView.h; sourceTree = "<group>"; };
+		04A40B26251C8A6F0082DFD3 /* HQPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HQPickerView.m; sourceTree = "<group>"; };
+		04A496442553AB1A00345FCF /* UIControl+QiEventInterval.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIControl+QiEventInterval.h"; sourceTree = "<group>"; };
+		04A496452553AB1A00345FCF /* UIControl+QiEventInterval.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIControl+QiEventInterval.m"; sourceTree = "<group>"; };
+		04A4F81C21ABF0020052EFC4 /* RSShenHeModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSShenHeModel.h; sourceTree = "<group>"; };
+		04A4F81D21ABF0020052EFC4 /* RSShenHeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSShenHeModel.m; sourceTree = "<group>"; };
+		04A4F81F21ABF1990052EFC4 /* RSShenHeFristCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSShenHeFristCell.h; sourceTree = "<group>"; };
+		04A4F82021ABF1990052EFC4 /* RSShenHeFristCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSShenHeFristCell.m; sourceTree = "<group>"; };
+		04A6F154219521CF00D15F58 /* RSRedButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSRedButton.m; sourceTree = "<group>"; };
+		04A6F155219521D000D15F58 /* RSRedButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSRedButton.h; sourceTree = "<group>"; };
+		04A6F157219528D800D15F58 /* RSAuditedViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSAuditedViewController.h; sourceTree = "<group>"; };
+		04A6F158219528D800D15F58 /* RSAuditedViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSAuditedViewController.m; sourceTree = "<group>"; };
+		04A6F15A219538F100D15F58 /* RSApprovalProcessViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSApprovalProcessViewController.h; sourceTree = "<group>"; };
+		04A6F15B219538F100D15F58 /* RSApprovalProcessViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSApprovalProcessViewController.m; sourceTree = "<group>"; };
+		04A6F15D21953A8B00D15F58 /* RSProgressView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSProgressView.h; sourceTree = "<group>"; };
+		04A6F15E21953A8B00D15F58 /* RSProgressView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSProgressView.m; sourceTree = "<group>"; };
+		04A6F16021955C2300D15F58 /* RSProgressStatusCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSProgressStatusCell.h; sourceTree = "<group>"; };
+		04A6F16121955C2300D15F58 /* RSProgressStatusCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSProgressStatusCell.m; sourceTree = "<group>"; };
+		04A6F1642195684A00D15F58 /* JJOptionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JJOptionView.h; sourceTree = "<group>"; };
+		04A6F1652195684A00D15F58 /* JJOptionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JJOptionView.m; sourceTree = "<group>"; };
+		04A6F1662195684A00D15F58 /* list_icon_drfault@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "list_icon_drfault@3x.png"; sourceTree = "<group>"; };
+		04A6F1672195684A00D15F58 /* list_icon_drfault@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "list_icon_drfault@2x.png"; sourceTree = "<group>"; };
+		04A6F16F21957BCB00D15F58 /* RSPasswordModificationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSPasswordModificationViewController.h; sourceTree = "<group>"; };
+		04A6F17021957BCB00D15F58 /* RSPasswordModificationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSPasswordModificationViewController.m; sourceTree = "<group>"; };
+		04A6F17221957BE600D15F58 /* RSPersonalInformationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSPersonalInformationViewController.h; sourceTree = "<group>"; };
+		04A6F17321957BE600D15F58 /* RSPersonalInformationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSPersonalInformationViewController.m; sourceTree = "<group>"; };
+		04A6F1752195834500D15F58 /* RSPersonFirstCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSPersonFirstCell.m; sourceTree = "<group>"; };
+		04A6F1762195834500D15F58 /* RSPersonSecondCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSPersonSecondCell.m; sourceTree = "<group>"; };
+		04A6F1772195834600D15F58 /* RSPersonSecondCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSPersonSecondCell.h; sourceTree = "<group>"; };
+		04A6F1782195834600D15F58 /* RSPersonFirstCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSPersonFirstCell.h; sourceTree = "<group>"; };
+		04A6F17C219592D900D15F58 /* MyMD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyMD5.m; sourceTree = "<group>"; };
+		04A6F17D219592D900D15F58 /* MyMD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMD5.h; sourceTree = "<group>"; };
+		04A6F181219911F800D15F58 /* NetworkTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkTool.h; sourceTree = "<group>"; };
+		04A6F182219911F800D15F58 /* NetworkTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkTool.m; sourceTree = "<group>"; };
+		04A6F185219980B800D15F58 /* RSViewProgressLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSViewProgressLine.h; sourceTree = "<group>"; };
+		04A6F186219980B900D15F58 /* RSViewProgressLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSViewProgressLine.m; sourceTree = "<group>"; };
+		04A8E7B223B065DB004E8013 /* QLPreviewItemCustom.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QLPreviewItemCustom.h; sourceTree = "<group>"; };
+		04A8E7B323B065DB004E8013 /* QLPreviewItemCustom.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QLPreviewItemCustom.m; sourceTree = "<group>"; };
+		04A8E7B523B066FC004E8013 /* RSNoticeMoreViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSNoticeMoreViewController.h; sourceTree = "<group>"; };
+		04A8E7B623B066FC004E8013 /* RSNoticeMoreViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSNoticeMoreViewController.m; sourceTree = "<group>"; };
+		04A8E7B823B0680D004E8013 /* RSXNoticeCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSXNoticeCell.h; sourceTree = "<group>"; };
+		04A8E7B923B0680D004E8013 /* RSXNoticeCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSXNoticeCell.m; sourceTree = "<group>"; };
+		04A8E7BB23B07140004E8013 /* RSToBeInitiatedViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSToBeInitiatedViewController.h; sourceTree = "<group>"; };
+		04A8E7BC23B07140004E8013 /* RSToBeInitiatedViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSToBeInitiatedViewController.m; sourceTree = "<group>"; };
+		04B3F70F23B0A46000CDD821 /* RSTouchViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSTouchViewController.h; sourceTree = "<group>"; };
+		04B3F71023B0A46000CDD821 /* RSTouchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSTouchViewController.m; sourceTree = "<group>"; };
+		04B3F71223B0ABBA00CDD821 /* RSTouchCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSTouchCell.h; sourceTree = "<group>"; };
+		04B3F71323B0ABBA00CDD821 /* RSTouchCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSTouchCell.m; sourceTree = "<group>"; };
+		04B3F71523B0B1E000CDD821 /* RSBLTouchViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSBLTouchViewController.h; sourceTree = "<group>"; };
+		04B3F71623B0B1E000CDD821 /* RSBLTouchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSBLTouchViewController.m; sourceTree = "<group>"; };
+		04B3F71823B0BDDD00CDD821 /* RSBLTouchCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSBLTouchCell.h; sourceTree = "<group>"; };
+		04B3F71923B0BDDD00CDD821 /* RSBLTouchCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSBLTouchCell.m; sourceTree = "<group>"; };
+		04B3F71B23B0C2D500CDD821 /* RSNameOfCargoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSNameOfCargoViewController.h; sourceTree = "<group>"; };
+		04B3F71C23B0C2D500CDD821 /* RSNameOfCargoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSNameOfCargoViewController.m; sourceTree = "<group>"; };
+		04B3F71E23B0C77200CDD821 /* RSNameOfCargoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSNameOfCargoCell.h; sourceTree = "<group>"; };
+		04B3F71F23B0C77200CDD821 /* RSNameOfCargoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSNameOfCargoCell.m; sourceTree = "<group>"; };
+		04B3F72123B0C89700CDD821 /* RSStockViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSStockViewController.h; sourceTree = "<group>"; };
+		04B3F72223B0C89800CDD821 /* RSStockViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSStockViewController.m; sourceTree = "<group>"; };
+		04B3F72423B0C92E00CDD821 /* RSBLStockCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSBLStockCell.h; sourceTree = "<group>"; };
+		04B3F72523B0C92E00CDD821 /* RSBLStockCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSBLStockCell.m; sourceTree = "<group>"; };
+		04B3F72723B1B20B00CDD821 /* RSSLTouchCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSSLTouchCell.h; sourceTree = "<group>"; };
+		04B3F72823B1B20B00CDD821 /* RSSLTouchCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSSLTouchCell.m; sourceTree = "<group>"; };
+		04B3F72A23B1B4E100CDD821 /* RSSLHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSSLHeaderView.h; sourceTree = "<group>"; };
+		04B3F72B23B1B4E100CDD821 /* RSSLHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSSLHeaderView.m; sourceTree = "<group>"; };
+		04B3F72D23B1B5DB00CDD821 /* RSSLFootView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSSLFootView.h; sourceTree = "<group>"; };
+		04B3F72E23B1B5DB00CDD821 /* RSSLFootView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSSLFootView.m; sourceTree = "<group>"; };
+		04B3F73023B1BDD200CDD821 /* RSSLStockHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSSLStockHeaderView.h; sourceTree = "<group>"; };
+		04B3F73123B1BDD200CDD821 /* RSSLStockHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSSLStockHeaderView.m; sourceTree = "<group>"; };
+		04B3F73323B1BF4200CDD821 /* RSSLStockFootView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSSLStockFootView.h; sourceTree = "<group>"; };
+		04B3F73423B1BF4200CDD821 /* RSSLStockFootView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSSLStockFootView.m; sourceTree = "<group>"; };
+		04B3F73623B1BFCE00CDD821 /* RSSLStockCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSSLStockCell.h; sourceTree = "<group>"; };
+		04B3F73723B1BFCE00CDD821 /* RSSLStockCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSSLStockCell.m; sourceTree = "<group>"; };
+		04B3F73C23B1FF0000CDD821 /* RSTouchAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSTouchAlertView.h; sourceTree = "<group>"; };
+		04B3F73D23B1FF0000CDD821 /* RSTouchAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSTouchAlertView.m; sourceTree = "<group>"; };
+		04B3F73F23B2022000CDD821 /* UITextView+ZWPlaceHolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+ZWPlaceHolder.h"; sourceTree = "<group>"; };
+		04B3F74023B2022000CDD821 /* UITextView+ZWPlaceHolder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+ZWPlaceHolder.m"; sourceTree = "<group>"; };
+		04B3F74223B34D0B00CDD821 /* RSInformationLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSInformationLabel.h; sourceTree = "<group>"; };
+		04B3F74323B34D0B00CDD821 /* RSInformationLabel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSInformationLabel.m; sourceTree = "<group>"; };
+		04B3F74623B497DA00CDD821 /* JHSysAlertUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHSysAlertUtil.h; sourceTree = "<group>"; };
+		04B3F74723B497DA00CDD821 /* JHSysAlertUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHSysAlertUtil.m; sourceTree = "<group>"; };
+		04B3F74923B4A71A00CDD821 /* RSTouchModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSTouchModel.h; sourceTree = "<group>"; };
+		04B3F74A23B4A71A00CDD821 /* RSTouchModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSTouchModel.m; sourceTree = "<group>"; };
+		04B3F74C23B4B31800CDD821 /* RSShipperMode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSShipperMode.h; sourceTree = "<group>"; };
+		04B3F74D23B4B31800CDD821 /* RSShipperMode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSShipperMode.m; sourceTree = "<group>"; };
+		04B3F74F23B4B89F00CDD821 /* RSBMStockModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSBMStockModel.h; sourceTree = "<group>"; };
+		04B3F75023B4B89F00CDD821 /* RSBMStockModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSBMStockModel.m; sourceTree = "<group>"; };
+		04B3F75223B4C7F600CDD821 /* RSSlStockModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSSlStockModel.h; sourceTree = "<group>"; };
+		04B3F75323B4C7F600CDD821 /* RSSlStockModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSSlStockModel.m; sourceTree = "<group>"; };
+		04B3F75523B4C8B900CDD821 /* RSSLPieceModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSSLPieceModel.h; sourceTree = "<group>"; };
+		04B3F75623B4C8B900CDD821 /* RSSLPieceModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSSLPieceModel.m; sourceTree = "<group>"; };
+		04B3F75823B5D78600CDD821 /* RSWarehouseModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSWarehouseModel.h; sourceTree = "<group>"; };
+		04B3F75923B5D78600CDD821 /* RSWarehouseModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSWarehouseModel.m; sourceTree = "<group>"; };
+		04B3F75B23B5D7BB00CDD821 /* RSStoreAreaModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSStoreAreaModel.h; sourceTree = "<group>"; };
+		04B3F75C23B5D7BB00CDD821 /* RSStoreAreaModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSStoreAreaModel.m; sourceTree = "<group>"; };
+		04B4F9F023C3084200853021 /* RSAboutOurViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSAboutOurViewController.h; sourceTree = "<group>"; };
+		04B4F9F123C3084200853021 /* RSAboutOurViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSAboutOurViewController.m; sourceTree = "<group>"; };
+		04BD6B1B23BAF125006693E3 /* RSRegisterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSRegisterViewController.h; sourceTree = "<group>"; };
+		04BD6B1C23BAF125006693E3 /* RSRegisterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSRegisterViewController.m; sourceTree = "<group>"; };
+		04C0473E21787B5E0006B8D4 /* UIScrollView+DREmptyDataSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+DREmptyDataSet.m"; sourceTree = "<group>"; };
+		04C0473F21787B5E0006B8D4 /* UIScrollView+DRRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+DRRefresh.h"; sourceTree = "<group>"; };
+		04C0474021787B5E0006B8D4 /* UIScrollView+DREmptyDataSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+DREmptyDataSet.h"; sourceTree = "<group>"; };
+		04C0474121787B5E0006B8D4 /* UIScrollView+DRRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+DRRefresh.m"; sourceTree = "<group>"; };
+		04C0474421787DA00006B8D4 /* RSShenHeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSShenHeViewController.h; sourceTree = "<group>"; };
+		04C0474521787DA00006B8D4 /* RSShenHeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSShenHeViewController.m; sourceTree = "<group>"; };
+		04C0474A217885FF0006B8D4 /* RSLoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSLoginViewController.h; sourceTree = "<group>"; };
+		04C0474B217885FF0006B8D4 /* RSLoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSLoginViewController.m; sourceTree = "<group>"; };
+		04C1D92421C5E79A00384F98 /* MXActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MXActionSheet.h; sourceTree = "<group>"; };
+		04C1D92521C5E79A00384F98 /* MXActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MXActionSheet.m; sourceTree = "<group>"; };
+		04C1D92B21C63F7400384F98 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
+		04C1D92D21C63F8C00384F98 /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
+		04C1D92F21C63F9E00384F98 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
+		04C1D93121C63FAD00384F98 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		04C1D93321C63FBB00384F98 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		04C1D93521C63FC700384F98 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		04C1D93721C63FD600384F98 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		04C1D93921C63FE500384F98 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		04C1D93B21C63FF600384F98 /* OAManage.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OAManage.entitlements; sourceTree = "<group>"; };
+		04CA3FBB219AC85C009C2D33 /* RSUserModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSUserModel.h; sourceTree = "<group>"; };
+		04CA3FBC219AC85C009C2D33 /* RSUserModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSUserModel.m; sourceTree = "<group>"; };
+		04D09F3021B6678B0078D7DA /* RSNoticeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSNoticeViewController.h; sourceTree = "<group>"; };
+		04D09F3121B6678B0078D7DA /* RSNoticeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSNoticeViewController.m; sourceTree = "<group>"; };
+		04D6CEC72190254E00B35A51 /* UIColor+HexColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+HexColor.h"; sourceTree = "<group>"; };
+		04D6CEC82190254E00B35A51 /* UIColor+HexColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+HexColor.m"; sourceTree = "<group>"; };
+		04D6CEC92190254E00B35A51 /* Nonetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Nonetwork.h; sourceTree = "<group>"; };
+		04D6CECA2190254E00B35A51 /* Nonetwork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Nonetwork.m; sourceTree = "<group>"; };
+		04D6CECD219026AA00B35A51 /* NSString+Hash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Hash.h"; sourceTree = "<group>"; };
+		04D6CECE219026AA00B35A51 /* NSString+Hash.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Hash.m"; sourceTree = "<group>"; };
+		04D6CED02190329000B35A51 /* RSBaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSBaseViewController.h; sourceTree = "<group>"; };
+		04D6CED12190329000B35A51 /* RSBaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSBaseViewController.m; sourceTree = "<group>"; };
+		04D6CED421904F5C00B35A51 /* ZZQEmptyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZQEmptyView.h; sourceTree = "<group>"; };
+		04D6CED521904F5C00B35A51 /* ZZQEmptyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZQEmptyView.m; sourceTree = "<group>"; };
+		04D6CED721914B2000B35A51 /* MJChiBaoZiHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJChiBaoZiHeader.m; sourceTree = "<group>"; };
+		04D6CED821914B2000B35A51 /* MJChiBaoZiFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJChiBaoZiFooter.h; sourceTree = "<group>"; };
+		04D6CED921914B2100B35A51 /* MJChiBaoZiHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJChiBaoZiHeader.h; sourceTree = "<group>"; };
+		04D6CEDA21914B2100B35A51 /* MJChiBaoZiFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJChiBaoZiFooter.m; sourceTree = "<group>"; };
+		04D6CEDE2191754000B35A51 /* SCNavigationMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCNavigationMenuView.h; sourceTree = "<group>"; };
+		04D6CEDF2191754000B35A51 /* SCNavigationMenuTitleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCNavigationMenuTitleCell.m; sourceTree = "<group>"; };
+		04D6CEE02191754000B35A51 /* SCNavigationMenuProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCNavigationMenuProtocol.h; sourceTree = "<group>"; };
+		04D6CEE12191754000B35A51 /* SCNavigationMenuTitleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCNavigationMenuTitleCell.h; sourceTree = "<group>"; };
+		04D6CEE22191754000B35A51 /* SCNavigationMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCNavigationMenuView.m; sourceTree = "<group>"; };
+		04E6A342219189B7007A44F2 /* UIView+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Frame.h"; sourceTree = "<group>"; };
+		04E6A343219189B7007A44F2 /* UIView+Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Frame.m"; sourceTree = "<group>"; };
+		04E6A34521927A1A007A44F2 /* RSCustomMenuCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSCustomMenuCell.h; sourceTree = "<group>"; };
+		04E6A34621927A1A007A44F2 /* RSCustomMenuCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSCustomMenuCell.m; sourceTree = "<group>"; };
+		04E6A3482192824F007A44F2 /* RSApprovalCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSApprovalCell.h; sourceTree = "<group>"; };
+		04E6A3492192824F007A44F2 /* RSApprovalCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSApprovalCell.m; sourceTree = "<group>"; };
+		04FD4FFF2421CF07004EBA34 /* RSOnlineVideoHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSOnlineVideoHeaderView.h; sourceTree = "<group>"; };
+		04FD50002421CF07004EBA34 /* RSOnlineVideoHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSOnlineVideoHeaderView.m; sourceTree = "<group>"; };
+		04FD500224220066004EBA34 /* RSOnlineModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSOnlineModel.h; sourceTree = "<group>"; };
+		04FD500324220066004EBA34 /* RSOnlineModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSOnlineModel.m; sourceTree = "<group>"; };
+		04FD5005242211F5004EBA34 /* RSOnlineTypeModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSOnlineTypeModel.h; sourceTree = "<group>"; };
+		04FD5006242211F5004EBA34 /* RSOnlineTypeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSOnlineTypeModel.m; sourceTree = "<group>"; };
+		04FD500824234909004EBA34 /* RSJumpVideoTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSJumpVideoTool.h; sourceTree = "<group>"; };
+		04FF49C921A3B38E00C4A2C2 /* FSAES128.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FSAES128.h; sourceTree = "<group>"; };
+		04FF49CA21A3B38E00C4A2C2 /* FSAES128.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FSAES128.m; sourceTree = "<group>"; };
+		04FF49DD21A3F04B00C4A2C2 /* RSRoleModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSRoleModel.h; sourceTree = "<group>"; };
+		04FF49DE21A3F04B00C4A2C2 /* RSRoleModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSRoleModel.m; sourceTree = "<group>"; };
+		04FF49E121A4F21D00C4A2C2 /* RSAEncryptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSAEncryptor.h; sourceTree = "<group>"; };
+		04FF49E321A4F21D00C4A2C2 /* RSAEncryptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSAEncryptor.m; sourceTree = "<group>"; };
+		1D3B410FD229353805935146 /* Pods-OAManage.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OAManage.release.xcconfig"; path = "Pods/Target Support Files/Pods-OAManage/Pods-OAManage.release.xcconfig"; sourceTree = "<group>"; };
+		33536298934A81E564D1E0B6 /* Pods-OAManage.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OAManage.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OAManage/Pods-OAManage.debug.xcconfig"; sourceTree = "<group>"; };
+		425A1ECECB928E2700E33380 /* libPods-OAManage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-OAManage.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0436F67E2178198300B0D6C8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04DE278F262672AB00172706 /* CoreTelephony.framework in Frameworks */,
+				04C1D93821C63FD600384F98 /* CFNetwork.framework in Frameworks */,
+				04C1D93621C63FC700384F98 /* MobileCoreServices.framework in Frameworks */,
+				04C1D93421C63FBB00384F98 /* SystemConfiguration.framework in Frameworks */,
+				04C1D93221C63FAE00384F98 /* libz.tbd in Frameworks */,
+				04C1D93021C63F9E00384F98 /* libxml2.tbd in Frameworks */,
+				04C1D92E21C63F8C00384F98 /* libresolv.tbd in Frameworks */,
+				04469EAE27E711C6003831A9 /* libMiPushSDK.a in Frameworks */,
+				04469EAF27E711C6003831A9 /* libMiPushApnsAckSDK.a in Frameworks */,
+				04C1D92C21C63F7400384F98 /* UserNotifications.framework in Frameworks */,
+				04215DA1237AAA8D001EFE11 /* libsqlite3.tbd in Frameworks */,
+				3E37A3CC73786F01A8AEED07 /* libPods-OAManage.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0404773023AA0E3400B4D528 /* WSDaePickerView */ = {
+			isa = PBXGroup;
+			children = (
+				0404773123AA0E3400B4D528 /* NSDate+Extension.h */,
+				0404773223AA0E3400B4D528 /* WSDatePickerView.h */,
+				0404773323AA0E3400B4D528 /* UIView+Extension.h */,
+				0404773423AA0E3400B4D528 /* WSDatePickerView.xib */,
+				0404773523AA0E3400B4D528 /* WSDatePickerView.m */,
+				0404773623AA0E3400B4D528 /* NSDate+Extension.m */,
+				0404773723AA0E3400B4D528 /* UIView+Extension.m */,
+			);
+			path = WSDaePickerView;
+			sourceTree = "<group>";
+		};
+		041E07332384EEC400766441 /* GYRollingNoticeView */ = {
+			isa = PBXGroup;
+			children = (
+				041E07372384EEC400766441 /* GYNoticeViewCell.h */,
+				041E07342384EEC400766441 /* GYNoticeViewCell.m */,
+				041E07362384EEC400766441 /* GYRollingNoticeView.h */,
+				041E07352384EEC400766441 /* GYRollingNoticeView.m */,
+			);
+			path = GYRollingNoticeView;
+			sourceTree = "<group>";
+		};
+		041E07492387B38C00766441 /* SHESelectTable */ = {
+			isa = PBXGroup;
+			children = (
+				041E074A2387B38C00766441 /* SHESelectTable.h */,
+				041E074B2387B38C00766441 /* SHESelectCell.h */,
+				041E074C2387B38C00766441 /* select_right@2x.png */,
+				041E074D2387B38C00766441 /* select_right@3x.png */,
+				041E074E2387B38C00766441 /* SHESelectTable.m */,
+				041E074F2387B38C00766441 /* SHESelectCell.m */,
+			);
+			path = SHESelectTable;
+			sourceTree = "<group>";
+		};
+		04215D8E237A83B7001EFE11 /* 流程发起 */ = {
+			isa = PBXGroup;
+			children = (
+				04215D8F237A83B7001EFE11 /* model */,
+				04215D90237A83B7001EFE11 /* view */,
+				04215D91237A83B7001EFE11 /* viewController */,
+			);
+			path = "流程发起";
+			sourceTree = "<group>";
+		};
+		04215D8F237A83B7001EFE11 /* model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		04215D90237A83B7001EFE11 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				041E070F237E588800766441 /* RSLaunchCell.h */,
+				041E0710237E588800766441 /* RSLaunchCell.m */,
+				041E0712237E983700766441 /* RSLaunchReusableView.h */,
+				041E0713237E983700766441 /* RSLaunchReusableView.m */,
+				041E071523823E7900766441 /* RSLaunchFootReusableView.h */,
+				041E071623823E7900766441 /* RSLaunchFootReusableView.m */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		04215D91237A83B7001EFE11 /* viewController */ = {
+			isa = PBXGroup;
+			children = (
+				04215D9A237A9130001EFE11 /* RSLaunchViewController.h */,
+				04215D9B237A9130001EFE11 /* RSLaunchViewController.m */,
+				04A8E7BB23B07140004E8013 /* RSToBeInitiatedViewController.h */,
+				04A8E7BC23B07140004E8013 /* RSToBeInitiatedViewController.m */,
+			);
+			path = viewController;
+			sourceTree = "<group>";
+		};
+		04215D92237A83BD001EFE11 /* 流程审核 */ = {
+			isa = PBXGroup;
+			children = (
+				04215D93237A83BD001EFE11 /* model */,
+				04215D94237A83BD001EFE11 /* view */,
+				04215D95237A83BD001EFE11 /* viewController */,
+			);
+			path = "流程审核";
+			sourceTree = "<group>";
+		};
+		04215D93237A83BD001EFE11 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				04A4F81C21ABF0020052EFC4 /* RSShenHeModel.h */,
+				04A4F81D21ABF0020052EFC4 /* RSShenHeModel.m */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		04215D94237A83BD001EFE11 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				04A4F81F21ABF1990052EFC4 /* RSShenHeFristCell.h */,
+				04A4F82021ABF1990052EFC4 /* RSShenHeFristCell.m */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		04215D95237A83BD001EFE11 /* viewController */ = {
+			isa = PBXGroup;
+			children = (
+				04C0474421787DA00006B8D4 /* RSShenHeViewController.h */,
+				04C0474521787DA00006B8D4 /* RSShenHeViewController.m */,
+			);
+			path = viewController;
+			sourceTree = "<group>";
+		};
+		04215D96237A8465001EFE11 /* 主框架 */ = {
+			isa = PBXGroup;
+			children = (
+				04215D97237A84F4001EFE11 /* RSMainViewController.h */,
+				04215D98237A84F4001EFE11 /* RSMainViewController.m */,
+			);
+			path = "主框架";
+			sourceTree = "<group>";
+		};
+		0436F6782178198200B0D6C8 = {
+			isa = PBXGroup;
+			children = (
+				0436F6832178198300B0D6C8 /* OAManage */,
+				0436F6822178198300B0D6C8 /* Products */,
+				9D272C8657832820A0FBD16F /* Pods */,
+				9003A5D94784D936DD044D8B /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		0436F6822178198300B0D6C8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0436F6812178198300B0D6C8 /* OAManage.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0436F6832178198300B0D6C8 /* OAManage */ = {
+			isa = PBXGroup;
+			children = (
+				04C1D93B21C63FF600384F98 /* OAManage.entitlements */,
+				0436F69D2178221700B0D6C8 /* Classes */,
+				0436F6872178198300B0D6C8 /* ViewController.h */,
+				0436F6882178198300B0D6C8 /* ViewController.m */,
+				0436F68A2178198300B0D6C8 /* Main.storyboard */,
+				0436F6902178198B00B0D6C8 /* Assets.xcassets */,
+				0436F6922178198B00B0D6C8 /* LaunchScreen.storyboard */,
+				041E070D237D2B9D00766441 /* 欢迎页.png */,
+				0436F6952178198B00B0D6C8 /* Info.plist */,
+				0436F6962178198B00B0D6C8 /* main.m */,
+				0436F68D2178198300B0D6C8 /* OAManage.xcdatamodeld */,
+			);
+			path = OAManage;
+			sourceTree = "<group>";
+		};
+		0436F69D2178221700B0D6C8 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				046E9DFF2420603000EF6554 /* 线上培训 */,
+				04B3F70B23B0A43700CDD821 /* 触控 */,
+				04215D96237A8465001EFE11 /* 主框架 */,
+				04215D92237A83BD001EFE11 /* 流程审核 */,
+				04215D8E237A83B7001EFE11 /* 流程发起 */,
+				04A6F16B21957B4E00D15F58 /* 个人中心 */,
+				0436F69E2178221700B0D6C8 /* 其他 */,
+				0436F6A52178221700B0D6C8 /* 首页 */,
+				0436F6A92178221700B0D6C8 /* 登录 */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		0436F69E2178221700B0D6C8 /* 其他 */ = {
+			isa = PBXGroup;
+			children = (
+				0436F69F2178221700B0D6C8 /* 分类 */,
+				0436F6A02178221700B0D6C8 /* model */,
+				0436F6A12178221700B0D6C8 /* View */,
+				0436F6A22178221700B0D6C8 /* Lib */,
+				0436F6A32178221700B0D6C8 /* 工具类 */,
+				0436F6A42178221700B0D6C8 /* ViewController */,
+			);
+			path = "其他";
+			sourceTree = "<group>";
+		};
+		0436F69F2178221700B0D6C8 /* 分类 */ = {
+			isa = PBXGroup;
+			children = (
+				04A6F185219980B800D15F58 /* RSViewProgressLine.h */,
+				04A6F186219980B900D15F58 /* RSViewProgressLine.m */,
+				04A6F181219911F800D15F58 /* NetworkTool.h */,
+				04A6F182219911F800D15F58 /* NetworkTool.m */,
+				04A6F155219521D000D15F58 /* RSRedButton.h */,
+				04A6F154219521CF00D15F58 /* RSRedButton.m */,
+				04D6CECD219026AA00B35A51 /* NSString+Hash.h */,
+				04D6CECE219026AA00B35A51 /* NSString+Hash.m */,
+				04D6CEC92190254E00B35A51 /* Nonetwork.h */,
+				04D6CECA2190254E00B35A51 /* Nonetwork.m */,
+				04D6CEC72190254E00B35A51 /* UIColor+HexColor.h */,
+				04D6CEC82190254E00B35A51 /* UIColor+HexColor.m */,
+				0436F6BB2178298800B0D6C8 /* UIBarButtonItem+Item.h */,
+				0436F6BC2178298800B0D6C8 /* UIBarButtonItem+Item.m */,
+				0436F6B92178282600B0D6C8 /* RSMyNavigationViewController.h */,
+				0436F6B82178282500B0D6C8 /* RSMyNavigationViewController.m */,
+				04D6CED02190329000B35A51 /* RSBaseViewController.h */,
+				04D6CED12190329000B35A51 /* RSBaseViewController.m */,
+				04A496442553AB1A00345FCF /* UIControl+QiEventInterval.h */,
+				04A496452553AB1A00345FCF /* UIControl+QiEventInterval.m */,
+			);
+			path = "分类";
+			sourceTree = "<group>";
+		};
+		0436F6A02178221700B0D6C8 /* model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		0436F6A12178221700B0D6C8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0436F6A22178221700B0D6C8 /* Lib */ = {
+			isa = PBXGroup;
+			children = (
+				04469EA927E711C5003831A9 /* libMiPushSDK */,
+				04A40B24251C8A6E0082DFD3 /* HQPickerView */,
+				04A40B20251B39360082DFD3 /* ColumnChartView */,
+				04A40B0F2519EB280082DFD3 /* YCPopover */,
+				04A40B0B2519E65C0082DFD3 /* DIYSystemDatePicker */,
+				04A40AF82519D2520082DFD3 /* WFTable */,
+				04B3F74523B497DA00CDD821 /* JHAlertUtil */,
+				0404773023AA0E3400B4D528 /* WSDaePickerView */,
+				041E07492387B38C00766441 /* SHESelectTable */,
+				041E07332384EEC400766441 /* GYRollingNoticeView */,
+				04C1D92321C5E79A00384F98 /* MXActionSheet */,
+				04FF49E021A4F21D00C4A2C2 /* RSA */,
+				04A6F17B219592D900D15F58 /* MyMD5 */,
+				04A6F1632195684A00D15F58 /* JJOptionView */,
+				04D6CEDD2191754000B35A51 /* SCNavigationMenuView */,
+				04D6CED321904F5C00B35A51 /* ZZQEmptyView */,
+			);
+			path = Lib;
+			sourceTree = "<group>";
+		};
+		0436F6A32178221700B0D6C8 /* 工具类 */ = {
+			isa = PBXGroup;
+			children = (
+				04B3F73F23B2022000CDD821 /* UITextView+ZWPlaceHolder.h */,
+				04B3F74023B2022000CDD821 /* UITextView+ZWPlaceHolder.m */,
+				041E071A238280CD00766441 /* JhPageControl.h */,
+				041E0718238280CB00766441 /* JhPageControl.m */,
+				041E071B238280CD00766441 /* ZKImgRunLoopView.h */,
+				041E0719238280CC00766441 /* ZKImgRunLoopView.m */,
+				04E6A342219189B7007A44F2 /* UIView+Frame.h */,
+				04E6A343219189B7007A44F2 /* UIView+Frame.m */,
+				04D6CED821914B2000B35A51 /* MJChiBaoZiFooter.h */,
+				04D6CEDA21914B2100B35A51 /* MJChiBaoZiFooter.m */,
+				04D6CED921914B2100B35A51 /* MJChiBaoZiHeader.h */,
+				04D6CED721914B2000B35A51 /* MJChiBaoZiHeader.m */,
+				04C0473D21787B5E0006B8D4 /* UITableview+YBRefresh */,
+				0436F6B12178245F00B0D6C8 /* OAManagePrefixHeader.pch */,
+				04FF49C921A3B38E00C4A2C2 /* FSAES128.h */,
+				04FF49CA21A3B38E00C4A2C2 /* FSAES128.m */,
+				041E07402386247F00766441 /* RSOALocalDB.h */,
+				041E07412386247F00766441 /* RSOALocalDB.m */,
+				041E0743238625B600766441 /* RSOACreatFile.h */,
+				041E0744238625B600766441 /* RSOACreatFile.m */,
+				040476D323A0D2DA00B4D528 /* iCloudManager.h */,
+				040476D423A0D2DA00B4D528 /* iCloudManager.m */,
+				040476D623A0D33800B4D528 /* ZZDocument.h */,
+				040476D723A0D33800B4D528 /* ZZDocument.m */,
+				04FD500824234909004EBA34 /* RSJumpVideoTool.h */,
+				0471B00224373E2B00785F4D /* RSJumpVideoTool.m */,
+				04A40B082519DE790082DFD3 /* RSMyLabel.h */,
+				04A40B092519DE790082DFD3 /* RSMyLabel.m */,
+			);
+			path = "工具类";
+			sourceTree = "<group>";
+		};
+		0436F6A42178221700B0D6C8 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				0436F6842178198300B0D6C8 /* AppDelegate.h */,
+				0436F6852178198300B0D6C8 /* AppDelegate.m */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		0436F6A52178221700B0D6C8 /* 首页 */ = {
+			isa = PBXGroup;
+			children = (
+				0436F6A62178221700B0D6C8 /* model */,
+				0436F6A72178221700B0D6C8 /* View */,
+				0436F6A82178221700B0D6C8 /* ViewController */,
+			);
+			path = "首页";
+			sourceTree = "<group>";
+		};
+		0436F6A62178221700B0D6C8 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				045D414521A808CE005F34D2 /* RSInformationModel.h */,
+				045D414621A808CE005F34D2 /* RSInformationModel.m */,
+				045D414821AB91F3005F34D2 /* RSAuditedModel.h */,
+				045D414921AB91F3005F34D2 /* RSAuditedModel.m */,
+				0429906B21ACEA14004503A7 /* RSApprovalProcessModel.h */,
+				0429906C21ACEA14004503A7 /* RSApprovalProcessModel.m */,
+				041E073D23853EBE00766441 /* RSMailModel.h */,
+				041E073E23853EBE00766441 /* RSMailModel.m */,
+				040476E323A7981800B4D528 /* RSBannerModel.h */,
+				040476E423A7981800B4D528 /* RSBannerModel.m */,
+				0404772723A8BC6C00B4D528 /* RSNoticeModel.h */,
+				0404772823A8BC6C00B4D528 /* RSNoticeModel.m */,
+				0404772D23AA054000B4D528 /* RSSystemModel.h */,
+				0404772E23AA054000B4D528 /* RSSystemModel.m */,
+				0404773C23AA31E500B4D528 /* RSSystemTypeModel.h */,
+				0404773D23AA31E500B4D528 /* RSSystemTypeModel.m */,
+				0404773F23AB156300B4D528 /* RSNewAuditedModel.h */,
+				0404774023AB156300B4D528 /* RSNewAuditedModel.m */,
+				0404774223AB220000B4D528 /* RSWorkContentModel.h */,
+				0404774323AB220000B4D528 /* RSWorkContentModel.m */,
+				0404774E23AB2A7100B4D528 /* RSWorkTypeModel.h */,
+				0404774F23AB2A7100B4D528 /* RSWorkTypeModel.m */,
+				046AF2D52546657E0069591B /* RSColumnarModel.h */,
+				046AF2D62546657E0069591B /* RSColumnarModel.m */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		0436F6A72178221700B0D6C8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				04E6A34521927A1A007A44F2 /* RSCustomMenuCell.h */,
+				04E6A34621927A1A007A44F2 /* RSCustomMenuCell.m */,
+				04E6A3482192824F007A44F2 /* RSApprovalCell.h */,
+				04E6A3492192824F007A44F2 /* RSApprovalCell.m */,
+				04A6F15D21953A8B00D15F58 /* RSProgressView.h */,
+				04A6F15E21953A8B00D15F58 /* RSProgressView.m */,
+				04A6F16021955C2300D15F58 /* RSProgressStatusCell.h */,
+				04A6F16121955C2300D15F58 /* RSProgressStatusCell.m */,
+				041E07212383983E00766441 /* RSMailListCell.h */,
+				041E07222383983E00766441 /* RSMailListCell.m */,
+				041E07272383BCED00766441 /* RSMailDetailCell.h */,
+				041E07282383BCED00766441 /* RSMailDetailCell.m */,
+				041E072A2383E28F00766441 /* RSServiceHeaderView.h */,
+				041E072B2383E28F00766441 /* RSServiceHeaderView.m */,
+				041E072D2384DF3800766441 /* RSServiceCell.h */,
+				041E072E2384DF3800766441 /* RSServiceCell.m */,
+				041E073A2385098D00766441 /* RSGyRollingCell.h */,
+				041E073B2385098D00766441 /* RSGyRollingCell.m */,
+				041E07462387874100766441 /* RSSalertView.h */,
+				041E07472387874100766441 /* RSSalertView.m */,
+				041E07542387CD8E00766441 /* RSNewAuditedCell.h */,
+				041E07552387CD8E00766441 /* RSNewAuditedCell.m */,
+				041E07572387D45F00766441 /* RSApprovalHeaderView.h */,
+				041E07582387D45F00766441 /* RSApprovalHeaderView.m */,
+				041930E0238E162700DD2508 /* RSApprovalProcessCell.h */,
+				041930E1238E162700DD2508 /* RSApprovalProcessCell.m */,
+				0404775123AB7E7300B4D528 /* RSSystemCell.h */,
+				0404775223AB7E7300B4D528 /* RSSystemCell.m */,
+				04A8E7B223B065DB004E8013 /* QLPreviewItemCustom.h */,
+				04A8E7B323B065DB004E8013 /* QLPreviewItemCustom.m */,
+				04A8E7B823B0680D004E8013 /* RSXNoticeCell.h */,
+				04A8E7B923B0680D004E8013 /* RSXNoticeCell.m */,
+				04B3F74223B34D0B00CDD821 /* RSInformationLabel.h */,
+				04B3F74323B34D0B00CDD821 /* RSInformationLabel.m */,
+				04A40AD6251854E30082DFD3 /* RSMarketModuleCell.h */,
+				04A40AD7251854E30082DFD3 /* RSMarketModuleCell.m */,
+				04A40ADC25185CA40082DFD3 /* RSManageCell.h */,
+				04A40ADD25185CA40082DFD3 /* RSManageCell.m */,
+				04A40AE2251886AF0082DFD3 /* RSContractCell.h */,
+				04A40AE3251886AF0082DFD3 /* RSContractCell.m */,
+				0462F18C2608228300DBB3AA /* RSBalanCell.h */,
+				0462F18D2608228300DBB3AA /* RSBalanCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0436F6A82178221700B0D6C8 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				04215D9D237A91CA001EFE11 /* RSServiceViewController.h */,
+				04215D9E237A91CA001EFE11 /* RSServiceViewController.m */,
+				04A6F157219528D800D15F58 /* RSAuditedViewController.h */,
+				04A6F158219528D800D15F58 /* RSAuditedViewController.m */,
+				04A6F15A219538F100D15F58 /* RSApprovalProcessViewController.h */,
+				04A6F15B219538F100D15F58 /* RSApprovalProcessViewController.m */,
+				0429906E21AD175C004503A7 /* RSWKOAmanagerViewController.h */,
+				0429906F21AD175C004503A7 /* RSWKOAmanagerViewController.m */,
+				04D09F3021B6678B0078D7DA /* RSNoticeViewController.h */,
+				04D09F3121B6678B0078D7DA /* RSNoticeViewController.m */,
+				041E071E23838CF100766441 /* RSMailListViewController.h */,
+				041E071F23838CF100766441 /* RSMailListViewController.m */,
+				041E072423839D9600766441 /* RSMailDetailViewController.h */,
+				041E072523839D9600766441 /* RSMailDetailViewController.m */,
+				040476DD23A726DB00B4D528 /* RSShowImageViewController.h */,
+				040476DE23A726DB00B4D528 /* RSShowImageViewController.m */,
+				040476E023A75C5500B4D528 /* RSInputWorkViewController.h */,
+				040476E123A75C5500B4D528 /* RSInputWorkViewController.m */,
+				0404772A23A9DAF800B4D528 /* RSSystemViewController.h */,
+				0404772B23A9DAF800B4D528 /* RSSystemViewController.m */,
+				04A8E7B523B066FC004E8013 /* RSNoticeMoreViewController.h */,
+				04A8E7B623B066FC004E8013 /* RSNoticeMoreViewController.m */,
+				04A40AD3251840CD0082DFD3 /* RSMarketModuleViewController.h */,
+				04A40AD4251840CD0082DFD3 /* RSMarketModuleViewController.m */,
+				04A40AD925185B970082DFD3 /* RSManageViewController.h */,
+				04A40ADA25185B970082DFD3 /* RSManageViewController.m */,
+				04A40ADF25187E140082DFD3 /* RSContractViewController.h */,
+				04A40AE025187E140082DFD3 /* RSContractViewController.m */,
+				04A40AE5251994610082DFD3 /* RSBalanceViewController.h */,
+				04A40AE6251994610082DFD3 /* RSBalanceViewController.m */,
+				04A40B1A2519EBC30082DFD3 /* RSPopViewController.h */,
+				04A40B1B2519EBC30082DFD3 /* RSPopViewController.m */,
+				04A40B1D251AE6150082DFD3 /* RSColumnarViewController.h */,
+				04A40B1E251AE6150082DFD3 /* RSColumnarViewController.m */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		0436F6A92178221700B0D6C8 /* 登录 */ = {
+			isa = PBXGroup;
+			children = (
+				0436F6AA2178221700B0D6C8 /* model */,
+				0436F6AB2178221700B0D6C8 /* View */,
+				0436F6AC2178221700B0D6C8 /* ViewController */,
+			);
+			path = "登录";
+			sourceTree = "<group>";
+		};
+		0436F6AA2178221700B0D6C8 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				04FF49DD21A3F04B00C4A2C2 /* RSRoleModel.h */,
+				04FF49DE21A3F04B00C4A2C2 /* RSRoleModel.m */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		0436F6AB2178221700B0D6C8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0436F6AC2178221700B0D6C8 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				04C0474A217885FF0006B8D4 /* RSLoginViewController.h */,
+				04C0474B217885FF0006B8D4 /* RSLoginViewController.m */,
+				04BD6B1B23BAF125006693E3 /* RSRegisterViewController.h */,
+				04BD6B1C23BAF125006693E3 /* RSRegisterViewController.m */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		04469EA927E711C5003831A9 /* libMiPushSDK */ = {
+			isa = PBXGroup;
+			children = (
+				04469EAA27E711C5003831A9 /* libMiPushSDK.a */,
+				04469EAB27E711C5003831A9 /* libMiPushApnsAckSDK.a */,
+				04469EAC27E711C5003831A9 /* MiPushApnsAckSDK.h */,
+				04469EAD27E711C5003831A9 /* MiPushSDK.h */,
+			);
+			name = libMiPushSDK;
+			path = ../../../../../../../Downloads/MiPush_Client_iOS_20201123/iOS/libMiPushSDK;
+			sourceTree = "<group>";
+		};
+		046E9DFF2420603000EF6554 /* 线上培训 */ = {
+			isa = PBXGroup;
+			children = (
+				046E9E002420603000EF6554 /* model */,
+				046E9E012420603000EF6554 /* view */,
+				046E9E022420603000EF6554 /* ViewController */,
+			);
+			path = "线上培训";
+			sourceTree = "<group>";
+		};
+		046E9E002420603000EF6554 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				04FD500224220066004EBA34 /* RSOnlineModel.h */,
+				04FD500324220066004EBA34 /* RSOnlineModel.m */,
+				04FD5005242211F5004EBA34 /* RSOnlineTypeModel.h */,
+				04FD5006242211F5004EBA34 /* RSOnlineTypeModel.m */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		046E9E012420603000EF6554 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				044656E72420A58100F1089C /* RSOnlineContentCell.h */,
+				044656E82420A58100F1089C /* RSOnlineContentCell.m */,
+				04FD4FFF2421CF07004EBA34 /* RSOnlineVideoHeaderView.h */,
+				04FD50002421CF07004EBA34 /* RSOnlineVideoHeaderView.m */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		046E9E022420603000EF6554 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				044656E124207AC300F1089C /* RSOnlineTrainingViewController.h */,
+				044656E224207AC300F1089C /* RSOnlineTrainingViewController.m */,
+				044656E42420A43800F1089C /* RSOnlineContentViewController.h */,
+				044656E52420A43800F1089C /* RSOnlineContentViewController.m */,
+				044656EA2420B59900F1089C /* RSOnlineVideoPlayViewController.h */,
+				044656EB2420B59900F1089C /* RSOnlineVideoPlayViewController.m */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		04A40AF82519D2520082DFD3 /* WFTable */ = {
+			isa = PBXGroup;
+			children = (
+				04A40AF92519D2520082DFD3 /* BCContentOB.h */,
+				04A40AFA2519D2520082DFD3 /* BCMyCollectionViewCell.h */,
+				04A40AFB2519D2520082DFD3 /* MyTableListView.h */,
+				04A40AFC2519D2520082DFD3 /* BCMyTableViewCell.h */,
+				04A40AFD2519D2520082DFD3 /* BCContentOB.m */,
+				04A40AFE2519D2520082DFD3 /* BCMyCollectionViewCell.m */,
+				04A40AFF2519D2520082DFD3 /* BCMyTableViewCell.m */,
+				04A40B002519D2520082DFD3 /* MyTableListView.m */,
+				046AF2DB254C52F50069591B /* RSFeeNameCell.h */,
+				046AF2DC254C52F50069591B /* RSFeeNameCell.m */,
+			);
+			path = WFTable;
+			sourceTree = "<group>";
+		};
+		04A40B0B2519E65C0082DFD3 /* DIYSystemDatePicker */ = {
+			isa = PBXGroup;
+			children = (
+				04A40B0C2519E65C0082DFD3 /* DIYSystemDatePickerView.h */,
+				04A40B0D2519E65C0082DFD3 /* DIYSystemDatePickerView.m */,
+			);
+			path = DIYSystemDatePicker;
+			sourceTree = "<group>";
+		};
+		04A40B0F2519EB280082DFD3 /* YCPopover */ = {
+			isa = PBXGroup;
+			children = (
+				04A40B142519EB280082DFD3 /* YCPopoverMacro.h */,
+				04A40B112519EB280082DFD3 /* YCPopoverAnimator.h */,
+				04A40B152519EB280082DFD3 /* YCPopoverAnimator.m */,
+				04A40B132519EB280082DFD3 /* YCPresentationController.h */,
+				04A40B102519EB280082DFD3 /* YCPresentationController.m */,
+				04A40B122519EB280082DFD3 /* UIViewController+YCPopover.h */,
+				04A40B162519EB280082DFD3 /* UIViewController+YCPopover.m */,
+			);
+			path = YCPopover;
+			sourceTree = "<group>";
+		};
+		04A40B20251B39360082DFD3 /* ColumnChartView */ = {
+			isa = PBXGroup;
+			children = (
+				04A40B21251B39360082DFD3 /* ColumnChartView.m */,
+				04A40B22251B39360082DFD3 /* ColumnChartView.h */,
+			);
+			path = ColumnChartView;
+			sourceTree = "<group>";
+		};
+		04A40B24251C8A6E0082DFD3 /* HQPickerView */ = {
+			isa = PBXGroup;
+			children = (
+				04A40B25251C8A6F0082DFD3 /* HQPickerView.h */,
+				04A40B26251C8A6F0082DFD3 /* HQPickerView.m */,
+			);
+			path = HQPickerView;
+			sourceTree = "<group>";
+		};
+		04A6F1632195684A00D15F58 /* JJOptionView */ = {
+			isa = PBXGroup;
+			children = (
+				04A6F1642195684A00D15F58 /* JJOptionView.h */,
+				04A6F1652195684A00D15F58 /* JJOptionView.m */,
+				04A6F1662195684A00D15F58 /* list_icon_drfault@3x.png */,
+				04A6F1672195684A00D15F58 /* list_icon_drfault@2x.png */,
+			);
+			path = JJOptionView;
+			sourceTree = "<group>";
+		};
+		04A6F16B21957B4E00D15F58 /* 个人中心 */ = {
+			isa = PBXGroup;
+			children = (
+				04A6F16C21957B4E00D15F58 /* model */,
+				04A6F16D21957B4E00D15F58 /* View */,
+				04A6F16E21957B4E00D15F58 /* viewController */,
+			);
+			path = "个人中心";
+			sourceTree = "<group>";
+		};
+		04A6F16C21957B4E00D15F58 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				04CA3FBB219AC85C009C2D33 /* RSUserModel.h */,
+				04CA3FBC219AC85C009C2D33 /* RSUserModel.m */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		04A6F16D21957B4E00D15F58 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0412B78F21A6840300761547 /* RSMenuHeaderFootView.h */,
+				0412B79021A6840300761547 /* RSMenuHeaderFootView.m */,
+				04A6F1782195834600D15F58 /* RSPersonFirstCell.h */,
+				04A6F1752195834500D15F58 /* RSPersonFirstCell.m */,
+				04A6F1772195834600D15F58 /* RSPersonSecondCell.h */,
+				04A6F1762195834500D15F58 /* RSPersonSecondCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		04A6F16E21957B4E00D15F58 /* viewController */ = {
+			isa = PBXGroup;
+			children = (
+				0436F6B52178280000B0D6C8 /* RSMenuViewController.h */,
+				0436F6B62178280000B0D6C8 /* RSMenuViewController.m */,
+				04A6F16F21957BCB00D15F58 /* RSPasswordModificationViewController.h */,
+				04A6F17021957BCB00D15F58 /* RSPasswordModificationViewController.m */,
+				04A6F17221957BE600D15F58 /* RSPersonalInformationViewController.h */,
+				04A6F17321957BE600D15F58 /* RSPersonalInformationViewController.m */,
+				04B4F9F023C3084200853021 /* RSAboutOurViewController.h */,
+				04B4F9F123C3084200853021 /* RSAboutOurViewController.m */,
+			);
+			path = viewController;
+			sourceTree = "<group>";
+		};
+		04A6F17B219592D900D15F58 /* MyMD5 */ = {
+			isa = PBXGroup;
+			children = (
+				04A6F17C219592D900D15F58 /* MyMD5.m */,
+				04A6F17D219592D900D15F58 /* MyMD5.h */,
+			);
+			path = MyMD5;
+			sourceTree = "<group>";
+		};
+		04B3F70B23B0A43700CDD821 /* 触控 */ = {
+			isa = PBXGroup;
+			children = (
+				04B3F70C23B0A43700CDD821 /* model */,
+				04B3F70D23B0A43700CDD821 /* view */,
+				04B3F70E23B0A43700CDD821 /* viewController */,
+			);
+			path = "触控";
+			sourceTree = "<group>";
+		};
+		04B3F70C23B0A43700CDD821 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				04B3F74923B4A71A00CDD821 /* RSTouchModel.h */,
+				04B3F74A23B4A71A00CDD821 /* RSTouchModel.m */,
+				04B3F74C23B4B31800CDD821 /* RSShipperMode.h */,
+				04B3F74D23B4B31800CDD821 /* RSShipperMode.m */,
+				04B3F74F23B4B89F00CDD821 /* RSBMStockModel.h */,
+				04B3F75023B4B89F00CDD821 /* RSBMStockModel.m */,
+				04B3F75223B4C7F600CDD821 /* RSSlStockModel.h */,
+				04B3F75323B4C7F600CDD821 /* RSSlStockModel.m */,
+				04B3F75523B4C8B900CDD821 /* RSSLPieceModel.h */,
+				04B3F75623B4C8B900CDD821 /* RSSLPieceModel.m */,
+				04B3F75823B5D78600CDD821 /* RSWarehouseModel.h */,
+				04B3F75923B5D78600CDD821 /* RSWarehouseModel.m */,
+				04B3F75B23B5D7BB00CDD821 /* RSStoreAreaModel.h */,
+				04B3F75C23B5D7BB00CDD821 /* RSStoreAreaModel.m */,
+				046AF2D825490B600069591B /* RSFeeModel.h */,
+				046AF2D925490B600069591B /* RSFeeModel.m */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		04B3F70D23B0A43700CDD821 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				04B3F71223B0ABBA00CDD821 /* RSTouchCell.h */,
+				04B3F71323B0ABBA00CDD821 /* RSTouchCell.m */,
+				04B3F71823B0BDDD00CDD821 /* RSBLTouchCell.h */,
+				04B3F71923B0BDDD00CDD821 /* RSBLTouchCell.m */,
+				04B3F71E23B0C77200CDD821 /* RSNameOfCargoCell.h */,
+				04B3F71F23B0C77200CDD821 /* RSNameOfCargoCell.m */,
+				04B3F72423B0C92E00CDD821 /* RSBLStockCell.h */,
+				04B3F72523B0C92E00CDD821 /* RSBLStockCell.m */,
+				04B3F72723B1B20B00CDD821 /* RSSLTouchCell.h */,
+				04B3F72823B1B20B00CDD821 /* RSSLTouchCell.m */,
+				04B3F72A23B1B4E100CDD821 /* RSSLHeaderView.h */,
+				04B3F72B23B1B4E100CDD821 /* RSSLHeaderView.m */,
+				04B3F72D23B1B5DB00CDD821 /* RSSLFootView.h */,
+				04B3F72E23B1B5DB00CDD821 /* RSSLFootView.m */,
+				04B3F73023B1BDD200CDD821 /* RSSLStockHeaderView.h */,
+				04B3F73123B1BDD200CDD821 /* RSSLStockHeaderView.m */,
+				04B3F73323B1BF4200CDD821 /* RSSLStockFootView.h */,
+				04B3F73423B1BF4200CDD821 /* RSSLStockFootView.m */,
+				04B3F73623B1BFCE00CDD821 /* RSSLStockCell.h */,
+				04B3F73723B1BFCE00CDD821 /* RSSLStockCell.m */,
+				04B3F73C23B1FF0000CDD821 /* RSTouchAlertView.h */,
+				04B3F73D23B1FF0000CDD821 /* RSTouchAlertView.m */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		04B3F70E23B0A43700CDD821 /* viewController */ = {
+			isa = PBXGroup;
+			children = (
+				04B3F70F23B0A46000CDD821 /* RSTouchViewController.h */,
+				04B3F71023B0A46000CDD821 /* RSTouchViewController.m */,
+				04B3F71523B0B1E000CDD821 /* RSBLTouchViewController.h */,
+				04B3F71623B0B1E000CDD821 /* RSBLTouchViewController.m */,
+				04B3F71B23B0C2D500CDD821 /* RSNameOfCargoViewController.h */,
+				04B3F71C23B0C2D500CDD821 /* RSNameOfCargoViewController.m */,
+				04B3F72123B0C89700CDD821 /* RSStockViewController.h */,
+				04B3F72223B0C89800CDD821 /* RSStockViewController.m */,
+			);
+			path = viewController;
+			sourceTree = "<group>";
+		};
+		04B3F74523B497DA00CDD821 /* JHAlertUtil */ = {
+			isa = PBXGroup;
+			children = (
+				04B3F74623B497DA00CDD821 /* JHSysAlertUtil.h */,
+				04B3F74723B497DA00CDD821 /* JHSysAlertUtil.m */,
+			);
+			path = JHAlertUtil;
+			sourceTree = "<group>";
+		};
+		04C0473D21787B5E0006B8D4 /* UITableview+YBRefresh */ = {
+			isa = PBXGroup;
+			children = (
+				04C0473E21787B5E0006B8D4 /* UIScrollView+DREmptyDataSet.m */,
+				04C0473F21787B5E0006B8D4 /* UIScrollView+DRRefresh.h */,
+				04C0474021787B5E0006B8D4 /* UIScrollView+DREmptyDataSet.h */,
+				04C0474121787B5E0006B8D4 /* UIScrollView+DRRefresh.m */,
+			);
+			path = "UITableview+YBRefresh";
+			sourceTree = "<group>";
+		};
+		04C1D92321C5E79A00384F98 /* MXActionSheet */ = {
+			isa = PBXGroup;
+			children = (
+				04C1D92421C5E79A00384F98 /* MXActionSheet.h */,
+				04C1D92521C5E79A00384F98 /* MXActionSheet.m */,
+			);
+			path = MXActionSheet;
+			sourceTree = "<group>";
+		};
+		04D6CED321904F5C00B35A51 /* ZZQEmptyView */ = {
+			isa = PBXGroup;
+			children = (
+				04D6CED421904F5C00B35A51 /* ZZQEmptyView.h */,
+				04D6CED521904F5C00B35A51 /* ZZQEmptyView.m */,
+			);
+			path = ZZQEmptyView;
+			sourceTree = "<group>";
+		};
+		04D6CEDD2191754000B35A51 /* SCNavigationMenuView */ = {
+			isa = PBXGroup;
+			children = (
+				04D6CEE02191754000B35A51 /* SCNavigationMenuProtocol.h */,
+				04D6CEDE2191754000B35A51 /* SCNavigationMenuView.h */,
+				04D6CEE22191754000B35A51 /* SCNavigationMenuView.m */,
+				04D6CEE12191754000B35A51 /* SCNavigationMenuTitleCell.h */,
+				04D6CEDF2191754000B35A51 /* SCNavigationMenuTitleCell.m */,
+			);
+			path = SCNavigationMenuView;
+			sourceTree = "<group>";
+		};
+		04FF49E021A4F21D00C4A2C2 /* RSA */ = {
+			isa = PBXGroup;
+			children = (
+				04FF49E121A4F21D00C4A2C2 /* RSAEncryptor.h */,
+				04FF49E321A4F21D00C4A2C2 /* RSAEncryptor.m */,
+			);
+			path = RSA;
+			sourceTree = "<group>";
+		};
+		9003A5D94784D936DD044D8B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0462F1AE260CCD8D00DBB3AA /* libMiPushSDK.a */,
+				040476DB23A12BB300B4D528 /* libiconv.2.tbd */,
+				040476D923A1291300B4D528 /* libiconv.tbd */,
+				04215DA0237AAA7C001EFE11 /* libsqlite3.tbd */,
+				04C1D93921C63FE500384F98 /* CoreTelephony.framework */,
+				04C1D93721C63FD600384F98 /* CFNetwork.framework */,
+				04C1D93521C63FC700384F98 /* MobileCoreServices.framework */,
+				04C1D93321C63FBB00384F98 /* SystemConfiguration.framework */,
+				04C1D93121C63FAD00384F98 /* libz.tbd */,
+				04C1D92F21C63F9E00384F98 /* libxml2.tbd */,
+				04C1D92D21C63F8C00384F98 /* libresolv.tbd */,
+				04C1D92B21C63F7400384F98 /* UserNotifications.framework */,
+				425A1ECECB928E2700E33380 /* libPods-OAManage.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9D272C8657832820A0FBD16F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				33536298934A81E564D1E0B6 /* Pods-OAManage.debug.xcconfig */,
+				1D3B410FD229353805935146 /* Pods-OAManage.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0436F6802178198300B0D6C8 /* OAManage */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0436F69A2178198B00B0D6C8 /* Build configuration list for PBXNativeTarget "OAManage" */;
+			buildPhases = (
+				18ECA1AE276FA176690E6AFD /* [CP] Check Pods Manifest.lock */,
+				0436F67D2178198300B0D6C8 /* Sources */,
+				0436F67E2178198300B0D6C8 /* Frameworks */,
+				0436F67F2178198300B0D6C8 /* Resources */,
+				E7674B28F75A70CF754069C1 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OAManage;
+			productName = OAManage;
+			productReference = 0436F6812178198300B0D6C8 /* OAManage.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0436F6792178198200B0D6C8 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = RS;
+				LastUpgradeCheck = 1000;
+				ORGANIZATIONNAME = mac;
+				TargetAttributes = {
+					0436F6802178198300B0D6C8 = {
+						CreatedOnToolsVersion = 10.0;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
+					};
+				};
+			};
+			buildConfigurationList = 0436F67C2178198200B0D6C8 /* Build configuration list for PBXProject "OAManage" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 0436F6782178198200B0D6C8;
+			productRefGroup = 0436F6822178198300B0D6C8 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0436F6802178198300B0D6C8 /* OAManage */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0436F67F2178198300B0D6C8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0436F6942178198B00B0D6C8 /* LaunchScreen.storyboard in Resources */,
+				04A6F16A2195684A00D15F58 /* list_icon_drfault@2x.png in Resources */,
+				0436F6912178198B00B0D6C8 /* Assets.xcassets in Resources */,
+				041E070E237D2B9D00766441 /* 欢迎页.png in Resources */,
+				0436F68C2178198300B0D6C8 /* Main.storyboard in Resources */,
+				04A6F1692195684A00D15F58 /* list_icon_drfault@3x.png in Resources */,
+				041E07512387B38C00766441 /* select_right@3x.png in Resources */,
+				0404773823AA0E3400B4D528 /* WSDatePickerView.xib in Resources */,
+				041E07502387B38C00766441 /* select_right@2x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		18ECA1AE276FA176690E6AFD /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-OAManage-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E7674B28F75A70CF754069C1 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-OAManage/Pods-OAManage-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-OAManage/Pods-OAManage-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-OAManage/Pods-OAManage-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0436F67D2178198300B0D6C8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0404772923A8BC6C00B4D528 /* RSNoticeModel.m in Sources */,
+				04B3F71423B0ABBA00CDD821 /* RSTouchCell.m in Sources */,
+				04A40AD5251840CD0082DFD3 /* RSMarketModuleViewController.m in Sources */,
+				04A6F15F21953A8B00D15F58 /* RSProgressView.m in Sources */,
+				04A6F187219980B900D15F58 /* RSViewProgressLine.m in Sources */,
+				04D6CED22190329100B35A51 /* RSBaseViewController.m in Sources */,
+				0436F6BA2178282600B0D6C8 /* RSMyNavigationViewController.m in Sources */,
+				04B3F75723B4C8B900CDD821 /* RSSLPieceModel.m in Sources */,
+				04A40B032519D2530082DFD3 /* BCMyTableViewCell.m in Sources */,
+				041E072623839D9600766441 /* RSMailDetailViewController.m in Sources */,
+				041E0711237E588800766441 /* RSLaunchCell.m in Sources */,
+				0404775023AB2A7100B4D528 /* RSWorkTypeModel.m in Sources */,
+				04B3F71A23B0BDDD00CDD821 /* RSBLTouchCell.m in Sources */,
+				0429906D21ACEA14004503A7 /* RSApprovalProcessModel.m in Sources */,
+				0436F6BD2178298800B0D6C8 /* UIBarButtonItem+Item.m in Sources */,
+				041E0745238625B600766441 /* RSOACreatFile.m in Sources */,
+				04B3F75423B4C7F600CDD821 /* RSSlStockModel.m in Sources */,
+				04215D9F237A91CA001EFE11 /* RSServiceViewController.m in Sources */,
+				04FF49CB21A3B38E00C4A2C2 /* FSAES128.m in Sources */,
+				04D6CEDC21914B2100B35A51 /* MJChiBaoZiFooter.m in Sources */,
+				04B3F74823B497DA00CDD821 /* JHSysAlertUtil.m in Sources */,
+				046AF2DA25490B600069591B /* RSFeeModel.m in Sources */,
+				040476E223A75C5500B4D528 /* RSInputWorkViewController.m in Sources */,
+				04B3F74B23B4A71A00CDD821 /* RSTouchModel.m in Sources */,
+				04B3F73E23B1FF0000CDD821 /* RSTouchAlertView.m in Sources */,
+				041E071D238280CD00766441 /* ZKImgRunLoopView.m in Sources */,
+				045D414A21AB91F3005F34D2 /* RSAuditedModel.m in Sources */,
+				041E07592387D45F00766441 /* RSApprovalHeaderView.m in Sources */,
+				04A40B022519D2530082DFD3 /* BCMyCollectionViewCell.m in Sources */,
+				04B3F72023B0C77200CDD821 /* RSNameOfCargoCell.m in Sources */,
+				04D6CEE42191754000B35A51 /* SCNavigationMenuView.m in Sources */,
+				041E07382384EEC500766441 /* GYNoticeViewCell.m in Sources */,
+				04B3F73523B1BF4200CDD821 /* RSSLStockFootView.m in Sources */,
+				04A6F17A2195834600D15F58 /* RSPersonSecondCell.m in Sources */,
+				0471B00324373E2B00785F4D /* RSJumpVideoTool.m in Sources */,
+				04B3F72623B0C92E00CDD821 /* RSBLStockCell.m in Sources */,
+				04A40ADB25185B970082DFD3 /* RSManageViewController.m in Sources */,
+				04B3F75D23B5D7BB00CDD821 /* RSStoreAreaModel.m in Sources */,
+				041E07292383BCED00766441 /* RSMailDetailCell.m in Sources */,
+				041E071C238280CD00766441 /* JhPageControl.m in Sources */,
+				04D6CECB2190254E00B35A51 /* UIColor+HexColor.m in Sources */,
+				04B3F75A23B5D78600CDD821 /* RSWarehouseModel.m in Sources */,
+				045D414721A808CE005F34D2 /* RSInformationModel.m in Sources */,
+				04A6F17121957BCB00D15F58 /* RSPasswordModificationViewController.m in Sources */,
+				04A40B0E2519E65C0082DFD3 /* DIYSystemDatePickerView.m in Sources */,
+				041E07422386247F00766441 /* RSOALocalDB.m in Sources */,
+				0404773923AA0E3400B4D528 /* WSDatePickerView.m in Sources */,
+				04D6CEDB21914B2100B35A51 /* MJChiBaoZiHeader.m in Sources */,
+				04CA3FBD219AC85C009C2D33 /* RSUserModel.m in Sources */,
+				041E0714237E983700766441 /* RSLaunchReusableView.m in Sources */,
+				040476D523A0D2DA00B4D528 /* iCloudManager.m in Sources */,
+				044656E92420A58100F1089C /* RSOnlineContentCell.m in Sources */,
+				0436F6892178198300B0D6C8 /* ViewController.m in Sources */,
+				04A8E7BD23B07140004E8013 /* RSToBeInitiatedViewController.m in Sources */,
+				041E07562387CD8E00766441 /* RSNewAuditedCell.m in Sources */,
+				041E071723823E7900766441 /* RSLaunchFootReusableView.m in Sources */,
+				04B3F71723B0B1E000CDD821 /* RSBLTouchViewController.m in Sources */,
+				041E07392384EEC500766441 /* GYRollingNoticeView.m in Sources */,
+				044656E62420A43800F1089C /* RSOnlineContentViewController.m in Sources */,
+				04A40AD8251854E30082DFD3 /* RSMarketModuleCell.m in Sources */,
+				04A6F156219521D000D15F58 /* RSRedButton.m in Sources */,
+				041E07522387B38C00766441 /* SHESelectTable.m in Sources */,
+				04A6F159219528D800D15F58 /* RSAuditedViewController.m in Sources */,
+				04A40AE7251994610082DFD3 /* RSBalanceViewController.m in Sources */,
+				04D6CEE32191754000B35A51 /* SCNavigationMenuTitleCell.m in Sources */,
+				0462F18E2608228500DBB3AA /* RSBalanCell.m in Sources */,
+				04A8E7BA23B0680D004E8013 /* RSXNoticeCell.m in Sources */,
+				04A40B172519EB280082DFD3 /* YCPresentationController.m in Sources */,
+				04B3F72F23B1B5DB00CDD821 /* RSSLFootView.m in Sources */,
+				040476E523A7981800B4D528 /* RSBannerModel.m in Sources */,
+				04A6F15C219538F100D15F58 /* RSApprovalProcessViewController.m in Sources */,
+				04D09F3221B6678B0078D7DA /* RSNoticeViewController.m in Sources */,
+				040476D823A0D33900B4D528 /* ZZDocument.m in Sources */,
+				04B3F71123B0A46000CDD821 /* RSTouchViewController.m in Sources */,
+				04E6A34721927A1A007A44F2 /* RSCustomMenuCell.m in Sources */,
+				04FD5007242211F5004EBA34 /* RSOnlineTypeModel.m in Sources */,
+				04B3F74123B2022000CDD821 /* UITextView+ZWPlaceHolder.m in Sources */,
+				04B3F73223B1BDD200CDD821 /* RSSLStockHeaderView.m in Sources */,
+				04A40AE125187E140082DFD3 /* RSContractViewController.m in Sources */,
+				04A40B23251B39360082DFD3 /* ColumnChartView.m in Sources */,
+				041E07482387874100766441 /* RSSalertView.m in Sources */,
+				0436F68F2178198300B0D6C8 /* OAManage.xcdatamodeld in Sources */,
+				04E6A344219189B7007A44F2 /* UIView+Frame.m in Sources */,
+				0404772C23A9DAF800B4D528 /* RSSystemViewController.m in Sources */,
+				0436F6B72178280000B0D6C8 /* RSMenuViewController.m in Sources */,
+				04A40B042519D2530082DFD3 /* MyTableListView.m in Sources */,
+				04B3F72323B0C89800CDD821 /* RSStockViewController.m in Sources */,
+				04B3F74E23B4B31800CDD821 /* RSShipperMode.m in Sources */,
+				04C0474621787DA00006B8D4 /* RSShenHeViewController.m in Sources */,
+				04FF49DF21A3F04B00C4A2C2 /* RSRoleModel.m in Sources */,
+				04A6F17E219592D900D15F58 /* MyMD5.m in Sources */,
+				0404775323AB7E7300B4D528 /* RSSystemCell.m in Sources */,
+				041E072F2384DF3800766441 /* RSServiceCell.m in Sources */,
+				04A40B192519EB280082DFD3 /* UIViewController+YCPopover.m in Sources */,
+				041E07232383983E00766441 /* RSMailListCell.m in Sources */,
+				04A8E7B723B066FD004E8013 /* RSNoticeMoreViewController.m in Sources */,
+				04C0474221787B5E0006B8D4 /* UIScrollView+DREmptyDataSet.m in Sources */,
+				04FF49E521A4F21E00C4A2C2 /* RSAEncryptor.m in Sources */,
+				04A496462553AB1A00345FCF /* UIControl+QiEventInterval.m in Sources */,
+				0404772F23AA054000B4D528 /* RSSystemModel.m in Sources */,
+				04B3F71D23B0C2D500CDD821 /* RSNameOfCargoViewController.m in Sources */,
+				041E073F23853EBE00766441 /* RSMailModel.m in Sources */,
+				044656E324207AC300F1089C /* RSOnlineTrainingViewController.m in Sources */,
+				04D6CED621904F5C00B35A51 /* ZZQEmptyView.m in Sources */,
+				04A40B0A2519DE790082DFD3 /* RSMyLabel.m in Sources */,
+				04215D9C237A9130001EFE11 /* RSLaunchViewController.m in Sources */,
+				04C0474C217885FF0006B8D4 /* RSLoginViewController.m in Sources */,
+				0429907021AD175C004503A7 /* RSWKOAmanagerViewController.m in Sources */,
+				04D6CECC2190254E00B35A51 /* Nonetwork.m in Sources */,
+				04B3F75123B4B89F00CDD821 /* RSBMStockModel.m in Sources */,
+				04A6F1682195684A00D15F58 /* JJOptionView.m in Sources */,
+				04B4F9F223C3084200853021 /* RSAboutOurViewController.m in Sources */,
+				0436F6972178198B00B0D6C8 /* main.m in Sources */,
+				04C1D92621C5E79A00384F98 /* MXActionSheet.m in Sources */,
+				04A40AE4251886AF0082DFD3 /* RSContractCell.m in Sources */,
+				04A40B1C2519EBC30082DFD3 /* RSPopViewController.m in Sources */,
+				0404773A23AA0E3400B4D528 /* NSDate+Extension.m in Sources */,
+				04FD500424220066004EBA34 /* RSOnlineModel.m in Sources */,
+				04B3F73823B1BFCE00CDD821 /* RSSLStockCell.m in Sources */,
+				04B3F74423B34D0B00CDD821 /* RSInformationLabel.m in Sources */,
+				040476DF23A726DB00B4D528 /* RSShowImageViewController.m in Sources */,
+				04A6F1792195834600D15F58 /* RSPersonFirstCell.m in Sources */,
+				04A6F17421957BE600D15F58 /* RSPersonalInformationViewController.m in Sources */,
+				04A4F81E21ABF0020052EFC4 /* RSShenHeModel.m in Sources */,
+				04215D99237A84F4001EFE11 /* RSMainViewController.m in Sources */,
+				041E07532387B38C00766441 /* SHESelectCell.m in Sources */,
+				046AF2D72546657E0069591B /* RSColumnarModel.m in Sources */,
+				04A8E7B423B065DC004E8013 /* QLPreviewItemCustom.m in Sources */,
+				0404774423AB220000B4D528 /* RSWorkContentModel.m in Sources */,
+				04BD6B1D23BAF125006693E3 /* RSRegisterViewController.m in Sources */,
+				041E073C2385098D00766441 /* RSGyRollingCell.m in Sources */,
+				04A4F82121ABF1990052EFC4 /* RSShenHeFristCell.m in Sources */,
+				04FD50012421CF07004EBA34 /* RSOnlineVideoHeaderView.m in Sources */,
+				0404773E23AA31E500B4D528 /* RSSystemTypeModel.m in Sources */,
+				04A40B182519EB280082DFD3 /* YCPopoverAnimator.m in Sources */,
+				04B3F72923B1B20B00CDD821 /* RSSLTouchCell.m in Sources */,
+				044656EC2420B59A00F1089C /* RSOnlineVideoPlayViewController.m in Sources */,
+				046AF2DD254C52F50069591B /* RSFeeNameCell.m in Sources */,
+				0436F6862178198300B0D6C8 /* AppDelegate.m in Sources */,
+				04A40ADE25185CA40082DFD3 /* RSManageCell.m in Sources */,
+				04A40B012519D2530082DFD3 /* BCContentOB.m in Sources */,
+				04A6F184219911F900D15F58 /* NetworkTool.m in Sources */,
+				04A40B27251C8A6F0082DFD3 /* HQPickerView.m in Sources */,
+				041E072023838CF100766441 /* RSMailListViewController.m in Sources */,
+				041930E2238E162700DD2508 /* RSApprovalProcessCell.m in Sources */,
+				0404773B23AA0E3400B4D528 /* UIView+Extension.m in Sources */,
+				04E6A34A2192824F007A44F2 /* RSApprovalCell.m in Sources */,
+				04B3F72C23B1B4E100CDD821 /* RSSLHeaderView.m in Sources */,
+				04D6CECF219026AA00B35A51 /* NSString+Hash.m in Sources */,
+				04A6F16221955C2300D15F58 /* RSProgressStatusCell.m in Sources */,
+				0412B79121A6840400761547 /* RSMenuHeaderFootView.m in Sources */,
+				041E072C2383E28F00766441 /* RSServiceHeaderView.m in Sources */,
+				0404774123AB156300B4D528 /* RSNewAuditedModel.m in Sources */,
+				04A40B1F251AE6150082DFD3 /* RSColumnarViewController.m in Sources */,
+				04C0474321787B5E0006B8D4 /* UIScrollView+DRRefresh.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		0436F68A2178198300B0D6C8 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0436F68B2178198300B0D6C8 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		0436F6922178198B00B0D6C8 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0436F6932178198B00B0D6C8 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		0436F6982178198B00B0D6C8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		0436F6992178198B00B0D6C8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		0436F69B2178198B00B0D6C8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 33536298934A81E564D1E0B6 /* Pods-OAManage.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = OAManage/OAManage.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Distribution";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "Apple Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 2.14;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 5CVKEU8NXR;
+				ENABLE_BITCODE = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/OAManage/Classes/其他/工具类/OAManagePrefixHeader.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/AFNetworking\"",
+					"\"${PODS_ROOT}/Headers/Public/CocoaAsyncSocket\"",
+					"\"${PODS_ROOT}/Headers/Public/DZNEmptyDataSet\"",
+					"\"${PODS_ROOT}/Headers/Public/FMDB\"",
+					"\"${PODS_ROOT}/Headers/Public/IQKeyboardManager\"",
+					"\"${PODS_ROOT}/Headers/Public/JXTAlertManager\"",
+					"\"${PODS_ROOT}/Headers/Public/KTVCocoaHTTPServer\"",
+					"\"${PODS_ROOT}/Headers/Public/KTVHTTPCache\"",
+					"\"${PODS_ROOT}/Headers/Public/MJExtension\"",
+					"\"${PODS_ROOT}/Headers/Public/MJRefresh\"",
+					"\"${PODS_ROOT}/Headers/Public/Masonry\"",
+					"\"${PODS_ROOT}/Headers/Public/Reachability\"",
+					"\"${PODS_ROOT}/Headers/Public/SDAutoLayout\"",
+					"\"${PODS_ROOT}/Headers/Public/SDWebImage\"",
+					"\"${PODS_ROOT}/Headers/Public/SJAttributesFactory\"",
+					"\"${PODS_ROOT}/Headers/Public/SJBaseVideoPlayer\"",
+					"\"${PODS_ROOT}/Headers/Public/SJObserverHelper\"",
+					"\"${PODS_ROOT}/Headers/Public/SJUIFactory\"",
+					"\"${PODS_ROOT}/Headers/Public/SJVideoPlayer\"",
+					"\"${PODS_ROOT}/Headers/Public/SVProgressHUD\"",
+					"\"${PODS_ROOT}/Headers/Public/TZImagePickerController\"",
+					"\"${PODS_ROOT}/Headers/Public/UMCAnalytics\"",
+					"\"${PODS_ROOT}/Headers/Public/UMCCommon\"",
+					"\"${PODS_ROOT}/Headers/Public/XLPhotoBrowser+CoderXL\"",
+				);
+				INFOPLIST_FILE = OAManage/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/OAManage/Classes/其他/Lib/libMiPushSDK",
+				);
+				MARKETING_VERSION = 2.3.0;
+				MiSDKRun = debug;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ruishi.OAManage;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = 2022newRuishiOA;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		0436F69C2178198B00B0D6C8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1D3B410FD229353805935146 /* Pods-OAManage.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = OAManage/OAManage.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Distribution";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "Apple Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 2.14;
+				DEVELOPMENT_TEAM = 5CVKEU8NXR;
+				ENABLE_BITCODE = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/OAManage/Classes/其他/工具类/OAManagePrefixHeader.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/AFNetworking\"",
+					"\"${PODS_ROOT}/Headers/Public/CocoaAsyncSocket\"",
+					"\"${PODS_ROOT}/Headers/Public/DZNEmptyDataSet\"",
+					"\"${PODS_ROOT}/Headers/Public/FMDB\"",
+					"\"${PODS_ROOT}/Headers/Public/IQKeyboardManager\"",
+					"\"${PODS_ROOT}/Headers/Public/JXTAlertManager\"",
+					"\"${PODS_ROOT}/Headers/Public/KTVCocoaHTTPServer\"",
+					"\"${PODS_ROOT}/Headers/Public/KTVHTTPCache\"",
+					"\"${PODS_ROOT}/Headers/Public/MJExtension\"",
+					"\"${PODS_ROOT}/Headers/Public/MJRefresh\"",
+					"\"${PODS_ROOT}/Headers/Public/Masonry\"",
+					"\"${PODS_ROOT}/Headers/Public/Reachability\"",
+					"\"${PODS_ROOT}/Headers/Public/SDAutoLayout\"",
+					"\"${PODS_ROOT}/Headers/Public/SDWebImage\"",
+					"\"${PODS_ROOT}/Headers/Public/SJAttributesFactory\"",
+					"\"${PODS_ROOT}/Headers/Public/SJBaseVideoPlayer\"",
+					"\"${PODS_ROOT}/Headers/Public/SJObserverHelper\"",
+					"\"${PODS_ROOT}/Headers/Public/SJUIFactory\"",
+					"\"${PODS_ROOT}/Headers/Public/SJVideoPlayer\"",
+					"\"${PODS_ROOT}/Headers/Public/SVProgressHUD\"",
+					"\"${PODS_ROOT}/Headers/Public/TZImagePickerController\"",
+					"\"${PODS_ROOT}/Headers/Public/UMCAnalytics\"",
+					"\"${PODS_ROOT}/Headers/Public/UMCCommon\"",
+					"\"${PODS_ROOT}/Headers/Public/XLPhotoBrowser+CoderXL\"",
+				);
+				INFOPLIST_FILE = OAManage/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/OAManage/Classes/其他/Lib/libMiPushSDK",
+				);
+				MARKETING_VERSION = 2.3.0;
+				MiSDKRun = online;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ruishi.OAManage;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = 2022newRuishiOA;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0436F67C2178198200B0D6C8 /* Build configuration list for PBXProject "OAManage" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0436F6982178198B00B0D6C8 /* Debug */,
+				0436F6992178198B00B0D6C8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0436F69A2178198B00B0D6C8 /* Build configuration list for PBXNativeTarget "OAManage" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0436F69B2178198B00B0D6C8 /* Debug */,
+				0436F69C2178198B00B0D6C8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		0436F68D2178198300B0D6C8 /* OAManage.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				0436F68E2178198300B0D6C8 /* OAManage.xcdatamodel */,
+			);
+			currentVersion = 0436F68E2178198300B0D6C8 /* OAManage.xcdatamodel */;
+			path = OAManage.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 0436F6792178198200B0D6C8 /* Project object */;
+}

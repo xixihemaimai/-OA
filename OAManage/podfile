@@ -1,0 +1,21 @@
+target 'OAManage' do
+pod 'AFNetworking'
+pod 'MJRefresh'
+pod 'DZNEmptyDataSet'
+pod 'SDAutoLayout'
+pod 'IQKeyboardManager'
+pod 'SVProgressHUD'
+pod 'Masonry'
+pod 'MJExtension'
+
+
+pod 'SDWebImage'
+pod 'XLPhotoBrowser+CoderXL'
+pod 'JXTAlertManager'
+pod 'TZImagePickerController'
+pod 'FMDB'
+
+pod 'KTVHTTPCache', '~> 2.0.1'
+pod ‘SJVideoPlayer'
+
+end
