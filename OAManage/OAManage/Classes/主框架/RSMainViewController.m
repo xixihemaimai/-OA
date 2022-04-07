@@ -57,7 +57,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.tabBar setTintColor:[UIColor colorWithHexColorStr:@"#27C79A"]];
-    
     [self addSubCtrls];
 }
 
@@ -100,5 +99,7 @@
     menuVc.tabBarItem.selectedImage = newImage3;
     RSMyNavigationViewController * myNav3 = [[RSMyNavigationViewController alloc]initWithRootViewController:menuVc];
     self.viewControllers = @[myNav0,myNav1,myNav2,myNav3];
+    
+    
 }
 @end

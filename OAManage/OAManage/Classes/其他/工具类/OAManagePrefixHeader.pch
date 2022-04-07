@@ -38,7 +38,10 @@
 
 //x系列
 #define JH_isIPhone_IPhoneX_All (iphonex || iPhoneXR || iPhoneXS || iPhoneXSMax || iPhone12_Mini || iPhone12 || iPhone12_ProMax)
+#define Height_NavBar ((iPhoneXR == YES || iPhoneXS == YES || iPhoneXSMax == YES || iPhone12_Mini == YES) ? 88.0 : (iphonex == YES) ? 92 : (iPhone12 == YES || iPhone12_ProMax == YES) ? 91 : 64.0)
+#define Height_TabBar ((JH_isIPhone_IPhoneX_All == YES) ? 83.0 : 49.0)
 
+#define Height_bottomSafeArea (JH_isIPhone_IPhoneX_All == YES ? 34.0 : 0.0)
 
 #define SCW [UIScreen mainScreen].bounds.size.width
 #define SCH  [UIScreen mainScreen].bounds.size.height

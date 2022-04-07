@@ -82,6 +82,7 @@
     } else {
       self.automaticallyAdjustsScrollViewInsets = NO;
     }
+//    [self.navigationController.navigationBar setTranslucent:false];
     [self.navigationController.navigationBar setBackgroundColor:[UIColor clearColor]];
     
 //    if ([self isKindOfClass:[RSHomeViewController class]]) {

@@ -69,8 +69,7 @@ static NSString * MENUHEADER = @"MENUHEADER";
         [self.tableview reloadData];
     }
     
-    self.tableview.frame = CGRectMake(0, 0, SCW, SCH);
-    
+    self.tableview.frame = CGRectMake(0, 0, SCW, SCH - Height_TabBar);
     
    //tableview的头部
     UIView * menuHeaderview = [[UIView alloc]init];

@@ -99,7 +99,7 @@
        }else{
             witdh = 88;
         }
-        _leftTableview = [[UITableView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.navigationController.navigationBar.frame), witdh, SCH - CGRectGetMaxY(self.navigationController.navigationBar.frame)) style:UITableViewStylePlain];
+        _leftTableview = [[UITableView alloc]initWithFrame:CGRectMake(0, Height_NavBar, witdh, SCH - Height_NavBar - Height_TabBar) style:UITableViewStylePlain];
         _leftTableview.delegate = self;
         _leftTableview.dataSource = self;
         _leftTableview.showsVerticalScrollIndicator = NO;
@@ -112,7 +112,7 @@
 
 - (UITableView *)rightTableview{
     if (!_rightTableview) {
-        _rightTableview = [[UITableView alloc]initWithFrame:CGRectMake(CGRectGetMaxX(self.leftTableview.frame), CGRectGetMaxY(self.navigationController.navigationBar.frame),SCW - CGRectGetMaxX(self.leftTableview.frame) , SCH - CGRectGetMaxY(self.navigationController.navigationBar.frame)) style:UITableViewStylePlain];
+        _rightTableview = [[UITableView alloc]initWithFrame:CGRectMake(CGRectGetMaxX(self.leftTableview.frame), Height_NavBar,SCW - CGRectGetMaxX(self.leftTableview.frame) , SCH - Height_NavBar - Height_TabBar) style:UITableViewStylePlain];
         _rightTableview.delegate = self;
         _rightTableview.dataSource = self;
         _rightTableview.separatorStyle = UITableViewCellSeparatorStyleNone;

@@ -72,12 +72,12 @@ static NSString * LAUNCHREUSABFOOTCELLID = @"LAUNCHREUSABFOOTCELLID";
     flowLayout.minimumLineSpacing = 0;
     flowLayout.minimumInteritemSpacing = 0;
     flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
-    UICollectionView * collectview = [[UICollectionView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(_headerView.frame), SCW, SCH - CGRectGetMaxY(_headerView.frame)) collectionViewLayout:flowLayout];
+    UICollectionView * collectview = [[UICollectionView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(_headerView.frame), SCW, SCH - CGRectGetMaxY(self.headerView.frame) - Height_TabBar - Height_NavBar ) collectionViewLayout:flowLayout];
     collectview.backgroundColor = [UIColor colorWithHexColorStr:@"#ffffff"];
     [collectview registerClass:[RSLaunchCell class] forCellWithReuseIdentifier:COLLECTIONCELLID];
     [collectview registerClass:[RSLaunchReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:LAUNCHREUSABLECELLID];
     [collectview registerClass:[RSLaunchFootReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:LAUNCHREUSABFOOTCELLID];
-    collectview.contentInset = UIEdgeInsetsMake(0, 0, 40, 0);
+    collectview.contentInset = UIEdgeInsetsMake(0, 0, 80, 0);
     collectview.delegate = self;
     collectview.dataSource = self;
     [self.view addSubview:collectview];
@@ -91,26 +91,10 @@ static NSString * LAUNCHREUSABFOOTCELLID = @"LAUNCHREUSABFOOTCELLID";
 //    [self reloadShenHeNewData];
 //}
 
-
-
-
 - (void)setCustomHeaderView{
 
     UIView * headerView = [[UIView alloc]init];
-    headerView.frame = CGRectMake(0, CGRectGetMaxY(self.navigationController.navigationBar.frame) + 30, SCW, 40);
-//    if (@available(iOS 13.0, *)) {
-//        if (iphonex || iPhoneXR || iPhoneXS || iPhoneXSMax) {
-//            headerView.frame = CGRectMake(0, CGRectGetMaxY(self.navigationController.navigationBar.frame) + 44, SCW, 40);
-//        }else{
-//            headerView.frame = CGRectMake(0, CGRectGetMaxY(self.navigationController.navigationBar.frame) + 22, SCW, 40);
-//        }
-//    }else{
-//        if (iphonex || iPhoneXR || iPhoneXS || iPhoneXSMax) {
-//            headerView.frame = CGRectMake(0, navY + navHeight, SCW, 40);
-//        }else{
-//            headerView.frame = CGRectMake(0, CGRectGetMaxY(self.navigationController.navigationBar.frame), SCW, 40);
-//        }
-//    }
+    headerView.frame = CGRectMake(0, Height_NavBar, SCW, 40);
     headerView.backgroundColor = [UIColor colorWithHexColorStr:@"#FC8C78"];
     _headerView = headerView;
     
@@ -183,11 +167,11 @@ static NSString * LAUNCHREUSABFOOTCELLID = @"LAUNCHREUSABFOOTCELLID";
         if ((long)array.count < 1) {
             self.headerView.hidden = YES;
             self.headerView.yj_height = 0;
-            self.collectview.frame = CGRectMake(0, CGRectGetMaxY(self.headerView.frame), SCW, SCH - CGRectGetMaxY(self.headerView.frame));
+            self.collectview.frame = CGRectMake(0, CGRectGetMaxY(self.headerView.frame), SCW, SCH -  self.headerView.yj_height - Height_TabBar - Height_NavBar);
         }else{
             self.headerView.yj_height = 40;
             self.headerView.hidden = NO;
-            self.collectview.frame = CGRectMake(0, CGRectGetMaxY(self.headerView.frame), SCW, SCH - CGRectGetMaxY(self.headerView.frame));
+            self.collectview.frame = CGRectMake(0, CGRectGetMaxY(self.headerView.frame), SCW, SCH - self.headerView.yj_height - Height_TabBar - Height_NavBar);
             self.headerLabel.text = [NSString stringWithFormat:@"你有%ld条待发起流程",(long)array.count];
         }
     };

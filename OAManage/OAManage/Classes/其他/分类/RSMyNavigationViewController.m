@@ -78,6 +78,9 @@
     NSDictionary *dic = [NSDictionary dictionaryWithObject:whiteColor forKey:NSForegroundColorAttributeName];
     [self.navigationBar setTitleTextAttributes:dic];
     
+    
+    
+    
 
 //    self.navigationBar.translucent = true;
 }
@@ -90,6 +93,23 @@
         self.interactivePopGestureRecognizer.delegate = (id)viewController;
     }
 }
+
+
+- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated{
+    if(@available(iOS 15.0,*)){
+          UINavigationBarAppearance *apperance=[[UINavigationBarAppearance alloc]init];
+          apperance.backgroundColor=[UIColor whiteColor];//设置背景色
+//          [apperance setTitleTextAttributes:@{
+//                      NSFontAttributeName:[UIFont systemFontOfSize:18],
+//                      NSForegroundColorAttributeName:titleColor
+//          }];//设置标题字体
+          apperance.shadowImage = [[UIImage alloc]init];
+          apperance.shadowColor=nil;//分割线去除
+          [UINavigationBar appearance].standardAppearance=apperance;
+          [UINavigationBar appearance].scrollEdgeAppearance=[UINavigationBar appearance].standardAppearance;//重新赋值
+      }
+}
+
 
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
