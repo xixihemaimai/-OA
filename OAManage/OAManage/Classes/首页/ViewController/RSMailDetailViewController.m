@@ -27,11 +27,11 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    //self.navigationController.navigationBar.hidden = YES;
+    self.navigationController.navigationBar.hidden = YES;
     //设置导航栏背景图片为一个空的image，这样就透明了
-       [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
+//       [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
        //去掉透明后导航栏下边的黑边
-       [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
+//       [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
 }
 
 
@@ -79,6 +79,16 @@
 //    .rightSpaceToView(headerView, 0)
 //    .heightIs(237.5);
     backgroundBtn.frame = CGRectMake(0, 0, headerView.yj_width, 237.5);
+    
+    
+    
+    UIButton * backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [backBtn setImage:[UIImage imageNamed:@"system-backnew"] forState:UIControlStateNormal];
+    backBtn.frame = CGRectMake(13, 35, 50, 50);
+    [backBtn addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
+    [headerView addSubview:backBtn];
+    
+    
     
     
     UIButton * touBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -161,6 +171,10 @@
 }
 
 
+- (void)backAction{
+    [self.navigationController popViewControllerAnimated:true];
+}
+
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.phoneArray.count;
@@ -203,9 +217,17 @@
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     //    如果不想让其他页面的导航栏变为透明 需要重置
-    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
-    [self.navigationController.navigationBar setShadowImage:nil];
+//    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+//    [self.navigationController.navigationBar setShadowImage:nil];
+    self.navigationController.navigationBar.hidden = false;
 }
+
+
+//- (void)viewDidDisappear:(BOOL)animated{
+//    [super viewDidDisappear:animated];
+//    self.navigationController.navigationBar.hidden = false;
+//    
+//}
 
 
 @end
