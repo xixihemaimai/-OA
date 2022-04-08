@@ -93,19 +93,19 @@
 
 - (UITableView *)leftTableview{
     if (!_leftTableview) {
-       CGFloat witdh = 0.0;
-       if (SCH >= 780) {
-            witdh = 100;
-       }else{
-            witdh = 88;
-        }
-        _leftTableview = [[UITableView alloc]initWithFrame:CGRectMake(0, Height_NavBar, witdh, SCH - Height_NavBar - Height_TabBar) style:UITableViewStylePlain];
+//       CGFloat witdh = 0.0;
+//       if (SCH >= 780) {
+//            witdh = 100;
+//       }else{
+//            witdh = 88;
+//        }
+        _leftTableview = [[UITableView alloc]initWithFrame:CGRectMake(0, Height_NavBar, 100, SCH - Height_NavBar - Height_TabBar) style:UITableViewStylePlain];
         _leftTableview.delegate = self;
         _leftTableview.dataSource = self;
         _leftTableview.showsVerticalScrollIndicator = NO;
         _leftTableview.showsHorizontalScrollIndicator = NO;
         _leftTableview.separatorStyle = UITableViewCellSeparatorStyleNone;
-        _leftTableview.backgroundColor =  [UIColor colorWithHexColorStr:@"#ffffff"];
+        _leftTableview.backgroundColor = [UIColor colorWithHexColorStr:@"#ffffff"];
     }
     return _leftTableview;
 }
@@ -366,13 +366,7 @@
         if (indexPath.row == 0) {
             cell.shenHeImageView.hidden = NO;
             cell.shenHeLabel.textAlignment = NSTextAlignmentLeft;
-//            cell.shenHeImageView.sd_layout
-//            .leftSpaceToView(cell.contentView, 10)
-//            .centerYEqualToView(cell.contentView)
-//            .widthIs(13)
-//            .heightEqualToWidth();
-            cell.shenHeLabel.frame = CGRectMake(CGRectGetMaxX(cell.shenHeImageView.frame)+ 5, cell.shenHeImageView.yj_y - 4.5, 32, 13);
-            
+            cell.shenHeLabel.frame = CGRectMake(20.5 + 5, cell.shenHeImageView.yj_y - 4.5, 32, 13);
         }else{
             cell.shenHeLabel.textAlignment = NSTextAlignmentLeft;
             cell.shenHeImageView.hidden = YES;
@@ -384,6 +378,7 @@
             cell.shenHeLabel.textColor = [UIColor colorWithHexColorStr:@"#7d7d7d"];
             cell.contentView.backgroundColor = [UIColor colorWithHexColorStr:@"#f8f8f8"];
         }
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }else{
         static NSString * CELLID = @"SHE3ID";
@@ -416,11 +411,21 @@
         self.billKey = shenhemodel.billKey;
         self.selectIndex = indexPath.row;
         if (indexPath.row == self.selectIndex) {
+            cell.shenHeLabel.textColor = [UIColor colorWithHexColorStr:@"#333333"];
             cell.contentView.backgroundColor = [UIColor colorWithHexColorStr:@"#ffffff"];
         }else{
+            cell.shenHeLabel.textColor = [UIColor colorWithHexColorStr:@"#7d7d7d"];
             cell.contentView.backgroundColor = [UIColor colorWithHexColorStr:@"#F8F8F8"];
         }
-        [self.leftTableview reloadData];
+//        [self.leftTableview reloadData];
+        //这边写一个其他所有的界面进行变化
+        for (int i = 0; i < self.leftArray.count; i++) {
+            if (i != indexPath.row) {
+                RSShenHeFristCell * cell = [tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
+                cell.contentView.backgroundColor = [UIColor colorWithHexColorStr:@"#F8F8F8"];
+                cell.shenHeLabel.textColor = [UIColor colorWithHexColorStr:@"#7d7d7d"];
+            }
+        }
         [self.rightTableview.mj_header beginRefreshing];
     }else{
         [self.rightTableview deselectRowAtIndexPath:indexPath animated:YES];
