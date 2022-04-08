@@ -143,7 +143,7 @@ static NSString * SLFOOTVIEWID = @"SLFOOTVIEWID";
     self.pageNum = 1;
     self.emptyView.hidden = YES;
     
-    self.tableview.frame = CGRectMake(0, navHeight + navY, SCW, SCH - (navHeight + navY));
+    self.tableview.frame = CGRectMake(0, Height_NavBar, SCW, SCH - Height_NavBar);
     self.tableview.contentInset = UIEdgeInsetsMake(0, 0, 100, 0);
     [self setCustomNavigaionView];
     [self setBLCustomHeaderView];

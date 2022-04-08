@@ -18,9 +18,9 @@
         
         
         //上面的view
-//        UIView * topView = [[UIView alloc]init];
-//        topView.backgroundColor = [UIColor clearColor];
-//        [self.contentView addSubview:topView];
+        UIView * topView = [[UIView alloc]init];
+        topView.backgroundColor = [UIColor clearColor];
+        [self.contentView addSubview:topView];
         
         //图片
         UIImageView * shenHeImageView = [[UIImageView alloc]init];
@@ -49,26 +49,26 @@
         
         
         //底部view
-//        UIView * bottomView = [[UIView alloc]init];
-//        bottomView.backgroundColor = [UIColor clearColor];
-//        [self.contentView addSubview:bottomView];
+        UIView * bottomView = [[UIView alloc]init];
+        bottomView.backgroundColor = [UIColor clearColor];
+        [self.contentView addSubview:bottomView];
         
-//        topView.frame = CGRectMake(0, 0, self.contentView.yj_width, 8);
-//        bottomView.frame = CGRectMake(0, self.contentView.yj_height  - 8, self.contentView.yj_width, 8);
+        topView.frame = CGRectMake(0, 0, self.contentView.yj_width, 8);
+        bottomView.frame = CGRectMake(0, 60 - 8, self.contentView.yj_width, 8);
 
         shenHeImageView.frame = CGRectMake(12.5, self.contentView.yj_height/2 - 4, 8, 8);
         
-        shenHeLabel.frame = CGRectMake(12, 0, 100 - 27, 60);        
-            if (iPhone6p || iPhoneXR || iPhoneXSMax){
+        shenHeLabel.frame = CGRectMake(12, CGRectGetMaxY(topView.frame), 88 - 27, 60 - topView.yj_height - bottomView.yj_height);
+//            if (iPhone6p || iPhoneXR || iPhoneXSMax){
                 
 //                shenHeLabel.frame = CGRectMake(12, CGRectGetMaxY(topView.frame), 88 - 27, self.contentView.yj_height - CGRectGetMaxY(topView.frame));
-                countLabel.frame = CGRectMake(CGRectGetMaxX(shenHeLabel.frame) - 5, 16, 14, 14);
-            }
-            else{
+                countLabel.frame = CGRectMake(CGRectGetMaxX(shenHeLabel.frame) + 5, self.contentView.centerY, 14, 14);
+//            }
+//            else{
 //                shenHeLabel.frame = CGRectMake(12, CGRectGetMaxY(topView.frame), 88 - 32, self.contentView.yj_height - CGRectGetMaxY(topView.frame));
-                countLabel.frame = CGRectMake(CGRectGetMaxX(shenHeLabel.frame), 16, 12, 12);
+//                countLabel.frame = CGRectMake(CGRectGetMaxX(shenHeLabel.frame), 16, 12, 12);
 
-            }
+//            }
         countLabel.layer.cornerRadius = countLabel.yj_width * 0.5;
         countLabel.layer.masksToBounds = true;
     }

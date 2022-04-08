@@ -34,8 +34,8 @@
         [self.contentView addSubview:menuRightView];
         
         
-        menuImageView.frame = CGRectMake(21, ((45 / SCW) * SCW)/2 - ((19 * SCW) / SCW)/2, (19 * SCW) / SCW, (19 * SCW) / SCW);
-        menuLabel.frame = CGRectMake(CGRectGetMaxX(menuImageView.frame) + 7, ((45 / SCW) * SCW)/2 - ((19 * SCW) / SCW)/2, SCW * 0.4, 23);
+        menuImageView.frame = CGRectMake(21, self.contentView.centerY, (19 * SCW) / SCW, (19 * SCW) / SCW);
+        menuLabel.frame = CGRectMake(CGRectGetMaxX(menuImageView.frame) + 7, self.contentView.centerY - 3, SCW * 0.4, 23);
        
 //            menuImageView.sd_layout
 //            .leftSpaceToView(self.contentView, 21)
@@ -55,7 +55,7 @@
 //            .widthIs((9 / SCW) * SCW)
 //            .heightIs(15);
         
-        menuRightView.frame = CGRectMake(SCW - 12 - (9 / SCW) * SCW, ((45 / SCW) * SCW)/2 - ((19 * SCW) / SCW)/2, (9 / SCW) * SCW, 15);
+        menuRightView.frame = CGRectMake(SCW - 12 - (9 / SCW) * SCW, self.contentView.centerY, (9 / SCW) * SCW, 15);
 
     }
     return self;

@@ -111,12 +111,12 @@ static NSString * SLSTOCKFOOTVIEWID = @"SLSTOCKFOOTVIEWID";
    // self.tableview.contentInset = UIEdgeInsetsMake(0, 0, 40, 0);
     self.contentTableview.contentInset = UIEdgeInsetsMake(0, 0, 100, 0);
     [self.tableview removeFromSuperview];
-     if (@available(iOS 11.0, *)) {
-        [[UIScrollView appearance] setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentAutomatic];
-    }else{
-        self.automaticallyAdjustsScrollViewInsets = NO;
-    }
-    UITableView * contentTableview = [[UITableView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.navigationController.navigationBar.frame), SCW, SCH - CGRectGetMaxY(self.navigationController.navigationBar.frame)) style:UITableViewStyleGrouped];
+//     if (@available(iOS 11.0, *)) {
+//        [[UIScrollView appearance] setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentAutomatic];
+//    }else{
+//        self.automaticallyAdjustsScrollViewInsets = NO;
+//    }
+    UITableView * contentTableview = [[UITableView alloc]initWithFrame:CGRectMake(0, Height_NavBar, SCW, SCH - Height_NavBar) style:UITableViewStyleGrouped];
     contentTableview.separatorStyle = UITableViewCellSeparatorStyleNone;
     contentTableview.delegate = self;
     contentTableview.dataSource = self;

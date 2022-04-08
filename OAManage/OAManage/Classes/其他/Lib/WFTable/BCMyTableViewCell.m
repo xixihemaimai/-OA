@@ -15,7 +15,8 @@
 -(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-    
+        self.contentView.backgroundColor = [UIColor whiteColor];
+        
         _label = [[RSMyLabel alloc] initWithFrame:CGRectMake(0, 0, 70, 34)];
         _label.layer.borderColor = [UIColor colorWithHexColorStr:@"#E1E1E1"].CGColor;
         _label.layer.borderWidth = 0.5f;
@@ -23,7 +24,7 @@
         _label.textColor = [UIColor colorWithHexColorStr:@"#666666"];
 //        _label.textAlignment = NSTextAlignmentCenter;
         _label.font = [UIFont systemFontOfSize:13.f];
-        [self addSubview:_label];
+        [self.contentView addSubview:_label];
         _label.userInteractionEnabled = YES;
         
         UIButton * detailedBtn = [UIButton buttonWithType:UIButtonTypeCustom];

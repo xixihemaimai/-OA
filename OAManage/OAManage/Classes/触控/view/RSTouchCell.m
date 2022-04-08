@@ -26,8 +26,9 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
          self.contentView.backgroundColor = [UIColor colorWithHexColorStr:@"#ffffff"];
-         UIView * showView = [[UIView alloc]init];
+                UIView * showView = [[UIView alloc]init];
                 showView.backgroundColor = [UIColor colorWithHexColorStr:@"#F7F7F7"];
+                showView.frame = CGRectMake(12, 8, SCW - 24, 113);
                 [self.contentView addSubview:showView];
                 
                 //显示界面的内容
@@ -105,7 +106,7 @@
         //        abnormalDetailLabel.font = [UIFont systemFontOfSize:15];
         //        [showView addSubview:abnormalDetailLabel];
                 
-        showView.frame = CGRectMake(12, 8, SCW - 24, 113);
+      
                 
 //                showView.sd_layout
 //                .leftSpaceToView(self.contentView, 12)
@@ -120,14 +121,14 @@
 //                .widthIs(32)
 //                .heightEqualToWidth();
         
-        showImageView.frame = CGRectMake(15, CGRectGetMaxY(showView.frame) + 16, 32, 32);
+        showImageView.frame = CGRectMake(15, 16, 32, 32);
                 
 //                showLabel.sd_layout
 //                .topSpaceToView(showView, 12)
 //                .leftSpaceToView(showImageView, 9)
 //                .widthRatioToView(showView, 0.6)
 //                .heightIs(23);
-        showLabel.frame = CGRectMake(CGRectGetMaxX(showImageView.frame) + 9, CGRectGetMaxY(showView.frame) + 12, showView.yj_width * 0.6, 23);
+        showLabel.frame = CGRectMake(CGRectGetMaxX(showImageView.frame) + 9, 12, showView.yj_width * 0.6, 23);
                 
                 
 //                timeLabel.sd_layout
@@ -135,7 +136,7 @@
 //                .topSpaceToView(showView, 19)
 //                .heightIs(14)
 //                .widthRatioToView(showView, 0.3);
-        timeLabel.frame = CGRectMake(CGRectGetMaxX(showLabel.frame) + 5, CGRectGetMaxY(showView.frame) + 19, showView.yj_width * 0.2, 14);
+        timeLabel.frame = CGRectMake(CGRectGetMaxX(showLabel.frame) + 5, 19, showView.yj_width * 0.2, 14);
                 
                 
 //                productLabel.sd_layout

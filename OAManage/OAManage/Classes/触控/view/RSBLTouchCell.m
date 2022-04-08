@@ -64,7 +64,7 @@
          blueView.clipsToBounds = YES;
          [exceptionView addSubview:blueView];
          
-        blueView.frame = CGRectMake(SCW - 24, 10, 4, 17);
+        blueView.frame = CGRectMake(exceptionView.yj_width - 4, 10, 4, 17);
         
 //         blueView.sd_layout
 //         .rightSpaceToView(exceptionView, 0)

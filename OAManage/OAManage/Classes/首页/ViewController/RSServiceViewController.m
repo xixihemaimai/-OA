@@ -77,7 +77,7 @@ static NSString * SERVICEHEADERVIEWID = @"SERVICEHEADERVIEWID";
     self.title = @"首页";
     self.emptyView.hidden = YES;
     self.tableview.contentInset = UIEdgeInsetsMake(0, 0, 60, 0);
-
+    self.tableview.frame = CGRectMake(0, Height_NavBar, SCW, SCH - Height_NavBar - Height_TabBar);
     UIButton * menuBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
     [menuBtn setImage:[UIImage imageNamed:@"通讯录复制"] forState:UIControlStateNormal];
     [menuBtn addTarget:self action:@selector(showPhoneContentMenu:) forControlEvents:UIControlEventTouchUpInside];

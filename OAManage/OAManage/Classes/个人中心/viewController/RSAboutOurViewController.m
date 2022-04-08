@@ -39,8 +39,7 @@
     UIImageView * headerImage = [[UIImageView alloc]init];
     headerImage.image = [UIImage imageNamed:@"关于我们"];
     [headerView addSubview:headerImage];
-    
-    headerView.frame = CGRectMake(0, 0, SCW, 500);
+    headerView.frame = CGRectMake(0, 0, SCW, self.view.bounds.size.height - Height_NavBar);
     headerImage.frame = CGRectMake(0, 0, SCW, 250);
 //    headerImage.sd_layout.leftSpaceToView(headerView, 0).rightSpaceToView(headerView, 0).topSpaceToView(headerView, 0).heightIs(250);
     
@@ -62,6 +61,7 @@
     headerLabel.frame = CGRectMake(37.5, CGRectGetMaxY(headerImage.frame) + 31, SCW - 37.5 -37.5, 202);
     
     UILabel * andLabel = [[UILabel alloc]init];
+    andLabel.frame = CGRectMake(SCW/2 - 7.5, SCH - 150, 15, 58);
     andLabel.text = @"和";
     andLabel.numberOfLines = 0;
     andLabel.textAlignment = NSTextAlignmentCenter;
@@ -69,30 +69,24 @@
     andLabel.font = [UIFont systemFontOfSize:14];
     [headerView addSubview:andLabel];
     
-//    andLabel.sd_layout.centerXEqualToView(headerView).topSpaceToView(headerLabel, 69.5).heightIs(20).widthIs(15);
-    andLabel.frame = CGRectMake(SCW/2 - 7.5, SCH - 100, 15, 20);
-    
-
     UIButton * privacyBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    privacyBtn.frame = CGRectMake(SCW/2 - 58/2 - 35, SCH - 150, 58, 58);
     [privacyBtn setTitle:@"用户隐私" forState:UIControlStateNormal];
     [privacyBtn setTitleColor:[UIColor colorWithHexColorStr:@"#27C79A"] forState:UIControlStateNormal];
     privacyBtn.titleLabel.font = [UIFont systemFontOfSize:14];
     [headerView addSubview:privacyBtn];
     [privacyBtn addTarget:self action:@selector(privacyAction:) forControlEvents:UIControlEventTouchUpInside];
-//    privacyBtn.sd_layout.topEqualToView(andLabel).bottomEqualToView(andLabel).widthIs(58).rightSpaceToView(andLabel, 0);
     
-    privacyBtn.frame = CGRectMake(SCW/2 - 58/2 - 35, SCH - 100, 58, 20);
     
     UIButton * serviceBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    serviceBtn.frame = CGRectMake(CGRectGetMaxX(andLabel.frame), SCH - 150, 58, 58);
     [serviceBtn setTitle:@"用户协议" forState:UIControlStateNormal];
     [serviceBtn setTitleColor:[UIColor colorWithHexColorStr:@"#27C79A"] forState:UIControlStateNormal];
     serviceBtn.titleLabel.font = [UIFont systemFontOfSize:14];
     [headerView addSubview:serviceBtn];
     [serviceBtn addTarget:self action:@selector(serviceAction:) forControlEvents:UIControlEventTouchUpInside];
     
-//    serviceBtn.sd_layout.leftSpaceToView(andLabel, 0).topEqualToView(andLabel).bottomEqualToView(andLabel).widthIs(58);
     
-    serviceBtn.frame = CGRectMake(CGRectGetMaxX(andLabel.frame), SCH - 100, 58, 20);
 //    [headerView setupAutoHeightWithBottomView:privacyBtn bottomMargin:30];
 //    [headerView layoutIfNeeded];
     self.tableview.tableHeaderView = headerView;
@@ -101,6 +95,7 @@
 
 //用户隐私
 - (void)privacyAction:(UIButton *)privacyBtn{
+    NSLog(@"========");
     RSWKOAmanagerViewController * wkOAstr = [[RSWKOAmanagerViewController alloc]init];
     wkOAstr.type = @"5";
     [self.navigationController pushViewController:wkOAstr animated:YES];
@@ -109,6 +104,7 @@
 
 //用户协议
 - (void)serviceAction:(UIButton *)serviceBtn{
+    NSLog(@"=====3===");
     RSWKOAmanagerViewController * wkOAstr = [[RSWKOAmanagerViewController alloc]init];
     wkOAstr.type = @"6";
     [self.navigationController pushViewController:wkOAstr animated:YES];
