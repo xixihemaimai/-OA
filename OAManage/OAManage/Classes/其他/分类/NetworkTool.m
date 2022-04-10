@@ -402,7 +402,9 @@
                     self.failure(dict);
                 }
             }
-             [self newReloadErrorStatus:[responseObject[@"status"] integerValue]];
+//            if ([responseObject isKindOfClass:[NSDictionary class]]) {
+                [self newReloadErrorStatus:[responseObject[@"status"] integerValue]];
+//            }
         }
     }];
 }

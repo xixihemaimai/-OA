@@ -571,6 +571,8 @@ typedef void(^Obtain)(BOOL isValue);
     //获取成功之后的操作
     network.successReload = ^(NSDictionary *dict) {
         
+        NSLog(@"===============%@",dict);
+        
         [SVProgressHUD dismiss];
         self.loginBtn.enabled = NO;
         RSUserModel * usermodel = [[RSUserModel alloc]init];
@@ -638,7 +640,7 @@ typedef void(^Obtain)(BOOL isValue);
         usermodel.UseCar = [dict[@"flowAccess"][@"UseCar"]boolValue];
         
         usermodel.Flow_WorkOvertime =  [dict[@"flowAccess"][@"Flow_WorkOvertime"]boolValue];
-                usermodel.Flow_SpecialApplication = [dict[@"flowAccess"][@"Flow_SpecialApplication"]boolValue];
+        usermodel.Flow_SpecialApplication = [dict[@"flowAccess"][@"Flow_SpecialApplication"]boolValue];
         
         usermodel.OA_Market_Home  = [dict[@"flowAccess"][@"OA_Market_Home"]boolValue];
         usermodel.OA_BM_IO = [dict[@"flowAccess"][@"OA_BM_IO"]boolValue];
@@ -648,12 +650,13 @@ typedef void(^Obtain)(BOOL isValue);
         usermodel.OA_Ledger_Dtl = [dict[@"flowAccess"][@"OA_Ledger_Dtl"]boolValue];
         
         usermodel.OA_Market_Fee = [dict[@"flowAccess"][@"OA_Market_Fee"]boolValue];
-               usermodel.OA_Market_Dealer_Fee  = [dict[@"flowAccess"][@"OA_Market_Dealer_Fee"]boolValue];
-               usermodel.OA_Market_Pay_In  = [dict[@"flowAccess"][@"OA_Market_Pay_In"]boolValue];
+        usermodel.OA_Market_Dealer_Fee  = [dict[@"flowAccess"][@"OA_Market_Dealer_Fee"]boolValue];
+        usermodel.OA_Market_Pay_In  = [dict[@"flowAccess"][@"OA_Market_Pay_In"]boolValue];
         
         usermodel.OA_Market_Settle_In  = [dict[@"flowAccess"][@"OA_Market_Settle_In"]boolValue];
         
-        
+        usermodel.Flow_PropertyServices = [dict[@"flowAccess"][@"Flow_PropertyServices"]boolValue];
+        usermodel.Flow_TrainingCosts = [dict[@"flowAccess"][@"Flow_TrainingCosts"]boolValue];
         
         
         

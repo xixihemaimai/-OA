@@ -114,6 +114,10 @@ OA_Market_Dealer_Fee      园区商户费用应收
 OA_Market_Pay_In   园区收款明细表
 OA_Market_Settle_In  园区应收明细表
  
+ 
+ Flow_PropertyServices 物业服务审批
+ Flow_TrainingCosts 培训费用申请
+ 
 
 */
 @property (nonatomic,assign)NSInteger userId;
@@ -223,6 +227,11 @@ OA_Market_Settle_In  园区应收明细表
 @property (nonatomic,assign)BOOL  OA_Market_Dealer_Fee;
 @property (nonatomic,assign)BOOL  OA_Market_Pay_In;
 @property (nonatomic,assign)BOOL  OA_Market_Settle_In;
+
+
+
+@property (nonatomic,assign)BOOL Flow_PropertyServices;
+@property (nonatomic,assign)BOOL Flow_TrainingCosts;
 
 @end
 

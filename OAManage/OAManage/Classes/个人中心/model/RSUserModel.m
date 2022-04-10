@@ -193,7 +193,10 @@
     [aCoder encodeBool:self.OA_Market_Dealer_Fee forKey:@"OA_Market_Dealer_Fee"];
     
     [aCoder encodeBool:self.OA_Market_Pay_In  forKey:@"OA_Market_Pay_In"];
-       [aCoder encodeBool:self.OA_Market_Settle_In forKey:@"OA_Market_Settle_In"];
+    [aCoder encodeBool:self.OA_Market_Settle_In forKey:@"OA_Market_Settle_In"];
+    
+    [aCoder encodeBool:self.Flow_TrainingCosts forKey:@"Flow_TrainingCosts"];
+    [aCoder encodeBool:self.Flow_PropertyServices forKey:@"Flow_PropertyServices"];
     
     
 }
@@ -296,7 +299,8 @@
                self.OA_Market_Settle_In = [aDecoder decodeBoolForKey:@"OA_Market_Settle_In"];
         
       
-        
+        self.Flow_PropertyServices = [aDecoder decodeBoolForKey:@"Flow_PropertyServices"];
+        self.Flow_TrainingCosts = [aDecoder decodeBoolForKey:@"Flow_TrainingCosts"];
         
         
         
@@ -394,6 +398,9 @@
     
     usermodel.OA_Market_Pay_In = self.OA_Market_Pay_In;
           usermodel.OA_Market_Settle_In = self.OA_Market_Settle_In;
+    
+    usermodel.Flow_PropertyServices = self.Flow_PropertyServices;
+    usermodel.Flow_TrainingCosts = self.Flow_TrainingCosts;
     
    
     

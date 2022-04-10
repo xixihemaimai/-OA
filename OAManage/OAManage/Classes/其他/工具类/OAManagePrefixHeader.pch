@@ -118,31 +118,23 @@
 #import <SJVideoPlayer.h>
 #import <KTVHTTPCache/KTVHTTPCache.h>
 
-//测试
-//#define URL_POST_IOS @"http://125.77.216.3:48000"
-//#define URL_POST_IOS @"http://117.29.162.206:8089"
-//正式
-//#define URL_POST_IOS @"http://121.204.136.234:48000"
-//http:/27.150.183.178:48000/Yigo1.6
-#define URL_POST_IOS @"http:/27.150.183.178:48000"
-//H5
-#define URL_YIGO_IOS @""URL_POST_IOS"/Yigo1.6/services/MapWebService?wsdl"
-#define URL_H5_IOS @""URL_POST_IOS"/Yigo1.6/Approval.html"
-#define URL_H5FQ_IOS @""URL_POST_IOS"/Yigo1.6/Application.html"
-#define URL_H5_CONTRACT_IOS @""URL_POST_IOS"/Yigo1.6/ContractDetails.html"
-/**
- //#define URL_YIGO_IOS @""URL_POST_IOS"/Yigo1.6/services/MapWebService?wsdl"
- //H5正式
- //#define URL_H5_IOS @""URL_POST_IOS"/Yigo1.6/Approval.html"
- //H5正式发起流程
- //#define URL_H5FQ_IOS @""URL_POST_IOS"/Yigo1.6/Application.html"
-*/
+//web测试
+#define URL_POST_IOS @"http://183.251.102.156:48000/Yigo1.6"
+//web正式
+//#define URL_POST_IOS @"http:/27.150.183.178:48000/Yigo1.6"
 
-//新的测试请求方式
-//#define URL_NEWPOST_IOS @"http://125.77.216.3:28000"
-//#define URL_NEWPOST_IOS @"http://117.29.162.206:8090"
-//新的请求正式方式
-#define URL_NEWPOST_IOS @"http://121.204.136.234:48001"
+//测试账号：YBING 123456 liuxh 654321
+
+//api测试服
+#define URL_NEWPOST_IOS @"http://183.251.102.156:48001"
+//api正式
+//#define URL_NEWPOST_IOS @"http://121.204.136.234:48001"
+
+//H5
+#define URL_YIGO_IOS @""URL_POST_IOS"/services/MapWebService?wsdl"
+#define URL_H5_IOS @""URL_POST_IOS"/Approval.html"
+#define URL_H5FQ_IOS @""URL_POST_IOS"/Application.html"
+#define URL_H5_CONTRACT_IOS @""URL_POST_IOS"/ContractDetails.html"
 
 
 #define URL_YIGODATA_IOS(A,B,C) [NSString stringWithFormat:@ \

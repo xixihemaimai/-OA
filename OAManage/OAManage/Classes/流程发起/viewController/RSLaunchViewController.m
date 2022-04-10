@@ -551,7 +551,7 @@ static NSString * LAUNCHREUSABFOOTCELLID = @"LAUNCHREUSABFOOTCELLID";
     
     
     //其他
-    //一般付款申请流程 固定资产申请单 广告制作申请单 二手闲置处理申请单 辅料应付结算单 辅料采购申请单 废料处理申请单
+    //一般付款申请流程 固定资产申请单 广告制作申请单 二手闲置处理申请单 辅料应付结算单 辅料采购申请单 废料处理申请单 物业服务审批 培训费用申请
     //发起流程复制 31 发起流程复制 30 发起流程复制 33 发起流程复制 32 发起流程复制 35 发起流程复制 34 发起流程复制 36
     if (self.usermodel.Flow_Payment == true) {
         NSDictionary * dict = @{@"img":@"发起流程复制 31",@"title":@"一般付款申请流程",@"key":@"Flow_Payment"};
@@ -578,6 +578,18 @@ static NSString * LAUNCHREUSABFOOTCELLID = @"LAUNCHREUSABFOOTCELLID";
         NSDictionary * dict = @{@"img":@"发起流程复制 17",@"title":@"特殊申请审批流程",@"key":@"Flow_SpecialApplication"};
         [array6 addObject:dict];
     }
+    
+    if (self.usermodel.Flow_PropertyServices == true) {
+        NSDictionary * dict = @{@"img":@"发起流程复制 17",@"title":@"物业服务审批",@"key":@"Flow_PropertyServices"};
+        [array6 addObject:dict];
+    }
+    
+    if (self.usermodel.Flow_TrainingCosts == true) {
+        NSDictionary * dict = @{@"img":@"发起流程复制 17",@"title":@"培训费用申请",@"key":@"Flow_TrainingCosts"};
+        [array6 addObject:dict];
+    }
+    
+    
     
 //    if (self.usermodel.AM_Requisition == true) {
 //        NSDictionary * dict = @{@"img":@"发起流程复制 34",@"title":@"辅料采购申购单",@"key":@"AM_Requisition"};

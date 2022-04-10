@@ -172,6 +172,9 @@
                usermodel.OA_Market_Pay_In  = [dict[@"flowAccess"][@"OA_Market_Pay_In"]boolValue];
         
         usermodel.OA_Market_Settle_In  = [dict[@"flowAccess"][@"OA_Market_Settle_In"]boolValue];
+        
+        usermodel.Flow_PropertyServices = [dict[@"flowAccess"][@"Flow_PropertyServices"]boolValue];
+        usermodel.Flow_TrainingCosts = [dict[@"flowAccess"][@"Flow_TrainingCosts"]boolValue];
 
         [MiPushSDK setAccount:[NSString stringWithFormat:@"%ld",(long)usermodel.userId]];
         [user removeObjectForKey:@"OAUSERMODEL"];
