@@ -575,17 +575,17 @@ static NSString * LAUNCHREUSABFOOTCELLID = @"LAUNCHREUSABFOOTCELLID";
     }
     
     if (self.usermodel.Flow_SpecialApplication == true) {
-        NSDictionary * dict = @{@"img":@"发起流程复制 17",@"title":@"特殊申请审批流程",@"key":@"Flow_SpecialApplication"};
+        NSDictionary * dict = @{@"img":@"特殊申请审批流程",@"title":@"特殊申请审批流程",@"key":@"Flow_SpecialApplication"};
         [array6 addObject:dict];
     }
     
     if (self.usermodel.Flow_PropertyServices == true) {
-        NSDictionary * dict = @{@"img":@"发起流程复制 17",@"title":@"物业服务审批",@"key":@"Flow_PropertyServices"};
+        NSDictionary * dict = @{@"img":@"物业服务审批",@"title":@"物业服务审批",@"key":@"Flow_PropertyServices"};
         [array6 addObject:dict];
     }
     
     if (self.usermodel.Flow_TrainingCosts == true) {
-        NSDictionary * dict = @{@"img":@"发起流程复制 17",@"title":@"培训费用申请",@"key":@"Flow_TrainingCosts"};
+        NSDictionary * dict = @{@"img":@"培训费用申请",@"title":@"培训费用申请",@"key":@"Flow_TrainingCosts"};
         [array6 addObject:dict];
     }
     

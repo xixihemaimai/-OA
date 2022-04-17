@@ -1790,7 +1790,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2.14;
+				CURRENT_PROJECT_VERSION = 2.16;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 5CVKEU8NXR;
 				ENABLE_BITCODE = NO;
@@ -1834,7 +1834,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/OAManage/Classes/其他/Lib/libMiPushSDK",
 				);
-				MARKETING_VERSION = 2.3.0;
+				MARKETING_VERSION = 2.3.1;
 				MiSDKRun = debug;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ruishi.OAManage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1853,7 +1853,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2.14;
+				CURRENT_PROJECT_VERSION = 2.16;
 				DEVELOPMENT_TEAM = 5CVKEU8NXR;
 				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1896,7 +1896,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/OAManage/Classes/其他/Lib/libMiPushSDK",
 				);
-				MARKETING_VERSION = 2.3.0;
+				MARKETING_VERSION = 2.3.1;
 				MiSDKRun = online;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ruishi.OAManage;

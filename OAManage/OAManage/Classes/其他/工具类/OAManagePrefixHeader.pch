@@ -119,16 +119,16 @@
 #import <KTVHTTPCache/KTVHTTPCache.h>
 
 //web测试
-#define URL_POST_IOS @"http://183.251.102.156:48000/Yigo1.6"
+//#define URL_POST_IOS @"http://183.251.102.156:48000/Yigo1.6"
 //web正式
-//#define URL_POST_IOS @"http:/27.150.183.178:48000/Yigo1.6"
+#define URL_POST_IOS @"http:/27.150.183.178:48000/Yigo1.6"
 
 //测试账号：YBING 123456 liuxh 654321
 
 //api测试服
-#define URL_NEWPOST_IOS @"http://183.251.102.156:48001"
+//#define URL_NEWPOST_IOS @"http://183.251.102.156:48001"
 //api正式
-//#define URL_NEWPOST_IOS @"http://121.204.136.234:48001"
+#define URL_NEWPOST_IOS @"http://121.204.136.234:48001"
 
 //H5
 #define URL_YIGO_IOS @""URL_POST_IOS"/services/MapWebService?wsdl"
