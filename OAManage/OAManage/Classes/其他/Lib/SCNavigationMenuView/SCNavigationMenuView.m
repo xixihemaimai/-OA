@@ -311,13 +311,13 @@
     
     self.menuTableView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.6];
     //self.menuTableView.frame = self.menuContainer.bounds;
-    CGFloat Y = 0.0;
-    if (iphonex || iPhoneXR || iPhoneXS || iPhoneXSMax) {
-        Y = 88;
-    }else{
-        Y = 64;
-    }
-    self.menuTableView.frame = CGRectMake(0, Y, SCW, self.menuContainer.bounds.size.height);
+//    CGFloat Y = 0.0;
+//    if (iphonex || iPhoneXR || iPhoneXS || iPhoneXSMax) {
+//        Y = 88;
+//    }else{
+//        Y = 64;
+//    }
+    self.menuTableView.frame = CGRectMake(0, Height_NavBar, SCW, self.menuContainer.bounds.size.height);
     [self.menuContainer addSubview:self.menuTableView];
     CGFloat tableViewHeight = 0;
     for (id<SCNavigationMenuItemProtocol> item in self.navigationMenuItems) {

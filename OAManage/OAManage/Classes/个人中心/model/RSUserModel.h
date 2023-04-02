@@ -73,7 +73,7 @@ sex 性别
  "AM_Requisition"              辅料采购申购单            其他流程
  "AM_SetlleIn"                    辅料应付结算单            其他流程
  "Flow_SpecialApplication"特殊申请审批流程         其他流程
- 
+ “Flow_Litigation”               诉讼需求申请表            其他流程
  
  "BM_OutNotice"  荒料发货通知  物流流程
  "BS_OutNotice"  荒料保税发货通知  物流流程
@@ -190,6 +190,7 @@ OA_Market_Settle_In  园区应收明细表
 @property (nonatomic,assign)BOOL  AM_Requisition;
 @property (nonatomic,assign)BOOL  AM_SetlleIn;
 @property (nonatomic,assign)BOOL  Flow_SpecialApplication;
+@property (nonatomic,assign)BOOL  Flow_Litigation;
 
 
 @property (nonatomic,assign)BOOL  BM_OutNotice;

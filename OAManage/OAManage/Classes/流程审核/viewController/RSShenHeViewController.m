@@ -102,6 +102,12 @@
         _leftTableview = [[UITableView alloc]initWithFrame:CGRectMake(0, Height_NavBar, 100, SCH - Height_NavBar - Height_TabBar) style:UITableViewStylePlain];
         _leftTableview.delegate = self;
         _leftTableview.dataSource = self;
+        if (@available(iOS 11.0, *)) {
+            _leftTableview.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+        }
+        if (@available(iOS 15.0, *)){
+            _leftTableview.sectionHeaderTopPadding = 0.0;
+        }
         _leftTableview.showsVerticalScrollIndicator = NO;
         _leftTableview.showsHorizontalScrollIndicator = NO;
         _leftTableview.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -113,6 +119,12 @@
 - (UITableView *)rightTableview{
     if (!_rightTableview) {
         _rightTableview = [[UITableView alloc]initWithFrame:CGRectMake(CGRectGetMaxX(self.leftTableview.frame), Height_NavBar,SCW - CGRectGetMaxX(self.leftTableview.frame) , SCH - Height_NavBar - Height_TabBar) style:UITableViewStylePlain];
+        if (@available(iOS 11.0, *)) {
+            _rightTableview.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+        }
+        if (@available(iOS 15.0, *)){
+            _rightTableview.sectionHeaderTopPadding = 0.0;
+        }
         _rightTableview.delegate = self;
         _rightTableview.dataSource = self;
         _rightTableview.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -197,6 +209,7 @@
     self.emptyView.hidden = NO;
     self.rightTableview.mj_header = [MJChiBaoZiHeader headerWithRefreshingTarget:self refreshingAction:@selector(reloadShenHeRightNewData)];
     self.rightTableview.mj_footer = [MJChiBaoZiFooter footerWithRefreshingTarget:self refreshingAction:@selector(reloadShenHeRightMoreData)];
+    
 }
 
 - (void)reloadShenHeRightNewData{

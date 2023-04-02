@@ -27,18 +27,28 @@
 // 判断iPhoneXs Max | 11ProMax
 #define iPhoneXSMax ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1242, 2688), [[UIScreen mainScreen] currentMode].size) && !JH_isPad : NO)
 
-//判断iPhone12_Mini
+//判断iPhone12_Mini iPhone13_Mini
 #define iPhone12_Mini ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1080, 2340), [[UIScreen mainScreen] currentMode].size) && !JH_isPad : NO)
 
-//判断iPhone12 | 12Pro
+//判断iPhone12 | 12Pro iPhone12pro iPhone13pro 14
 #define iPhone12 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1170, 2532), [[UIScreen mainScreen] currentMode].size) && !JH_isPad : NO)
 
-//判断iPhone12 Pro Max
+//判断iPhone12 Pro Max 13promax 14 plus
 #define iPhone12_ProMax ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1284, 2778), [[UIScreen mainScreen] currentMode].size) && !JH_isPad : NO)
+//14 pro
+#define iPhone14_pro ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1179, 2556), [[UIScreen mainScreen] currentMode].size) && !JH_isPad : NO)
+//14pro max
+#define iPhone14_proMax ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1290, 2796), [[UIScreen mainScreen] currentMode].size) && !JH_isPad : NO)
 
 //x系列
-#define JH_isIPhone_IPhoneX_All (iphonex || iPhoneXR || iPhoneXS || iPhoneXSMax || iPhone12_Mini || iPhone12 || iPhone12_ProMax)
-#define Height_NavBar ((iPhoneXR == YES || iPhoneXS == YES || iPhoneXSMax == YES || iPhone12_Mini == YES) ? 88.0 : (iphonex == YES) ? 92 : (iPhone12 == YES || iPhone12_ProMax == YES) ? 91 : 64.0)
+#define JH_isIPhone_IPhoneX_All (iphonex || iPhoneXR || iPhoneXS || iPhoneXSMax || iPhone12_Mini || iPhone12 || iPhone12_ProMax || iPhone14_pro || iPhone14_proMax)
+
+//#define Height_NavBar ((iPhoneXR == YES || iPhoneXS == YES || iPhoneXSMax == YES || iPhone12_Mini == YES) ? 88.0 : (iphonex == YES) ? 92 : (iPhone12 == YES || iPhone12_ProMax == YES) ? 91 : 64.0)
+//UIApplication.shared.statusBarFrame.height
+#define Height_NavBar ((iPhoneXR ? 92 : (iphonex || iPhoneXS || iPhoneXSMax || iPhone12_Mini) ? 88 : (iPhone12 || iPhone12_ProMax) ? 91 : (iPhone14_pro || iPhone14_proMax) ? 103 : (iPhone12_Mini) ? 94 : 64))
+
+#define Height_NavBar_status ((iPhoneXR ? 48 : (iphonex || iPhoneXS || iPhoneXSMax || iPhone12_Mini) ? 44 : (iPhone12 || iPhone12_ProMax) ? 47 : (iPhone14_pro || iPhone14_proMax) ? 59 : (iPhone12_Mini) ? 50 : 20))
+
 #define Height_TabBar ((JH_isIPhone_IPhoneX_All == YES) ? 83.0 : 49.0)
 
 #define Height_bottomSafeArea (JH_isIPhone_IPhoneX_All == YES ? 34.0 : 0.0)
@@ -55,9 +65,6 @@
 #define DEVICES_IS_PRO_12_9 SCH == 1366
 
 #define SCALE_TO_PRO (DEVICES_IS_PRO_12_9 ? (1366.0/1024.0): 1)
-
-
-
 #define navHeight self.navigationController.navigationBar.frame.size.height
 #define navY self.navigationController.navigationBar.frame.origin.y
 
@@ -86,7 +93,6 @@
 #import "RSUserModel.h"
 #import "FSAES128.h"
 #import "MXActionSheet.h"
-#import "MiPushSDK.h"
 #import "iCloudManager.h"
 #import "ZZDocument.h"
 #import "WSDatePickerView.h"
@@ -117,7 +123,7 @@
 #import <Masonry.h>
 #import <SJVideoPlayer.h>
 #import <KTVHTTPCache/KTVHTTPCache.h>
-
+#import <JPush/JPUSHService.h>
 //web测试
 //#define URL_POST_IOS @"http://183.251.102.156:48000/Yigo1.6"
 //web正式
@@ -186,6 +192,8 @@ xsi:type=\"q0:Array\">" \
 #define URL_USERINFO @"userinfo"
 //5. 修改密码接口（主接口: LoginWebService方法名changepwd）
 #define URL_CHANGPWD @"changepwd"
+//注销账号
+#define URL_LOGINOFF @"logOff"
 //6. 获取公告列表（主接口: WorkFlowWebService方法名notice）新版本没有使用这个接口了
 //#define URL_NOTICE @"notice"
 //7. 我的-待审批列表（主接口: WorkFlowWebService方法名tobeaudit）

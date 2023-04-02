@@ -18,8 +18,6 @@
 
 //个人信息
 #import "RSPersonalInformationViewController.h"
-//密码修改
-#import "RSPasswordModificationViewController.h"
 
 #import "RSTouchViewController.h"
 
@@ -189,20 +187,17 @@ static NSString * MENUHEADER = @"MENUHEADER";
     }
     if (indexPath.row == 0) {
         cell.menuImageView.image = [UIImage imageNamed:@"个人信息"];
-        cell.menuLabel.text = @"个人信息";
+        cell.menuLabel.text = @"账号与安全";
     }else if (indexPath.row == 1){
-        cell.menuImageView.image = [UIImage imageNamed:@"密码修改"];
-        cell.menuLabel.text = @"密码修改";
-    }else if (indexPath.row == 2){
         cell.menuImageView.image = [UIImage imageNamed:@"清除缓存"];
         cell.menuLabel.text = @"清除缓存";
-    }else if (indexPath.row == 3){
+    }else if (indexPath.row == 2){
         cell.menuImageView.image = [UIImage imageNamed:@"图标"];
         cell.menuLabel.text = @"荒料解控";
-    }else if (indexPath.row == 4){
+    }else if (indexPath.row == 3){
         cell.menuImageView.image = [UIImage imageNamed:@"图标复制"];
         cell.menuLabel.text = @"大板解控";
-    }else if (indexPath.row == 5){
+    }else if (indexPath.row == 4){
         cell.menuImageView.image = [UIImage imageNamed:@"图标复制备份"];
          cell.menuLabel.text = @"关于我们";
     }
@@ -234,10 +229,7 @@ static NSString * MENUHEADER = @"MENUHEADER";
     if (indexpath.row == 0) {
         RSPersonalInformationViewController * personalInformationVc = [[RSPersonalInformationViewController alloc]init];
         [self.navigationController pushViewController:personalInformationVc animated:YES];
-    }else if (indexpath.row == 1) {
-        RSPasswordModificationViewController * passwordModificationVc = [[RSPasswordModificationViewController alloc]init];
-        [self.navigationController pushViewController:passwordModificationVc animated:YES];
-    }else if(indexpath.row == 2){
+    }else if(indexpath.row == 1){
      //清除缓存
         //这句话是解决，清除缓存之后，在去点击视频，没有办法播放视频的问题
         [KTVHTTPCache cacheDeleteAllCaches];
@@ -263,19 +255,18 @@ static NSString * MENUHEADER = @"MENUHEADER";
             alert.modalPresentationStyle = UIModalPresentationFullScreen;
         }
         [self presentViewController:alert animated:YES completion:nil];
-    }else if (indexpath.row == 3){
+    }else if (indexpath.row == 2){
         RSTouchViewController * touchVc = [[RSTouchViewController alloc]init];
         touchVc.selectType = @"huangliao";
            [self.navigationController pushViewController:touchVc animated:YES];
         
-    }else if (indexpath.row == 4){
+    }else if (indexpath.row == 3){
         
         RSTouchViewController * touchVc = [[RSTouchViewController alloc]init];
         touchVc.selectType = @"daban";
            [self.navigationController pushViewController:touchVc animated:YES];
         
-    }else if (indexpath.row == 5){
-        
+    }else if (indexpath.row == 4){
         RSAboutOurViewController * abountVc = [[RSAboutOurViewController alloc]init];
         [self.navigationController pushViewController:abountVc animated:YES];
     }
@@ -283,10 +274,15 @@ static NSString * MENUHEADER = @"MENUHEADER";
 
 //FIXME:退出
 - (void)signOutAction:(UIButton *)signOutBtn{
-    NSString * canshu = URL_YIGODATA_APPLOGINTOKEN(self.usermodel.appLoginToken);
-    NSString * sopaStr = URL_YIGODATA_IOS(URL_LOGINWEBSERVICE, URL_LOGOUT, canshu);
-    NetworkTool * network = [[NetworkTool alloc]init];
-    [network reloadWebServiceNoDataURL:URL_YIGO_IOS andParameters:sopaStr andURLName:URL_LOGOUT];
+    [JHSysAlertUtil presentAlertViewWithTitle:@"是否退出App" message:nil cancelTitle:@"取消" defaultTitle:@"确定" distinct:true cancel:^{
+        
+        } confirm:^{
+            NSString * canshu = URL_YIGODATA_APPLOGINTOKEN(self.usermodel.appLoginToken);
+            NSString * sopaStr = URL_YIGODATA_IOS(URL_LOGINWEBSERVICE, URL_LOGOUT, canshu);
+            NetworkTool * network = [[NetworkTool alloc]init];
+            [network reloadWebServiceNoDataURL:URL_YIGO_IOS andParameters:sopaStr andURLName:URL_LOGOUT];
+        }];
+   
 }
 
 

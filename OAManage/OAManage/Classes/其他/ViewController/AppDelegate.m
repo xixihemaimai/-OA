@@ -17,8 +17,16 @@
 
 //新版本
 #import "RSMainViewController.h"
+#import <CoreTelephony/CTCellularData.h>
+#import <UserNotifications/UserNotifications.h>
 
-@interface AppDelegate ()
+#ifdef DEBUG
+static BOOL isProduction = false;
+#else
+static BOOL isProduction = true;
+#endif
+
+@interface AppDelegate ()<UNUserNotificationCenterDelegate,JPUSHRegisterDelegate>
 {
      UIViewController *tempViewControl;
 }
@@ -39,6 +47,26 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    JPUSHRegisterEntity * entity = [[JPUSHRegisterEntity alloc] init];
+     entity.types = JPAuthorizationOptionAlert|JPAuthorizationOptionBadge|JPAuthorizationOptionSound|JPAuthorizationOptionProvidesAppNotificationSettings;
+     [JPUSHService registerForRemoteNotificationConfig:entity delegate:self];
+    
+    
+    
+    
+    [JPUSHService setupWithOption:launchOptions appKey:@"08d3097508cda23770d74eee"
+                            channel:@"Publish channel"
+                   apsForProduction:isProduction
+              advertisingIdentifier:nil];
+    
+    
+    if (UIDevice.currentDevice.systemVersion.floatValue <= 10.0) {
+        [self networkStatus:application didFinishLaunchingWithOptions:launchOptions];
+    }else {
+        //2.2已经开启网络权限 监听网络状态
+        [self addReachabilityManager:application didFinishLaunchingWithOptions:launchOptions];
+    }
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     
@@ -52,9 +80,6 @@
         self.window.overrideUserInterfaceStyle = UIUserInterfaceStyleUnspecified;
     }
     
-    
-    //小米推送
-    [MiPushSDK registerMiPush:self type:0 connect:YES];
     //这边要对登录的数据进行判断是否有用户信息保存，有的话，先去重新获取用户信息在跳转页面
     NSUserDefaults * user = [NSUserDefaults standardUserDefaults];
     NSData * data = [user objectForKey:@"OAUSERMODEL"];
@@ -73,7 +98,8 @@
     NSString * dateString = [formatter stringFromDate:Currentdate];
     if (laterString.length > 0) {
         if ([dateString isEqualToString:laterString]) {
-            [MiPushSDK unsetAccount:[NSString stringWithFormat:@"%ld",(long)usermodel.userId]];
+            [JPUSHService deleteAlias:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
+            } seq:0];
             [user removeObjectForKey:@"AES"];
             [user removeObjectForKey:@"OAUSERMODEL"];
             [user synchronize];
@@ -136,7 +162,7 @@
         
         usermodel.Flow_WorkOvertime =  [dict[@"flowAccess"][@"Flow_WorkOvertime"]boolValue];
         usermodel.Flow_SpecialApplication = [dict[@"flowAccess"][@"Flow_SpecialApplication"]boolValue];
-        
+        usermodel.Flow_Litigation = [dict[@"flowAccess"][@"Flow_Litigation"] boolValue];
         
         usermodel.Flow_InvestContract = [dict[@"flowAccess"][@"Flow_InvestContract"]boolValue];
         usermodel.Flow_Payment = [dict[@"flowAccess"][@"Flow_Payment"]boolValue];
@@ -175,8 +201,8 @@
         
         usermodel.Flow_PropertyServices = [dict[@"flowAccess"][@"Flow_PropertyServices"]boolValue];
         usermodel.Flow_TrainingCosts = [dict[@"flowAccess"][@"Flow_TrainingCosts"]boolValue];
-
-        [MiPushSDK setAccount:[NSString stringWithFormat:@"%ld",(long)usermodel.userId]];
+        [JPUSHService setAlias:[NSString stringWithFormat:@"%ld",(long)usermodel.userId] completion:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
+        } seq:0];
         [user removeObjectForKey:@"OAUSERMODEL"];
         NSData *data = [NSKeyedArchiver archivedDataWithRootObject:usermodel];
         [user setObject:data forKey:@"OAUSERMODEL"];
@@ -188,7 +214,8 @@
         });
     };
     network.failure = ^(NSDictionary *dict) {
-        [MiPushSDK unsetAccount:[NSString stringWithFormat:@"%ld",(long)usermodel.userId]];
+        [JPUSHService deleteAlias:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
+        } seq:0];
         [user removeObjectForKey:@"AES"];
         [user removeObjectForKey:@"OAUSERMODEL"];
         [user synchronize];
@@ -204,20 +231,114 @@
     
     [self.window makeKeyAndVisible];
    
-    // 点击通知打开app处理逻辑
-    NSDictionary* userInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
-    if(userInfo){
-        NSString *messageId = [userInfo objectForKey:@"_id_"];
-        if (messageId!=nil) {
-            [MiPushSDK openAppNotify:messageId];
-        }
-    }
     [self initAutoScaleSize];
     //设置键盘
     [self settIQKeyMananger];
     //监测网络
-    [self networkInspect];
+//    [self networkInspect];
     return YES;
+}
+
+
+/*
+ 获取网络权限状态
+ */
+- (void)networkStatus:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    //2.根据权限执行相应的交互
+    CTCellularData *cellularData = [[CTCellularData alloc] init];
+    /*
+     此函数会在网络权限改变时再次调用
+     */
+    cellularData.cellularDataRestrictionDidUpdateNotifier = ^(CTCellularDataRestrictedState state) {
+        switch (state) {
+            case kCTCellularDataRestricted:
+                NSLog(@"Restricted");
+                //2.1权限关闭的情况下 再次请求网络数据会弹出设置网络提示
+                [self networkSettingAlert];
+                break;
+            case kCTCellularDataNotRestricted:
+                  
+                NSLog(@"NotRestricted");
+                //2.2已经开启网络权限 监听网络状态
+                [self addReachabilityManager:application didFinishLaunchingWithOptions:launchOptions];
+                break;
+            case kCTCellularDataRestrictedStateUnknown:
+                NSLog(@"Unknown");
+                [self unknownNetwork];
+                break;
+                  
+            default:
+                break;
+        }
+    };
+}
+
+- (void)networkSettingAlert {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"您尚未授权“app”访问网络的权限，请前往设置开启网络授权" preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        }]];
+        [alertController addAction:[UIAlertAction actionWithTitle:@"去设置" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString] options:@{} completionHandler:nil];
+        }]];
+        [self.window.rootViewController presentViewController:alertController animated:YES completion:nil];
+    });
+}
+
+- (void)unknownNetwork {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"未知网络" preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        }]];
+        [self.window.rootViewController presentViewController:alertController animated:YES completion:nil];
+    });
+}
+
+
+/**
+ 实时检查当前网络状态
+ */
+- (void)addReachabilityManager:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    AFNetworkReachabilityManager *afNetworkReachabilityManager = [AFNetworkReachabilityManager sharedManager];
+    __weak typeof(self) weakSelf = self;
+    [afNetworkReachabilityManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        switch (status) {
+            case AFNetworkReachabilityStatusNotReachable:{
+                NSLog(@"网络不通：%@",@(status) );
+                [weakSelf showNetWorkBar];
+                break;
+            }
+                
+            case AFNetworkReachabilityStatusUnknown:{
+                [weakSelf showNetWorkBar];
+                break;
+            }
+            
+            case AFNetworkReachabilityStatusReachableViaWiFi:{
+                NSLog(@"网络通过WIFI连接：%@",@(status));
+             
+                [self getInfo_application:application didFinishLaunchingWithOptions:launchOptions];
+             
+                break;
+            }
+            case AFNetworkReachabilityStatusReachableViaWWAN:{
+                NSLog(@"网络通过无线连接：%@",@(status) );
+              
+                [self getInfo_application:application didFinishLaunchingWithOptions:launchOptions];
+            
+                break;
+            }
+            default:
+                break;
+        }
+    }];
+    [afNetworkReachabilityManager startMonitoring];  //开启网络监视器；
+}
+
+
+//把以前写在- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions里面的一些初始化操作放在该方法
+- (void)getInfo_application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+   
 }
 
 - (void)initAutoScaleSize
@@ -311,41 +432,41 @@ else
     keyboardManager.keyboardDistanceFromTextField = 10.0f; // 输入框距离键盘的距离
 }
 //FIXME:这边是网络
--(void)networkInspect
-{
-    __weak typeof(self) weakSelf = self;
-    AFNetworkReachabilityManager *manager = [AFNetworkReachabilityManager sharedManager];
-    [manager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
-        // 当网络状态改变时调用
-        switch (status) {
-            case AFNetworkReachabilityStatusUnknown:
-                //NSLog(@"未知网络");
-                [weakSelf showNetWorkBar];
-                break;
-            case AFNetworkReachabilityStatusNotReachable:
-                //NSLog(@"没有网络");
-                //此步意义不明
-                //                if([[self topViewController]class] ==[ToolNetWorkSolveVC class])
-                //                {
-                //                    [self dismissNetWorkBar];
-                //                    return;
-                //                }
-                // [self showNetWorkBar];
-                [weakSelf showNetWorkBar];
-                break;
-            case AFNetworkReachabilityStatusReachableViaWWAN:
-                //NSLog(@"手机自带网络");
-                //   [weakSelf showPhoneNetworkBar];
-                break;
-            case AFNetworkReachabilityStatusReachableViaWiFi:
-                //NSLog(@"WIFI");
-                //[weakSelf showWIFINetworkBar];
-                break;
-        }
-    }];
-    //开始监控
-    [manager startMonitoring];
-}
+//-(void)networkInspect
+//{
+//    __weak typeof(self) weakSelf = self;
+//    AFNetworkReachabilityManager *manager = [AFNetworkReachabilityManager sharedManager];
+//    [manager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+//        // 当网络状态改变时调用
+//        switch (status) {
+//            case AFNetworkReachabilityStatusUnknown:
+//                //NSLog(@"未知网络");
+//                [weakSelf showNetWorkBar];
+//                break;
+//            case AFNetworkReachabilityStatusNotReachable:
+//                //NSLog(@"没有网络");
+//                //此步意义不明
+//                //                if([[self topViewController]class] ==[ToolNetWorkSolveVC class])
+//                //                {
+//                //                    [self dismissNetWorkBar];
+//                //                    return;
+//                //                }
+//                // [self showNetWorkBar];
+//                [weakSelf showNetWorkBar];
+//                break;
+//            case AFNetworkReachabilityStatusReachableViaWWAN:
+//                //NSLog(@"手机自带网络");
+//                //   [weakSelf showPhoneNetworkBar];
+//                break;
+//            case AFNetworkReachabilityStatusReachableViaWiFi:
+//                //NSLog(@"WIFI");
+//                //[weakSelf showWIFINetworkBar];
+//                break;
+//        }
+//    }];
+//    //开始监控
+//    [manager startMonitoring];
+//}
 
 - (void)showNetWorkBar{
     tempViewControl = [self topViewController];
@@ -426,28 +547,22 @@ else
     [viewController.view addSubview:Nonet];
 }
 
-#pragma mark -- 这下面都是小米推送获取推送消息ios10.0之前
+#pragma mark -- 这下面都是极光推送
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
-    //NSLog(@"------------77777777------%@",[NSString stringWithFormat:@"APNS notify: %@", userInfo]);
-    //NSString *messageId = [userInfo objectForKey:@"_id_"];
     // 当同时启动APNs与内部长连接时, 把两处收到的消息合并. 通过miPushReceiveNotification返回
-    [MiPushSDK handleReceiveRemoteNotification:userInfo];
-    //[MiPushSDK openAppNotify:messageId];
+    [JPUSHService handleRemoteNotification:userInfo];
 }
 
 #pragma mark 注册push服务.
 - (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
-    // [vMain printLog:[NSString stringWithFormat:@"APNS token: %@", [deviceToken description]]];
-    //NSLog(@"-----------888888-------%@",[NSString stringWithFormat:@"APNS token: %@", [deviceToken description]]);
     // 注册APNS成功, 注册deviceToken
-    [MiPushSDK bindDeviceToken:deviceToken];
+    [JPUSHService registerDeviceToken:deviceToken];
 }
 
 - (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)err
 {
-    //[vMain printLog:[NSString stringWithFormat:@"APNS error: %@", err]];
     // 注册APNS失败.
     // 自行处理.
     //NSLog(@"-----9999999-------%@",[NSString stringWithFormat:@"APNS error: %@", err]);
@@ -458,9 +573,7 @@ else
 - (void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler {
     NSDictionary * userInfo = notification.request.content.userInfo;
     if([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
-        // [vMain printLog:[NSString stringWithFormat:@"APNS notify: %@", userInfo]];
-        //NSLog(@"--------------10000-----------%@",[NSString stringWithFormat:@"APNS notify: %@", userInfo]);
-        [MiPushSDK handleReceiveRemoteNotification:userInfo];
+        [JPUSHService handleRemoteNotification:userInfo];
     }
     completionHandler(UNNotificationPresentationOptionAlert);
 }
@@ -469,80 +582,52 @@ else
 - (void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)())completionHandler {
     NSDictionary * userInfo = response.notification.request.content.userInfo;
     if([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
-        // [vMain printLog:[NSString stringWithFormat:@"APNS notify: %@", userInfo]];
-        // NSLog(@"---------------11111111----------%@",[NSString stringWithFormat:@"APNS notify: %@", userInfo]);
-        [MiPushSDK handleReceiveRemoteNotification:userInfo];
+        [JPUSHService handleRemoteNotification:userInfo];
     }
     completionHandler();
 }
-#pragma mark MiPushSDKDelegate
-- (void)miPushRequestSuccWithSelector:(NSString *)selector data:(NSDictionary *)data
-{
-    //[vMain printLog:[NSString stringWithFormat:@"command succ(%@): %@", [self getOperateType:selector], data]];
-    // NSLog(@"--------------122222222-----------%@",[NSString stringWithFormat:@"command succ(%@): %@", [self getOperateType:selector], data]);
-    if ([selector isEqualToString:@"registerMiPush:"]) {
-        //[vMain setRunState:YES];
-    }else if ([selector isEqualToString:@"registerApp"]) {
-        // 获取regId
-        // NSLog(@"regid = %@", data[@"regid"]);
-    }else if ([selector isEqualToString:@"bindDeviceToken:"]) {
-        //  [MiPushSDK setAlias:@"1"];
-        // [MiPushSDK subscribe:@"2"];
-        // [MiPushSDK setAccount:@"8"];
-        // 获取regId
-    }else if ([selector isEqualToString:@"unregisterMiPush"]) {
-        // [vMain setRunState:NO];
+
+
+//jpushNotificationAuthorization
+
+- (void)jpushNotificationAuthorization:(JPAuthorizationStatus)status withInfo:(NSDictionary *)info{
+    NSLog(@"jpushNotificationAuthorization=========%@",info);
+}
+
+//jpushNotificationCenter
+- (void)jpushNotificationCenter:(UNUserNotificationCenter *)center openSettingsForNotification:(UNNotification *)notification{
+    if ([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
+        //从通知界面直接进入应用
+    }else{
+        //从通知设置界面进入应用
     }
-    // [MiPushSDK getAllAccountAsync];
 }
 
-- (void)miPushRequestErrWithSelector:(NSString *)selector error:(int)error data:(NSDictionary *)data
-{
-    //[vMain printLog:[NSString stringWithFormat:@"command error(%d|%@): %@", error, [self getOperateType:selector], data]];
-    //  NSLog(@"-------------1333333333---------%@",[NSString stringWithFormat:@"command error(%d|%@): %@", error, [self getOperateType:selector], data]);
-}
-
-- (void)miPushReceiveNotification:(NSDictionary*)data
-{
-    // 1.当启动长连接时, 收到消息会回调此处
-    // 2.[MiPushSDK handleReceiveRemoteNotification]
-    //   当使用此方法后会把APNs消息导入到此
-    //[vMain printLog:[NSString stringWithFormat:@"XMPP notify: %@", data]];
-    // NSLog(@"---------14444444------%@",[NSString stringWithFormat:@"XMPP notify: %@", data]);
-}
-
-- (NSString*)getOperateType:(NSString*)selector
-{
-    NSString *ret = nil;
-    if ([selector hasPrefix:@"registerMiPush:"] ) {
-        ret = @"客户端注册设备";
-    }else if ([selector isEqualToString:@"unregisterMiPush"]) {
-        ret = @"客户端设备注销";
-    }else if ([selector isEqualToString:@"registerApp"]) {
-        ret = @"注册App";
-    }else if ([selector isEqualToString:@"bindDeviceToken:"]) {
-        ret = @"绑定 PushDeviceToken";
-    }else if ([selector isEqualToString:@"setAlias:"]) {
-        ret = @"客户端设置别名";
-    }else if ([selector isEqualToString:@"unsetAlias:"]) {
-        ret = @"客户端取消别名";
-    }else if ([selector isEqualToString:@"subscribe:"]) {
-        ret = @"客户端设置主题";
-    }else if ([selector isEqualToString:@"unsubscribe:"]) {
-        ret = @"客户端取消主题";
-    }else if ([selector isEqualToString:@"setAccount:"]) {
-        ret = @"客户端设置账号";
-    }else if ([selector isEqualToString:@"unsetAccount:"]) {
-        ret = @"客户端取消账号";
-    }else if ([selector isEqualToString:@"openAppNotify:"]) {
-        ret = @"统计客户端";
-    }else if ([selector isEqualToString:@"getAllAliasAsync"]) {
-        ret = @"获取Alias设置信息";
-    }else if ([selector isEqualToString:@"getAllTopicAsync"]) {
-        ret = @"获取Topic设置信息";
+//jpushNotificationCenter
+- (void)jpushNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(NSInteger))completionHandler{
+    NSDictionary * userInfo = notification.request.content.userInfo;
+    if ([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
+           [JPUSHService handleRemoteNotification:userInfo];
+        NSLog(@"iOS10处理远程推送-处于前台时接收到通知:%@", userInfo);
+//        UIApplication.applicationIconBadgeNumber = 0;
     }
-    return ret;
+    completionHandler(UNNotificationPresentationOptionAlert);
 }
+
+//jpushNotificationCenter
+
+- (void)jpushNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)(void))completionHandler{
+    NSDictionary * userInfo = response.notification.request.content.userInfo;
+    if ([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
+           [JPUSHService handleRemoteNotification:userInfo];
+        NSLog(@"iOS10处理远程推送-处于前台时接收到通知:%@", userInfo);
+    }
+    completionHandler();
+}
+
+
+
+
 
 - (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(nullable UIWindow *)window{
     if (_allowRotation == true) {   // 如果属性值为YES,仅允许屏幕向左旋转,否则仅允许竖屏
@@ -561,7 +646,8 @@ else
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
-    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+//    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+//    [JPUSHService resetBadge];
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
 }
@@ -569,14 +655,20 @@ else
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+//    application.applicationIconBadgeNumber = 0;
+//    [JPUSHService resetBadge];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+    application.applicationIconBadgeNumber = 0;
+    [JPUSHService resetBadge];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    application.applicationIconBadgeNumber = 0;
+    [JPUSHService resetBadge];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {

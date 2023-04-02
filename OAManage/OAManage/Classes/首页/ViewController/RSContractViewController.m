@@ -353,7 +353,7 @@
     RSWKOAmanagerViewController * wkVc = [[RSWKOAmanagerViewController alloc]init];
     wkVc.type = @"7";
     wkVc.billId = [columnarmodel.billId integerValue];
-    wkVc.title = @"查看合同";
+    wkVc.title = columnarmodel.billTitle;
     wkVc.creatorName = columnarmodel.billTitle;
     [self.navigationController pushViewController:wkVc animated:YES];
 }

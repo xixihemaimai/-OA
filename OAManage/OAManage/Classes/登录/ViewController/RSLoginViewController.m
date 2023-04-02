@@ -641,6 +641,7 @@ typedef void(^Obtain)(BOOL isValue);
         
         usermodel.Flow_WorkOvertime =  [dict[@"flowAccess"][@"Flow_WorkOvertime"]boolValue];
         usermodel.Flow_SpecialApplication = [dict[@"flowAccess"][@"Flow_SpecialApplication"]boolValue];
+        usermodel.Flow_Litigation = [dict[@"flowAccess"][@"Flow_Litigation"] boolValue];
         
         usermodel.OA_Market_Home  = [dict[@"flowAccess"][@"OA_Market_Home"]boolValue];
         usermodel.OA_BM_IO = [dict[@"flowAccess"][@"OA_BM_IO"]boolValue];
@@ -659,9 +660,8 @@ typedef void(^Obtain)(BOOL isValue);
         usermodel.Flow_TrainingCosts = [dict[@"flowAccess"][@"Flow_TrainingCosts"]boolValue];
         
         
-        
-        
-        [MiPushSDK setAccount:[NSString stringWithFormat:@"%ld",(long)usermodel.userId]];
+        [JPUSHService setAlias:[NSString stringWithFormat:@"%ld",(long)usermodel.userId] completion:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
+        } seq:0];
         NSData *data = [NSKeyedArchiver archivedDataWithRootObject:usermodel];
         [user setObject:data forKey:@"OAUSERMODEL"];
         [user synchronize];

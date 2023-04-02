@@ -32,13 +32,20 @@ static NSString * APPROVALHEADERVIEW = @"APPROVALHEADERVIEW";
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.title = @"审批";
+//    self.title = @"审批";
     CGFloat H = (89 / SCW) * SCW;
     RSProgressView * progressView = [[RSProgressView alloc]initWithFrame:CGRectMake(0, 0, SCW, H)];
     self.progressView = progressView;
     self.tableview.tableHeaderView = progressView;
     self.tableview.backgroundColor = [UIColor colorWithHexColorStr:@"#ECECEC"];
-
+    self.tableview.backgroundColor = [UIColor colorWithHexColorStr:@"#FFFFFF"];
+    self.tableview.estimatedSectionFooterHeight = 0.0;
+    self.tableview.estimatedSectionHeaderHeight = 0.0;
+    if (@available(iOS 15.0, *)) {
+        self.tableview.sectionHeaderTopPadding = 0.0;
+    }
+    self.tableview.estimatedRowHeight = 128;
+    self.tableview.rowHeight = UITableViewAutomaticDimension;
    RSWeakself
     [self reloadApprovalprocessNewData];
     self.tableview.mj_header = [MJChiBaoZiHeader headerWithRefreshingBlock:^{
@@ -114,7 +121,7 @@ static NSString * APPROVALHEADERVIEW = @"APPROVALHEADERVIEW";
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 40;
+    return 0;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -134,7 +141,7 @@ static NSString * APPROVALHEADERVIEW = @"APPROVALHEADERVIEW";
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-       return  (144 / SCW) * SCW;
+    return UITableViewAutomaticDimension;
 }
 
 @end

@@ -157,6 +157,8 @@
     [aCoder encodeBool:self.AM_Requisition forKey:@"AM_Requisition"];
     [aCoder encodeBool:self.AM_SetlleIn forKey:@"AM_SetlleIn"];
     [aCoder encodeBool:self.Flow_SpecialApplication forKey:@"Flow_SpecialApplication"];
+    [aCoder encodeBool:self.Flow_Litigation forKey:@"Flow_Litigation"];
+    
     
     [aCoder encodeBool:self.BM_OutNotice forKey:@"BM_OutNotice"];
     [aCoder encodeBool:self.BS_OutNotice forKey:@"BS_OutNotice"];
@@ -262,6 +264,7 @@
         self.AM_Requisition = [aDecoder decodeBoolForKey:@"AM_Requisition"];
         self.AM_SetlleIn = [aDecoder decodeBoolForKey:@"AM_SetlleIn"];
         self.Flow_SpecialApplication = [aDecoder decodeBoolForKey:@"Flow_SpecialApplication"];
+        self.Flow_Litigation = [aDecoder decodeBoolForKey:@"Flow_Litigation"];
         
         self.BM_OutNotice = [aDecoder decodeBoolForKey:@"BM_OutNotice"];
         self.BS_OutNotice = [aDecoder decodeBoolForKey:@"BS_OutNotice"];
@@ -367,6 +370,7 @@
     usermodel.AM_Requisition = self.AM_Requisition;
     usermodel.AM_SetlleIn = self.AM_SetlleIn;
     usermodel.Flow_SpecialApplication = self.Flow_SpecialApplication;
+    usermodel.Flow_Litigation = self.Flow_Litigation;
     
     usermodel.BM_OutNotice = self.BM_OutNotice;
     usermodel.BS_OutNotice = self.BS_OutNotice;

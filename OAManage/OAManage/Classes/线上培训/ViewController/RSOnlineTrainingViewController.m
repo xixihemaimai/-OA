@@ -56,11 +56,7 @@
     [super viewWillAppear:animated];
     [UIApplication sharedApplication].statusBarHidden = NO;
     self.navigationController.navigationBar.hidden = NO;
-    if (iphonex || iPhoneXR || iPhoneXS || iPhoneXSMax) {
-        self.navigationController.navigationBar.frame = CGRectMake(0, 44, SCW, 44);
-    }else{
-        self.navigationController.navigationBar.frame = CGRectMake(0, 20, SCW, 44);
-    }
+    self.navigationController.navigationBar.frame = CGRectMake(0, Height_NavBar_status, SCW, 44);
 }
 
 - (void)viewDidLoad {
@@ -68,8 +64,6 @@
     
 //    self.edgesForExtendedLayout=UIRectEdgeNone;
     self.view.backgroundColor = [UIColor colorWithHexColorStr:@"#ffffff"];
-    
-    
     self.emptyView.hidden = true;
     [self.tableview removeFromSuperview];
     
@@ -280,7 +274,7 @@
     
     if (self.titleScrollView.contentSize.width > SCW) {
         // 4.让标题按钮居中
-          [self setTitleBtnCenter:titleBtn];
+        [self setTitleBtnCenter:titleBtn];
     }
     // 5.移动下滑线，让下滑线在点击按钮的正下方
     // 使用动画
@@ -407,16 +401,16 @@
     // 设置背景颜色
 //    titleScrollView.backgroundColor = [UIColor redColor];
     // 设置标题栏的frame
-    CGFloat x = 0;
-    CGFloat y = 0.0f;
-    if (iphonex || iPhoneXR || iPhoneXS || iPhoneXSMax) {
-        y = 88;
-    }else{
-        y = 64;
-    }
+//    CGFloat x = 0;
+//    CGFloat y = 0.0f;
+//    if (iphonex || iPhoneXR || iPhoneXS || iPhoneXSMax) {
+//        y = 88;
+//    }else{
+//        y = 64;
+//    }
     CGFloat w = SCW;
     CGFloat h = 44.5;
-    titleScrollView.frame = CGRectMake(x, y, w, h);
+    titleScrollView.frame = CGRectMake(0, Height_NavBar, w, h);
     // 添加到控制器的view里
     [self.view addSubview:titleScrollView];
     

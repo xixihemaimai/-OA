@@ -14,14 +14,17 @@
 @property (nonatomic,strong) UIImageView * verticalImageView;
 @property (nonatomic,strong) UILabel * departmentLabel;
 @property (nonatomic,strong) UILabel * statusLabel;
-
-
+@property (nonatomic,strong) UIView * verticalView;
+@property (nonatomic,strong)UIImageView * transverseImageView;
 @property (nonatomic,strong) UILabel * nameLabel;
 
 @property (nonatomic,strong) UILabel * contentLabel;
-
+@property (nonatomic,strong)UIImageView * headImageview;
 
 @property (nonatomic,strong) UILabel * timeLabel;
+@property (nonatomic,strong)UIImageView * agreeImageView;
+
+@property (nonatomic,strong)UIImageView * rightImageView;
 @end
 
 
@@ -32,14 +35,14 @@
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         
         
-        self.contentView.backgroundColor = [UIColor colorWithHexColorStr:@"#ECECEC"];
+        self.contentView.backgroundColor = [UIColor colorWithHexColorStr:@"#ffffff"];
         
         
         //竖直的view
         UIView * verticalView = [[UIView alloc]init];
         verticalView.backgroundColor = [UIColor colorWithHexColorStr:@"#DEDEDE"];
         [self.contentView addSubview:verticalView];
-        
+        _verticalView = verticalView;
         
         //竖直的图片
         UIImageView * verticalImageView = [[UIImageView alloc]init];
@@ -51,11 +54,9 @@
         
         //横的图片
         UIImageView * transverseImageView = [[UIImageView alloc]init];
-        //transverseImageView.contentMode = UIViewContentModeScaleAspectFill;
         transverseImageView.image = [UIImage imageNamed:@"Rectangle"];
-        //transverseImageView.backgroundColor = [UIColor whiteColor];
         [self.contentView addSubview:transverseImageView];
-        
+        _transverseImageView = transverseImageView;
         
         //部门
         UILabel * departmentLabel = [[UILabel alloc]init];
@@ -84,7 +85,7 @@
         headImageview.contentMode = UIViewContentModeScaleAspectFill;
         headImageview.image = [UIImage imageNamed:@"logo"];
         [transverseImageView addSubview:headImageview];
-        
+        _headImageview = headImageview;
         
         //名字
         //name
@@ -100,7 +101,8 @@
         //什么事情内容
         //content
         UILabel * contentLabel = [[UILabel alloc]init];
-        contentLabel.text = @"同意，请注意完成工作内容";
+        contentLabel.text = @"同意，请注意完成工作内容同意";
+        contentLabel.numberOfLines = 0;
         contentLabel.textAlignment = NSTextAlignmentLeft;
         contentLabel.textColor = [UIColor colorWithHexColorStr:@"#333333"];
         contentLabel.font = [UIFont systemFontOfSize:Textadaptation(13)];
@@ -123,8 +125,8 @@
         rightImageView.contentMode = UIViewContentModeScaleAspectFill;
         rightImageView.image = [UIImage imageNamed:@"向右"];
         [transverseImageView addSubview:rightImageView];
-        rightImageView.hidden = YES;
-        
+//        rightImageView.hidden = YES;
+        _rightImageView = rightImageView;
         
         //同意的图片
         //Agree
@@ -132,120 +134,112 @@
         agreeImageView.contentMode = UIViewContentModeScaleAspectFill;
         agreeImageView.image = [UIImage imageNamed:@"审批完图片 copy 2"];
         [transverseImageView addSubview:agreeImageView];
+        _agreeImageView = agreeImageView;
+      
+        [self.verticalView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(18);
+            make.width.mas_equalTo(1);
+            make.top.bottom.equalTo(self.contentView);
+        }];
+        
+        [self.transverseImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(32);
+            make.right.mas_equalTo(-13);
+            make.top.mas_equalTo(6);
+//            make.centerY.equalTo(self.verticalImageView.mas_centerY);
+        }];
+        
+//        transverseImageView.backgroundColor = [UIColor colorWithHexColorStr:@"#ffffff"];
+//        transverseImageView.layer.cornerRadius = 5;
+//        transverseImageView.layer.borderColor = [UIColor colorWithHexColorStr:@"#DBE0E3"].CGColor;
+//        transverseImageView.layer.borderWidth = 0.5;
+//        if (@available(iOS 11.0, *)) {
+//            transverseImageView.layer.maskedCorners = true;
+//        }
+        
+        [self.departmentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(17);
+            make.top.mas_equalTo(11);
+            make.right.equalTo(self.transverseImageView.mas_right);
+            make.height.mas_equalTo(20);
+        }];
         
         
         
-//        verticalView.sd_layout
-//        .leftSpaceToView(self.contentView, 18)
-//        .topSpaceToView(self.contentView, 0)
-//        .bottomSpaceToView(self.contentView, 0)
-//        .widthIs(1);
+        
+        [self.statusLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(17);
+            make.right.equalTo(self.transverseImageView.mas_right);
+            make.top.equalTo(self.departmentLabel.mas_bottom).offset(1);
+            make.height.mas_equalTo(16.5);
+        }];
+        
+        
+        [self.headImageview mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(17);
+            make.top.equalTo(self.statusLabel.mas_bottom).offset(18);
+            make.width.height.mas_equalTo(32);
+        }];
+        
+        self.headImageview.layer.cornerRadius = 32 * 0.5;
+        self.headImageview.layer.masksToBounds = YES;
+        
+        
+        [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.headImageview.mas_right).offset(12);
+            make.top.equalTo(self.headImageview.mas_top);
+            make.width.mas_equalTo(150);
+            make.height.mas_equalTo(19);
+        }];
+        
+        
+        [self.timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(self.transverseImageView.mas_right).offset(-16.5);
+            make.top.equalTo(self.nameLabel.mas_top);
+            make.height.mas_equalTo(19);
+            make.bottom.equalTo(self.nameLabel.mas_bottom);
+        }];
+        
+        [self.agreeImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(self.headImageview.mas_right);
+            make.bottom.equalTo(self.headImageview.mas_bottom);
+            make.width.height.mas_equalTo(13);
+        }];
+        
+        [self.contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.headImageview.mas_right).offset(12);
+            make.top.equalTo(self.nameLabel.mas_bottom);
+            make.right.equalTo(self.transverseImageView.mas_right).offset(-16.5);
+            make.bottom.equalTo(self.transverseImageView.mas_bottom).offset(-15);
+        }];
+        
+        [self.rightImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.mas_equalTo(-14.5);
+            make.top.mas_equalTo(18);
+            make.width.mas_equalTo(8.5);
+            make.height.mas_equalTo(15);
+        }];
         
         
         
         
-        verticalView.frame = CGRectMake(18, 0, 1, (144 / SCW) * SCW);
-        
-        verticalImageView.frame = CGRectMake(11, 19, 16, 16);
-        
-//        transverseImageView.sd_layout
-//        .leftSpaceToView(self.contentView, 32)
-//        .topSpaceToView(self.contentView, 14)
-//        .bottomSpaceToView(self.contentView, 14)
-//        .rightSpaceToView(self.contentView, 13);
-        
-        transverseImageView.frame = CGRectMake(32, 14, SCW - 46, (144 / SCW) * SCW - 28);
-        
-        departmentLabel.frame = CGRectMake(17, 11, transverseImageView.yj_width * 0.4, (144 / SCW) * SCW * 0.15);
-//        departmentLabel.sd_layout
-//        .leftSpaceToView(transverseImageView, 17)
-//        .topSpaceToView(transverseImageView, 11)
-//        .widthRatioToView(transverseImageView, 0.4)
-//        .heightRatioToView(self.contentView, 0.15);
-        
-        statusLabel.frame = CGRectMake(17, CGRectGetMaxY(departmentLabel.frame) + 1, transverseImageView.yj_width * 0.4, (144 / SCW) * SCW * 0.15);
-//        statusLabel.sd_layout
-//        .leftEqualToView(departmentLabel)
-//        .rightEqualToView(departmentLabel)
-//        .topSpaceToView(departmentLabel, 1)
-//        .heightRatioToView(self.contentView, 0.15);
-        
-        
-//        verticalImageView.sd_layout
-//        .leftSpaceToView(self.contentView, 11)
-//        .topSpaceToView(self.contentView, 19)
-//        .widthIs(16)
-//        .heightEqualToWidth();
-        
-        
-        
-            
-//            verticalImageView.sd_layout
-//            .leftSpaceToView(self.contentView, 11)
-//            .topSpaceToView(self.contentView, 19)
-//            .widthIs(16)
-//            .heightEqualToWidth();
-        
-        
-        headImageview.frame = CGRectMake(17, CGRectGetMaxY(statusLabel.frame) + 10, (32 / SCW) * SCW, (32 / SCW) * SCW);
-            
-//            headImageview.sd_layout
-//            .leftEqualToView(departmentLabel)
-//            .topSpaceToView(statusLabel, 10)
-//            .widthIs((32 / SCW) * SCW)
-//            .heightEqualToWidth();
-            
-        
-        nameLabel.frame = CGRectMake(CGRectGetMaxX(headImageview.frame) + 12, headImageview.yj_y, transverseImageView.yj_width * 0.4, (144 / SCW) * SCW * 0.1);
-//            nameLabel.sd_layout
-//            .leftSpaceToView(headImageview, 12)
-//            .topEqualToView(headImageview)
-//            .widthRatioToView(transverseImageView, 0.4)
-//            .heightRatioToView(self.contentView, 0.1);
-            
-        contentLabel.frame = CGRectMake(CGRectGetMaxX(headImageview.frame) + 12, CGRectGetMaxY(nameLabel.frame) + 4, SCW - CGRectGetMaxX(headImageview.frame) - 50, (144 / SCW) * SCW * 0.1);
-//            contentLabel.sd_layout
-//            .leftEqualToView(nameLabel)
-//            .topSpaceToView(nameLabel, 4)
-//            .rightSpaceToView(transverseImageView, 15)
-//            .heightRatioToView(self.contentView, 0.1);
-            
-        rightImageView.frame = CGRectMake(SCW - 15 - 9, CGRectGetMaxY(transverseImageView.frame) + 18, 9, 15);
-//            rightImageView.sd_layout
-//            .rightSpaceToView(transverseImageView, 15)
-//            .topSpaceToView(transverseImageView, 18)
-//            .widthIs(9)
-//            .heightIs(15);
-//
-            
-//            agreeImageView.sd_layout
-//            .rightSpaceToView(contentLabel, 10)
-//            .widthIs(13)
-//            .heightEqualToWidth()
-//            .bottomEqualToView(headImageview);
-        
-        /**
-         
-         headImageview.frame = CGRectMake(17, CGRectGetMaxY(statusLabel.frame) + 10, (32 / SCW) * SCW, (32 / SCW) * SCW);
-         */
-            
-        agreeImageView.frame = CGRectMake(self.frame.size.width - 30, contentLabel.yj_y, 13, 13);
-            
-          
-        
-        headImageview.layer.cornerRadius = headImageview.yj_width * 0.5;
-        headImageview.layer.masksToBounds = YES;
- 
-//        timeLabel.sd_layout
-//        .leftSpaceToView(nameLabel, 0)
-//        .rightSpaceToView(transverseImageView, 15)
-//        .topEqualToView(nameLabel)
-//        .bottomEqualToView(nameLabel);
-        
-        timeLabel.frame = CGRectMake(CGRectGetMaxX(nameLabel.frame), nameLabel.yj_y, 120, (144 / SCW) * SCW * 0.1);
-        
+        [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.top.equalTo(self);
+            make.bottom.equalTo(self.transverseImageView.mas_bottom).offset(6);
+        }];
     }
     return self;
+}
+
+- (CGFloat)getHeightByWidth:(CGFloat)width title:(NSString *)title font:(UIFont *)font
+{
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, width, 0)];
+    label.text = title;
+    label.font = font;
+    label.numberOfLines = 0;
+    [label sizeToFit];
+    CGFloat height = label.frame.size.height;
+    return height;
 }
 
 
@@ -255,15 +249,49 @@
     _nameLabel.text = [NSString stringWithFormat:@"%@",_approvalProcessmodel.userName];
     
     _departmentLabel.text = [NSString stringWithFormat:@"%@",_approvalProcessmodel.workItemName];
-    _contentLabel.text = [NSString stringWithFormat:@"%@",_approvalProcessmodel.userInfo];
+//    _contentLabel.text = [NSString stringWithFormat:@"%@",_approvalProcessmodel.userInfo];
+    
+    
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+     paragraphStyle.lineBreakMode = NSLineBreakByCharWrapping;
+     NSDictionary *attributes = @{NSParagraphStyleAttributeName:paragraphStyle};
+    self.contentLabel.attributedText = [[NSAttributedString alloc]initWithString:[NSString stringWithFormat:@"%@",_approvalProcessmodel.userInfo] attributes:attributes];
+    
+    
+    CGFloat height = [self getHeightByWidth:SCW - 45 title:[NSString stringWithFormat:@"%@",_approvalProcessmodel.userInfo] font:[UIFont systemFontOfSize:Textadaptation(13)]];
+    
+    
+//  NSLog(@"=============23=2========%lf",height);
+    NSInteger count = height/13;
+//  NSLog(@"============2234==========%ld",count);
+    [self.verticalImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(11);
+        make.width.height.mas_equalTo(16);
+        make.top.mas_equalTo(10 + count * 2);
+//        if (count == 1){
+//            make.top.mas_equalTo(12);
+//        }else if (count == 2){
+//            make.top.mas_equalTo(14);
+//        }else if (count == 3){
+//            make.top.mas_equalTo(16);
+//        }else if (count == 4){
+//            make.top.mas_equalTo(18);
+//        }else if (count == 5){
+//            make.top.mas_equalTo(20);
+//        }else if (count == 6){
+//            make.top.mas_equalTo(22);
+//        }
+    }];
+    
     
     if ([_approvalProcessmodel.resultInfo isEqualToString:@"通过"]) {
         _verticalImageView.image = [UIImage imageNamed:@"审批完图片"];
         NSString * current = _approvalProcessmodel.finishTime;
         current = [current substringToIndex:16];
         _timeLabel.text = [NSString stringWithFormat:@"%@",current];
-        
+        _rightImageView.hidden = true;
     }else{
+        _rightImageView.hidden = false;
         NSString * current = _approvalProcessmodel.createTime;
         current = [current substringToIndex:16];
         _timeLabel.text = [NSString stringWithFormat:@"%@",current];

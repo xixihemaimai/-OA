@@ -72,7 +72,7 @@ static NSString * LAUNCHREUSABFOOTCELLID = @"LAUNCHREUSABFOOTCELLID";
     flowLayout.minimumLineSpacing = 0;
     flowLayout.minimumInteritemSpacing = 0;
     flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
-    UICollectionView * collectview = [[UICollectionView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(_headerView.frame), SCW, SCH - CGRectGetMaxY(self.headerView.frame) - Height_TabBar - Height_NavBar ) collectionViewLayout:flowLayout];
+    UICollectionView * collectview = [[UICollectionView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(_headerView.frame), SCW,SCH - Height_NavBar - Height_TabBar - 40) collectionViewLayout:flowLayout];
     collectview.backgroundColor = [UIColor colorWithHexColorStr:@"#ffffff"];
     [collectview registerClass:[RSLaunchCell class] forCellWithReuseIdentifier:COLLECTIONCELLID];
     [collectview registerClass:[RSLaunchReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:LAUNCHREUSABLECELLID];
@@ -92,9 +92,9 @@ static NSString * LAUNCHREUSABFOOTCELLID = @"LAUNCHREUSABFOOTCELLID";
 //}
 
 - (void)setCustomHeaderView{
-
+    self.edgesForExtendedLayout = UIRectEdgeNone;
     UIView * headerView = [[UIView alloc]init];
-    headerView.frame = CGRectMake(0, Height_NavBar, SCW, 40);
+    headerView.frame = CGRectMake(0, 0, SCW, 40);
     headerView.backgroundColor = [UIColor colorWithHexColorStr:@"#FC8C78"];
     _headerView = headerView;
     
@@ -586,6 +586,11 @@ static NSString * LAUNCHREUSABFOOTCELLID = @"LAUNCHREUSABFOOTCELLID";
     
     if (self.usermodel.Flow_TrainingCosts == true) {
         NSDictionary * dict = @{@"img":@"培训费用申请",@"title":@"培训费用申请",@"key":@"Flow_TrainingCosts"};
+        [array6 addObject:dict];
+    }
+    
+    if (self.usermodel.Flow_Litigation == true){
+        NSDictionary * dict = @{@"img":@"诉讼申请表",@"title":@"诉讼需求申请表",@"key":@"Flow_Litigation"};
         [array6 addObject:dict];
     }
     

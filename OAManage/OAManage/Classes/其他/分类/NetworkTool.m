@@ -78,18 +78,26 @@
     // 返回NSData
     manger.responseSerializer = [AFHTTPResponseSerializer serializer];
     // 设置请求头，也可以不设置
-    [manger.requestSerializer setValue:@"application/soap+xml; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+    [manger.requestSerializer setValue:@"application/soap+xml;charset=utf-8" forHTTPHeaderField:@"Content-Type"];
     [manger.requestSerializer setValue:@"" forHTTPHeaderField:@"SOAPAction"];
     [manger.requestSerializer setQueryStringSerializationWithBlock:^NSString *(NSURLRequest *request, NSDictionary *parameters, NSError *__autoreleasing *error)
     {
              return soapStr;
     }];
-    [manger POST:URLStr parameters:soapStr progress:^(NSProgress * _Nonnull uploadProgress) {
-    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        block(responseObject,YES);
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        block(error,NO);
-    }];
+    NSDictionary * dict = @{@"Content-Type":@"application/soap+xml;charset=utf-8",@"SOAPAction":@""};
+    [manger POST:URLStr parameters:soapStr headers:dict progress:^(NSProgress * _Nonnull uploadProgress) {
+        } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            block(responseObject,YES);
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSLog(@"===23=4=24=32=4==4=2=4=====%@",error);
+            block(error,NO);
+        }];
+//    [manger POST:URLStr parameters:soapStr progress:^(NSProgress * _Nonnull uploadProgress) {
+//    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+//        block(responseObject,YES);
+//    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+//        block(error,NO);
+//    }];
 }
 
 //新的请求方式
@@ -103,14 +111,22 @@
     securityPolicy.allowInvalidCertificates = YES;
     manger.securityPolicy = securityPolicy;
     manger.requestSerializer.timeoutInterval = 30.0f;
-    [manger POST:url parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
-    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        //请求成功
-        block(responseObject,YES);
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        //请求失败
-        block(error,NO);
-    }];
+    
+    [manger POST:url parameters:parameters headers:nil progress:^(NSProgress * _Nonnull uploadProgress) {
+        } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            block(responseObject,YES);
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            block(error,NO);
+        }];
+    
+//    [manger POST:url parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
+//    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+//        //请求成功
+//        block(responseObject,YES);
+//    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+//        //请求失败
+//        block(error,NO);
+//    }];
 }
 
 
@@ -464,6 +480,11 @@
                 if (self.failure) {
                     self.failure(responseObject);
                 }
+            }else if ([urlName isEqualToString:URL_LOGINOFF]){
+                [SVProgressHUD showErrorWithStatus:@"注销失败"];
+                if (self.failure) {
+                    self.failure(responseObject);
+                }
             }
             else {
                [SVProgressHUD showErrorWithStatus:@"获取失败"];
@@ -533,6 +554,11 @@
                     self.successReload(dic);
                 }
             }else if ([_tempStr isEqualToString:URL_CHANGPWD]){
+                [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"%@",dict[@"message"]]];
+                if (self.successReload) {
+                    self.successReload(dict);
+                }
+            }else if ([_tempStr isEqualToString:URL_LOGINOFF]){
                 [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"%@",dict[@"message"]]];
                 if (self.successReload) {
                     self.successReload(dict);
@@ -623,7 +649,8 @@
                 NSUserDefaults * user = [NSUserDefaults standardUserDefaults];
                 NSData * data = [user objectForKey:@"OAUSERMODEL"];
                 RSUserModel * usermodel  = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-                [MiPushSDK unsetAccount:[NSString stringWithFormat:@"%ld",usermodel.userId]];
+                [JPUSHService deleteAlias:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
+                } seq:0];
                 [user removeObjectForKey:@"OAUSERMODEL"];
                 [user removeObjectForKey:@"AES"];
                 [user synchronize];
@@ -800,7 +827,8 @@
                            NSUserDefaults * user = [NSUserDefaults standardUserDefaults];
                            NSData * data = [user objectForKey:@"OAUSERMODEL"];
                            RSUserModel * usermodel  = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-                           [MiPushSDK unsetAccount:[NSString stringWithFormat:@"%ld",(long)usermodel.userId]];
+        [JPUSHService deleteAlias:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
+        } seq:0];
                            [user removeObjectForKey:@"OAUSERMODEL"];
                            [user removeObjectForKey:@"AES"];
                            [user synchronize];

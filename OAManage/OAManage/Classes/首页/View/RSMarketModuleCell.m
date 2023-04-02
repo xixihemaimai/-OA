@@ -46,44 +46,13 @@
         
         mananView.frame = CGRectMake(12, 5, SCW - 24, 85);
         
-//        mananView.sd_layout
-//        .leftSpaceToView(self.contentView, 12)
-//        .rightSpaceToView(self.contentView, 12)
-//        .topSpaceToView(self.contentView, 5)
-//        .bottomSpaceToView(self.contentView, 5);
-        
-//        mananImage.sd_layout
-//        .centerYEqualToView(mananView)
-//        .leftSpaceToView(mananView, 15)
-//        .widthIs(32)
-//        .heightIs(32);
-        
-        mananImage.frame = CGRectMake(15, 95/2 - 32/2, 32, 32);
-        
-//        mananLabel.sd_layout
-//        .leftSpaceToView(mananImage, 15)
-//        .topSpaceToView(mananView, 20.5)
-//        .heightIs(24)
-//        .widthIs(150);
+        mananImage.frame = CGRectMake(15,85/2 - 16, 32, 32);
         
         mananLabel.frame = CGRectMake(CGRectGetMaxX(mananImage.frame) + 15, 20.5, 150, 24);
         
-//        functionLabel.sd_layout
-//        .leftEqualToView(mananLabel)
-//        .rightEqualToView(mananLabel)
-//        .topSpaceToView(mananLabel, 0)
-//        .heightIs(20);
-        
         functionLabel.frame = CGRectMake(CGRectGetMaxX(mananImage.frame) + 15, CGRectGetMaxY(mananLabel.frame), 150, 20);
         
-//        functionImage.sd_layout
-//        .centerYEqualToView(mananView)
-//        .rightSpaceToView(mananView, 24.5)
-//        .widthIs(21)
-//        .heightEqualToWidth();
-        
-        functionImage.frame = CGRectMake(self.contentView.yj_width - 24.5, 95/2 - 21/2, 21, 21);
-        
+        functionImage.frame = CGRectMake(mananView.yj_width - 12 - 21, 85/2 - 21/2, 21, 21);
         
     }
     return self;

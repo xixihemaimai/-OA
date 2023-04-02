@@ -9,6 +9,11 @@
 #import "RSPersonalInformationViewController.h"
 #import "RSPersonFirstCell.h"
 #import "RSPersonSecondCell.h"
+#import "AppDelegate.h"
+#import "RSLoginViewController.h"
+#import "RSLoginOffView.h"
+//密码修改
+#import "RSPasswordModificationViewController.h"
 
 @interface RSPersonalInformationViewController ()
 
@@ -35,7 +40,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.emptyView.hidden = YES;
     self.fristArray = @[@"昵称",@"性别"];
-    self.secondArray = @[@"所在部门",@"所在职位"];
+    self.secondArray = @[@"所在部门",@"所在职位",@"密码修改",@"注销账号"];
 }
 
 
@@ -54,7 +59,7 @@
     }else if (section == 1){
         return 2;
     }else{
-        return 2;
+        return 4;
     }
 }
 
@@ -78,6 +83,7 @@
         }
         if (indexPath.section == 1) {
             cell.nameLabel.text = self.fristArray[indexPath.row];
+            cell.rightImageView.hidden = true;
             if (indexPath.row == 0) {
                 cell.phoneLabel.text = [NSString stringWithFormat:@"%@",self.usermodel.userName];
             }
@@ -86,10 +92,13 @@
             }
         }else if (indexPath.section == 2){
             cell.nameLabel.text = self.secondArray[indexPath.row];
+            cell.rightImageView.hidden = true;
             if (indexPath.row == 0) {
                  cell.phoneLabel.text = [NSString stringWithFormat:@"%@",self.usermodel.deptName];
-            }else{
+            }else if (indexPath.row == 1){
                 cell.phoneLabel.text = @"UI设计";
+            }else if (indexPath.row == 2 || indexPath.row == 3){
+                cell.rightImageView.hidden = false;
             }
         }
 //        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -107,6 +116,45 @@
 }
 
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section == 2){
+        if (indexPath.row == 2){
+            RSPasswordModificationViewController * passwordModificationVc = [[RSPasswordModificationViewController alloc]init];
+            [self.navigationController pushViewController:passwordModificationVc animated:YES];
+        }if (indexPath.row == 3){
+//            NSLog(@"================注销账号");
+            [JHSysAlertUtil presentAlertViewWithTitle:@"是否注销账号" message:nil cancelTitle:@"取消" defaultTitle:@"确定" distinct:true cancel:^{
+            } confirm:^{
+                RSLoginOffView * loginOffView = [[RSLoginOffView alloc]initWithFrame:self.view.bounds];
+                loginOffView.inputPassword = ^(NSString * _Nonnull password, BOOL isSure) {
+                    if (isSure){
+                        NetworkTool * network = [[NetworkTool alloc]init];
+                        NSString * oldPassword = [MyMD5 md5:password];
+                        NSString * newPassword = [MyMD5 md5:@""];
+                        NSString * password = URL_YIGODATA_PASSWORD(oldPassword, newPassword);
+                        NSUserDefaults * user = [NSUserDefaults standardUserDefaults];
+                        NSString * aes = [user objectForKey:@"AES"];
+                        NSString *const kInitVector = @"16-Bytes--String";
+                        NSString * aes2 = [FSAES128 encryptAES:password key:aes andKInItVector:kInitVector];
+                        NSString * canshu = URL_YIGODATA_CHANGPWD(self.usermodel.appLoginToken, aes2);
+                        NSString * soapStr = URL_YIGODATA_IOS(URL_LOGINWEBSERVICE, URL_LOGINOFF, canshu);
+                        [network reloadWebServiceNoDataURL:URL_YIGO_IOS andParameters:soapStr andURLName:URL_LOGINOFF];
+                        network.successReload = ^(NSDictionary *dict) {
+                            [user removeObjectForKey:@"OAUSERMODEL"];
+                            [user removeObjectForKey:@"AES"];
+                            [user synchronize];
+                            AppDelegate * appdelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+                            RSLoginViewController * loginVc = [[RSLoginViewController alloc]init];
+                                   RSMyNavigationViewController * mayNa = [[RSMyNavigationViewController alloc]initWithRootViewController:loginVc];
+                            appdelegate.window.rootViewController = mayNa;
+                        };
+                    }
+                };
+                [self.view addSubview:loginOffView];
+            }];
+        }
+    }
+}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return 0;

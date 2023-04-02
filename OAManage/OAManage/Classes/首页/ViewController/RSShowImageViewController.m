@@ -21,6 +21,7 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor colorWithHexColorStr:@"#ffffff"];
     UIImageView * showImage = [[UIImageView alloc]init];
+    showImage.contentMode = UIViewContentModeScaleAspectFit;
     showImage.frame = CGRectMake(0, 0, SCW, SCH);
     if (iphonex) {
         showImage.image = [UIImage imageNamed:@"Group1125_2436XS和X"];

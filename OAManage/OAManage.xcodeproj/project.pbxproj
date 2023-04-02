@@ -78,8 +78,6 @@
 		046AF2DA25490B600069591B /* RSFeeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 046AF2D925490B600069591B /* RSFeeModel.m */; };
 		046AF2DD254C52F50069591B /* RSFeeNameCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 046AF2DC254C52F50069591B /* RSFeeNameCell.m */; };
 		0471B00324373E2B00785F4D /* RSJumpVideoTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 0471B00224373E2B00785F4D /* RSJumpVideoTool.m */; };
-		049CF26427FF1BA300A5F895 /* libMiPushSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 049CF26027FF1BA300A5F895 /* libMiPushSDK.a */; };
-		049CF26527FF1BA300A5F895 /* libMiPushApnsAckSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 049CF26127FF1BA300A5F895 /* libMiPushApnsAckSDK.a */; };
 		04A40AD5251840CD0082DFD3 /* RSMarketModuleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A40AD4251840CD0082DFD3 /* RSMarketModuleViewController.m */; };
 		04A40AD8251854E30082DFD3 /* RSMarketModuleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A40AD7251854E30082DFD3 /* RSMarketModuleCell.m */; };
 		04A40ADB25185B970082DFD3 /* RSManageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A40ADA25185B970082DFD3 /* RSManageViewController.m */; };
@@ -183,6 +181,7 @@
 		04FF49DF21A3F04B00C4A2C2 /* RSRoleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FF49DE21A3F04B00C4A2C2 /* RSRoleModel.m */; };
 		04FF49E521A4F21E00C4A2C2 /* RSAEncryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FF49E321A4F21D00C4A2C2 /* RSAEncryptor.m */; };
 		3E37A3CC73786F01A8AEED07 /* libPods-OAManage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 425A1ECECB928E2700E33380 /* libPods-OAManage.a */; };
+		5C20026629D715A90079A4B3 /* RSLoginOffView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C20026529D715A90079A4B3 /* RSLoginOffView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -323,10 +322,6 @@
 		046AF2DB254C52F50069591B /* RSFeeNameCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSFeeNameCell.h; sourceTree = "<group>"; };
 		046AF2DC254C52F50069591B /* RSFeeNameCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSFeeNameCell.m; sourceTree = "<group>"; };
 		0471B00224373E2B00785F4D /* RSJumpVideoTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSJumpVideoTool.m; sourceTree = "<group>"; };
-		049CF26027FF1BA300A5F895 /* libMiPushSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMiPushSDK.a; sourceTree = "<group>"; };
-		049CF26127FF1BA300A5F895 /* libMiPushApnsAckSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMiPushApnsAckSDK.a; sourceTree = "<group>"; };
-		049CF26227FF1BA300A5F895 /* MiPushApnsAckSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MiPushApnsAckSDK.h; sourceTree = "<group>"; };
-		049CF26327FF1BA300A5F895 /* MiPushSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MiPushSDK.h; sourceTree = "<group>"; };
 		04A40AD3251840CD0082DFD3 /* RSMarketModuleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSMarketModuleViewController.h; sourceTree = "<group>"; };
 		04A40AD4251840CD0082DFD3 /* RSMarketModuleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSMarketModuleViewController.m; sourceTree = "<group>"; };
 		04A40AD6251854E30082DFD3 /* RSMarketModuleCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSMarketModuleCell.h; sourceTree = "<group>"; };
@@ -528,6 +523,8 @@
 		1D3B410FD229353805935146 /* Pods-OAManage.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OAManage.release.xcconfig"; path = "Pods/Target Support Files/Pods-OAManage/Pods-OAManage.release.xcconfig"; sourceTree = "<group>"; };
 		33536298934A81E564D1E0B6 /* Pods-OAManage.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OAManage.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OAManage/Pods-OAManage.debug.xcconfig"; sourceTree = "<group>"; };
 		425A1ECECB928E2700E33380 /* libPods-OAManage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-OAManage.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5C20026429D715A90079A4B3 /* RSLoginOffView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSLoginOffView.h; sourceTree = "<group>"; };
+		5C20026529D715A90079A4B3 /* RSLoginOffView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSLoginOffView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -542,8 +539,6 @@
 				04C1D93221C63FAE00384F98 /* libz.tbd in Frameworks */,
 				04C1D93021C63F9E00384F98 /* libxml2.tbd in Frameworks */,
 				04C1D92E21C63F8C00384F98 /* libresolv.tbd in Frameworks */,
-				049CF26427FF1BA300A5F895 /* libMiPushSDK.a in Frameworks */,
-				049CF26527FF1BA300A5F895 /* libMiPushApnsAckSDK.a in Frameworks */,
 				04C1D92C21C63F7400384F98 /* UserNotifications.framework in Frameworks */,
 				04215DA1237AAA8D001EFE11 /* libsqlite3.tbd in Frameworks */,
 				3E37A3CC73786F01A8AEED07 /* libPods-OAManage.a in Frameworks */,
@@ -787,7 +782,6 @@
 		0436F6A22178221700B0D6C8 /* Lib */ = {
 			isa = PBXGroup;
 			children = (
-				049CF25F27FF1BA300A5F895 /* libMiPushSDK */,
 				04A40B24251C8A6E0082DFD3 /* HQPickerView */,
 				04A40B20251B39360082DFD3 /* ColumnChartView */,
 				04A40B0F2519EB280082DFD3 /* YCPopover */,
@@ -1064,17 +1058,6 @@
 			path = ViewController;
 			sourceTree = "<group>";
 		};
-		049CF25F27FF1BA300A5F895 /* libMiPushSDK */ = {
-			isa = PBXGroup;
-			children = (
-				049CF26027FF1BA300A5F895 /* libMiPushSDK.a */,
-				049CF26127FF1BA300A5F895 /* libMiPushApnsAckSDK.a */,
-				049CF26227FF1BA300A5F895 /* MiPushApnsAckSDK.h */,
-				049CF26327FF1BA300A5F895 /* MiPushSDK.h */,
-			);
-			path = libMiPushSDK;
-			sourceTree = "<group>";
-		};
 		04A40AF82519D2520082DFD3 /* WFTable */ = {
 			isa = PBXGroup;
 			children = (
@@ -1172,6 +1155,8 @@
 				04A6F1752195834500D15F58 /* RSPersonFirstCell.m */,
 				04A6F1772195834600D15F58 /* RSPersonSecondCell.h */,
 				04A6F1762195834500D15F58 /* RSPersonSecondCell.m */,
+				5C20026429D715A90079A4B3 /* RSLoginOffView.h */,
+				5C20026529D715A90079A4B3 /* RSLoginOffView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1494,6 +1479,7 @@
 				04A6F187219980B900D15F58 /* RSViewProgressLine.m in Sources */,
 				04D6CED22190329100B35A51 /* RSBaseViewController.m in Sources */,
 				0436F6BA2178282600B0D6C8 /* RSMyNavigationViewController.m in Sources */,
+				5C20026629D715A90079A4B3 /* RSLoginOffView.m in Sources */,
 				04B3F75723B4C8B900CDD821 /* RSSLPieceModel.m in Sources */,
 				04A40B032519D2530082DFD3 /* BCMyTableViewCell.m in Sources */,
 				041E072623839D9600766441 /* RSMailDetailViewController.m in Sources */,
@@ -1790,7 +1776,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2.16;
+				CURRENT_PROJECT_VERSION = 2.19;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 5CVKEU8NXR;
 				ENABLE_BITCODE = NO;
@@ -1825,20 +1811,19 @@
 					"\"${PODS_ROOT}/Headers/Public/XLPhotoBrowser+CoderXL\"",
 				);
 				INFOPLIST_FILE = OAManage/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/OAManage/Classes/其他/Lib/libMiPushSDK",
-				);
-				MARKETING_VERSION = 2.3.1;
-				MiSDKRun = debug;
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				MARKETING_VERSION = 2.4.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ruishi.OAManage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1851,10 +1836,11 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = OAManage/OAManage.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=*]" = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2.16;
-				DEVELOPMENT_TEAM = 5CVKEU8NXR;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 2.19;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 5CVKEU8NXR;
 				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/OAManage/Classes/其他/工具类/OAManagePrefixHeader.pch";
@@ -1887,21 +1873,21 @@
 					"\"${PODS_ROOT}/Headers/Public/XLPhotoBrowser+CoderXL\"",
 				);
 				INFOPLIST_FILE = OAManage/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/OAManage/Classes/其他/Lib/libMiPushSDK",
-				);
-				MARKETING_VERSION = 2.3.1;
-				MiSDKRun = online;
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				MARKETING_VERSION = 2.4.1;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ruishi.OAManage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = 2023ruishiOAAppStore;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

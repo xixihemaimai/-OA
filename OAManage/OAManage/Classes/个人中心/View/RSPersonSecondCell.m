@@ -29,12 +29,21 @@
         [self.contentView addSubview:phoneLabel];
         
         
+        UIImageView * rightImageView = [[UIImageView alloc]init];
+        rightImageView.image = [UIImage imageNamed:@"向右"];
+        _rightImageView = rightImageView;
+        [self.contentView addSubview:rightImageView];
+        
+        
         UIView * bottoview = [[UIView alloc]init];
         bottoview.backgroundColor = [UIColor colorWithHexColorStr:@"#f0f0f0"];
         [self.contentView addSubview:bottoview];
+        rightImageView.frame = CGRectMake(SCW - 13 - 9, 16.5, 9, 15);
         nameLabel.frame = CGRectMake(12, 24 - 7.5, SCW * 0.4, 15);
         phoneLabel.frame = CGRectMake(CGRectGetMaxX(nameLabel.frame) + 10, 12, SCW - CGRectGetMaxX(nameLabel.frame) - 10 - 32, 24);
         bottoview.frame = CGRectMake(0, 47, SCW, 1);
+        
+        
         
         
     }

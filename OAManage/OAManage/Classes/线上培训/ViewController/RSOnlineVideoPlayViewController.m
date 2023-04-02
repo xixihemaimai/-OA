@@ -44,9 +44,6 @@
 }
 
 
-
-
-
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     self.player.rotationManager.disabledAutorotation = false;
@@ -55,6 +52,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.emptyView.hidden = YES;
+    
     UIView *playerSuperview = [[UIView alloc]init];
     playerSuperview.frame = CGRectMake(0, 0, SCW, 215);
     self.tableview.tableHeaderView = playerSuperview;
@@ -84,7 +82,7 @@
 
 //SJEdgeControlLayerDelegate按键返回的代理（//点击返回按钮的回调）
 - (void)backItemWasTappedForControlLayer:(id<SJControlLayer>)controlLayer{
-    if (!self.player.isFullScreen) {
+    if (!self.player.isFullscreen) {
         [self.navigationController popViewControllerAnimated:YES];
     }
 }
@@ -192,7 +190,6 @@
 {
     [super viewDidDisappear:animated];
     [self.player pause];
-    
 }
 
 

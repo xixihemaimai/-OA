@@ -15,5 +15,7 @@
 
 @property (nonatomic,strong)UILabel * phoneLabel;
 
+@property (nonatomic,strong)UIImageView * rightImageView;
+
 
 @end

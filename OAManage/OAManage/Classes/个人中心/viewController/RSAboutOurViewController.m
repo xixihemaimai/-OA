@@ -95,7 +95,7 @@
 
 //用户隐私
 - (void)privacyAction:(UIButton *)privacyBtn{
-    NSLog(@"========");
+//    NSLog(@"========");
     RSWKOAmanagerViewController * wkOAstr = [[RSWKOAmanagerViewController alloc]init];
     wkOAstr.type = @"5";
     [self.navigationController pushViewController:wkOAstr animated:YES];
@@ -104,7 +104,7 @@
 
 //用户协议
 - (void)serviceAction:(UIButton *)serviceBtn{
-    NSLog(@"=====3===");
+//    NSLog(@"=====3===");
     RSWKOAmanagerViewController * wkOAstr = [[RSWKOAmanagerViewController alloc]init];
     wkOAstr.type = @"6";
     [self.navigationController pushViewController:wkOAstr animated:YES];

@@ -1,5 +1,5 @@
 target 'OAManage' do
-pod 'AFNetworking'
+
 pod 'MJRefresh'
 pod 'DZNEmptyDataSet'
 pod 'SDAutoLayout'
@@ -7,7 +7,8 @@ pod 'IQKeyboardManager'
 pod 'SVProgressHUD'
 pod 'Masonry'
 pod 'MJExtension'
-
+pod ‘SJVideoPlayer'
+pod 'AFNetworking'
 
 pod 'SDWebImage'
 pod 'XLPhotoBrowser+CoderXL'
@@ -16,6 +17,7 @@ pod 'TZImagePickerController'
 pod 'FMDB'
 
 pod 'KTVHTTPCache', '~> 2.0.1'
-pod ‘SJVideoPlayer'
 
+pod 'JCore'
+pod 'JPush'
 end

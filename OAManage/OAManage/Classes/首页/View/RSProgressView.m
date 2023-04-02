@@ -84,95 +84,74 @@
         [self addSubview:bottomview];
     
         
-//        firstView.sd_layout
-//        .leftSpaceToView(self, 50)
-//        .topSpaceToView(self, 25)
-//        .widthIs(11)
-//        .heightIs(11);
+        [secondView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(self);
+            make.width.height.mas_equalTo(11);
+            make.top.mas_equalTo(25);
+        }];
+        
+        [secondLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(self);
+            make.top.equalTo(secondView.mas_bottom).offset(11);
+        }];
         
         
-        firstView.frame = CGRectMake(50, 25, 11, 11);
         
-        firstView.layer.cornerRadius = firstView.yj_width * 0.5;
+        [firstView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(25);
+            make.left.mas_equalTo(50);
+            make.width.height.mas_equalTo(11);
+        }];
+        
+        [firstProgressView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(secondView);
+            make.left.equalTo(firstView.mas_right);
+            make.right.equalTo(secondView.mas_right);
+            make.height.mas_equalTo(1);
+        }];
+        
+        
+        
+        
+        [firstLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(firstView);
+            make.top.equalTo(firstView.mas_bottom).offset(11);
+        }];
+        
+        [thirdView mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.centerY.equalTo(secondProgressView);
+//            make.left.equalTo(secondProgressView.mas_right);
+            make.top.mas_equalTo(25);
+            make.right.mas_equalTo(-50);
+            make.width.height.mas_equalTo(11);
+        }];
+        
+        
+        [secondProgressView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(secondView);
+            make.left.equalTo(secondView.mas_right);
+            make.right.equalTo(thirdView.mas_left);
+            make.height.mas_equalTo(1);
+        }];
+        
+        
+        
+        [thirdLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(thirdView.mas_bottom).offset(11);
+            make.centerX.equalTo(thirdView);
+        }];
+        
+        firstView.layer.cornerRadius = 11 * 0.5;
         firstView.layer.masksToBounds = YES;
-        
-        
-//        firstLabel.sd_layout
-//        .leftSpaceToView(self, 29)
-//        .topSpaceToView(firstView, 11)
-//        .heightIs(19)
-//        .widthRatioToView(self, 0.3);
-        
-        firstLabel.frame = CGRectMake(19, CGRectGetMaxY(firstView.frame) + 11, self.frame.size.width * 0.3, 19);
-        
-        
-//        secondView.sd_layout
-//        //.centerYEqualToView(centerView)
-//        .topSpaceToView(self, 25)
-//        .centerXEqualToView(self)
-//        .widthIs(11)
-//        .heightIs(11);
-        
-        secondView.frame = CGRectMake(self.frame.size.width/2 - 5.5, 25, 11, 11);
-        
-        secondView.layer.cornerRadius = secondView.yj_width * 0.5;
+        secondView.layer.cornerRadius = 11 * 0.5;
         secondView.layer.masksToBounds = YES;
-        
-//        secondLabel.sd_layout
-//        .centerXEqualToView(self)
-//        .topSpaceToView(secondView, 11)
-//        .heightIs(19)
-//           .widthRatioToView(self, 0.3);
-        
-        secondLabel.frame = CGRectMake(self.frame.size.width/2 - (self.frame.size.width * 0.3)/2, CGRectGetMaxY(secondView.frame) + 11, self.frame.size.width * 0.3, 19);
-        
-        firstProgressView.sd_layout
-        .leftSpaceToView(firstView, 0)
-        .rightSpaceToView(secondView, 0)
-        .topSpaceToView(self, 29)
-        .heightIs(1);
-        
-        firstProgressView.frame = CGRectMake(CGRectGetMaxX(firstView.frame), 29, self.frame.size.width * 0.3 , 1);
-        
-//        thirdView.sd_layout
-//        .rightSpaceToView(self, 50)
-//        .topSpaceToView(self, 25)
-//        .widthIs(11)
-//        .heightIs(11);
-        
-        thirdView.frame = CGRectMake(self.frame.size.width - 50 , 25, 11, 11);
-        
-        thirdView.layer.cornerRadius = thirdView.yj_width * 0.5;
+        thirdView.layer.cornerRadius = 11 * 0.5;
         thirdView.layer.masksToBounds = YES;
         
-        
-//        secondProgressView.sd_layout
-//        .leftSpaceToView(secondView, 0)
-//        .rightSpaceToView(thirdView, 0)
-//        .topSpaceToView(self, 29)
-//        .heightIs(1);
-        
-        secondProgressView.frame = CGRectMake(CGRectGetMaxX(secondView.frame) + 5.5, 29, self.frame.size.width * 0.3, 1);
-        
-        
-//        thirdLabel.sd_layout
-//        .rightSpaceToView(self, 32)
-//        .topSpaceToView(thirdView, 11)
-//        .heightIs(19)
-//        .widthRatioToView(self, 0.3);
-        
-        thirdLabel.frame = CGRectMake(self.frame.size.width - self.frame.size.width * 0.35, CGRectGetMaxY(thirdView.frame) + 11, self.frame.size.width * 0.3, 19);
-        
-
-        
-//        bottomview.sd_layout
-//        .leftSpaceToView(self, 0)
-//        .rightSpaceToView(self, 0)
-//        .bottomSpaceToView(self, 0)
-//        .heightIs(8);
-        
-        bottomview.frame = CGRectMake(0, self.frame.size.height - 8, self.frame.size.width, 8);
-        
+        [bottomview mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.bottom.equalTo(self);
+            make.height.mas_equalTo(8);
+        }];
     
     }
     return self;

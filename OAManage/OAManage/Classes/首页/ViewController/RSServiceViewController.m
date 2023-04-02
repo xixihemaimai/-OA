@@ -276,7 +276,7 @@ static NSString * SERVICEHEADERVIEWID = @"SERVICEHEADERVIEWID";
 //    .widthIs(SCW/4)
 //    .heightIs(122);
     
-    UIImageView * firstImage = [[UIImageView alloc]initWithFrame:CGRectMake(24, 122/2 - 24, 48, 48)];
+    UIImageView * firstImage = [[UIImageView alloc]initWithFrame:CGRectMake((SCW/4)/2 - 24, 122/2 - 24, 48, 48)];
     firstImage.image = [UIImage imageNamed:@"工作日志"];
     firstImage.contentMode = UIViewContentModeScaleAspectFill;
     [firstBtn addSubview:firstImage];
@@ -311,7 +311,7 @@ static NSString * SERVICEHEADERVIEWID = @"SERVICEHEADERVIEWID";
 //    .widthIs(SCW/4)
 //    .bottomEqualToView(firstBtn);
     
-    UIImageView * fourImage = [[UIImageView alloc]initWithFrame:CGRectMake(24,122/2 - 24, 48, 48)];
+    UIImageView * fourImage = [[UIImageView alloc]initWithFrame:CGRectMake((SCW/4)/2 - 24,122/2 - 24, 48, 48)];
     fourImage.image = [UIImage imageNamed:@"市场模块"];
     fourImage.contentMode = UIViewContentModeScaleAspectFill;
     [fourBtn addSubview:fourImage];
@@ -349,7 +349,7 @@ static NSString * SERVICEHEADERVIEWID = @"SERVICEHEADERVIEWID";
 //    .widthIs(SCW/4)
 //    .bottomEqualToView(fourBtn);
     
-    UIImageView * secondImage = [[UIImageView alloc]initWithFrame:CGRectMake(24, 122/2 - 24, 48, 48)];
+    UIImageView * secondImage = [[UIImageView alloc]initWithFrame:CGRectMake((SCW/4)/2 - 24, 122/2 - 24, 48, 48)];
     secondImage.image = [UIImage imageNamed:@"体系文件"];
     secondImage.contentMode = UIViewContentModeScaleAspectFill;
     [secondBtn addSubview:secondImage];
@@ -385,7 +385,7 @@ static NSString * SERVICEHEADERVIEWID = @"SERVICEHEADERVIEWID";
 //    .widthIs(SCW/4)
 //    .bottomEqualToView(secondBtn);
     
-    UIImageView * thirdImage = [[UIImageView alloc]initWithFrame:CGRectMake(24, 122/2 - 24, 48, 48)];
+    UIImageView * thirdImage = [[UIImageView alloc]initWithFrame:CGRectMake((SCW/4)/2 - 24, 122/2 - 24, 48, 48)];
     thirdImage.image = [UIImage imageNamed:@"线上培训"];
     thirdImage.contentMode = UIViewContentModeScaleAspectFill;
     [thirdBtn addSubview:thirdImage];
