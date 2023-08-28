@@ -107,7 +107,7 @@
     [aCoder encodeInteger:self.deptId forKey:@"deptId"];
     
     [aCoder encodeInteger:self.empId forKey:@"empId"];
-     [aCoder encodeObject:self.empName forKey:@"empName"];
+    [aCoder encodeObject:self.empName forKey:@"empName"];
     
     
     
@@ -299,9 +299,9 @@
         self.OA_Market_Dealer_Fee = [aDecoder decodeBoolForKey:@"OA_Market_Dealer_Fee"];
         
         self.OA_Market_Pay_In = [aDecoder decodeBoolForKey:@"OA_Market_Pay_In"];
-               self.OA_Market_Settle_In = [aDecoder decodeBoolForKey:@"OA_Market_Settle_In"];
+        self.OA_Market_Settle_In = [aDecoder decodeBoolForKey:@"OA_Market_Settle_In"];
         
-      
+        
         self.Flow_PropertyServices = [aDecoder decodeBoolForKey:@"Flow_PropertyServices"];
         self.Flow_TrainingCosts = [aDecoder decodeBoolForKey:@"Flow_TrainingCosts"];
         
@@ -390,23 +390,21 @@
     usermodel.FG_ProfitQuote = self.FG_ProfitQuote;
     
     usermodel.OA_Market_Home = self.OA_Market_Home;
-     usermodel.OA_BM_IO = self.OA_BM_IO;
-     usermodel.OA_SL_IO = self.OA_SL_IO;
-     usermodel.OA_Lease = self.OA_Lease;
-     usermodel.OA_Ledger = self.OA_Ledger;
+    usermodel.OA_BM_IO = self.OA_BM_IO;
+    usermodel.OA_SL_IO = self.OA_SL_IO;
+    usermodel.OA_Lease = self.OA_Lease;
+    usermodel.OA_Ledger = self.OA_Ledger;
     
     usermodel.OA_Ledger_Dtl = self.OA_Ledger_Dtl;
-        usermodel.OA_Market_Fee = self.OA_Market_Fee;
-        usermodel.OA_Market_Dealer_Fee = self.OA_Market_Dealer_Fee;
+    usermodel.OA_Market_Fee = self.OA_Market_Fee;
+    usermodel.OA_Market_Dealer_Fee = self.OA_Market_Dealer_Fee;
     
     
     usermodel.OA_Market_Pay_In = self.OA_Market_Pay_In;
-          usermodel.OA_Market_Settle_In = self.OA_Market_Settle_In;
+    usermodel.OA_Market_Settle_In = self.OA_Market_Settle_In;
     
     usermodel.Flow_PropertyServices = self.Flow_PropertyServices;
     usermodel.Flow_TrainingCosts = self.Flow_TrainingCosts;
-    
-   
     
     return usermodel;
 }
