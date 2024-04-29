@@ -330,6 +330,9 @@ static NSString * LAUNCHREUSABFOOTCELLID = @"LAUNCHREUSABFOOTCELLID";
     "Flow_ApplyActivity"                员工活动申请            行政流程
     "Entertain"                      招待住宿申请            行政流程
     "Flow_Entertain"                    招待申请                   行政流程
+     
+     
+     Flow_ProcessChange            流程变更申请           行政流程
     
 
     "Flow_ApplyLeave"                 请假申请                   人事流程
@@ -340,6 +343,12 @@ static NSString * LAUNCHREUSABFOOTCELLID = @"LAUNCHREUSABFOOTCELLID";
     "Flow_Become"                       转正申请                   人事流程
     "Flow_Business"                      出差审批流程           人事流程
     “Flow_WorkOvertime"             加班申请流程           人事流程
+     
+     
+     
+     Flow_Confirmation                   录用确认申请           人事流程
+     Flow_GoOut                            外出申请                   人事流程
+     Flow_ReplaceCard                  补卡申请                   人事流程
     
      
     "Flow_InvestContract"            招商合同审批表         印章管理流程
@@ -368,7 +377,12 @@ static NSString * LAUNCHREUSABFOOTCELLID = @"LAUNCHREUSABFOOTCELLID";
     
     "Flow_SpecialApplication" 特殊申请审批流程    其他流程
      
-      
+     “Flow_Litigation”               诉讼需求申请表            其他流程
+     Flow_Loan                         借款申请                      其他流程
+     Flow_Promotion                 推广费用申请               其他流程
+     
+     
+     
     
     
     "BM_OutNotice"  荒料发货通知  物流流程
@@ -433,6 +447,10 @@ static NSString * LAUNCHREUSABFOOTCELLID = @"LAUNCHREUSABFOOTCELLID";
         NSDictionary * dict = @{@"img":@"发起流程复制 9",@"title":@"招待申请",@"key":@"Flow_Entertain"};
         [array1 addObject:dict];
     }
+    if (self.usermodel.Flow_ProcessChange == true){
+        NSDictionary * dict = @{@"img":@"发起流程复制 9",@"title":@" 流程变更申请",@"key":@"Flow_ProcessChange"};
+        [array1 addObject:dict];
+    }
     
     [array addObject:array1];
    
@@ -474,6 +492,20 @@ static NSString * LAUNCHREUSABFOOTCELLID = @"LAUNCHREUSABFOOTCELLID";
         [array2 addObject:dict];
     }
     
+    if (self.usermodel.Flow_Confirmation == true) {
+        NSDictionary * dict = @{@"img":@"发起流程复制 17",@"title":@"录用确认申请",@"key":@"Flow_Confirmation"};
+        [array2 addObject:dict];
+    }
+    
+    if (self.usermodel.Flow_GoOut == true) {
+        NSDictionary * dict = @{@"img":@"发起流程复制 17",@"title":@"外出申请",@"key":@"Flow_GoOut"};
+        [array2 addObject:dict];
+    }
+    
+    if (self.usermodel.Flow_ReplaceCard == true) {
+        NSDictionary * dict = @{@"img":@"发起流程复制 17",@"title":@"补卡申请 ",@"key":@"Flow_ReplaceCard"};
+        [array2 addObject:dict];
+    }
     
     
     
@@ -591,6 +623,18 @@ static NSString * LAUNCHREUSABFOOTCELLID = @"LAUNCHREUSABFOOTCELLID";
     
     if (self.usermodel.Flow_Litigation == true){
         NSDictionary * dict = @{@"img":@"诉讼申请表",@"title":@"诉讼需求申请表",@"key":@"Flow_Litigation"};
+        [array6 addObject:dict];
+    }
+    
+    
+    
+    if (self.usermodel.Flow_Loan == true){
+        NSDictionary * dict = @{@"img":@"诉讼申请表",@"title":@"借款申请",@"key":@"“Flow_Loan”"};
+        [array6 addObject:dict];
+    }
+    
+    if (self.usermodel.Flow_Promotion == true){
+        NSDictionary * dict = @{@"img":@"诉讼申请表",@"title":@"推广费用申请",@"key":@"Flow_Promotion"};
         [array6 addObject:dict];
     }
     

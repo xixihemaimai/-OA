@@ -201,6 +201,17 @@ static BOOL isProduction = true;
         
         usermodel.Flow_PropertyServices = [dict[@"flowAccess"][@"Flow_PropertyServices"]boolValue];
         usermodel.Flow_TrainingCosts = [dict[@"flowAccess"][@"Flow_TrainingCosts"]boolValue];
+        
+        
+        
+        usermodel.Flow_ProcessChange = [dict[@"flowAccess"][@"Flow_ProcessChange"]boolValue];
+        usermodel.Flow_ProcessChange = [dict[@"flowAccess"][@"Flow_Confirmation"]boolValue];
+        usermodel.Flow_ProcessChange = [dict[@"flowAccess"][@"Flow_GoOut"]boolValue];
+        usermodel.Flow_ProcessChange = [dict[@"flowAccess"][@"Flow_ReplaceCard"]boolValue];
+        usermodel.Flow_ProcessChange = [dict[@"flowAccess"][@"Flow_Loan"]boolValue];
+        usermodel.Flow_ProcessChange = [dict[@"flowAccess"][@"Flow_Promotion"]boolValue];
+        
+        
         [JPUSHService setAlias:[NSString stringWithFormat:@"%ld",(long)usermodel.userId] completion:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
         } seq:0];
         [user removeObjectForKey:@"OAUSERMODEL"];

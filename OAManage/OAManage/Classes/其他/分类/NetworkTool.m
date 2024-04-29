@@ -133,6 +133,7 @@
 
 //新的
 - (void)newReloadWebServiceNoDataURL:(NSString *)URLstr andParameters:(NSDictionary *)soapStr andURLName:(NSString *)urlName{
+    NSLog(@"====================232=3==4=32=4=========%@",URLstr);
     _tempStr = urlName;
     [self newReloadWebServiceNetDataUrl:URLstr withParameters:soapStr andURLName:urlName withBlock:^(id responseObject, BOOL success) {
 //        NSLog(@"===================%@",soapStr);
@@ -419,7 +420,9 @@
                 }
             }
 //            if ([responseObject isKindOfClass:[NSDictionary class]]) {
-                [self newReloadErrorStatus:[responseObject[@"status"] integerValue]];
+//                [self newReloadErrorStatus:[responseObject[@"status"] integerValue]];
+//            }else{
+                jxt_showToastMessage(@"请求失败", 0.75);
 //            }
         }
     }];
@@ -447,6 +450,7 @@
 
 //获取用户信息
 - (void)reloadWebServiceNoDataURL:(NSString *)URLstr  andParameters:(NSString *)soapStr andURLName:(NSString *)urlName{
+    NSLog(@"===============2=3=23=2=3=========%@",URLstr);
     _tempStr = urlName;
     URLstr = [URLstr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     URLstr =  [URLstr stringByReplacingOccurrencesOfString:@"%20" withString:@""];

@@ -113,7 +113,7 @@
     NSString * notice = URL_YIGODATA_LIFTLIST(number, @(10), self.beginBtn.currentTitle,self.endBtn.currentTitle,self.nameTextfield.text,type);
     NSString * aes2 = [FSAES128 encryptAES:notice key:aes andKInItVector:kInitVector];
     NSString * canshu = URL_YIGODATA_NOTICE(self.usermodel.appLoginToken, aes2);
-    NSString * sopaStr = URL_YIGODATA_IOS(URL_WORKFLOWWEBSERVICE, URL_LIFTLIST, canshu);
+    NSString * sopaStr = URL_YIGODATA_IOS(URL_WORKFLOWWEBSERVICE, URL_LIFTLIST, canshu); 
     [network reloadWebServiceNoDataURL:URL_YIGO_IOS andParameters:sopaStr andURLName:URL_LIFTLIST];
     network.successArrayReload = ^(NSMutableArray *array) {
       if (self.pageNum == 1) {

@@ -22,7 +22,7 @@
 typedef void(^Obtain)(BOOL isValue);
 
 @interface RSLoginViewController ()<JJOptionViewDelegate,UITextFieldDelegate>
-
+//角色
 @property (nonatomic,strong)JJOptionView * roleView;
 /**账号*/
 @property (nonatomic,strong)UITextField * userNameField;
@@ -36,6 +36,9 @@ typedef void(^Obtain)(BOOL isValue);
 @property (nonatomic,assign)NSInteger roleInt;
 
 @property (nonatomic,strong) UIButton * loginBtn;
+//机构
+@property (nonatomic,strong)UIButton * mechanism;
+
 
 @end
 
@@ -146,8 +149,49 @@ typedef void(^Obtain)(BOOL isValue);
      //    .heightIs(39);
      */
     
+    NSLog(@"======12132132213213213213========%@",URL_POST_IOS);
     
-    JJOptionView * roleView = [[JJOptionView alloc]initWithFrame:CGRectMake(SCW/2 - 133, CGRectGetMaxY(passwordField.frame) + 18, 266, 39)];
+    
+//    NSUserDefaults * userd = [NSUserDefaults standardUserDefaults];
+//    NSString * yigo = [userd objectForKey:@"mechanismName"];
+//    if([yigo isEqualToString:@"HC"]){
+//        NSString * URLYIGO_IOS = [NSString stringWithString:@"%@/services/MapWebService?wsdl",URL_POST_IOS_HC];
+//        NSLog(@"=================3=32=3========%@",URLYIGO_IOS);
+//    }else{
+//        NSString * URLYIGO_IOS = [NSString stringWithString:@"%@/services/MapWebService?wsdl",URL_POST_IOS_HX];
+//        NSLog(@"=================3=32=3========%@",URLYIGO_IOS);
+//    }
+// 
+    //增加一个机构选择
+    UIButton * mechanism = [UIButton buttonWithType:UIButtonTypeCustom];
+    NSUserDefaults * userOrange = [NSUserDefaults standardUserDefaults];
+    NSString * mechanismString = [userOrange objectForKey:@"mechanismName"];
+    if (mechanismString == nil || [mechanismString isEqualToString:@""]) {
+        [mechanism setTitle:@"海西石材城" forState:UIControlStateNormal];
+        [userOrange setObject:@"HX" forKey:@"mechanismName"];
+    }else{
+        if ([mechanismString isEqualToString:@"HX"]){
+            [mechanism setTitle:@"海西石材城" forState:UIControlStateNormal];
+            [userOrange setObject:@"HX" forKey:@"mechanismName"];
+        }else{
+            [mechanism setTitle:@"泉州合成展会" forState:UIControlStateNormal];
+            [userOrange setObject:@"HC" forKey:@"mechanismName"];
+        }
+    }
+    mechanism.frame = CGRectMake(SCW/2 - 133, CGRectGetMaxY(passwordField.frame) + 18, 266, 39);
+//  [mechanism setBackgroundColor:[UIColor colorWithHexColorStr:@"#3FE4B1"]];
+    mechanism.layer.borderColor = [UIColor colorWithHexColorStr:@"#D3D3D3"].CGColor;
+    mechanism.layer.cornerRadius = 20;
+    mechanism.layer.borderWidth = 1;
+    mechanism.layer.masksToBounds = YES;
+    [mechanism setTitleColor:[UIColor colorWithHexColorStr:@"#E0E0E0"] forState:UIControlStateNormal];
+    mechanism.titleLabel.font = [UIFont systemFontOfSize:Textadaptation(14)];
+    [loginView addSubview:mechanism];
+    [mechanism addTarget:self action:@selector(AlertAction:) forControlEvents:UIControlEventTouchUpInside];
+    mechanism.enabled = YES;
+    _mechanism = mechanism;
+ 
+    JJOptionView * roleView = [[JJOptionView alloc]initWithFrame:CGRectMake(SCW/2 - 133, CGRectGetMaxY(mechanism.frame) + 18, 266, 39)];
     roleView.title = @"用户角色";
     roleView.delegate = self;
     [loginView addSubview:roleView];
@@ -252,7 +296,6 @@ typedef void(^Obtain)(BOOL isValue);
     userPrivacyBtn.titleLabel.font = [UIFont systemFontOfSize:14];
     CGRect userPrivacy = [userPrivacyBtn.currentTitle boundingRectWithSize:CGSizeMake(MAXFLOAT, 20)options:NSStringDrawingUsesLineFragmentOrigin
                                                                 attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]} context:nil];
-    
     
     /**
      
@@ -394,6 +437,52 @@ typedef void(^Obtain)(BOOL isValue);
     //[loginView setupAutoHeightWithBottomView:label bottomMargin:0];
 }
 
+- (void)AlertAction:(UIButton *)button{
+    if(_userNameField.text.length < 1){
+        [SVProgressHUD showInfoWithStatus:@"请输入正确的用户名，在进行选择角色和组织机构"];
+    }else{
+        RSWeakself
+        NSUserDefaults * userOrange = [NSUserDefaults standardUserDefaults];
+//        UIAlertController* alert = [UIAlertController alertControllerWithTitle:nil message:nil                                                                                                                                                            preferredStyle:UIAlertControllerStyleActionSheet];
+//        UIAlertAction *cancleAction=[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+//        UIAlertAction * messageAction = [UIAlertAction actionWithTitle:@"海西石材城" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//            [weakSelf.mechanism setTitle:@"海西石材城" forState:UIControlStateNormal];
+//            [userOrange setObject:@"HX" forKey:@"mechanismName"];
+//        }];
+//        UIAlertAction *findPwdAction=[UIAlertAction actionWithTitle:@"泉州合成展会" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//            [weakSelf.mechanism setTitle:@"泉州合成展会" forState:UIControlStateNormal];
+//            [userOrange setObject:@"HC" forKey:@"mechanismName"];
+//        }];
+//        [userOrange synchronize];
+//        [alert addAction:findPwdAction];
+//        [alert addAction:messageAction];
+//        [alert addAction:cancleAction];
+//        [self presentViewController:alert animated:YES completion:nil];
+
+        [JXTAlertView showAlertViewWithTitle:@"选择组织结构"
+                                     message:@""
+                           cancelButtonTitle:@"取消"
+                            buttonIndexBlock:^(NSInteger buttonIndex) {
+            if (buttonIndex == 0) {
+                NSLog(@"cancel");
+            }
+            else if (buttonIndex == 1) {
+                NSLog(@"按钮1");
+                [weakSelf.mechanism setTitle:@"海西石材城" forState:UIControlStateNormal];
+                [userOrange setObject:@"HX" forKey:@"mechanismName"];
+                [weakSelf reloadRole];
+            }
+            else if (buttonIndex == 2) {
+                NSLog(@"按钮2");
+                [weakSelf.mechanism setTitle:@"泉州合成展会" forState:UIControlStateNormal];
+                [userOrange setObject:@"HC" forKey:@"mechanismName"];
+                [weakSelf reloadRole];
+            }
+        } otherButtonTitles:@"海西石材城", @"泉州合成展会", nil];
+    }
+}
+
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     return YES;
 }
@@ -517,7 +606,7 @@ typedef void(^Obtain)(BOOL isValue);
     }
     if ([_roleView.title isEqualToString:@"用户角色"]) {
         logBtn.enabled = YES;
-        [SVProgressHUD showInfoWithStatus:@"请输入正确的用户名，在进行选择角色"];
+        [SVProgressHUD showInfoWithStatus:@"请输入正确的用户名，在进行选择角色和组织机构"];
         return;
     }
     //    if ([self.PublickKeyTemp length] < 1) {
@@ -542,6 +631,15 @@ typedef void(^Obtain)(BOOL isValue);
 }
 
 - (void)loginUserSopaStr{
+    
+    /**
+     首页
+     首页接口，请求入参都加入一个 orgCode 字段，
+     当前组织为 海西石材城 传入 HX
+     当前组织为 泉州合成展会 传入 HC
+     */
+    
+    
     //[SVProgressHUD showWithStatus:@"正在登录中......."];
     //[SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeBlack];
     //账号，密码，角色，AES，唯一标示符，------》公钥加密
@@ -560,7 +658,15 @@ typedef void(^Obtain)(BOOL isValue);
     [user setObject:aes2 forKey:@"AES"];
     [user synchronize];
     // NSString *const kInitVector = @"16-Bytes--String";
-    NSString * data = [NSString stringWithFormat:@"{userCode:'%@',password:'%@',roleId:%ld,aesKey:'%@'}",self.userNameField.text,password,(long)_roleInt,aes2];
+//    NSString * data = [NSString stringWithFormat:@"{userCode:'%@',password:'%@',roleId:%ld,aesKey:'%@'}",self.userNameField.text,password,(long)_roleInt,aes2];
+    NSString * mechanismS = [user objectForKey:@"mechanismName"];
+//    if ([_mechanism.currentTitle isEqualToString:@"海西石材城"]){
+//        mechanismS = @"HX";
+//    }else{
+//        mechanismS = @"HC";
+//    }
+    NSString * data = [NSString stringWithFormat:@"{userCode:'%@',password:'%@',orgCode:'%@',roleId:%ld,aesKey:'%@'}",self.userNameField.text,password,mechanismS,(long)_roleInt,aes2];
+    NSLog(@"===========323============%@",data);
     //RSA加密
     NSString * rsaEncryptor = [RSAEncryptor encryptString:data publicKey:self.PublickKeyTemp];
     //网络请求
@@ -571,7 +677,7 @@ typedef void(^Obtain)(BOOL isValue);
     //获取成功之后的操作
     network.successReload = ^(NSDictionary *dict) {
         
-        NSLog(@"===============%@",dict);
+        NSLog(@"========2323232=======%@",dict);
         
         [SVProgressHUD dismiss];
         self.loginBtn.enabled = NO;
@@ -658,6 +764,16 @@ typedef void(^Obtain)(BOOL isValue);
         
         usermodel.Flow_PropertyServices = [dict[@"flowAccess"][@"Flow_PropertyServices"]boolValue];
         usermodel.Flow_TrainingCosts = [dict[@"flowAccess"][@"Flow_TrainingCosts"]boolValue];
+        
+        
+        usermodel.Flow_ProcessChange = [dict[@"flowAccess"][@"Flow_ProcessChange"]boolValue];
+        usermodel.Flow_ProcessChange = [dict[@"flowAccess"][@"Flow_Confirmation"]boolValue];
+        usermodel.Flow_ProcessChange = [dict[@"flowAccess"][@"Flow_GoOut"]boolValue];
+        usermodel.Flow_ProcessChange = [dict[@"flowAccess"][@"Flow_ReplaceCard"]boolValue];
+        usermodel.Flow_ProcessChange = [dict[@"flowAccess"][@"Flow_Loan"]boolValue];
+        usermodel.Flow_ProcessChange = [dict[@"flowAccess"][@"Flow_Promotion"]boolValue];
+        
+        
         
         
         [JPUSHService setAlias:[NSString stringWithFormat:@"%ld",(long)usermodel.userId] completion:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {

@@ -39,6 +39,10 @@ sex 性别
  "Entertain"                      招待住宿申请            行政流程
  "Flow_Entertain"                    招待申请                   行政流程
  
+ Flow_ProcessChange            流程变更申请           行政流程
+ 
+ 
+ 
 
  "Flow_ApplyLeave"                 请假申请                   人事流程
  "Flow_BreakDown"                 调休申请单                人事流程
@@ -48,6 +52,12 @@ sex 性别
  "Flow_Become"                       转正申请                   人事流程
  "Flow_Business"                      出差审批流程           人事流程
  "Flow_WorkOvertime"              加班申请流程           人事流程
+ 
+ 
+ Flow_Confirmation                   录用确认申请           人事流程
+ Flow_GoOut                            外出申请                   人事流程
+ Flow_ReplaceCard                  补卡申请                   人事流程
+ 
  
  "Flow_InvestContract"            招商合同审批表         印章管理流程
  "Flow_Contract"                     合同审批表                 印章管理流程
@@ -74,6 +84,13 @@ sex 性别
  "AM_SetlleIn"                    辅料应付结算单            其他流程
  "Flow_SpecialApplication"特殊申请审批流程         其他流程
  “Flow_Litigation”               诉讼需求申请表            其他流程
+ Flow_Loan                         借款申请                      其他流程
+ Flow_Promotion                 推广费用申请               其他流程
+ 
+ 
+ 
+ 
+ 
  
  "BM_OutNotice"  荒料发货通知  物流流程
  "BS_OutNotice"  荒料保税发货通知  物流流程
@@ -151,6 +168,7 @@ OA_Market_Settle_In  园区应收明细表
 @property (nonatomic,assign)BOOL  Flow_ApplyActivity;
 @property (nonatomic,assign)BOOL  Entertain;
 @property (nonatomic,assign)BOOL  Flow_Entertain;
+@property (nonatomic,assign)BOOL  Flow_ProcessChange;
 
 
 @property (nonatomic,assign)BOOL  Flow_ApplyLeave;
@@ -161,6 +179,10 @@ OA_Market_Settle_In  园区应收明细表
 @property (nonatomic,assign)BOOL  Flow_Become;
 @property (nonatomic,assign)BOOL  Flow_Business;
 @property (nonatomic,assign)BOOL  Flow_WorkOvertime;
+@property (nonatomic,assign)BOOL  Flow_Confirmation;
+@property (nonatomic,assign)BOOL  Flow_GoOut;
+@property (nonatomic,assign)BOOL  Flow_ReplaceCard;
+
 
 
 @property (nonatomic,assign)BOOL  Flow_InvestContract;
@@ -191,7 +213,8 @@ OA_Market_Settle_In  园区应收明细表
 @property (nonatomic,assign)BOOL  AM_SetlleIn;
 @property (nonatomic,assign)BOOL  Flow_SpecialApplication;
 @property (nonatomic,assign)BOOL  Flow_Litigation;
-
+@property (nonatomic,assign)BOOL  Flow_Loan;
+@property (nonatomic,assign)BOOL  Flow_Promotion;
 
 @property (nonatomic,assign)BOOL  BM_OutNotice;
 @property (nonatomic,assign)BOOL  BS_OutNotice;

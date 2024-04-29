@@ -127,20 +127,31 @@
 //web测试
 //#define URL_POST_IOS @"http://183.251.102.156:48000/Yigo1.6"
 //web正式
-#define URL_POST_IOS @"http:/27.150.183.178:48000/Yigo1.6"
+//#define URL_POST_IOS @"http:/27.150.183.178:48000/Yigo1.6"
+//海西石材城新
+#define URL_POST_IOS_HX @"http://121.204.136.234:48000/Yigo1.6"
+//泉州合成展会新
+#define URL_POST_IOS_HC @"http://121.204.136.234:15888/Yigo1.6"
+
+//用户协议和隐私政策
+#define URL_POST_IOS_YP @"http:/27.150.183.178:48000/Yigo1.6"
+//组织机构不同的切换
+#define URL_POST_IOS ([[[NSUserDefaults standardUserDefaults]objectForKey:@"mechanismName"] isEqualToString:@"HC"] ? URL_POST_IOS_HC : URL_POST_IOS_HX)
 
 //测试账号：YBING 123456 liuxh 654321
-
 //api测试服
 //#define URL_NEWPOST_IOS @"http://183.251.102.156:48001"
 //api正式
 #define URL_NEWPOST_IOS @"http://121.204.136.234:48001"
-
 //H5
-#define URL_YIGO_IOS @""URL_POST_IOS"/services/MapWebService?wsdl"
-#define URL_H5_IOS @""URL_POST_IOS"/Approval.html"
-#define URL_H5FQ_IOS @""URL_POST_IOS"/Application.html"
-#define URL_H5_CONTRACT_IOS @""URL_POST_IOS"/ContractDetails.html"
+//#define URL_YIGO_IOS @""URL_POST_IOS"/services/MapWebService?wsdl"
+#define URL_YIGO_IOS [NSString stringWithFormat:@"%@/services/MapWebService?wsdl",URL_POST_IOS]
+//#define URL_H5_IOS @""URL_POST_IOS"/Approval.html"
+#define URL_H5_IOS [NSString stringWithFormat:@"%@/Approval.html",URL_POST_IOS]
+//#define URL_H5FQ_IOS @""URL_POST_IOS"/Application.html"
+#define URL_H5FQ_IOS [NSString stringWithFormat:@"%@/Application.html",URL_POST_IOS]
+//#define /*URL_H5_CONTRACT_IOS*/ @""URL_POST_IOS"/ContractDetails.html"
+#define URL_H5_CONTRACT_IOS [NSString stringWithFormat:@"%@/ContractDetails.html",URL_POST_IOS]
 
 
 #define URL_YIGODATA_IOS(A,B,C) [NSString stringWithFormat:@ \
@@ -265,62 +276,97 @@ xsi:type=\"q0:Array\">" \
 
 #define URL_YIGODATA_SLSTOCK(A,B,C,D,E,F,G,H) [NSString stringWithFormat:@"{pageNum:'%@',pageSize:'%@',mtlName:'%@', blockNo:'%@',deaId:'%@',type:'%@',whsId:'%@',storeAreaId:'%@'}",A,B,C,D,E,F,G,H]
 
-#define URL_BANNER_IOS @""URL_NEWPOST_IOS"/api/banner/get"
+#define URL_BANNER_IOS [NSString stringWithFormat:@"%@/api/banner/get",URL_NEWPOST_IOS]
+//#define URL_BANNER_IOS @""URL_NEWPOST_IOS"/api/banner/get"
+
 #define URL_NEWBANNER_IOS(A,B) [NSString stringWithFormat:@"{pageNum:%d,pageSize:%d,filter:{location:'app_index'}}",A,B]
 #define URL_NOTICE_IOS @""URL_NEWPOST_IOS"/api/notice/get"
 #define URL_NEWNOTICE_IOS(A,B) [NSString stringWithFormat:@"{pageNum:%ld,pageSize:%d,filter:{noticeType:''}}",A,B]
-#define URL_INFORMATION_IOS @""URL_NEWPOST_IOS"/api/information/get"
+
+#define URL_INFORMATION_IOS [NSString stringWithFormat:@"%@/api/information/get",URL_NEWPOST_IOS]
+//#define URL_INFORMATION_IOS @""URL_NEWPOST_IOS"/api/information/get"
+
 #define URL_NEWINFORMATION_IOS(A,B) [NSString stringWithFormat:@"{pageNum:%d,pageSize:%d,filter:{infoType:'海西资讯'}}",A,B]
-#define URL_SYS_FILES_IOS @""URL_NEWPOST_IOS"/api/sys_files/get"
+
+#define URL_SYS_FILES_IOS [NSString stringWithFormat:@"%@/api/sys_files/get",URL_NEWPOST_IOS]
+//#define URL_SYS_FILES_IOS @""URL_NEWPOST_IOS"/api/sys_files/get"
+
 #define URL_NEWSYS_FILES_IOS(A,B,C,D) [NSString stringWithFormat:@"{pageNum:%d,pageSize:%d,filter:{fileTypeId:%ld,fileName:'%@'}}",A,B,C,D]
-#define URL_SYS_FILES_TYPE_IOS @""URL_NEWPOST_IOS"/api/sys_files_type/get"
+
+#define URL_SYS_FILES_TYPE_IOS [NSString stringWithFormat:@"%@/api/sys_files_type/get",URL_NEWPOST_IOS]
+//#define URL_SYS_FILES_TYPE_IOS @""URL_NEWPOST_IOS"/api/sys_files_type/get"
 //获取
-#define URL_DIARY_IOS @""URL_NEWPOST_IOS"/api/diary/get"
+#define URL_DIARY_IOS [NSString stringWithFormat:@"%@/api/diary/get",URL_NEWPOST_IOS]
+//#define URL_DIARY_IOS @""URL_NEWPOST_IOS"/api/diary/get"
+
+
+
 #define URL_NEWDIARY_IOS(A,B) [NSString stringWithFormat:@"{pageNum:%ld,pageSize:%d,filter:null}",A,B]
 //新增
-#define URL_DIARY_ADD_IOS @""URL_NEWPOST_IOS"/api/diary/add"
+#define URL_DIARY_ADD_IOS [NSString stringWithFormat:@"%@/api/diary/add",URL_NEWPOST_IOS]
+//#define URL_DIARY_ADD_IOS @""URL_NEWPOST_IOS"/api/diary/add"
 //删除
-#define URL_DIARY_DELETE_IOS @""URL_NEWPOST_IOS"/api/diary/delete"
+#define URL_DIARY_DELETE_IOS [NSString stringWithFormat:@"%@/api/diary/delete",URL_NEWPOST_IOS]
+//#define URL_DIARY_DELETE_IOS @""URL_NEWPOST_IOS"/api/diary/delete"
 #define URL_DIARY_NEWDELETE_IOS(A) [NSString stringWithFormat:@"{id:%ld}",A]
 //获取类别详情
-#define URL_DIARY_GET_DTL_IOS @""URL_NEWPOST_IOS"/api/diary/get_dtl"
+#define URL_DIARY_GET_DTL_IOS [NSString stringWithFormat:@"%@/api/diary/get_dtl",URL_NEWPOST_IOS]
+//#define URL_DIARY_GET_DTL_IOS @""URL_NEWPOST_IOS"/api/diary/get_dtl"
 #define URL_DIARY_NEWGET_DTL_IOS(A) [NSString stringWithFormat:@"{id:%ld}",A]
 //修改
-#define URL_DIARY_UPDATE_IOS @""URL_NEWPOST_IOS"/api/diary/update"
+#define URL_DIARY_UPDATE_IOS [NSString stringWithFormat:@"%@/api/diary/update",URL_NEWPOST_IOS]
+//#define URL_DIARY_UPDATE_IOS @""URL_NEWPOST_IOS"/api/diary/update"
 //线上培训视频接口视频控制器
 /// api / video / get
-#define URL_VIDEO_IOS @""URL_NEWPOST_IOS"/api/video/get"
+#define URL_VIDEO_IOS [NSString stringWithFormat:@"%@/api/video/get",URL_NEWPOST_IOS]
+//#define URL_VIDEO_IOS @""URL_NEWPOST_IOS"/api/video/get"
 #define URL_NEWVIDEO_IOS(A,B,C,D) [NSString stringWithFormat:@"{pageNum:%ld,pageSize:%d,filter:{videoTypeId:%ld,videoTitle:'%@'}}",A,B,C,D]
 //视频类型接口视频类型控制器
-#define URL_VIDEOTYPE_IOS @""URL_NEWPOST_IOS"/api/video_type/get"
+#define URL_VIDEOTYPE_IOS [NSString stringWithFormat:@"%@/api/video_type/get",URL_NEWPOST_IOS]
+//#define URL_VIDEOTYPE_IOS @""URL_NEWPOST_IOS"/api/video_type/get"
 //推荐视频 / api / video / get / recommend
-#define URL_VIDEORECOMMEND_IOS @""URL_NEWPOST_IOS"/api/video/get/recommend"
+#define URL_VIDEORECOMMEND_IOS [NSString stringWithFormat:@"%@/api/video/get/recommend",URL_NEWPOST_IOS]
+//#define URL_VIDEORECOMMEND_IOS @""URL_NEWPOST_IOS"/api/video/get/recommend"
 #define URL_NEWRECOMMEND_IOS(A,B,C,D,E) [NSString stringWithFormat:@"{pageNum:%ld,pageSize:%d,filter:{videoId:%ld,videoTypeId:%ld,videoTitle:'%@'}}",A,B,C,D,E]
 //获取合同预警信息
-#define URL_WARN_IOS @""URL_NEWPOST_IOS"/api/contract/warn"
+#define URL_WARN_IOS [NSString stringWithFormat:@"%@/api/contract/warn",URL_NEWPOST_IOS]
+//#define URL_WARN_IOS @""URL_NEWPOST_IOS"/api/contract/warn"
 //获取合同列表
-#define URL_CONTRACT_LIST_IOS @""URL_NEWPOST_IOS"/api/contract/list"
+#define URL_CONTRACT_LIST_IOS [NSString stringWithFormat:@"%@/api/contract/list",URL_NEWPOST_IOS]
+//#define URL_CONTRACT_LIST_IOS @""URL_NEWPOST_IOS"/api/contract/list"
 //获取荒料出入库信息
-#define URL_BMSTOCK_IOS @""URL_NEWPOST_IOS"/api/report/bmstock"
+#define URL_BMSTOCK_IOS [NSString stringWithFormat:@"%@/api/report/bmstock",URL_NEWPOST_IOS]
+//#define URL_BMSTOCK_IOS @""URL_NEWPOST_IOS"/api/report/bmstock"
 //获取大板出入库信息
-#define URL_SLSTOCK_IOS @""URL_NEWPOST_IOS"/api/report/slstock"
+#define URL_SLSTOCK_IOS [NSString stringWithFormat:@"%@/api/report/slstock",URL_NEWPOST_IOS]
+//#define URL_SLSTOCK_IOS @""URL_NEWPOST_IOS"/api/report/slstock"
 //获取招商总账信息
-#define URL_LEDGER_IOS @""URL_NEWPOST_IOS"/api/report/ledger"
+#define URL_LEDGER_IOS [NSString stringWithFormat:@"%@/api/report/ledger",URL_NEWPOST_IOS]
+//#define URL_LEDGER_IOS @""URL_NEWPOST_IOS"/api/report/ledger"
 //获取招商租赁情况
-#define URL_LEASE_IOS @""URL_NEWPOST_IOS"/api/report/lease"
+#define URL_LEASE_IOS [NSString stringWithFormat:@"%@/api/report/lease",URL_NEWPOST_IOS]
+//#define URL_LEASE_IOS @""URL_NEWPOST_IOS"/api/report/lease"
 //获取园区费用应收余额列表
-#define URL_MARKET_FEE_IOS @""URL_NEWPOST_IOS"/api/bill/market_fee"
+#define URL_MARKET_FEE_IOS [NSString stringWithFormat:@"%@/api/bill/market_fee",URL_NEWPOST_IOS]
+//#define URL_MARKET_FEE_IOS @""URL_NEWPOST_IOS"/api/bill/market_fee"
 //获取商户费用应收余额列表
-#define URL_DEALER_FEE_IOS @""URL_NEWPOST_IOS"/api/bill/dealer_fee"
+#define URL_DEALER_FEE_IOS [NSString stringWithFormat:@"%@/api/bill/dealer_fee",URL_NEWPOST_IOS]
+//#define URL_DEALER_FEE_IOS @""URL_NEWPOST_IOS"/api/bill/dealer_fee"
 //获取商户费用应收明细
-#define URL_DEALER_DTL_IOS @""URL_NEWPOST_IOS"/api/bill/dealer_fee_dtl"
+#define URL_DEALER_DTL_IOS [NSString stringWithFormat:@"%@/api/bill/dealer_fee_dtl",URL_NEWPOST_IOS]
+//#define URL_DEALER_DTL_IOS @""URL_NEWPOST_IOS"/api/bill/dealer_fee_dtl"
 //获取园区收款明细列表
-#define URL_PAY_MARKET_IOS @""URL_NEWPOST_IOS"/api/bill/pay_market_fee"
+#define URL_PAY_MARKET_IOS [NSString stringWithFormat:@"%@/api/bill/pay_market_fee",URL_NEWPOST_IOS]
+//#define URL_PAY_MARKET_IOS @""URL_NEWPOST_IOS"/api/bill/pay_market_fee"
 //获取园区应收明细列表
-#define URL_MARKET_DTL_IOS @""URL_NEWPOST_IOS"/api/bill/market_fee_dtl"
+#define URL_MARKET_DTL_IOS [NSString stringWithFormat:@"%@/api/bill/market_fee_dtl",URL_NEWPOST_IOS]
+//#define URL_MARKET_DTL_IOS @""URL_NEWPOST_IOS"/api/bill/market_fee_dtl"
 //获取当前用户未读公告总条数
-#define URL_UNREAD_IOS @""URL_NEWPOST_IOS"/api/notice/get/unread/count"
+#define URL_UNREAD_IOS [NSString stringWithFormat:@"%@/api/notice/get/unread/count",URL_NEWPOST_IOS]
+//#define URL_UNREAD_IOS @""URL_NEWPOST_IOS"/api/notice/get/unread/count"
 //标记某条公告为已读
-#define URL_READ_IOS @""URL_NEWPOST_IOS"/api/notice/read"
+#define URL_READ_IOS [NSString stringWithFormat:@"%@/api/notice/read",URL_NEWPOST_IOS]
+//#define URL_READ_IOS @""URL_NEWPOST_IOS"/api/notice/read"
 //标记所有公告为已读
-#define URL_ALLREAD_IOS @""URL_NEWPOST_IOS"/api/notice/read/all"
+#define URL_ALLREAD_IOS [NSString stringWithFormat:@"%@/api/notice/read/all",URL_NEWPOST_IOS]
+//#define URL_ALLREAD_IOS @""URL_NEWPOST_IOS"/api/notice/read/all"

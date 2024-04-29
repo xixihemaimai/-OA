@@ -104,11 +104,11 @@
     }else if ([self.type isEqualToString:@"5"]){
         //用户隐私
 //        stoneUrlStr = @"http://121.204.136.234:48000/Yigo1.6/agreement.html";
-        stoneUrlStr = [NSString stringWithFormat:@"%@/agreement.html",URL_POST_IOS];
+        stoneUrlStr = [NSString stringWithFormat:@"%@/agreement.html",URL_POST_IOS_YP];
     }else if ([self.type isEqualToString:@"6"]){
         //用户协议
 //        stoneUrlStr = @"http://121.204.136.234:48000/Yigo1.6/UserAgreement.html";
-        stoneUrlStr = [NSString stringWithFormat:@"%@/UserAgreement.html",URL_POST_IOS];
+        stoneUrlStr = [NSString stringWithFormat:@"%@/UserAgreement.html",URL_POST_IOS_YP];
     }else if ([self.type isEqualToString:@"7"]){
         //市场合同
         stoneUrlStr =[NSString stringWithFormat:@"%@?billId=%ld&billKey=%@&aesKey=%@&appLoginToken=%@&username=%@&userdepartment=%@&usertime=%@&type=0&version=%lf",URL_H5_CONTRACT_IOS,(long)self.billId,@"Flow_InvestContract",aes,self.usermodel.appLoginToken,self.creatorName,@"",@"",0.0];

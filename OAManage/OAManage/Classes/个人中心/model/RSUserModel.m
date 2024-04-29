@@ -306,7 +306,13 @@
         self.Flow_TrainingCosts = [aDecoder decodeBoolForKey:@"Flow_TrainingCosts"];
         
         
-        
+        self.Flow_ProcessChange = [aDecoder decodeBoolForKey:@"Flow_ProcessChange"];
+        self.Flow_Confirmation = [aDecoder decodeBoolForKey:@"Flow_Confirmation"];
+        self.Flow_GoOut = [aDecoder decodeBoolForKey:@"Flow_GoOut"];
+        self.Flow_ReplaceCard = [aDecoder decodeBoolForKey:@"Flow_ReplaceCard"];
+        self.Flow_Loan = [aDecoder decodeBoolForKey:@"Flow_Loan"];
+        self.Flow_Promotion = [aDecoder decodeBoolForKey:@"Flow_Promotion"];
+
     }
     return self;
 }
@@ -405,6 +411,14 @@
     
     usermodel.Flow_PropertyServices = self.Flow_PropertyServices;
     usermodel.Flow_TrainingCosts = self.Flow_TrainingCosts;
+    
+    
+    usermodel.Flow_ProcessChange = self.Flow_ProcessChange;
+    usermodel.Flow_Confirmation = self.Flow_Confirmation;
+    usermodel.Flow_GoOut = self.Flow_GoOut;
+    usermodel.Flow_ReplaceCard = self.Flow_ReplaceCard;
+    usermodel.Flow_Loan = self.Flow_Loan;
+    usermodel.Flow_Promotion = self.Flow_Promotion;
     
     return usermodel;
 }
