@@ -109,7 +109,9 @@ static NSString * SERVICEHEADERVIEWID = @"SERVICEHEADERVIEWID";
     NetworkTool * network = [[NetworkTool alloc]init];
     NSMutableDictionary * dict = [NSMutableDictionary dictionary];
     [dict setValue:self.usermodel.appLoginToken forKey:@"loginToken"];
-    [dict setValue:URL_NEWBANNER_IOS(1, 6) forKey:@"data"];
+    NSUserDefaults * user = [NSUserDefaults standardUserDefaults];
+     NSString * mechanismS = [user objectForKey:@"mechanismName"];
+    [dict setValue:URL_NEWBANNER_IOS(1, 6,mechanismS) forKey:@"data"];
     [network newReloadWebServiceNoDataURL:URL_BANNER_IOS andParameters:dict andURLName:URL_BANNER_IOS];
     network.successArrayReload = ^(NSMutableArray *array) {
         NSMutableArray * imageArray = [NSMutableArray array];
@@ -126,7 +128,9 @@ static NSString * SERVICEHEADERVIEWID = @"SERVICEHEADERVIEWID";
     NetworkTool * network = [[NetworkTool alloc]init];
     NSMutableDictionary * dict = [NSMutableDictionary dictionary];
     [dict setValue:self.usermodel.appLoginToken forKey:@"loginToken"];
-    [dict setValue:URL_NEWNOTICE_IOS((long)1, 6) forKey:@"data"];
+    NSUserDefaults * user = [NSUserDefaults standardUserDefaults];
+     NSString * mechanismS = [user objectForKey:@"mechanismName"];
+    [dict setValue:URL_NEWNOTICE_IOS((long)1, 6,mechanismS) forKey:@"data"];
     [network newReloadWebServiceNoDataURL:URL_NOTICE_IOS andParameters:dict andURLName:URL_NOTICE_IOS];
     network.successArrayReload = ^(NSMutableArray *array) {
         [self.contentArray removeAllObjects];
@@ -143,8 +147,10 @@ static NSString * SERVICEHEADERVIEWID = @"SERVICEHEADERVIEWID";
 - (void)reloadInformationNewData{
     NetworkTool * network = [[NetworkTool alloc]init];
     NSMutableDictionary * dict = [NSMutableDictionary dictionary];
+    NSUserDefaults * user = [NSUserDefaults standardUserDefaults];
+     NSString * mechanismS = [user objectForKey:@"mechanismName"];
     [dict setValue:self.usermodel.appLoginToken forKey:@"loginToken"];
-    [dict setValue:URL_NEWINFORMATION_IOS(1, 6) forKey:@"data"];
+    [dict setValue:URL_NEWINFORMATION_IOS(1, 6,mechanismS) forKey:@"data"];
     [network newReloadWebServiceNoDataURL:URL_INFORMATION_IOS andParameters:dict andURLName:URL_INFORMATION_IOS];
     network.successArrayReload = ^(NSMutableArray *array) {
         [self.informationArray removeAllObjects];
@@ -157,6 +163,9 @@ static NSString * SERVICEHEADERVIEWID = @"SERVICEHEADERVIEWID";
 - (void)reloadUnReadNotice{
     NetworkTool * network = [[NetworkTool alloc]init];
     NSMutableDictionary * dict = [NSMutableDictionary dictionary];
+    NSUserDefaults * user = [NSUserDefaults standardUserDefaults];
+    NSString * mechanismS = [user objectForKey:@"mechanismName"];
+    [dict setValue:mechanismS forKey:@"orgCode"];
     [dict setValue:self.usermodel.appLoginToken forKey:@"loginToken"];
     [network newReloadWebServiceNoDataURL:URL_UNREAD_IOS andParameters:dict andURLName:URL_UNREAD_IOS];
     network.successReload = ^(NSDictionary *dict) {

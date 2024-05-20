@@ -85,8 +85,9 @@
         }
         data = [NSString stringWithFormat:@"{countMonthFrom:'%@',countMonthTo:'%@',compareMonthFrom:'%@',compareMonthTo:'%@'}",[NSString stringWithFormat:@"%@-%@",_totalBtn.currentTitle,_beginBtn.currentTitle],[NSString stringWithFormat:@"%@-%@",_totalBtn.currentTitle,_endBtn.currentTitle],[NSString stringWithFormat:@"%@-%@",_contraseBtn.currentTitle,_beginBtn.currentTitle],[NSString stringWithFormat:@"%@-%@",_contraseBtn.currentTitle,_endBtn.currentTitle]];
     }
-    
-    NSDictionary * dict = @{@"loginToken":self.usermodel.appLoginToken,@"data":data};
+    NSUserDefaults * user = [NSUserDefaults standardUserDefaults];
+    NSString * mechanismS = [user objectForKey:@"mechanismName"];
+    NSDictionary * dict = @{@"loginToken":self.usermodel.appLoginToken,@"orgCode":mechanismS,@"data":data};
     [network newReloadWebServiceNoDataURL:url andParameters:dict andURLName:url];
     RSWeakself
     network.successArrayReload = ^(NSMutableArray *array) {

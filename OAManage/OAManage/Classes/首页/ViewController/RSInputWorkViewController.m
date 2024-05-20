@@ -113,8 +113,10 @@ static NSString * APPROVALHEADERVIEW = @"APPROVALHEADERVIEW";
         //URL_DIARY_GET_DTL_IOS 获取
        NetworkTool * network = [[NetworkTool alloc]init];
        NSMutableDictionary * dict = [NSMutableDictionary dictionary];
+        NSUserDefaults * user = [NSUserDefaults standardUserDefaults];
+         NSString * mechanismS = [user objectForKey:@"mechanismName"];
        [dict setValue:self.usermodel.appLoginToken forKey:@"loginToken"];
-       [dict setValue:URL_DIARY_NEWGET_DTL_IOS((long)self.auditedId) forKey:@"data"];
+       [dict setValue:URL_DIARY_NEWGET_DTL_IOS((long)self.auditedId,mechanismS) forKey:@"data"];
        [network newReloadWebServiceNoDataURL:URL_DIARY_GET_DTL_IOS andParameters:dict andURLName:URL_DIARY_GET_DTL_IOS];
         network.workSuccess = ^(RSWorkContentModel *workContentmodel) {
             self.workContentmodel = workContentmodel;
@@ -425,7 +427,9 @@ static NSString * APPROVALHEADERVIEW = @"APPROVALHEADERVIEW";
     NetworkTool * network = [[NetworkTool alloc]init];
     NSMutableDictionary * dict = [NSMutableDictionary dictionary];
     [dict setValue:self.usermodel.appLoginToken forKey:@"loginToken"];
-    
+    NSUserDefaults * user = [NSUserDefaults standardUserDefaults];
+    NSString * mechanismS = [user objectForKey:@"mechanismName"];
+    [dict setValue:mechanismS forKey:@"orgCode"];
     NSMutableDictionary * paraDict = [NSMutableDictionary dictionary];
     [paraDict setValue:self.timeStr forKey:@"diaryDate"];
     [paraDict setValue:self.footTextview.text forKey:@"summary"];

@@ -151,7 +151,7 @@ static BOOL isProduction = true;
         usermodel.Flow_Cachet = [dict[@"flowAccess"][@"Flow_Cachet"]boolValue];
         usermodel.Flow_Chapter = [dict[@"flowAccess"][@"Flow_Chapter"]boolValue];
         usermodel.Flow_Contract = [dict[@"flowAccess"][@"Flow_Contract"]boolValue];
-        usermodel.Entertain = [dict[@"flowAccess"][@"Entertain"]boolValue];
+//        usermodel.Entertain = [dict[@"flowAccess"][@"Entertain"]boolValue];
         usermodel.Flow_Entertain = [dict[@"flowAccess"][@"Flow_Entertain"]boolValue];
         usermodel.Flow_EquipService = [dict[@"flowAccess"][@"Flow_EquipService"]boolValue];
         usermodel.Flow_Equipment = [dict[@"flowAccess"][@"Flow_Equipment"]boolValue];
@@ -184,7 +184,7 @@ static BOOL isProduction = true;
         usermodel.SL_Transfer = [dict[@"flowAccess"][@"SL_Transfer"]boolValue];
         usermodel.SM_SendNotice = [dict[@"flowAccess"][@"SM_SendNotice"]boolValue];
         usermodel.SM_Transfer = [dict[@"flowAccess"][@"SM_Transfer"]boolValue];
-        usermodel.UseCar = [dict[@"flowAccess"][@"UseCar"]boolValue];
+        usermodel.Flow_UseCar = [dict[@"flowAccess"][@"Flow_UseCar"]boolValue];
         
         usermodel.OA_Market_Home = [dict[@"flowAccess"][@"OA_Market_Home"]boolValue];
         usermodel.OA_BM_IO = [dict[@"flowAccess"][@"OA_BM_IO"]boolValue];
@@ -205,11 +205,11 @@ static BOOL isProduction = true;
         
         
         usermodel.Flow_ProcessChange = [dict[@"flowAccess"][@"Flow_ProcessChange"]boolValue];
-        usermodel.Flow_ProcessChange = [dict[@"flowAccess"][@"Flow_Confirmation"]boolValue];
-        usermodel.Flow_ProcessChange = [dict[@"flowAccess"][@"Flow_GoOut"]boolValue];
-        usermodel.Flow_ProcessChange = [dict[@"flowAccess"][@"Flow_ReplaceCard"]boolValue];
-        usermodel.Flow_ProcessChange = [dict[@"flowAccess"][@"Flow_Loan"]boolValue];
-        usermodel.Flow_ProcessChange = [dict[@"flowAccess"][@"Flow_Promotion"]boolValue];
+        usermodel.Flow_Confirmation = [dict[@"flowAccess"][@"Flow_Confirmation"]boolValue];
+        usermodel.Flow_GoOut = [dict[@"flowAccess"][@"Flow_GoOut"]boolValue];
+        usermodel.Flow_ReplaceCard = [dict[@"flowAccess"][@"Flow_ReplaceCard"]boolValue];
+        usermodel.Flow_Loan = [dict[@"flowAccess"][@"Flow_Loan"]boolValue];
+        usermodel.Flow_Promotion = [dict[@"flowAccess"][@"Flow_Promotion"]boolValue];
         
         
         [JPUSHService setAlias:[NSString stringWithFormat:@"%ld",(long)usermodel.userId] completion:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {

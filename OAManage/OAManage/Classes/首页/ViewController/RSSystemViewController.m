@@ -327,6 +327,9 @@
     NetworkTool * network = [[NetworkTool alloc]init];
     NSMutableDictionary * dict = [NSMutableDictionary dictionary];
     [dict setValue:self.usermodel.appLoginToken forKey:@"loginToken"];
+    NSUserDefaults * user = [NSUserDefaults standardUserDefaults];
+    NSString * mechanismS = [user objectForKey:@"mechanismName"];
+    [dict setValue:mechanismS forKey:@"orgCode"];
     [network newReloadWebServiceNoDataURL:URL_SYS_FILES_TYPE_IOS andParameters:dict andURLName:URL_SYS_FILES_TYPE_IOS];
     network.successArrayReload = ^(NSMutableArray *array) {
         [self.systemTypeArray removeAllObjects];
@@ -397,8 +400,10 @@
     NetworkTool * network = [[NetworkTool alloc]init];
     NSMutableDictionary * dict = [NSMutableDictionary dictionary];
     [dict setValue:self.usermodel.appLoginToken forKey:@"loginToken"];
+    NSUserDefaults * user = [NSUserDefaults standardUserDefaults];
+     NSString * mechanismS = [user objectForKey:@"mechanismName"];
     //[NSNumber numberWithInteger:self.pageNum]
-    [dict setValue:URL_NEWSYS_FILES_IOS(self.pageNum, 10,(long)self.selectTypeNum,_fileTextField.text) forKey:@"data"];
+    [dict setValue:URL_NEWSYS_FILES_IOS(self.pageNum, 10,mechanismS,(long)self.selectTypeNum,_fileTextField.text) forKey:@"data"];
     [network newReloadWebServiceNoDataURL:URL_SYS_FILES_IOS andParameters:dict andURLName:URL_SYS_FILES_IOS];
     network.successArrayReload = ^(NSMutableArray *array) {
         if (self.pageNum == 1) {

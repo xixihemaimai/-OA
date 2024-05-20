@@ -34,7 +34,9 @@
 - (void)reloadReportNumber{
     //URL_WARN_IOS
     NetworkTool * network = [[NetworkTool alloc]init];
-    NSDictionary * dict = @{@"loginToken":self.usermodel.appLoginToken};
+    NSUserDefaults * user = [NSUserDefaults standardUserDefaults];
+    NSString * mechanismS = [user objectForKey:@"mechanismName"];
+    NSDictionary * dict = @{@"loginToken":self.usermodel.appLoginToken,@"orgCode":mechanismS};
     [network newReloadWebServiceNoDataURL:URL_WARN_IOS andParameters:dict andURLName:URL_WARN_IOS];
     RSWeakself
     network.successReload = ^(NSDictionary *dict) {

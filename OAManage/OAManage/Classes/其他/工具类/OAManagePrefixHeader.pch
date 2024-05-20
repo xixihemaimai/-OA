@@ -279,40 +279,38 @@ xsi:type=\"q0:Array\">" \
 #define URL_BANNER_IOS [NSString stringWithFormat:@"%@/api/banner/get",URL_NEWPOST_IOS]
 //#define URL_BANNER_IOS @""URL_NEWPOST_IOS"/api/banner/get"
 
-#define URL_NEWBANNER_IOS(A,B) [NSString stringWithFormat:@"{pageNum:%d,pageSize:%d,filter:{location:'app_index'}}",A,B]
+#define URL_NEWBANNER_IOS(A,B,C) [NSString stringWithFormat:@"{pageNum:%d,pageSize:%d, orgCode:'%@',filter:{location:'app_index'}}",A,B,C]
+
 #define URL_NOTICE_IOS @""URL_NEWPOST_IOS"/api/notice/get"
-#define URL_NEWNOTICE_IOS(A,B) [NSString stringWithFormat:@"{pageNum:%ld,pageSize:%d,filter:{noticeType:''}}",A,B]
+#define URL_NEWNOTICE_IOS(A,B,C) [NSString stringWithFormat:@"{pageNum:%ld,pageSize:%d,orgCode:'%@',filter:{noticeType:''}}",A,B,C]
 
 #define URL_INFORMATION_IOS [NSString stringWithFormat:@"%@/api/information/get",URL_NEWPOST_IOS]
 //#define URL_INFORMATION_IOS @""URL_NEWPOST_IOS"/api/information/get"
 
-#define URL_NEWINFORMATION_IOS(A,B) [NSString stringWithFormat:@"{pageNum:%d,pageSize:%d,filter:{infoType:'海西资讯'}}",A,B]
+#define URL_NEWINFORMATION_IOS(A,B,C) [NSString stringWithFormat:@"{pageNum:%d,pageSize:%d,orgCode:'%@',filter:{infoType:'海西资讯'}}",A,B,C]
 
 #define URL_SYS_FILES_IOS [NSString stringWithFormat:@"%@/api/sys_files/get",URL_NEWPOST_IOS]
 //#define URL_SYS_FILES_IOS @""URL_NEWPOST_IOS"/api/sys_files/get"
 
-#define URL_NEWSYS_FILES_IOS(A,B,C,D) [NSString stringWithFormat:@"{pageNum:%d,pageSize:%d,filter:{fileTypeId:%ld,fileName:'%@'}}",A,B,C,D]
+#define URL_NEWSYS_FILES_IOS(A,B,C,D,E) [NSString stringWithFormat:@"{pageNum:%d,pageSize:%d,orgCode:'%@',filter:{fileTypeId:%ld,fileName:'%@'}}",A,B,C,D,E]
 
 #define URL_SYS_FILES_TYPE_IOS [NSString stringWithFormat:@"%@/api/sys_files_type/get",URL_NEWPOST_IOS]
 //#define URL_SYS_FILES_TYPE_IOS @""URL_NEWPOST_IOS"/api/sys_files_type/get"
 //获取
 #define URL_DIARY_IOS [NSString stringWithFormat:@"%@/api/diary/get",URL_NEWPOST_IOS]
 //#define URL_DIARY_IOS @""URL_NEWPOST_IOS"/api/diary/get"
-
-
-
-#define URL_NEWDIARY_IOS(A,B) [NSString stringWithFormat:@"{pageNum:%ld,pageSize:%d,filter:null}",A,B]
+#define URL_NEWDIARY_IOS(A,B,C) [NSString stringWithFormat:@"{pageNum:%ld,pageSize:%d,orgCode:'%@',filter:null}",A,B,C]
 //新增
 #define URL_DIARY_ADD_IOS [NSString stringWithFormat:@"%@/api/diary/add",URL_NEWPOST_IOS]
 //#define URL_DIARY_ADD_IOS @""URL_NEWPOST_IOS"/api/diary/add"
 //删除
 #define URL_DIARY_DELETE_IOS [NSString stringWithFormat:@"%@/api/diary/delete",URL_NEWPOST_IOS]
 //#define URL_DIARY_DELETE_IOS @""URL_NEWPOST_IOS"/api/diary/delete"
-#define URL_DIARY_NEWDELETE_IOS(A) [NSString stringWithFormat:@"{id:%ld}",A]
+#define URL_DIARY_NEWDELETE_IOS(A,B) [NSString stringWithFormat:@"{id:%ld,orgCode:'%@'}",A,B]
 //获取类别详情
 #define URL_DIARY_GET_DTL_IOS [NSString stringWithFormat:@"%@/api/diary/get_dtl",URL_NEWPOST_IOS]
 //#define URL_DIARY_GET_DTL_IOS @""URL_NEWPOST_IOS"/api/diary/get_dtl"
-#define URL_DIARY_NEWGET_DTL_IOS(A) [NSString stringWithFormat:@"{id:%ld}",A]
+#define URL_DIARY_NEWGET_DTL_IOS(A,B) [NSString stringWithFormat:@"{id:%ld,orgCode:'%@'}",A,B]
 //修改
 #define URL_DIARY_UPDATE_IOS [NSString stringWithFormat:@"%@/api/diary/update",URL_NEWPOST_IOS]
 //#define URL_DIARY_UPDATE_IOS @""URL_NEWPOST_IOS"/api/diary/update"
@@ -320,14 +318,14 @@ xsi:type=\"q0:Array\">" \
 /// api / video / get
 #define URL_VIDEO_IOS [NSString stringWithFormat:@"%@/api/video/get",URL_NEWPOST_IOS]
 //#define URL_VIDEO_IOS @""URL_NEWPOST_IOS"/api/video/get"
-#define URL_NEWVIDEO_IOS(A,B,C,D) [NSString stringWithFormat:@"{pageNum:%ld,pageSize:%d,filter:{videoTypeId:%ld,videoTitle:'%@'}}",A,B,C,D]
+#define URL_NEWVIDEO_IOS(A,B,C,D,E) [NSString stringWithFormat:@"{pageNum:%ld,pageSize:%d,orgCode:'%@',filter:{videoTypeId:%ld,videoTitle:'%@'}}",A,B,C,D,E]
 //视频类型接口视频类型控制器
 #define URL_VIDEOTYPE_IOS [NSString stringWithFormat:@"%@/api/video_type/get",URL_NEWPOST_IOS]
 //#define URL_VIDEOTYPE_IOS @""URL_NEWPOST_IOS"/api/video_type/get"
 //推荐视频 / api / video / get / recommend
 #define URL_VIDEORECOMMEND_IOS [NSString stringWithFormat:@"%@/api/video/get/recommend",URL_NEWPOST_IOS]
 //#define URL_VIDEORECOMMEND_IOS @""URL_NEWPOST_IOS"/api/video/get/recommend"
-#define URL_NEWRECOMMEND_IOS(A,B,C,D,E) [NSString stringWithFormat:@"{pageNum:%ld,pageSize:%d,filter:{videoId:%ld,videoTypeId:%ld,videoTitle:'%@'}}",A,B,C,D,E]
+#define URL_NEWRECOMMEND_IOS(A,B,C,D,E,F) [NSString stringWithFormat:@"{pageNum:%ld,pageSize:%d,orgCode:'%@',filter:{videoId:%ld,videoTypeId:%ld,videoTitle:'%@'}}",A,B,C,D,E,F]
 //获取合同预警信息
 #define URL_WARN_IOS [NSString stringWithFormat:@"%@/api/contract/warn",URL_NEWPOST_IOS]
 //#define URL_WARN_IOS @""URL_NEWPOST_IOS"/api/contract/warn"

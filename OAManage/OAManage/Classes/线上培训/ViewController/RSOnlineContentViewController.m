@@ -67,8 +67,10 @@
 //    NSLog(@"+++++++++++++++%@",self.title);
     NetworkTool * network = [[NetworkTool alloc]init];
     NSMutableDictionary * dict = [NSMutableDictionary dictionary];
+    NSUserDefaults * user = [NSUserDefaults standardUserDefaults];
+    NSString * mechanismS = [user objectForKey:@"mechanismName"];
     [dict setValue:self.usermodel.appLoginToken forKey:@"loginToken"];
-    [dict setValue:URL_NEWVIDEO_IOS((long)self.pageNum,6,(long)self.view.tag,self.searchStr) forKey:@"data"];
+    [dict setValue:URL_NEWVIDEO_IOS((long)self.pageNum,6,mechanismS,(long)self.view.tag,self.searchStr) forKey:@"data"];
 //    NSLog(@"=========%@",dict);
     [network newReloadWebServiceNoDataURL:URL_VIDEO_IOS andParameters:dict andURLName:URL_VIDEO_IOS];
     network.successArrayReload = ^(NSMutableArray *array) {

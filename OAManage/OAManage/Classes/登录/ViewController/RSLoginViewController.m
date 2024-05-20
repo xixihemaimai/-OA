@@ -149,7 +149,7 @@ typedef void(^Obtain)(BOOL isValue);
      //    .heightIs(39);
      */
     
-    NSLog(@"======12132132213213213213========%@",URL_POST_IOS);
+//    NSLog(@"======12132132213213213213========%@",URL_POST_IOS);
     
     
 //    NSUserDefaults * userd = [NSUserDefaults standardUserDefaults];
@@ -659,14 +659,14 @@ typedef void(^Obtain)(BOOL isValue);
     [user synchronize];
     // NSString *const kInitVector = @"16-Bytes--String";
 //    NSString * data = [NSString stringWithFormat:@"{userCode:'%@',password:'%@',roleId:%ld,aesKey:'%@'}",self.userNameField.text,password,(long)_roleInt,aes2];
-    NSString * mechanismS = [user objectForKey:@"mechanismName"];
+//    NSString * mechanismS = [user objectForKey:@"mechanismName"];
 //    if ([_mechanism.currentTitle isEqualToString:@"海西石材城"]){
 //        mechanismS = @"HX";
 //    }else{
 //        mechanismS = @"HC";
 //    }
-    NSString * data = [NSString stringWithFormat:@"{userCode:'%@',password:'%@',orgCode:'%@',roleId:%ld,aesKey:'%@'}",self.userNameField.text,password,mechanismS,(long)_roleInt,aes2];
-    NSLog(@"===========323============%@",data);
+    //,orgCode:'%@',mechanismS
+    NSString * data = [NSString stringWithFormat:@"{userCode:'%@',password:'%@',roleId:%ld,aesKey:'%@'}",self.userNameField.text,password,(long)_roleInt,aes2];
     //RSA加密
     NSString * rsaEncryptor = [RSAEncryptor encryptString:data publicKey:self.PublickKeyTemp];
     //网络请求
@@ -676,9 +676,6 @@ typedef void(^Obtain)(BOOL isValue);
     [network reloadWebServiceNoDataURL:URL_YIGO_IOS andParameters:soapStr andURLName:URL_LOGIN];
     //获取成功之后的操作
     network.successReload = ^(NSDictionary *dict) {
-        
-        NSLog(@"========2323232=======%@",dict);
-        
         [SVProgressHUD dismiss];
         self.loginBtn.enabled = NO;
         RSUserModel * usermodel = [[RSUserModel alloc]init];
@@ -715,7 +712,7 @@ typedef void(^Obtain)(BOOL isValue);
         usermodel.Flow_Cachet = [dict[@"flowAccess"][@"Flow_Cachet"]boolValue];
         usermodel.Flow_Chapter = [dict[@"flowAccess"][@"Flow_Chapter"]boolValue];
         usermodel.Flow_Contract = [dict[@"flowAccess"][@"Flow_Contract"]boolValue];
-        usermodel.Entertain = [dict[@"flowAccess"][@"Entertain"]boolValue];
+//        usermodel.Entertain = [dict[@"flowAccess"][@"Entertain"]boolValue];
         usermodel.Flow_Entertain = [dict[@"flowAccess"][@"Flow_Entertain"]boolValue];
         usermodel.Flow_EquipService = [dict[@"flowAccess"][@"Flow_EquipService"]boolValue];
         usermodel.Flow_Equipment = [dict[@"flowAccess"][@"Flow_Equipment"]boolValue];
@@ -743,7 +740,7 @@ typedef void(^Obtain)(BOOL isValue);
         usermodel.SL_Transfer = [dict[@"flowAccess"][@"SL_Transfer"]boolValue];
         usermodel.SM_SendNotice = [dict[@"flowAccess"][@"SM_SendNotice"]boolValue];
         usermodel.SM_Transfer = [dict[@"flowAccess"][@"SM_Transfer"]boolValue];
-        usermodel.UseCar = [dict[@"flowAccess"][@"UseCar"]boolValue];
+        usermodel.Flow_UseCar = [dict[@"flowAccess"][@"Flow_UseCar"]boolValue];
         
         usermodel.Flow_WorkOvertime =  [dict[@"flowAccess"][@"Flow_WorkOvertime"]boolValue];
         usermodel.Flow_SpecialApplication = [dict[@"flowAccess"][@"Flow_SpecialApplication"]boolValue];
@@ -767,11 +764,11 @@ typedef void(^Obtain)(BOOL isValue);
         
         
         usermodel.Flow_ProcessChange = [dict[@"flowAccess"][@"Flow_ProcessChange"]boolValue];
-        usermodel.Flow_ProcessChange = [dict[@"flowAccess"][@"Flow_Confirmation"]boolValue];
-        usermodel.Flow_ProcessChange = [dict[@"flowAccess"][@"Flow_GoOut"]boolValue];
-        usermodel.Flow_ProcessChange = [dict[@"flowAccess"][@"Flow_ReplaceCard"]boolValue];
-        usermodel.Flow_ProcessChange = [dict[@"flowAccess"][@"Flow_Loan"]boolValue];
-        usermodel.Flow_ProcessChange = [dict[@"flowAccess"][@"Flow_Promotion"]boolValue];
+        usermodel.Flow_Confirmation = [dict[@"flowAccess"][@"Flow_Confirmation"]boolValue];
+        usermodel.Flow_GoOut = [dict[@"flowAccess"][@"Flow_GoOut"]boolValue];
+        usermodel.Flow_ReplaceCard = [dict[@"flowAccess"][@"Flow_ReplaceCard"]boolValue];
+        usermodel.Flow_Loan = [dict[@"flowAccess"][@"Flow_Loan"]boolValue];
+        usermodel.Flow_Promotion = [dict[@"flowAccess"][@"Flow_Promotion"]boolValue];
         
         
         

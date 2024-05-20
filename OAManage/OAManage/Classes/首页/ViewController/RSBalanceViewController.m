@@ -100,7 +100,9 @@
         url = URL_MARKET_DTL_IOS;
         filter = [NSString stringWithFormat:@"{monthFrom:'%@',monthTo:'%@',typeId:'%ld'}",_beginBtn.currentTitle,_endBtn.currentTitle,(long)self.tempID];
     }
-    NSString * data = [NSString stringWithFormat:@"{pageNum:'%@',pageSize:'%d',filter:%@}",[NSNumber numberWithInteger:self.pageNum],10,filter];
+    NSUserDefaults * user = [NSUserDefaults standardUserDefaults];
+    NSString * mechanismS = [user objectForKey:@"mechanismName"];
+    NSString * data = [NSString stringWithFormat:@"{pageNum:'%@',pageSize:'%d',orgCode:'%@',filter:%@}",[NSNumber numberWithInteger:self.pageNum],10,mechanismS,filter];
     NSDictionary * dict = @{@"loginToken":self.usermodel.appLoginToken,@"data":data};
     RSWeakself
     [network newReloadWebServiceNoDataURL:url andParameters:dict andURLName:url];
@@ -127,7 +129,9 @@
 
 - (void)reloadMerchantsReceivableNewDataTypeId:(NSInteger)typeId andBlock:(void(^)(NSDictionary * valueDict))block{
     NetworkTool * network = [[NetworkTool alloc]init];
-    NSString * data = [NSString stringWithFormat:@"{monthFrom:'%@',monthTo:'%@',typeId:'%ld'}",_beginBtn.currentTitle,_endBtn.currentTitle,(long)typeId];
+    NSUserDefaults * user = [NSUserDefaults standardUserDefaults];
+    NSString * mechanismS = [user objectForKey:@"mechanismName"];
+    NSString * data = [NSString stringWithFormat:@"{monthFrom:'%@',monthTo:'%@',orgCode:'%@',typeId:'%ld'}",_beginBtn.currentTitle,_endBtn.currentTitle,mechanismS,(long)typeId];
    // NSString * data = [NSString stringWithFormat:@"{pageNum:'%@',pageSize:'%d',filter:%@}",[NSNumber numberWithInteger:self.pageNum],100,filter];
     NSDictionary * dic = @{@"loginToken":self.usermodel.appLoginToken,@"data":data};
     //RSWeakself

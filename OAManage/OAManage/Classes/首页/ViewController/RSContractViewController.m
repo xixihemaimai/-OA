@@ -84,7 +84,9 @@
         time = _beginBtn.currentTitle;
     }
     NSString * filter = [NSString stringWithFormat:@"{status:'%ld',billTitle:'%@',billDate:'%@',warningType:'%ld'}",self.status,_titleField.text,time,self.warningType];
-    NSString * data = [NSString stringWithFormat:@"{pageNum:'%@',pageSize:'%d',filter:%@}",[NSNumber numberWithInteger:self.pageNum],10,filter];
+    NSUserDefaults * user = [NSUserDefaults standardUserDefaults];
+    NSString * mechanismS = [user objectForKey:@"mechanismName"];
+    NSString * data = [NSString stringWithFormat:@"{pageNum:'%@',pageSize:'%d',orgCode:'%@',filter:%@}",[NSNumber numberWithInteger:self.pageNum],10,mechanismS,filter];
     NSDictionary * dict = @{@"loginToken":self.usermodel.appLoginToken,@"data":data};
     RSWeakself
     [network newReloadWebServiceNoDataURL:URL_CONTRACT_LIST_IOS andParameters:dict andURLName:URL_CONTRACT_LIST_IOS];

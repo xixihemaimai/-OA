@@ -102,8 +102,10 @@
 - (void)reloadAuditedData{
     NetworkTool * network = [[NetworkTool alloc]init];
     NSMutableDictionary * dict = [NSMutableDictionary dictionary];
+    NSUserDefaults * user = [NSUserDefaults standardUserDefaults];
+     NSString * mechanismS = [user objectForKey:@"mechanismName"];
     [dict setValue:self.usermodel.appLoginToken forKey:@"loginToken"];
-    [dict setValue:URL_NEWRECOMMEND_IOS((long)self.pageNum,6,(long)self.onlinemodel.onlineId,(long)self.onlinemodel.videoTypeId, self.onlinemodel.videoTitle) forKey:@"data"];
+    [dict setValue:URL_NEWRECOMMEND_IOS((long)self.pageNum,6,mechanismS,(long)self.onlinemodel.onlineId,(long)self.onlinemodel.videoTypeId, self.onlinemodel.videoTitle) forKey:@"data"];
 //    NSLog(@"=========%@",dict);
     [network newReloadWebServiceNoDataURL:URL_VIDEORECOMMEND_IOS andParameters:dict andURLName:URL_VIDEORECOMMEND_IOS];
     network.successArrayReload = ^(NSMutableArray *array) {

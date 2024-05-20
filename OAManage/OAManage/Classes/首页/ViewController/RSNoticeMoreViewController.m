@@ -48,6 +48,9 @@
             RSWeakself
             NetworkTool * network = [[NetworkTool alloc]init];
             NSMutableDictionary * dict = [NSMutableDictionary dictionary];
+            NSUserDefaults * user = [NSUserDefaults standardUserDefaults];
+            NSString * mechanismS = [user objectForKey:@"mechanismName"];
+            [dict setValue:mechanismS forKey:@"orgCode"];
             [dict setValue:weakSelf.usermodel.appLoginToken forKey:@"loginToken"];
             [network newReloadWebServiceNoDataURL:URL_ALLREAD_IOS andParameters:dict andURLName:URL_ALLREAD_IOS];
             network.successReload = ^(NSDictionary *dict) {
@@ -74,6 +77,9 @@
 - (void)clickNoticeSettingReadStatus:(NSInteger)noticeId andIndexpath:(NSIndexPath *)indexpath{
     NetworkTool * network = [[NetworkTool alloc]init];
     NSMutableDictionary * dict = [NSMutableDictionary dictionary];
+    NSUserDefaults * user = [NSUserDefaults standardUserDefaults];
+    NSString * mechanismS = [user objectForKey:@"mechanismName"];
+    [dict setValue:mechanismS forKey:@"orgCode"];
     [dict setValue:self.usermodel.appLoginToken forKey:@"loginToken"];
     [dict setValue:[NSString stringWithFormat:@"{id:%ld}",noticeId] forKey:@"data"];
     [network newReloadWebServiceNoDataURL:URL_READ_IOS andParameters:dict andURLName:URL_READ_IOS];
@@ -104,7 +110,9 @@
     NetworkTool * network = [[NetworkTool alloc]init];
     NSMutableDictionary * dict = [NSMutableDictionary dictionary];
     [dict setValue:self.usermodel.appLoginToken forKey:@"loginToken"];
-    [dict setValue:URL_NEWNOTICE_IOS((long)self.pageNum, 40) forKey:@"data"];
+    NSUserDefaults * user = [NSUserDefaults standardUserDefaults];
+     NSString * mechanismS = [user objectForKey:@"mechanismName"];
+    [dict setValue:URL_NEWNOTICE_IOS((long)self.pageNum, 40,mechanismS) forKey:@"data"];
     [network newReloadWebServiceNoDataURL:URL_NOTICE_IOS andParameters:dict andURLName:URL_NOTICE_IOS];
     network.successArrayReload = ^(NSMutableArray *array) {
         if (self.pageNum == 1) {

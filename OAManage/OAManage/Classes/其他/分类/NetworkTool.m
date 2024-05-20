@@ -89,7 +89,7 @@
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             block(responseObject,YES);
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            NSLog(@"===23=4=24=32=4==4=2=4=====%@",error);
+//            NSLog(@"===23=4=24=32=4==4=2=4=====%@",error);
             block(error,NO);
         }];
 //    [manger POST:URLStr parameters:soapStr progress:^(NSProgress * _Nonnull uploadProgress) {
@@ -133,8 +133,11 @@
 
 //新的
 - (void)newReloadWebServiceNoDataURL:(NSString *)URLstr andParameters:(NSDictionary *)soapStr andURLName:(NSString *)urlName{
-    NSLog(@"====================232=3==4=32=4=========%@",URLstr);
+//    NSLog(@"====================232=3==4=32=4=========%@",URLstr);
     _tempStr = urlName;
+//  NSUserDefaults * user = [NSUserDefaults standardUserDefaults];
+//  NSString * mechanismS = [user objectForKey:@"mechanismName"];
+//  [soapStr setValue:mechanismS forKey:@"mechanismName"];
     [self newReloadWebServiceNetDataUrl:URLstr withParameters:soapStr andURLName:urlName withBlock:^(id responseObject, BOOL success) {
 //        NSLog(@"===================%@",soapStr);
 //        NSLog(@"=======1111111=========================%@",responseObject);
@@ -450,7 +453,7 @@
 
 //获取用户信息
 - (void)reloadWebServiceNoDataURL:(NSString *)URLstr  andParameters:(NSString *)soapStr andURLName:(NSString *)urlName{
-    NSLog(@"===============2=3=23=2=3=========%@",URLstr);
+//    NSLog(@"===============2=3=23=2=3=========%@",URLstr);
     _tempStr = urlName;
     URLstr = [URLstr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     URLstr =  [URLstr stringByReplacingOccurrencesOfString:@"%20" withString:@""];

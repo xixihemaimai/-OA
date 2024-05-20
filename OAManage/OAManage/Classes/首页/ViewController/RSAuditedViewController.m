@@ -117,8 +117,10 @@
 - (void)reloadAuditedData{
     NetworkTool * network = [[NetworkTool alloc]init];
     NSMutableDictionary * dict = [NSMutableDictionary dictionary];
+    NSUserDefaults * user = [NSUserDefaults standardUserDefaults];
+     NSString * mechanismS = [user objectForKey:@"mechanismName"];
     [dict setValue:self.usermodel.appLoginToken forKey:@"loginToken"];
-    [dict setValue:URL_NEWDIARY_IOS((long)self.pageNum, 10) forKey:@"data"];
+    [dict setValue:URL_NEWDIARY_IOS((long)self.pageNum, 10,mechanismS) forKey:@"data"];
     [network newReloadWebServiceNoDataURL:URL_DIARY_IOS andParameters:dict andURLName:URL_DIARY_IOS];
     network.successArrayReload = ^(NSMutableArray *array) {
       if (self.pageNum == 1) {
@@ -187,9 +189,11 @@
        //确定
         RSNewAuditedModel * auditemodel = self.workArray[deleteBtn.tag];
         NetworkTool * network = [[NetworkTool alloc]init];
+        NSUserDefaults * user = [NSUserDefaults standardUserDefaults];
+        NSString * mechanismS = [user objectForKey:@"mechanismName"];
         NSMutableDictionary * dict = [NSMutableDictionary dictionary];
         [dict setValue:self.usermodel.appLoginToken forKey:@"loginToken"];
-        [dict setValue:URL_DIARY_NEWDELETE_IOS((long)auditemodel.auditedId) forKey:@"data"];
+        [dict setValue:URL_DIARY_NEWDELETE_IOS((long)auditemodel.auditedId,mechanismS) forKey:@"data"];
         [network newReloadWebServiceNoDataURL:URL_DIARY_DELETE_IOS andParameters:dict andURLName:URL_DIARY_DELETE_IOS];
         network.deleteSuccess = ^{
             //[self.workArray removeObjectAtIndex:deleteBtn.tag];

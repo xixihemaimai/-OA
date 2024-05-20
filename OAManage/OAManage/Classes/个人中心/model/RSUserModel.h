@@ -161,12 +161,12 @@ OA_Market_Settle_In  园区应收明细表
 
 @property (nonatomic,assign)BOOL  Flow_Purchase;
 @property (nonatomic,assign)BOOL  Flow_Restaurant;
-@property (nonatomic,assign)BOOL  UseCar;
+@property (nonatomic,assign)BOOL  Flow_UseCar;
 @property (nonatomic,assign)BOOL  Flow_Receptions;
 @property (nonatomic,assign)BOOL  Flow_SupplierConsume;
 @property (nonatomic,assign)BOOL  Flow_VehicleReservation;
 @property (nonatomic,assign)BOOL  Flow_ApplyActivity;
-@property (nonatomic,assign)BOOL  Entertain;
+//@property (nonatomic,assign)BOOL  Entertain;
 @property (nonatomic,assign)BOOL  Flow_Entertain;
 @property (nonatomic,assign)BOOL  Flow_ProcessChange;
 

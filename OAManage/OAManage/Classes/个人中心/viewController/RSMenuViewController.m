@@ -30,7 +30,7 @@
 @property (nonatomic,strong)NSMutableArray * menuArray;
 
 
-
+@property (nonatomic,copy)NSString * mechanismName;
 
 @end
 
@@ -56,9 +56,19 @@ static NSString * MENUHEADER = @"MENUHEADER";
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    for (int i = 0; i < 6; i++) {
-        NSString * str = [NSString stringWithFormat:@"%d",i];
-        [self.menuArray addObject:str];
+    NSUserDefaults * user = [NSUserDefaults standardUserDefaults];
+    NSString * mechanismS = [user objectForKey:@"mechanismName"];
+    self.mechanismName = mechanismS;
+    if ([self.mechanismName isEqualToString:@"HX"]) {
+        for (int i = 0; i < 5; i++) {
+            NSString * str = [NSString stringWithFormat:@"%d",i];
+            [self.menuArray addObject:str];
+        }
+    }else{
+        for (int i = 0; i < 3; i++) {
+            NSString * str = [NSString stringWithFormat:@"%d",i];
+            [self.menuArray addObject:str];
+        }
     }
     if (self.menuArray.count < 1) {
         self.emptyView.hidden = NO;
@@ -192,14 +202,25 @@ static NSString * MENUHEADER = @"MENUHEADER";
         cell.menuImageView.image = [UIImage imageNamed:@"清除缓存"];
         cell.menuLabel.text = @"清除缓存";
     }else if (indexPath.row == 2){
-        cell.menuImageView.image = [UIImage imageNamed:@"图标"];
-        cell.menuLabel.text = @"荒料解控";
+//        self.usermodel.OA_BM_IO 荒料
+        if ([self.mechanismName isEqualToString:@"HX"]) {
+            cell.menuImageView.image = [UIImage imageNamed:@"图标"];
+            cell.menuLabel.text = @"荒料解控";
+        }else{
+            cell.menuImageView.image = [UIImage imageNamed:@"图标复制备份"];
+             cell.menuLabel.text = @"关于我们";
+        }
     }else if (indexPath.row == 3){
-        cell.menuImageView.image = [UIImage imageNamed:@"图标复制"];
-        cell.menuLabel.text = @"大板解控";
+//        self.usermodel.OA_SL_IO  大板
+        if ([self.mechanismName isEqualToString:@"HX"]) {
+            cell.menuImageView.image = [UIImage imageNamed:@"图标复制"];
+            cell.menuLabel.text = @"大板解控";
+        }
     }else if (indexPath.row == 4){
-        cell.menuImageView.image = [UIImage imageNamed:@"图标复制备份"];
-         cell.menuLabel.text = @"关于我们";
+        if ([self.mechanismName isEqualToString:@"HX"]) {
+            cell.menuImageView.image = [UIImage imageNamed:@"图标复制备份"];
+             cell.menuLabel.text = @"关于我们";
+        }
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
@@ -256,19 +277,25 @@ static NSString * MENUHEADER = @"MENUHEADER";
         }
         [self presentViewController:alert animated:YES completion:nil];
     }else if (indexpath.row == 2){
-        RSTouchViewController * touchVc = [[RSTouchViewController alloc]init];
-        touchVc.selectType = @"huangliao";
-           [self.navigationController pushViewController:touchVc animated:YES];
-        
+        if ([self.mechanismName isEqualToString:@"HX"]) {
+            RSTouchViewController * touchVc = [[RSTouchViewController alloc]init];
+            touchVc.selectType = @"huangliao";
+            [self.navigationController pushViewController:touchVc animated:YES];
+        }else{
+            RSAboutOurViewController * abountVc = [[RSAboutOurViewController alloc]init];
+            [self.navigationController pushViewController:abountVc animated:YES];
+        }
     }else if (indexpath.row == 3){
-        
-        RSTouchViewController * touchVc = [[RSTouchViewController alloc]init];
-        touchVc.selectType = @"daban";
-           [self.navigationController pushViewController:touchVc animated:YES];
-        
+        if ([self.mechanismName isEqualToString:@"HX"]) {
+            RSTouchViewController * touchVc = [[RSTouchViewController alloc]init];
+            touchVc.selectType = @"daban";
+            [self.navigationController pushViewController:touchVc animated:YES];
+        }
     }else if (indexpath.row == 4){
-        RSAboutOurViewController * abountVc = [[RSAboutOurViewController alloc]init];
-        [self.navigationController pushViewController:abountVc animated:YES];
+        if ([self.mechanismName isEqualToString:@"HX"]) {
+            RSAboutOurViewController * abountVc = [[RSAboutOurViewController alloc]init];
+            [self.navigationController pushViewController:abountVc animated:YES];
+        }
     }
 }
 

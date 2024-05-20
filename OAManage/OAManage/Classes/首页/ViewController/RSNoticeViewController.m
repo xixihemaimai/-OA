@@ -57,7 +57,9 @@
     NSMutableDictionary * dict = [NSMutableDictionary dictionary];
     [dict setValue:self.usermodel.appLoginToken forKey:@"loginToken"];
     //[NSNumber numberWithInteger:self.pageNum]
-    [dict setValue:URL_NEWINFORMATION_IOS(self.pageNum, 10) forKey:@"data"];
+    NSUserDefaults * user = [NSUserDefaults standardUserDefaults];
+     NSString * mechanismS = [user objectForKey:@"mechanismName"];
+    [dict setValue:URL_NEWINFORMATION_IOS(self.pageNum, 10,mechanismS) forKey:@"data"];
     [network newReloadWebServiceNoDataURL:URL_INFORMATION_IOS andParameters:dict andURLName:URL_INFORMATION_IOS];
     network.successArrayReload = ^(NSMutableArray *array) {
         if (self.pageNum == 1) {

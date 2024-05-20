@@ -27,6 +27,7 @@
 
 @property (nonatomic,strong)UICollectionView * collectview;
 
+@property (nonatomic,copy)NSString * mechanismName;
 
 @end
 
@@ -58,6 +59,11 @@ static NSString * LAUNCHREUSABFOOTCELLID = @"LAUNCHREUSABFOOTCELLID";
     
     [self.tableview removeFromSuperview];
     [self.emptyView removeFromSuperview];
+    
+    
+    NSUserDefaults * user = [NSUserDefaults standardUserDefaults];
+    NSString * mechanismS = [user objectForKey:@"mechanismName"];
+    self.mechanismName = mechanismS;
     
     self.array = [self changShowStyple];
     
@@ -206,12 +212,23 @@ static NSString * LAUNCHREUSABFOOTCELLID = @"LAUNCHREUSABFOOTCELLID";
 
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
-    return CGSizeMake(SCW, 41);
+    NSMutableArray * array = self.array[section];
+    if (array.count < 1) {
+        return CGSizeMake(SCW, 0);
+    }else{
+        return CGSizeMake(SCW, 41);
+    }
 }
 
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section{
-    return CGSizeMake(SCW, 30);
+//    return CGSizeMake(SCW, 30);
+    NSMutableArray * array = self.array[section];
+    if (array.count < 1) {
+        return CGSizeMake(SCW, 0);
+    }else{
+        return CGSizeMake(SCW, 30);
+    }
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
@@ -228,7 +245,11 @@ static NSString * LAUNCHREUSABFOOTCELLID = @"LAUNCHREUSABFOOTCELLID";
         }else if (indexPath.section == 4){
             header.launchLabel.text = @"设备采购";
         }else if (indexPath.section == 5){
-            header.launchLabel.text = @"其他";
+            if ([self.mechanismName isEqualToString:@"HX"]) {
+                header.launchLabel.text = @"其他";
+            }else{
+                header.launchLabel.text = @"费用流程";
+            }
         }
         //header.launchLabel.text = @"好";
         return header;
@@ -419,8 +440,8 @@ static NSString * LAUNCHREUSABFOOTCELLID = @"LAUNCHREUSABFOOTCELLID";
         NSDictionary * dict = @{@"img":@"发起流程复制 3",@"title":@"自助餐厅报餐",@"key":@"Flow_Restaurant"};
         [array1 addObject:dict];
     }
-    if (self.usermodel.UseCar == true) {
-        NSDictionary * dict = @{@"img":@"发起流程复制 2",@"title":@"用车申请",@"key":@"UseCar"};
+    if (self.usermodel.Flow_UseCar == true) {
+        NSDictionary * dict = @{@"img":@"发起流程复制 2",@"title":@"用车申请",@"key":@"Flow_UseCar"};
         [array1 addObject:dict];
     }
     if (self.usermodel.Flow_Receptions == true) {
@@ -439,18 +460,43 @@ static NSString * LAUNCHREUSABFOOTCELLID = @"LAUNCHREUSABFOOTCELLID";
         NSDictionary * dict = @{@"img":@"发起流程复制 7",@"title":@"员工活动申请",@"key":@"Flow_ApplyActivity"};
         [array1 addObject:dict];
     }
-    if (self.usermodel.Entertain == true) {
-        NSDictionary * dict = @{@"img":@"发起流程复制 10",@"title":@"招待住宿申请",@"key":@"Entertain"};
-        [array1 addObject:dict];
-    }
+//    if (self.usermodel.Entertain == true) {
+//        NSDictionary * dict = @{@"img":@"发起流程复制 10",@"title":@"招待住宿申请",@"key":@"Entertain"};
+//        [array1 addObject:dict];
+//    }
     if (self.usermodel.Flow_Entertain == true) {
-        NSDictionary * dict = @{@"img":@"发起流程复制 9",@"title":@"招待申请",@"key":@"Flow_Entertain"};
+        NSDictionary * dict = @{@"img":@"发起流程复制 10",@"title":@"招待住宿申请",@"key":@"Flow_Entertain"};
         [array1 addObject:dict];
     }
     if (self.usermodel.Flow_ProcessChange == true){
         NSDictionary * dict = @{@"img":@"发起流程复制 9",@"title":@" 流程变更申请",@"key":@"Flow_ProcessChange"};
         [array1 addObject:dict];
     }
+    
+    
+    //泉州合成这边合同审批表 固定资产申购单 出差申请
+    if ([self.mechanismName isEqualToString:@"HC"]) {
+        
+        if (self.usermodel.Flow_Contract == true) {
+            NSDictionary * dict = @{@"img":@"发起流程复制 18",@"title":@"合同审批表",@"key":@"Flow_Contract"};
+            [array1 addObject:dict];
+        }
+        
+        if (self.usermodel.Flow_FixedAssets == true) {
+            NSDictionary * dict = @{@"img":@"发起流程复制 30",@"title":@"固定资产申购单",@"key":@"Flow_FixedAssets"};
+            [array1 addObject:dict];
+        }
+        
+        if (self.usermodel.Flow_Business == true) {
+            NSDictionary * dict = @{@"img":@"发起流程复制 17",@"title":@"出差审批流程",@"key":@"Flow_Business"};
+            [array1 addObject:dict];
+        }
+        
+        
+    }
+    
+    
+    
     
     [array addObject:array1];
    
@@ -483,10 +529,14 @@ static NSString * LAUNCHREUSABFOOTCELLID = @"LAUNCHREUSABFOOTCELLID";
         NSDictionary * dict = @{@"img":@"发起流程复制 15",@"title":@"转正申请",@"key":@"Flow_Become"};
         [array2 addObject:dict];
     }
-    if (self.usermodel.Flow_Business == true) {
-        NSDictionary * dict = @{@"img":@"发起流程复制 17",@"title":@"出差审批流程",@"key":@"Flow_Business"};
-        [array2 addObject:dict];
+    
+    if ([self.mechanismName isEqualToString:@"HX"]) {
+        if (self.usermodel.Flow_Business == true) {
+            NSDictionary * dict = @{@"img":@"发起流程复制 17",@"title":@"出差审批流程",@"key":@"Flow_Business"};
+            [array2 addObject:dict];
+        }
     }
+    
     if (self.usermodel.Flow_WorkOvertime == true) {
         NSDictionary * dict = @{@"img":@"发起流程复制 17",@"title":@"加班申请流程",@"key":@"Flow_WorkOvertime"};
         [array2 addObject:dict];
@@ -521,10 +571,14 @@ static NSString * LAUNCHREUSABFOOTCELLID = @"LAUNCHREUSABFOOTCELLID";
 //        NSDictionary * dict = @{@"img":@"发起流程复制 19",@"title":@"招商合同审批表",@"key":@"Flow_InvestContract"};
 //        [array3 addObject:dict];
 //    }
-    if (self.usermodel.Flow_Contract == true) {
-        NSDictionary * dict = @{@"img":@"发起流程复制 18",@"title":@"合同审批表",@"key":@"Flow_Contract"};
-        [array3 addObject:dict];
+    
+    if ([self.mechanismName isEqualToString:@"HX"]) {
+        if (self.usermodel.Flow_Contract == true) {
+            NSDictionary * dict = @{@"img":@"发起流程复制 18",@"title":@"合同审批表",@"key":@"Flow_Contract"};
+            [array3 addObject:dict];
+        }
     }
+    
     if (self.usermodel.Flow_Cachet == true) {
         NSDictionary * dict = @{@"img":@"发起流程复制 21",@"title":@"印章外借使用申请",@"key":@"Flow_Cachet"};
         [array3 addObject:dict];
@@ -582,17 +636,21 @@ static NSString * LAUNCHREUSABFOOTCELLID = @"LAUNCHREUSABFOOTCELLID";
       [array addObject:array5];
     
     
-    //其他
+    //其他    可以在泉州合成为费用流程
     //一般付款申请流程 固定资产申请单 广告制作申请单 二手闲置处理申请单 辅料应付结算单 辅料采购申请单 废料处理申请单 物业服务审批 培训费用申请
     //发起流程复制 31 发起流程复制 30 发起流程复制 33 发起流程复制 32 发起流程复制 35 发起流程复制 34 发起流程复制 36
     if (self.usermodel.Flow_Payment == true) {
         NSDictionary * dict = @{@"img":@"发起流程复制 31",@"title":@"一般付款申请流程",@"key":@"Flow_Payment"};
         [array6 addObject:dict];
     }
-    if (self.usermodel.Flow_FixedAssets == true) {
-        NSDictionary * dict = @{@"img":@"发起流程复制 30",@"title":@"固定资产申购单",@"key":@"Flow_FixedAssets"};
-        [array6 addObject:dict];
+    if ([self.mechanismName isEqualToString:@"HX"]) {
+    
+        if (self.usermodel.Flow_FixedAssets == true) {
+            NSDictionary * dict = @{@"img":@"发起流程复制 30",@"title":@"固定资产申购单",@"key":@"Flow_FixedAssets"};
+            [array6 addObject:dict];
+        }
     }
+    
     if (self.usermodel.Flow_Advertising == true) {
         NSDictionary * dict = @{@"img":@"发起流程复制 33",@"title":@"广告制作申请单",@"key":@"Flow_Advertising"};
         [array6 addObject:dict];

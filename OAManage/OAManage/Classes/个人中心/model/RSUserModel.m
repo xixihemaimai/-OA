@@ -20,13 +20,12 @@
      sex 性别
      @property (nonatomic,assign)BOOL  Flow_Purchase;
      @property (nonatomic,assign)BOOL  Flow_Restaurant;
-     @property (nonatomic,assign)BOOL  UseCar;
+     @property (nonatomic,assign)BOOL  Flow_UseCar;
      @property (nonatomic,assign)BOOL  Flow_Receptions;
      @property (nonatomic,assign)BOOL  Flow_SupplierConsume;
      @property (nonatomic,assign)BOOL  Flow_VehicleReservation;
      @property (nonatomic,assign)BOOL  Flow_ApplyActivity;
      @property (nonatomic,assign)BOOL  Flow_Entertain;
-     @property (nonatomic,assign)BOOL  Flow_Entertain2;
      
      
      @property (nonatomic,assign)BOOL  Flow_ApplyLeave;
@@ -113,12 +112,12 @@
     
     [aCoder encodeBool:self.Flow_Purchase forKey:@"Flow_Purchase"];
     [aCoder encodeBool:self.Flow_Restaurant forKey:@"Flow_Restaurant"];
-    [aCoder encodeBool:self.UseCar forKey:@"UseCar"];
+    [aCoder encodeBool:self.Flow_UseCar forKey:@"Flow_UseCar"];
     [aCoder encodeBool:self.Flow_Receptions forKey:@"Flow_Receptions"];
     [aCoder encodeBool:self.Flow_SupplierConsume forKey:@"Flow_SupplierConsume"];
     [aCoder encodeBool:self.Flow_VehicleReservation forKey:@"Flow_VehicleReservation"];
     [aCoder encodeBool:self.Flow_ApplyActivity forKey:@"Flow_ApplyActivity"];
-    [aCoder encodeBool:self.Entertain forKey:@"Entertain"];
+//    [aCoder encodeBool:self.Entertain forKey:@"Entertain"];
     [aCoder encodeBool:self.Flow_Entertain forKey:@"Flow_Entertain"];
     
     
@@ -221,12 +220,12 @@
         
         self.Flow_Purchase = [aDecoder decodeBoolForKey:@"Flow_Purchase"];
         self.Flow_Restaurant = [aDecoder decodeBoolForKey:@"Flow_Restaurant"];
-        self.UseCar = [aDecoder decodeBoolForKey:@"UseCar"];
+        self.Flow_UseCar = [aDecoder decodeBoolForKey:@"Flow_UseCar"];
         self.Flow_Receptions = [aDecoder decodeBoolForKey:@"Flow_Receptions"];
         self.Flow_SupplierConsume = [aDecoder decodeBoolForKey:@"Flow_SupplierConsume"];
         self.Flow_VehicleReservation = [aDecoder decodeBoolForKey:@"Flow_VehicleReservation"];
         self.Flow_ApplyActivity = [aDecoder decodeBoolForKey:@"Flow_ApplyActivity"];
-        self.Entertain = [aDecoder decodeBoolForKey:@"Entertain"];
+//        self.Entertain = [aDecoder decodeBoolForKey:@"Entertain"];
         self.Flow_Entertain = [aDecoder decodeBoolForKey:@"Flow_Entertain"];
         
         
@@ -333,12 +332,12 @@
     
     usermodel.Flow_Purchase = self.Flow_Purchase;
     usermodel.Flow_Restaurant = self.Flow_Restaurant;
-    usermodel.UseCar = self.UseCar;
+    usermodel.Flow_UseCar = self.Flow_UseCar;
     usermodel.Flow_Receptions = self.Flow_Receptions;
     usermodel.Flow_SupplierConsume = self.Flow_SupplierConsume;
     usermodel.Flow_VehicleReservation = self.Flow_VehicleReservation;
     usermodel.Flow_ApplyActivity = self.Flow_ApplyActivity;
-    usermodel.Entertain = self.Entertain;
+//    usermodel.Entertain = self.Entertain;
     usermodel.Flow_Entertain = self.Flow_Entertain;
     
     

@@ -125,6 +125,9 @@
 - (void)reloadAuditedData{
     NetworkTool * network = [[NetworkTool alloc]init];
     NSMutableDictionary * dict = [NSMutableDictionary dictionary];
+    NSUserDefaults * user = [NSUserDefaults standardUserDefaults];
+    NSString * mechanismS = [user objectForKey:@"mechanismName"];
+    [dict setValue:mechanismS forKey:@"orgCode"];
     [dict setValue:self.usermodel.appLoginToken forKey:@"loginToken"];
     RSWeakself
     //[dict setValue:URL_NEWVIDEO_IOS((long)self.pageNum,6,1,self.title) forKey:@"data"];
